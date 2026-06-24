@@ -1,4 +1,17 @@
 #!/usr/bin/env node
+import { readFileSync } from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+try {
+  for (const line of readFileSync(join(__dirname, "../.env.local"), "utf8").split("\n")) {
+    const m = line.match(/^\s*([^#=]+)=(.*)$/);
+    if (m && !process.env[m[1].trim()]) process.env[m[1].trim()] = m[2].trim();
+  }
+} catch {
+  // .env.local optional for CI; Next.js loads it at build time
+}
 
 const required = [
   "NEXT_PUBLIC_SUPABASE_URL",
