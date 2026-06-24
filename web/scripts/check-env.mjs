@@ -10,7 +10,7 @@ try {
     if (m && !process.env[m[1].trim()]) process.env[m[1].trim()] = m[2].trim();
   }
 } catch {
-  // .env.local optional for CI; Next.js loads it at build time
+  // .env.local optional for CI
 }
 
 const required = [
@@ -20,34 +20,65 @@ const required = [
   "NEXT_PUBLIC_SITE_URL",
 ];
 
-const optional = [
-  "STRIPE_SECRET_KEY",
-  "STRIPE_WEBHOOK_SECRET",
-  "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
-  "TWILIO_ACCOUNT_SID",
-  "TWILIO_AUTH_TOKEN",
-];
+function set(key) {
+  return Boolean(process.env[key]?.trim());
+}
+
+function warnWrong(key, badPrefix, hint) {
+  const v = process.env[key]?.trim();
+  if (v?.startsWith(badPrefix)) {
+    console.log(`⚠ ${key} looks wrong (${badPrefix}…) — ${hint}`);
+    return true;
+  }
+  return false;
+}
 
 let missing = 0;
 
-console.log("RendezVous AI — environment check\n");
+console.log("RendezVous AI — app credentials\n");
 
+console.log("── Core (required) ──");
 for (const key of required) {
-  const ok = Boolean(process.env[key]?.trim());
-  console.log(`${ok ? "✓" : "✗"} ${key}${ok ? "" : " (required for production)"}`);
+  const ok = set(key);
+  console.log(`${ok ? "✓" : "✗"} ${key}`);
   if (!ok) missing++;
 }
 
-console.log("\nOptional (Phase 1):");
-for (const key of optional) {
-  const ok = Boolean(process.env[key]?.trim());
-  console.log(`${ok ? "✓" : "○"} ${key}`);
+console.log("\n── Twilio SMS ──");
+warnWrong("TWILIO_ACCOUNT_SID", "US", "use AC… Account SID");
+warnWrong("TWILIO_ACCOUNT_SID", "OQ", "OAuth Client ID — not Account SID");
+const twilioAc = set("TWILIO_ACCOUNT_SID") && process.env.TWILIO_ACCOUNT_SID.startsWith("AC");
+const twilioToken = set("TWILIO_AUTH_TOKEN");
+const twilioPhone = set("TWILIO_PHONE_NUMBER") || set("TWILIO_MESSAGING_SERVICE_SID");
+console.log(`${twilioAc ? "✓" : "○"} TWILIO_ACCOUNT_SID (AC…)`);
+console.log(`${twilioToken ? "✓" : "○"} TWILIO_AUTH_TOKEN`);
+console.log(`${twilioPhone ? "✓" : "✗"} TWILIO_PHONE_NUMBER or MESSAGING_SERVICE_SID`);
+if (twilioAc && twilioToken && !twilioPhone) {
+  console.log("  → Buy +1 514/438 number in Twilio Console");
 }
 
+console.log("\n── Optional ──");
+for (const key of [
+  "NEXT_PUBLIC_CALENDLY_URL",
+  "OLLAMA_BASE_URL",
+  "STRIPE_SECRET_KEY",
+  "DATABASE_URL",
+]) {
+  console.log(`${set(key) ? "✓" : "○"} ${key}`);
+}
+
+if (set("TWILIO_API_KEY_SID") || set("TWILIO_OAUTH")) {
+  console.log("\n── Ignored by app (safe to remove) ──");
+  if (set("TWILIO_API_KEY_SID")) console.log("○ TWILIO_API_KEY_* — Auth Token used instead");
+}
+
+console.log(
+  `\nSMS ready: ${twilioAc && twilioToken && twilioPhone ? "YES" : "NO — need phone number"}`
+);
+
 if (missing > 0) {
-  console.log(`\n${missing} required variable(s) missing. Copy web/.env.local.example → web/.env.local`);
+  console.log(`\n${missing} required variable(s) missing. See web/.env.local.example`);
   process.exit(1);
 }
 
-console.log("\nAll required variables set.");
 process.exit(0);
