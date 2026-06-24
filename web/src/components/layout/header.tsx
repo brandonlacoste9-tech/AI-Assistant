@@ -22,6 +22,12 @@ export function Header({ locale }: { locale: Locale }) {
 
         <div className="flex items-center gap-3">
           <LanguageToggle locale={locale} />
+          <Link
+            href="/login"
+            className="hidden text-sm font-medium text-[var(--muted-fg)] transition-colors hover:text-[var(--primary)] sm:inline"
+          >
+            {t.nav.login}
+          </Link>
           <Link href="/#waitlist" className="btn-primary hidden px-4 py-2 text-sm sm:inline-flex">
             {t.nav.trial}
           </Link>

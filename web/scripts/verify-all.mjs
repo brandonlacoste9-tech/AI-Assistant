@@ -52,7 +52,15 @@ for (const key of required) {
 
 // 2. Pages
 console.log("\n── Pages ──");
-const pages = ["/", "/pricing", "/signup?plan=pro", "/signup?plan=starter"];
+const pages = [
+  "/",
+  "/pricing",
+  "/signup?plan=pro",
+  "/signup?plan=starter",
+  "/login",
+  "/privacy",
+  "/terms",
+];
 for (const path of pages) {
   try {
     const res = await fetch(`${BASE}${path}`);

@@ -1,6 +1,3 @@
-import { Footer } from "@/components/layout/footer";
-import { Header } from "@/components/layout/header";
-import { FounderBanner } from "@/components/marketing/founder-banner";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getSiteUrl } from "@/lib/site-config";
@@ -54,10 +51,7 @@ export default async function RootLayout({
   return (
     <html lang={locale === "fr" ? "fr-CA" : "en-CA"}>
       <body className={`${dmSans.variable} ${fraunces.variable} min-h-screen antialiased`}>
-        <Header locale={locale} />
-        <FounderBanner locale={locale} />
-        <main>{children}</main>
-        <Footer locale={locale} />
+        {children}
       </body>
     </html>
   );

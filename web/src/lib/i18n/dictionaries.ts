@@ -70,6 +70,83 @@ export type Dictionary = {
     success: string;
     hasAccount: string;
   };
+  login: {
+    title: string;
+    subtitle: string;
+    fields: { email: string; password: string };
+    submit: string;
+    registered: string;
+    noAccount: string;
+    configError: string;
+  };
+  legal: {
+    back: string;
+    updated: string;
+    contact: string;
+    privacy: { title: string; sections: { heading: string; paragraphs: string[] }[] };
+    terms: { title: string; sections: { heading: string; paragraphs: string[] }[] };
+  };
+  dashboard: {
+    title: string;
+    subtitle: string;
+    nav: {
+      today: string;
+      bookings: string;
+      leads: string;
+      settings: string;
+      logout: string;
+    };
+    stats: { bookingsToday: string; activeLeads: string; recoveredCalls: string };
+    trial: { title: string; plan: string; ends: string };
+    settings: {
+      subtitle: string;
+      business: string;
+      email: string;
+      plan: string;
+      language: string;
+      billingNote: string;
+    };
+    bookings: {
+      add: string;
+      customerName: string;
+      phone: string;
+      serviceOptional: string;
+      notes: string;
+      save: string;
+      cancel: string;
+      empty: string;
+      error: string;
+    };
+    leads: {
+      add: string;
+      name: string;
+      phone: string;
+      notes: string;
+      save: string;
+      empty: string;
+      error: string;
+      sources: { manual: string; missedCall: string; webForm: string };
+      stages: { new: string; contacted: string; booked: string; lost: string };
+    };
+  };
+  onboarding: {
+    title: string;
+    subtitle: string;
+    step: string;
+    next: string;
+    error: string;
+    days: Record<string, string>;
+    hours: { title: string; subtitle: string };
+    services: {
+      title: string;
+      subtitle: string;
+      name: string;
+      duration: string;
+      price: string;
+      add: string;
+    };
+    done: { title: string; subtitle: string; cta: string };
+  };
 };
 
 const fr: Dictionary = {
@@ -274,8 +351,161 @@ const fr: Dictionary = {
     },
     langOptions: { fr: "Français", en: "English" },
     submit: "Créer mon compte",
-    success: "Compte créé! On vous contacte sous 48 h pour activer votre essai de 14 jours.",
+    success: "Compte créé! Connectez-vous pour configurer votre salon.",
     hasAccount: "Déjà un compte?",
+  },
+  login: {
+    title: "Connexion",
+    subtitle: "Accédez à votre tableau de bord RendezVous AI.",
+    fields: { email: "Courriel", password: "Mot de passe" },
+    submit: "Se connecter",
+    registered: "Compte créé! Connectez-vous pour continuer.",
+    noAccount: "Pas encore de compte?",
+    configError: "Connexion indisponible — configuration serveur manquante.",
+  },
+  legal: {
+    back: "Retour à l'accueil",
+    updated: "Dernière mise à jour",
+    contact: "Questions",
+    privacy: {
+      title: "Politique de confidentialité",
+      sections: [
+        {
+          heading: "Responsable",
+          paragraphs: [
+            "RendezVous AI (« nous ») exploite rendezvousai.ca et les services associés pour les salons et entreprises de services au Québec.",
+          ],
+        },
+        {
+          heading: "Données collectées",
+          paragraphs: [
+            "Nous collectons les renseignements que vous fournissez (nom, courriel, téléphone, nom d'entreprise) via la liste d'attente, l'inscription et le tableau de bord.",
+            "Les données d'utilisation (rendez-vous, leads, journaux d'appels) sont stockées pour fournir le service.",
+          ],
+        },
+        {
+          heading: "Hébergement et sécurité",
+          paragraphs: [
+            "Les données sont hébergées sur Supabase (infrastructure cloud). Nous appliquons le contrôle d'accès par entreprise (RLS) et le chiffrement en transit.",
+          ],
+        },
+        {
+          heading: "Vos droits (Loi 25)",
+          paragraphs: [
+            "Vous pouvez demander l'accès, la rectification ou la suppression de vos renseignements personnels en écrivant à contact@rendezvousai.ca.",
+          ],
+        },
+      ],
+    },
+    terms: {
+      title: "Conditions d'utilisation",
+      sections: [
+        {
+          heading: "Service",
+          paragraphs: [
+            "RendezVous AI fournit une réceptionniste IA et des outils de réservation pour les entreprises de services. Les fonctionnalités peuvent évoluer pendant la phase pilote.",
+          ],
+        },
+        {
+          heading: "Essai gratuit",
+          paragraphs: [
+            "L'essai de 14 jours est offert sans carte de crédit. À la fin de l'essai, l'accès peut être suspendu sans paiement.",
+          ],
+        },
+        {
+          heading: "Utilisation acceptable",
+          paragraphs: [
+            "Vous êtes responsable du contenu des messages envoyés à vos clients et du respect des lois applicables (TPS/TVQ, Loi 25, CASL pour les SMS).",
+          ],
+        },
+        {
+          heading: "Annulation",
+          paragraphs: [
+            "Vous pouvez annuler en tout temps. Les données peuvent être exportées sur demande avant la fermeture du compte.",
+          ],
+        },
+      ],
+    },
+  },
+  dashboard: {
+    title: "Aujourd'hui",
+    subtitle: "Vue d'ensemble de votre activité.",
+    nav: {
+      today: "Aujourd'hui",
+      bookings: "Rendez-vous",
+      leads: "Leads",
+      settings: "Paramètres",
+      logout: "Déconnexion",
+    },
+    stats: {
+      bookingsToday: "Rendez-vous aujourd'hui",
+      activeLeads: "Leads actifs",
+      recoveredCalls: "Appels récupérés",
+    },
+    trial: { title: "Votre essai", plan: "Forfait", ends: "Se termine le" },
+    settings: {
+      subtitle: "Informations de votre compte.",
+      business: "Entreprise",
+      email: "Courriel",
+      plan: "Forfait",
+      language: "Langue",
+      billingNote: "La facturation Stripe sera disponible lors de l'activation complète du forfait.",
+    },
+    bookings: {
+      add: "Nouveau rendez-vous",
+      customerName: "Nom du client",
+      phone: "Téléphone",
+      serviceOptional: "Service (optionnel)",
+      notes: "Notes",
+      save: "Enregistrer",
+      cancel: "Annuler",
+      empty: "Aucun rendez-vous pour le moment.",
+      error: "Erreur — réessayez.",
+    },
+    leads: {
+      add: "Nouveau lead",
+      name: "Nom",
+      phone: "Téléphone",
+      notes: "Notes",
+      save: "Enregistrer",
+      empty: "Aucun lead pour le moment.",
+      error: "Erreur — réessayez.",
+      sources: { manual: "Manuel", missedCall: "Appel manqué", webForm: "Formulaire web" },
+      stages: { new: "Nouveau", contacted: "Contacté", booked: "Réservé", lost: "Perdu" },
+    },
+  },
+  onboarding: {
+    title: "Configurez votre salon",
+    subtitle: "Quelques étapes pour activer votre tableau de bord.",
+    step: "Étape",
+    next: "Continuer",
+    error: "Erreur — réessayez.",
+    days: {
+      mon: "Lun",
+      tue: "Mar",
+      wed: "Mer",
+      thu: "Jeu",
+      fri: "Ven",
+      sat: "Sam",
+      sun: "Dim",
+    },
+    hours: {
+      title: "Heures d'ouverture",
+      subtitle: "Utilisées pour proposer des créneaux aux clients.",
+    },
+    services: {
+      title: "Vos services",
+      subtitle: "Ajoutez au moins un service proposé à vos clients.",
+      name: "Nom",
+      duration: "Durée (min)",
+      price: "Prix ($)",
+      add: "Ajouter un service",
+    },
+    done: {
+      title: "C'est prêt!",
+      subtitle: "Votre tableau de bord est activé. Vous pouvez ajouter des rendez-vous et des leads.",
+      cta: "Ouvrir le tableau de bord",
+    },
   },
 };
 
@@ -481,8 +711,161 @@ const en: Dictionary = {
     },
     langOptions: { fr: "Français", en: "English" },
     submit: "Create account",
-    success: "Account created! We'll contact you within 48 hours to activate your 14-day trial.",
+    success: "Account created! Sign in to set up your business.",
     hasAccount: "Already have an account?",
+  },
+  login: {
+    title: "Log in",
+    subtitle: "Access your RendezVous AI dashboard.",
+    fields: { email: "Email", password: "Password" },
+    submit: "Log in",
+    registered: "Account created! Sign in to continue.",
+    noAccount: "Don't have an account?",
+    configError: "Login unavailable — server not configured.",
+  },
+  legal: {
+    back: "Back to home",
+    updated: "Last updated",
+    contact: "Questions",
+    privacy: {
+      title: "Privacy Policy",
+      sections: [
+        {
+          heading: "Data controller",
+          paragraphs: [
+            "RendezVous AI (« we ») operates rendezvousai.ca and related services for Quebec service businesses.",
+          ],
+        },
+        {
+          heading: "Data we collect",
+          paragraphs: [
+            "We collect information you provide (name, email, phone, business name) via waitlist, signup, and the dashboard.",
+            "Usage data (bookings, leads, call logs) is stored to deliver the service.",
+          ],
+        },
+        {
+          heading: "Hosting and security",
+          paragraphs: [
+            "Data is hosted on Supabase (cloud infrastructure). We use per-business access control (RLS) and encryption in transit.",
+          ],
+        },
+        {
+          heading: "Your rights (Law 25)",
+          paragraphs: [
+            "You may request access, correction, or deletion of your personal information by emailing contact@rendezvousai.ca.",
+          ],
+        },
+      ],
+    },
+    terms: {
+      title: "Terms of Service",
+      sections: [
+        {
+          heading: "Service",
+          paragraphs: [
+            "RendezVous AI provides an AI receptionist and booking tools for service businesses. Features may evolve during the pilot phase.",
+          ],
+        },
+        {
+          heading: "Free trial",
+          paragraphs: [
+            "A 14-day trial is offered without a credit card. After the trial, access may be suspended without payment.",
+          ],
+        },
+        {
+          heading: "Acceptable use",
+          paragraphs: [
+            "You are responsible for message content sent to your customers and compliance with applicable laws (PST/QST, Law 25, CASL for SMS).",
+          ],
+        },
+        {
+          heading: "Cancellation",
+          paragraphs: [
+            "You may cancel anytime. Data may be exported on request before account closure.",
+          ],
+        },
+      ],
+    },
+  },
+  dashboard: {
+    title: "Today",
+    subtitle: "Overview of your business activity.",
+    nav: {
+      today: "Today",
+      bookings: "Bookings",
+      leads: "Leads",
+      settings: "Settings",
+      logout: "Log out",
+    },
+    stats: {
+      bookingsToday: "Bookings today",
+      activeLeads: "Active leads",
+      recoveredCalls: "Recovered calls",
+    },
+    trial: { title: "Your trial", plan: "Plan", ends: "Ends on" },
+    settings: {
+      subtitle: "Your account information.",
+      business: "Business",
+      email: "Email",
+      plan: "Plan",
+      language: "Language",
+      billingNote: "Stripe billing will be available when full plan activation ships.",
+    },
+    bookings: {
+      add: "New booking",
+      customerName: "Customer name",
+      phone: "Phone",
+      serviceOptional: "Service (optional)",
+      notes: "Notes",
+      save: "Save",
+      cancel: "Cancel",
+      empty: "No bookings yet.",
+      error: "Error — please try again.",
+    },
+    leads: {
+      add: "New lead",
+      name: "Name",
+      phone: "Phone",
+      notes: "Notes",
+      save: "Save",
+      empty: "No leads yet.",
+      error: "Error — please try again.",
+      sources: { manual: "Manual", missedCall: "Missed call", webForm: "Web form" },
+      stages: { new: "New", contacted: "Contacted", booked: "Booked", lost: "Lost" },
+    },
+  },
+  onboarding: {
+    title: "Set up your business",
+    subtitle: "A few steps to activate your dashboard.",
+    step: "Step",
+    next: "Continue",
+    error: "Error — please try again.",
+    days: {
+      mon: "Mon",
+      tue: "Tue",
+      wed: "Wed",
+      thu: "Thu",
+      fri: "Fri",
+      sat: "Sat",
+      sun: "Sun",
+    },
+    hours: {
+      title: "Business hours",
+      subtitle: "Used to offer available time slots to customers.",
+    },
+    services: {
+      title: "Your services",
+      subtitle: "Add at least one service you offer to customers.",
+      name: "Name",
+      duration: "Duration (min)",
+      price: "Price ($)",
+      add: "Add service",
+    },
+    done: {
+      title: "You're all set!",
+      subtitle: "Your dashboard is live. Add bookings and leads to get started.",
+      cta: "Open dashboard",
+    },
   },
 };
 

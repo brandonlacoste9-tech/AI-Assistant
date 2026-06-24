@@ -148,10 +148,7 @@ export default async function HomePage() {
 
       <section className="py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <SectionHeading
-            label="FAQ"
-            title={t.faq.title}
-          />
+          <SectionHeading label="FAQ" title={t.faq.title} />
           <dl className="mt-10 space-y-4">
             {t.faq.items.map((item) => (
               <div key={item.q} className="card p-6">

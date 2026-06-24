@@ -3,10 +3,13 @@
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useSearchParams } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export function SignupForm({ dict, locale }: { dict: Dictionary; locale: string }) {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const plan = searchParams.get("plan") ?? "pro";
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -17,9 +20,11 @@ export function SignupForm({ dict, locale }: { dict: Dictionary; locale: string 
     setStatus("loading");
     setErrorMsg("");
     const form = new FormData(e.currentTarget);
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
     const body = {
-      email: form.get("email"),
-      password: form.get("password"),
+      email,
+      password,
       business_name: form.get("business_name"),
       city: form.get("city"),
       phone: form.get("phone"),
@@ -36,7 +41,18 @@ export function SignupForm({ dict, locale }: { dict: Dictionary; locale: string 
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Signup failed");
-      setStatus("success");
+
+      const supabase = createClient();
+      if (supabase) {
+        const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+        if (!signInError) {
+          router.push("/onboarding");
+          router.refresh();
+          return;
+        }
+      }
+
+      router.push("/login?registered=1");
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "Signup failed");
@@ -47,6 +63,9 @@ export function SignupForm({ dict, locale }: { dict: Dictionary; locale: string 
     return (
       <div className="rounded-xl border border-[var(--teal)]/30 bg-[var(--teal-light)] p-6 text-center">
         <p className="font-medium text-[var(--teal)]">{dict.signup.success}</p>
+        <Link href="/login?registered=1" className="mt-4 inline-block text-sm font-semibold text-[var(--primary)] hover:underline">
+          {dict.nav.login}
+        </Link>
       </div>
     );
   }

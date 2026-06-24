@@ -20,8 +20,12 @@ export function Footer({ locale }: { locale: Locale }) {
           </Link>
         </div>
         <div className="mt-10 flex flex-wrap gap-6 border-t border-white/10 pt-8 text-sm text-white/50">
-          <span>{t.footer.privacy}</span>
-          <span>{t.footer.terms}</span>
+          <Link href="/privacy" className="transition-colors hover:text-white">
+            {t.footer.privacy}
+          </Link>
+          <Link href="/terms" className="transition-colors hover:text-white">
+            {t.footer.terms}
+          </Link>
           <a href="mailto:contact@rendezvousai.ca" className="transition-colors hover:text-white">
             contact@rendezvousai.ca
           </a>

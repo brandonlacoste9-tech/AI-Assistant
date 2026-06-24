@@ -37,6 +37,12 @@ export default async function SignupPage() {
             <SignupForm dict={t} locale={locale} />
           </Suspense>
         </div>
+        <p className="mt-6 text-center text-sm text-[var(--muted-fg)]">
+          {t.signup.hasAccount}{" "}
+          <Link href="/login" className="font-semibold text-[var(--primary)] hover:underline">
+            {t.nav.login}
+          </Link>
+        </p>
       </div>
     </section>
   );
