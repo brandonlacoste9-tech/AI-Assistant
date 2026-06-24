@@ -51,7 +51,7 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
           </div>
 
           <div className="lg:pl-4 relative w-full h-full flex items-center justify-center">
-            {/* Massive glowing orb behind the dashboard */}
+            {/* Massive glowing orb behind the picture */}
             <div 
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0" 
               style={{
@@ -62,8 +62,12 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
               }}
             />
             
-            <div className="relative z-10 w-full">
-              <DashboardMockup locale={locale} />
+            <div className="relative z-10 mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 shadow-2xl lg:max-w-md">
+              <img 
+                src={fr ? "/hero-fr.jpg" : "/hero-en.jpg"}
+                alt={fr ? "Arrêtez de perdre des réservations" : "Stop losing bookings"}
+                className="w-full object-cover"
+              />
             </div>
           </div>
         </div>
