@@ -3,6 +3,7 @@ import { resolveFirstMessage } from "@/lib/vapi/prompt-utils";
 import { VAPI_TOOL_FUNCTIONS } from "@/lib/vapi/tool-schemas";
 import { BRAND_NAME, BRAND_PRODUCT_SLUG } from "@/lib/site-config";
 import { endCallMessage, getReceptionistVoice, transferMessage } from "@/lib/vapi/voice-config";
+import { ensureE164 } from "@/lib/utils/phone";
 
 export function buildJustBookMeAssistantPayload(opts: {
   business: BusinessVoiceContext;
@@ -20,16 +21,19 @@ export function buildJustBookMeAssistantPayload(opts: {
   const lang = opts.business.defaultLanguage;
 
   if (opts.transferNumber) {
-    modelTools.push({
-      type: "transferCall",
-      destinations: [
-        {
-          type: "number",
-          number: opts.transferNumber,
-          message: transferMessage(lang),
-        },
-      ],
-    });
+    const formattedTransfer = ensureE164(opts.transferNumber);
+    if (formattedTransfer) {
+      modelTools.push({
+        type: "transferCall",
+        destinations: [
+          {
+            type: "number",
+            number: formattedTransfer,
+            message: transferMessage(lang),
+          },
+        ],
+      });
+    }
   }
 
   return {

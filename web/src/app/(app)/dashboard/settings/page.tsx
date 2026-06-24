@@ -33,6 +33,7 @@ export default async function SettingsPage() {
     default_language: ctx.defaultLanguage,
     working_hours: {} as Record<string, { open: string; close: string }>,
     forward_to_number: null as string | null,
+    phone_number: null as string | null,
     services: [] as {
       id: string;
       name: string;
@@ -63,6 +64,7 @@ export default async function SettingsPage() {
         default_language: data.default_language,
         working_hours: (data.working_hours as typeof profile.working_hours) ?? {},
         forward_to_number: data.forward_to_number,
+        phone_number: data.phone_number,
         services: [],
       };
     }

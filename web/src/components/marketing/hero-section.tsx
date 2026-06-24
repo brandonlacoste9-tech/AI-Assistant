@@ -50,8 +50,12 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
             </div>
           </div>
 
-          <div className="lg:pl-4">
-            <DashboardMockup locale={locale} />
+          <div className="lg:pl-4 relative">
+            <div className="absolute inset-0 -m-8 rounded-full bg-[var(--accent)]/20 blur-[80px]" />
+            <div className="absolute inset-0 -m-4 rounded-[3rem] bg-[#c4a882]/30 blur-[60px]" />
+            <div className="relative">
+              <DashboardMockup locale={locale} />
+            </div>
           </div>
         </div>
       </div>

@@ -57,3 +57,33 @@ export async function sendSms(to: string, body: string): Promise<SendSmsResult> 
     return { ok: false, error: msg };
   }
 }
+
+export async function searchAvailableNumbers(areaCode: string, countryCode = "CA") {
+  const client = getTwilioClient();
+  if (!client) throw new Error("Twilio client not initialized");
+
+  const numbers = await client.availablePhoneNumbers(countryCode).local.list({
+    areaCode: parseInt(areaCode, 10),
+    limit: 5,
+  });
+
+  return numbers.map((n) => ({
+    phoneNumber: n.phoneNumber,
+    friendlyName: n.friendlyName,
+    locality: n.locality,
+    region: n.region,
+  }));
+}
+
+export async function buyNumber(phoneNumber: string, smsUrl: string) {
+  const client = getTwilioClient();
+  if (!client) throw new Error("Twilio client not initialized");
+
+  const purchased = await client.incomingPhoneNumbers.create({
+    phoneNumber,
+    smsUrl,
+    smsMethod: "POST",
+  });
+
+  return purchased;
+}
