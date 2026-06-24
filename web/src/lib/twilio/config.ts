@@ -18,6 +18,20 @@ export function getTwilioAuthToken(): string | null {
   return process.env.TWILIO_AUTH_TOKEN?.trim() || null;
 }
 
+export function getTwilioApiKeySid(): string | null {
+  const sid = process.env.TWILIO_API_KEY_SID?.trim();
+  if (!sid?.startsWith("SK")) return sid || null;
+  return sid;
+}
+
+export function getTwilioApiKeySecret(): string | null {
+  return process.env.TWILIO_API_KEY_SECRET?.trim() || null;
+}
+
+export function hasTwilioApiKey(): boolean {
+  return Boolean(getTwilioApiKeySid() && getTwilioApiKeySecret());
+}
+
 export function getTwilioMessagingServiceSid(): string | null {
   return process.env.TWILIO_MESSAGING_SERVICE_SID?.trim() || null;
 }
@@ -26,9 +40,13 @@ export function getTwilioPhoneNumber(): string | null {
   return process.env.TWILIO_PHONE_NUMBER?.trim() || null;
 }
 
-export function isTwilioConfigured(): boolean {
+export function hasTwilioCredentials(): boolean {
   const sid = getTwilioAccountSid();
-  const token = getTwilioAuthToken();
+  if (!sid) return false;
+  return Boolean(getTwilioAuthToken() || hasTwilioApiKey());
+}
+
+export function isTwilioConfigured(): boolean {
   const from = getTwilioMessagingServiceSid() || getTwilioPhoneNumber();
-  return Boolean(sid && token && from);
+  return Boolean(hasTwilioCredentials() && from);
 }

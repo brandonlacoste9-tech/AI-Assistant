@@ -2,6 +2,8 @@ import {
   getTwilioAccountSid,
   getTwilioMessagingServiceSid,
   getTwilioPhoneNumber,
+  hasTwilioApiKey,
+  hasTwilioCredentials,
   isTwilioConfigured,
 } from "@/lib/twilio/config";
 import { NextResponse } from "next/server";
@@ -13,9 +15,11 @@ export async function GET() {
 
   return NextResponse.json({
     configured: isTwilioConfigured(),
+    credentials_ready: hasTwilioCredentials(),
     account_sid_set: Boolean(accountSid),
     account_sid_valid_prefix: accountSid?.startsWith("AC") ?? false,
     auth_token_set: hasToken,
+    api_key_set: hasTwilioApiKey(),
     from_set: Boolean(from),
     messaging_service: Boolean(getTwilioMessagingServiceSid()),
     phone_number: Boolean(getTwilioPhoneNumber()),

@@ -1,17 +1,29 @@
 import {
   getTwilioAccountSid,
+  getTwilioApiKeySecret,
+  getTwilioApiKeySid,
   getTwilioAuthToken,
   getTwilioMessagingServiceSid,
   getTwilioPhoneNumber,
+  hasTwilioCredentials,
   isTwilioConfigured,
 } from "@/lib/twilio/config";
 import twilio from "twilio";
 
 export function getTwilioClient() {
   const accountSid = getTwilioAccountSid();
+  if (!accountSid || !hasTwilioCredentials()) return null;
+
   const authToken = getTwilioAuthToken();
-  if (!accountSid || !authToken) return null;
-  return twilio(accountSid, authToken);
+  if (authToken) return twilio(accountSid, authToken);
+
+  const apiKeySid = getTwilioApiKeySid();
+  const apiKeySecret = getTwilioApiKeySecret();
+  if (apiKeySid && apiKeySecret) {
+    return twilio(apiKeySid, apiKeySecret, { accountSid });
+  }
+
+  return null;
 }
 
 export type SendSmsResult =
