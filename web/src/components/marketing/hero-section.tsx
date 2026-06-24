@@ -50,9 +50,15 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
             </div>
           </div>
 
-          <div className="lg:pl-4 relative">
-            <div className="absolute inset-0 -m-8 rounded-full bg-[var(--accent)]/20 blur-[80px]" />
-            <div className="absolute inset-0 -m-4 rounded-[3rem] bg-[#c4a882]/30 blur-[60px]" />
+          <div className="lg:pl-4 relative w-full">
+            {/* Intense brownish gold glow behind the mockup */}
+            <div 
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[150%] w-[150%] pointer-events-none" 
+              style={{
+                background: 'radial-gradient(circle at center, rgba(196, 168, 130, 0.4) 0%, rgba(196, 168, 130, 0.15) 30%, transparent 70%)',
+                filter: 'blur(40px)',
+              }}
+            />
             <div className="relative">
               <DashboardMockup locale={locale} />
             </div>
