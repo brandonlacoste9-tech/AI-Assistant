@@ -1,5 +1,6 @@
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/types";
+import { Logo } from "@/components/ui/logo";
 import Link from "next/link";
 
 export function Footer({ locale }: { locale: Locale }) {
@@ -10,7 +11,8 @@ export function Footer({ locale }: { locale: Locale }) {
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
           <div>
-            <p className="font-display text-2xl font-semibold">{t.footer.cta}</p>
+            <Logo showWordmark variant="light" />
+            <p className="font-display mt-6 text-2xl font-semibold">{t.footer.cta}</p>
             <p className="mt-2 text-sm text-white/60">{t.footer.rights}</p>
           </div>
           <Link href="/signup?plan=pro" className="btn-primary px-6 py-3 text-sm">
