@@ -22,32 +22,36 @@ export async function POST(req: Request) {
     const founderCode = `RDV-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
 
     const db = getSupabaseService();
-    if (db) {
-      const { error } = await db.from("waitlist_signups").insert({
-        business_name,
-        contact_name,
-        email,
-        phone: phone ?? null,
-        city,
-        staff_count: staff_count ?? null,
-        primary_pain: primary_pain ?? null,
-        locale,
-        founder_code: founderCode,
-      });
-      if (error) {
-        console.error("[waitlist]", error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
-      }
-    } else {
-      console.log("[waitlist] dev mode — no Supabase:", {
-        business_name,
-        contact_name,
-        email,
-        founderCode,
-      });
+    if (!db) {
+      console.warn("[waitlist] Supabase not configured — signup not persisted");
+      return NextResponse.json(
+        {
+          ok: true,
+          founder_code: founderCode,
+          persisted: false,
+          warning: "Supabase env vars missing on server. Lead not saved.",
+        },
+        { status: 503 }
+      );
     }
 
-    return NextResponse.json({ ok: true, founder_code: founderCode });
+    const { error } = await db.from("waitlist_signups").insert({
+      business_name,
+      contact_name,
+      email,
+      phone: phone ?? null,
+      city,
+      staff_count: staff_count ?? null,
+      primary_pain: primary_pain ?? null,
+      locale,
+      founder_code: founderCode,
+    });
+    if (error) {
+      console.error("[waitlist]", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ ok: true, founder_code: founderCode, persisted: true });
   } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }

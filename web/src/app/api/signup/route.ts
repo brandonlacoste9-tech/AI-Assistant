@@ -21,11 +21,13 @@ export async function POST(req: Request) {
 
     const supabase = await createSupabaseServerClient();
     if (!supabase) {
-      console.log("[signup] dev mode — no Supabase:", { email, business_name, plan });
-      return NextResponse.json({
-        ok: true,
-        message: "Dev mode: configure Supabase env vars to create accounts.",
-      });
+      console.warn("[signup] Supabase not configured");
+      return NextResponse.json(
+        {
+          error: "Signup unavailable — Supabase env vars not configured on server.",
+        },
+        { status: 503 }
+      );
     }
 
     const { data: authData, error: authError } = await supabase.auth.signUp({

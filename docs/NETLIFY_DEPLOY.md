@@ -32,7 +32,7 @@ Add every row below. Use **Production** scope (and **Deploy previews** if you wa
 | `NEXT_PUBLIC_SUPABASE_URL` | `https://xxxxx.supabase.co` | All | No |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `eyJhbG...` (anon key) | All | No |
 | `SUPABASE_SERVICE_ROLE_KEY` | `eyJhbG...` (service_role) | All | **Yes** |
-| `NEXT_PUBLIC_SITE_URL` | `https://YOUR-SITE.netlify.app` | Production | No |
+| `NEXT_PUBLIC_SITE_URL` | `https://resilient-khapse-ecd31c.netlify.app` | Production | No |
 
 For deploy previews, either set `NEXT_PUBLIC_SITE_URL` per-deploy via Netlify's `URL` substitution or use:
 

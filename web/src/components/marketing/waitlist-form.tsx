@@ -20,7 +20,8 @@ export function WaitlistForm({ dict, locale }: { dict: Dictionary; locale: strin
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...body, locale }),
       });
-      if (!res.ok) throw new Error("failed");
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error ?? data.warning ?? "failed");
       setStatus("success");
       e.currentTarget.reset();
     } catch {

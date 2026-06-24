@@ -36,7 +36,7 @@ Dashboard → **Authentication** → **URL Configuration**
 |---------|-------|
 | Site URL | `http://localhost:3000` (dev) |
 | Redirect URLs | `http://localhost:3000/**` |
-| | `https://YOUR-SITE.netlify.app/**` |
+| | `https://resilient-khapse-ecd31c.netlify.app/**` |
 
 Dashboard → **Authentication** → **Providers** → **Email**
 
