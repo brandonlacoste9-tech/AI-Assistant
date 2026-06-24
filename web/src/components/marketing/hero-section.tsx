@@ -52,7 +52,16 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
 
           <div className="lg:pl-4 relative w-full h-full flex items-center justify-center">
             {/* Massive glowing orb behind the dashboard */}
-            <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c4a882] opacity-40 blur-[120px] pointer-events-none" />
+            <div 
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none z-0" 
+              style={{
+                width: '700px',
+                height: '700px',
+                backgroundColor: '#c4a882',
+                opacity: 0.5,
+                filter: 'blur(120px)',
+              }}
+            />
             
             <div className="relative z-10 w-full">
               <DashboardMockup locale={locale} />
