@@ -21,6 +21,8 @@ export default async function SettingsPage() {
   let assistantId: string | null = null;
   let phoneNumber: string | null = null;
   let slug = "";
+  let voiceGreeting: string | null = null;
+  let voiceInstructions: string | null = null;
   let staffRows: { id: string; display_name: string; active: boolean }[] = [];
   let profile = {
     name: ctx.businessName,
@@ -40,7 +42,7 @@ export default async function SettingsPage() {
     const { data } = await supabase
       .from("businesses")
       .select(
-        "name, city, default_language, working_hours, forward_to_number, vapi_assistant_id, phone_number, slug"
+        "name, city, default_language, working_hours, forward_to_number, vapi_assistant_id, phone_number, slug, voice_greeting, voice_instructions"
       )
       .eq("id", ctx.businessId)
       .single();
@@ -49,6 +51,8 @@ export default async function SettingsPage() {
       assistantId = data.vapi_assistant_id ?? null;
       phoneNumber = data.phone_number ?? null;
       slug = (data.slug as string) ?? "";
+      voiceGreeting = (data.voice_greeting as string | null) ?? null;
+      voiceInstructions = (data.voice_instructions as string | null) ?? null;
       profile = {
         name: data.name,
         city: data.city,
@@ -143,9 +147,12 @@ export default async function SettingsPage() {
 
       <VoiceSettingsCard
         dict={t}
+        locale={locale}
         assistantId={assistantId}
         phoneNumber={phoneNumber}
         platformPhone={getTwilioPhoneNumber()}
+        initialGreeting={voiceGreeting}
+        initialInstructions={voiceInstructions}
       />
 
       <StaffCard dict={t} initial={staffRows} />

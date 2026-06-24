@@ -17,7 +17,9 @@ export async function GET() {
 
   const { data: business, error } = await supabase
     .from("businesses")
-    .select("name, city, default_language, working_hours, forward_to_number")
+    .select(
+      "name, city, default_language, working_hours, forward_to_number, voice_greeting, voice_instructions"
+    )
     .eq("id", businessId)
     .single();
 
@@ -39,6 +41,8 @@ export async function GET() {
       default_language: business.default_language,
       working_hours: business.working_hours ?? {},
       forward_to_number: business.forward_to_number,
+      voice_greeting: business.voice_greeting,
+      voice_instructions: business.voice_instructions,
     },
     services: services ?? [],
   });
@@ -56,6 +60,8 @@ export async function PATCH(req: Request) {
     default_language,
     working_hours,
     forward_to_number,
+    voice_greeting,
+    voice_instructions,
     services,
     sync_voice = true,
   } = body;
@@ -71,6 +77,14 @@ export async function PATCH(req: Request) {
   }
   if (typeof forward_to_number === "string") {
     updates.forward_to_number = forward_to_number.trim() || null;
+  }
+  if (voice_greeting !== undefined) {
+    const g = typeof voice_greeting === "string" ? voice_greeting.trim() : "";
+    updates.voice_greeting = g ? g.slice(0, 500) : null;
+  }
+  if (voice_instructions !== undefined) {
+    const ins = typeof voice_instructions === "string" ? voice_instructions.trim() : "";
+    updates.voice_instructions = ins ? ins.slice(0, 2000) : null;
   }
 
   if (Object.keys(updates).length > 0) {

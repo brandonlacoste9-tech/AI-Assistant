@@ -18,6 +18,16 @@ export function receptionistFirstMessage(
   return `Bonjour, merci d'appeler ${name}. Comment puis-je vous aider aujourd'hui?`;
 }
 
+export function resolveFirstMessage(
+  businessName: string,
+  locale: "fr" | "en",
+  customGreeting?: string | null
+): string {
+  const custom = customGreeting?.trim();
+  if (custom) return custom.slice(0, 500);
+  return receptionistFirstMessage(businessName, locale);
+}
+
 /** @deprecated Use receptionistFirstMessage */
 export function salonFirstMessage(
   businessName: string,

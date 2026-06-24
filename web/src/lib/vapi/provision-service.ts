@@ -34,7 +34,9 @@ export async function loadBusinessVoiceContext(
 
   const { data: business } = await supabase
     .from("businesses")
-    .select("id, name, city, timezone, default_language, working_hours, forward_to_number")
+    .select(
+      "id, name, city, timezone, default_language, working_hours, forward_to_number, voice_greeting, voice_instructions"
+    )
     .eq("id", businessId)
     .single();
 
@@ -59,6 +61,8 @@ export async function loadBusinessVoiceContext(
       duration_minutes: s.duration_minutes,
       price_cents: s.price_cents,
     })),
+    voiceGreeting: (business.voice_greeting as string | null) ?? null,
+    voiceInstructions: (business.voice_instructions as string | null) ?? null,
   };
 }
 

@@ -164,6 +164,17 @@ export type Dictionary = {
       syncing: string;
       syncDone: string;
       syncError: string;
+      customTitle: string;
+      customSubtitle: string;
+      greetingLabel: string;
+      greetingHint: string;
+      instructionsLabel: string;
+      instructionsPlaceholder: string;
+      instructionsHint: string;
+      saveCustom: string;
+      saving: string;
+      customSaved: string;
+      saveError: string;
     };
     bookings: {
       add: string;
@@ -666,6 +677,19 @@ const fr: Dictionary = {
       syncing: "Synchronisation…",
       syncDone: "Agent vocal mis à jour avec vos infos actuelles.",
       syncError: "Échec de la synchronisation — réessayez.",
+      customTitle: "Personnaliser ce que dit l'IA",
+      customSubtitle:
+        "Écrivez votre propre accueil et des consignes — l'agent vocal les utilise au prochain enregistrement.",
+      greetingLabel: "Message d'accueil (première phrase)",
+      greetingHint: "Laissez vide pour l'accueil par défaut. L'IA dit ce texte en premier.",
+      instructionsLabel: "Consignes supplémentaires",
+      instructionsPlaceholder:
+        "Ex: Toujours demander s'il s'agit d'une urgence. Mentionner nos estimations gratuites. Ne pas prendre de paiement par téléphone.",
+      instructionsHint: "Ton, phrases à utiliser, infos à mentionner, règles spéciales.",
+      saveCustom: "Enregistrer et synchroniser",
+      saving: "Enregistrement…",
+      customSaved: "Personnalisation enregistrée — agent vocal mis à jour.",
+      saveError: "Erreur — réessayez.",
     },
     bookings: {
       add: "Nouveau rendez-vous",
@@ -1190,6 +1214,19 @@ const en: Dictionary = {
       syncing: "Syncing…",
       syncDone: "Voice agent updated with your latest business info.",
       syncError: "Sync failed — please try again.",
+      customTitle: "Customize what your AI says",
+      customSubtitle:
+        "Write your own greeting and extra instructions — the voice agent uses them on save.",
+      greetingLabel: "Opening greeting (first thing callers hear)",
+      greetingHint: "Leave blank for the default greeting. The AI speaks this line first.",
+      instructionsLabel: "Extra instructions",
+      instructionsPlaceholder:
+        "E.g. Always ask if it's an emergency. Mention free estimates. Never take payment over the phone.",
+      instructionsHint: "Tone, phrases to use, info to mention, special rules.",
+      saveCustom: "Save & sync voice",
+      saving: "Saving…",
+      customSaved: "Customization saved — voice agent updated.",
+      saveError: "Error — please try again.",
     },
     bookings: {
       add: "New booking",

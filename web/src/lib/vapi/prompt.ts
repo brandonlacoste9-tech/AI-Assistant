@@ -9,6 +9,8 @@ export type BusinessVoiceContext = {
   timezone: string;
   workingHours?: Record<string, unknown> | null;
   services: { id: string; name: string; duration_minutes: number; price_cents: number }[];
+  voiceGreeting?: string | null;
+  voiceInstructions?: string | null;
 };
 
 const DEFAULT_SERVICES = `[
@@ -100,7 +102,14 @@ Do not:
 - Assume this is a salon unless the services list is salon-specific
 - Quote prices not in the services list without "starting at" / « à partir de »
 - Promise same-day if check_availability returns no slots
-- Collect payment card numbers on the phone`;
+- Collect payment card numbers on the phone${
+    ctx.voiceInstructions?.trim()
+      ? `
+
+Business owner instructions (follow these when appropriate — they override generic tone but not safety or tool rules):
+${ctx.voiceInstructions.trim()}`
+      : ""
+  }`;
 }
 
 /** @deprecated Use buildReceptionistSystemPrompt */
