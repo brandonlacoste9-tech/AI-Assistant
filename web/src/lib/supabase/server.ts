@@ -36,9 +36,22 @@ export async function createSupabaseServerClient() {
 export function getSupabaseService() {
   const env = requireEnv();
   if (!env) return null;
-  const serviceKey =
-    process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() ?? env.anonKey;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
+  if (!serviceKey) return null;
   return createClient(env.url, serviceKey, {
+    auth: { persistSession: false },
+  });
+}
+
+/** Waitlist writes: service role preferred, anon fallback after migration 003. */
+export function getWaitlistClient() {
+  return getSupabaseService() ?? getSupabaseAnonServer();
+}
+
+function getSupabaseAnonServer() {
+  const env = requireEnv();
+  if (!env) return null;
+  return createClient(env.url, env.anonKey, {
     auth: { persistSession: false },
   });
 }

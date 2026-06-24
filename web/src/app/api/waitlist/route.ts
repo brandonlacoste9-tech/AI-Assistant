@@ -1,4 +1,4 @@
-import { getSupabaseService } from "@/lib/supabase/server";
+import { getWaitlistClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
     const founderCode = `RDV-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
 
-    const db = getSupabaseService();
+    const db = getWaitlistClient();
     if (!db) {
       console.warn("[waitlist] Supabase not configured — signup not persisted");
       return NextResponse.json(
