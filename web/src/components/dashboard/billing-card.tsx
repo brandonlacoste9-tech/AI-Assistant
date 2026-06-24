@@ -2,6 +2,7 @@
 
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { usagePercent } from "@/lib/usage/plan-limits";
+import { softLimitLevel, worstSoftLimitLevel } from "@/lib/usage/soft-limit";
 import type { UsageSnapshot } from "@/lib/usage/get-usage";
 import { isValidPlan } from "@/lib/stripe/plans";
 import { Button } from "@/components/ui/button";
@@ -24,13 +25,18 @@ function UsageMeter({
   used,
   limit,
   unlimitedLabel,
+  meterWarn,
+  meterCritical,
 }: {
   label: string;
   used: number;
   limit: number | null;
   unlimitedLabel: string;
+  meterWarn: string;
+  meterCritical: string;
 }) {
   const pct = usagePercent(used, limit);
+  const level = softLimitLevel(used, limit);
   const displayLimit = limit === null ? unlimitedLabel : String(limit);
 
   return (
@@ -39,13 +45,25 @@ function UsageMeter({
         <span className="text-[var(--muted-fg)]">{label}</span>
         <span className="font-medium text-[var(--foreground)]">
           {used} / {displayLimit}
+          {level === "warn" && (
+            <span className="ml-1 text-amber-700">· {meterWarn}</span>
+          )}
+          {level === "critical" && (
+            <span className="ml-1 text-red-600">· {meterCritical}</span>
+          )}
         </span>
       </div>
       {pct !== null && (
         <div className="mt-1 h-2 overflow-hidden rounded-full bg-[var(--muted)]">
           <div
-            className={`h-full rounded-full transition-all ${pct >= 90 ? "bg-red-500" : "bg-[var(--primary)]"}`}
-            style={{ width: `${pct}%` }}
+            className={`h-full rounded-full transition-all ${
+              level === "critical"
+                ? "bg-red-500"
+                : level === "warn"
+                  ? "bg-amber-500"
+                  : "bg-[var(--primary)]"
+            }`}
+            style={{ width: `${Math.min(pct, 100)}%` }}
           />
         </div>
       )}
@@ -179,29 +197,55 @@ export function BillingCard({
           {billing.usage && (
             <div className="mt-6 space-y-3 border-t border-[var(--border)] pt-4">
               <p className="text-sm font-medium text-[var(--foreground)]">{t.usageTitle}</p>
+              {(() => {
+                const u = billing.usage!;
+                const overall = worstSoftLimitLevel([
+                  { used: u.bookings, limit: u.limits.bookings },
+                  { used: u.sms, limit: u.limits.sms },
+                  { used: u.voiceMinutes, limit: u.limits.voiceMinutes },
+                  { used: u.staff, limit: u.limits.staff },
+                ]);
+                if (overall === "ok") return null;
+                return (
+                  <p
+                    className={`text-sm ${overall === "critical" ? "text-red-700" : "text-amber-800"}`}
+                    role="status"
+                  >
+                    {overall === "critical" ? t.usageCritical : t.usageWarn}
+                  </p>
+                );
+              })()}
               <UsageMeter
                 label={t.usageBookings}
                 used={billing.usage.bookings}
                 limit={billing.usage.limits.bookings}
                 unlimitedLabel={t.unlimited}
+                meterWarn={t.usageMeterWarn}
+                meterCritical={t.usageMeterCritical}
               />
               <UsageMeter
                 label={t.usageSms}
                 used={billing.usage.sms}
                 limit={billing.usage.limits.sms}
                 unlimitedLabel={t.unlimited}
+                meterWarn={t.usageMeterWarn}
+                meterCritical={t.usageMeterCritical}
               />
               <UsageMeter
                 label={t.usageVoice}
                 used={billing.usage.voiceMinutes}
                 limit={billing.usage.limits.voiceMinutes}
                 unlimitedLabel={t.unlimited}
+                meterWarn={t.usageMeterWarn}
+                meterCritical={t.usageMeterCritical}
               />
               <UsageMeter
                 label={t.usageStaff}
                 used={billing.usage.staff}
                 limit={billing.usage.limits.staff}
                 unlimitedLabel={t.unlimited}
+                meterWarn={t.usageMeterWarn}
+                meterCritical={t.usageMeterCritical}
               />
             </div>
           )}

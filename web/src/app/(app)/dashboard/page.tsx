@@ -1,7 +1,9 @@
 import { CallsList } from "@/components/dashboard/calls-list";
+import { SetupChecklistCard } from "@/components/dashboard/setup-checklist-card";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { requireOnboardedContext } from "@/lib/auth/get-business-context";
+import { getSetupChecklist } from "@/lib/onboarding/setup-checklist";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { Calendar, DollarSign, Phone, TrendingUp, UserX } from "lucide-react";
 
@@ -23,8 +25,25 @@ export default async function DashboardPage() {
   let recoveredRevenueCents = 0;
   let noShowsToday = 0;
   let calls: Parameters<typeof CallsList>[0]["calls"] = [];
+  let checklist = null as Awaited<ReturnType<typeof getSetupChecklist>> | null;
+  let bookUrl: string | null = null;
+
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+    process.env.URL?.trim() ||
+    "https://justbookme.ca";
 
   if (supabase) {
+    checklist = await getSetupChecklist(supabase, ctx.businessId);
+
+    const { data: slugRow } = await supabase
+      .from("businesses")
+      .select("slug")
+      .eq("id", ctx.businessId)
+      .single();
+    if (slugRow?.slug) {
+      bookUrl = `${siteUrl.replace(/\/$/, "")}/book/${slugRow.slug}`;
+    }
     const { count: apptCount } = await supabase
       .from("appointments")
       .select("id", { count: "exact", head: true })
@@ -137,6 +156,10 @@ export default async function DashboardPage() {
         {t.dashboard.title}
       </h1>
       <p className="mt-1 text-sm text-[var(--muted-fg)]">{t.dashboard.subtitle}</p>
+
+      {checklist && (
+        <SetupChecklistCard dict={t} checklist={checklist} bookUrl={bookUrl} />
+      )}
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {stats.map((stat) => {

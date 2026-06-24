@@ -103,7 +103,32 @@ netlify deploy --build  # preview
 netlify deploy --prod   # production
 ```
 
-## 8. Troubleshooting
+## 8. Scheduled crons (reminders + usage)
+
+Netlify runs wrappers in `netlify/functions/` that call your Next.js API routes.
+
+| Function | Schedule (UTC) | API route |
+|----------|----------------|-----------|
+| `cron-reminders` | `0 13 * * *` (~8h ET) | `/api/cron/reminders` |
+| `cron-reminders-2h` | `0 * * * *` (hourly) | `/api/cron/reminders-2h` |
+| `cron-usage-rollup` | `0 11 * * *` (~6h ET) | `/api/cron/usage-rollup` |
+
+**Required env:** `CRON_SECRET` (random string). Wrappers send `Authorization: Bearer $CRON_SECRET`.
+
+After deploy, confirm on Netlify → **Functions** that all three show a **Scheduled** badge. Use **Run now** to test.
+
+Local manual trigger:
+
+```bash
+cd web
+npm run cron:reminders
+npm run cron:reminders-2h
+npm run cron:usage-rollup
+```
+
+**Pilot tip:** Enable Twilio and Vapi billing/usage email alerts in each provider dashboard.
+
+## 9. Troubleshooting
 
 | Issue | Fix |
 |-------|-----|
@@ -113,6 +138,7 @@ netlify deploy --prod   # production
 | Wrong site URL in emails | Update `NEXT_PUBLIC_SITE_URL` and redeploy |
 | Edge: `Could not resolve "@opentelemetry/api"` | Phase 0 ships **without** `src/middleware.ts`. API routes use service role. Re-add middleware for `/dashboard` with `npm install @opentelemetry/api` |
 | Plugin warns Node 20 vs 22 | `netlify.toml` sets `NODE_VERSION = "22"` |
+| Crons never run | Set `CRON_SECRET` in Netlify env; redeploy; check Functions → Scheduled |
 
 ## Build log notes
 

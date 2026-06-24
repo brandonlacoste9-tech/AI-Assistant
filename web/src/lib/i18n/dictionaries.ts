@@ -124,6 +124,19 @@ export type Dictionary = {
       };
     };
     trial: { title: string; plan: string; ends: string };
+    setupChecklist: {
+      label: string;
+      title: string;
+      subtitle: string;
+      bookLink: string;
+      items: {
+        services: string;
+        hours: string;
+        voice: string;
+        greeting: string;
+        bookPage: string;
+      };
+    };
     common: {
       delete: string;
       deleteConfirmBooking: string;
@@ -298,6 +311,10 @@ export type Dictionary = {
       usageVoice: string;
       usageStaff: string;
       unlimited: string;
+      usageWarn: string;
+      usageCritical: string;
+      usageMeterWarn: string;
+      usageMeterCritical: string;
     };
   };
   onboarding: {
@@ -652,6 +669,19 @@ const fr: Dictionary = {
       },
     },
     trial: { title: "Votre essai", plan: "Forfait", ends: "Se termine le" },
+    setupChecklist: {
+      label: "Mise en service",
+      title: "Préparez votre réceptionniste IA",
+      subtitle: "Complétez ces étapes avant d'accueillir vos premiers appels.",
+      bookLink: "Page de réservation publique :",
+      items: {
+        services: "Ajouter vos services",
+        hours: "Configurer vos heures d'ouverture",
+        voice: "Activer l'agent vocal (synchroniser)",
+        greeting: "Personnaliser le message d'accueil",
+        bookPage: "Publier votre lien de réservation",
+      },
+    },
     common: {
       delete: "Supprimer",
       deleteConfirmBooking: "Supprimer ce rendez-vous? Cette action est irréversible.",
@@ -835,6 +865,12 @@ const fr: Dictionary = {
       usageVoice: "Minutes voix",
       usageStaff: "Employés actifs",
       unlimited: "Illimité",
+      usageWarn:
+        "Vous approchez de la limite de votre forfait ce mois-ci. Passez à un forfait supérieur si besoin.",
+      usageCritical:
+        "Limite de forfait atteinte ou dépassée. Les appels entrants continuent — surveillez l'utilisation ou passez au forfait Pro.",
+      usageMeterWarn: "Presque à la limite",
+      usageMeterCritical: "Limite atteinte",
     },
   },
   onboarding: {
@@ -1222,6 +1258,19 @@ const en: Dictionary = {
       },
     },
     trial: { title: "Your trial", plan: "Plan", ends: "Ends on" },
+    setupChecklist: {
+      label: "Go live",
+      title: "Get your AI receptionist ready",
+      subtitle: "Complete these steps before your first customer calls.",
+      bookLink: "Public booking page:",
+      items: {
+        services: "Add your services",
+        hours: "Set your business hours",
+        voice: "Activate voice agent (sync)",
+        greeting: "Customize your phone greeting",
+        bookPage: "Publish your booking link",
+      },
+    },
     common: {
       delete: "Delete",
       deleteConfirmBooking: "Delete this booking? This cannot be undone.",
@@ -1405,6 +1454,12 @@ const en: Dictionary = {
       usageVoice: "Voice minutes",
       usageStaff: "Active staff",
       unlimited: "Unlimited",
+      usageWarn:
+        "You're approaching your plan limit this month. Upgrade if you need more capacity.",
+      usageCritical:
+        "Plan limit reached or exceeded. Inbound calls still work — monitor usage or upgrade to Pro.",
+      usageMeterWarn: "Near limit",
+      usageMeterCritical: "At limit",
     },
   },
   onboarding: {
