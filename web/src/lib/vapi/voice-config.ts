@@ -1,4 +1,4 @@
-/** Azure neural voices tuned for Quebec salon reception. */
+/** Azure neural voices tuned for Quebec service-business reception. */
 export function getReceptionistVoice(defaultLanguage: "fr" | "en") {
   if (defaultLanguage === "en") {
     return { provider: "azure" as const, voiceId: "en-CA-ClaraNeural" };

@@ -6,10 +6,22 @@ export function montrealTodayIso(): string {
   return new Date().toLocaleDateString("en-CA", { timeZone: "America/Montreal" });
 }
 
-export function salonFirstMessage(businessName: string, locale: "fr" | "en" = "fr"): string {
+/** Universal greeting — assistant speaks first, then listens for any service need. */
+export function receptionistFirstMessage(
+  businessName: string,
+  locale: "fr" | "en" = "fr"
+): string {
   const name = displayBusinessName(businessName);
   if (locale === "en") {
-    return `Thanks for calling ${name}. I can help you book, reschedule, or cancel an appointment. What would you like to do today?`;
+    return `Hi, thanks for calling ${name}. How can I help you today?`;
   }
-  return `Bonjour, bienvenue chez ${name}. Je peux vous aider à prendre, modifier ou annuler un rendez-vous. Comment puis-je vous aider?`;
+  return `Bonjour, merci d'appeler ${name}. Comment puis-je vous aider aujourd'hui?`;
+}
+
+/** @deprecated Use receptionistFirstMessage */
+export function salonFirstMessage(
+  businessName: string,
+  locale: "fr" | "en" = "fr"
+): string {
+  return receptionistFirstMessage(businessName, locale);
 }

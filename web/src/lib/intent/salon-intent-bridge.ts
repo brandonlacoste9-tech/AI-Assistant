@@ -1,10 +1,15 @@
 /**
- * Deterministic booking intent extraction (regex-first, Gemma4/Ollama LLM fallback).
- * Inspired by Flow Guru assistantActions — adapted for Quebec salon voice/SMS.
+ * Booking intent extraction (regex-first, Ollama LLM fallback).
+ * Salons, trades (plumbing/HVAC), dental offices, and other service businesses.
  */
 
+import {
+  describeCallerNeed,
+  matchBusinessService,
+  type ServiceOption,
+} from "@/lib/intent/match-service";
 import { isOllamaConfigured } from "@/lib/llm/ollama";
-import { parseSalonIntentWithLlm } from "@/lib/intent/llm-intent";
+import { parseBookingIntentWithLlm } from "@/lib/intent/llm-intent";
 
 export type SalonService =
   | "coupe"
@@ -98,7 +103,10 @@ const SERVICE_PATTERNS: { service: SalonService; label: string; patterns: RegExp
 ];
 
 const BOOKING_VERBS =
-  /(?:réserver|reserver|book|prendre|prendre\s+rendez[- ]?vous|rendez[- ]?vous|appointment|schedule|besoin\s+d['']?une?)/i;
+  /(?:réserver|reserver|book|prendre|prendre\s+rendez[- ]?vous|rendez[- ]?vous|appointment|schedule|besoin\s+d['']?une?|besoin\s+d['']?un|need\s+a|want\s+(?:an?\s+)?appointment|je\s+veux|i\s+want|i\s+need)/i;
+
+const SERVICE_NEED =
+  /(?:hair|cheveux|coupe|haircut|plumb|plombier|sink|évier|evier|drain|leak|fuite|hvac|climat|chauffage|heating|furnace|dental|dentiste|dentist|fix|réparer|reparer|repair|urgent|emergency)/i;
 
 const RESCHEDULE_VERBS =
   /(?:reporter|déplacer|deplacer|changer|reschedule|move\s+my|change\s+my)/i;
@@ -237,13 +245,37 @@ function detectAction(text: string): BookingIntentAction {
   if (HUMAN_VERBS.test(text)) return "transfer.human";
   if (CANCEL_VERBS.test(text)) return "booking.cancel";
   if (RESCHEDULE_VERBS.test(text)) return "booking.reschedule";
-  if (BOOKING_VERBS.test(text) || extractService(text)) return "booking.create";
+  if (BOOKING_VERBS.test(text) || SERVICE_NEED.test(text) || extractService(text)) {
+    return "booking.create";
+  }
   return "none";
+}
+
+function resolveServiceInfo(
+  raw: string,
+  locale: "fr" | "en",
+  services?: ServiceOption[]
+): { service: SalonService | null; label: string | null } {
+  const salonMatch = extractService(raw);
+  if (salonMatch) {
+    return { service: salonMatch.service, label: salonMatch.label };
+  }
+
+  if (services?.length) {
+    const matched = matchBusinessService(raw, services);
+    if (matched) return { service: "autre", label: matched.name };
+  }
+
+  const described = describeCallerNeed(raw, locale);
+  if (described) return { service: "autre", label: described };
+
+  return { service: null, label: null };
 }
 
 export function parseSalonBookingIntent(
   message: string,
-  now = new Date()
+  now = new Date(),
+  services?: ServiceOption[]
 ): SalonBookingIntent | null {
   const raw = message.trim().replace(/\s+/g, " ");
   if (!raw) return null;
@@ -252,7 +284,7 @@ export function parseSalonBookingIntent(
   const action = detectAction(raw);
   if (action === "none") return null;
 
-  const serviceInfo = extractService(raw);
+  const serviceInfo = resolveServiceInfo(raw, locale, services);
   const when = parseDateTime(raw, now);
 
   if (action === "transfer.human") {
@@ -277,8 +309,8 @@ export function parseSalonBookingIntent(
     return {
       action,
       status: "needs_input",
-      service: serviceInfo?.service ?? null,
-      serviceLabel: serviceInfo?.label ?? null,
+      service: serviceInfo.service,
+      serviceLabel: serviceInfo.label,
       startDescription: when?.description ?? null,
       startIso: when?.iso ?? null,
       locale,
@@ -295,12 +327,12 @@ export function parseSalonBookingIntent(
     return {
       action,
       status: when ? "needs_input" : "needs_input",
-      service: serviceInfo?.service ?? null,
-      serviceLabel: serviceInfo?.label ?? null,
+      service: serviceInfo.service,
+      serviceLabel: serviceInfo.label,
       startDescription: when?.description ?? null,
       startIso: when?.iso ?? null,
       locale,
-      confidence: when && serviceInfo ? "high" : "medium",
+      confidence: when && serviceInfo.label ? "high" : "medium",
       summary:
         locale === "fr"
           ? "Report demandé — confirmer l'ancien et le nouveau créneau."
@@ -310,7 +342,7 @@ export function parseSalonBookingIntent(
   }
 
   // booking.create
-  const hasService = Boolean(serviceInfo);
+  const hasService = Boolean(serviceInfo.label);
   const hasTime = Boolean(when);
 
   let status: IntentStatus = "needs_input";
@@ -327,16 +359,16 @@ export function parseSalonBookingIntent(
   const summary =
     locale === "fr"
       ? hasService && hasTime
-        ? `Réservation ${serviceInfo!.label} — ${when!.description}.`
+        ? `Réservation ${serviceInfo.label} — ${when!.description}.`
         : hasService
-          ? `Service identifié (${serviceInfo!.label}) — quelle date/heure?`
+          ? `Service identifié (${serviceInfo.label}) — quelle date/heure?`
           : hasTime
             ? `Créneau ${when!.description} — quel service?`
             : "Réservation demandée — préciser service et horaire."
       : hasService && hasTime
-        ? `Book ${serviceInfo!.label} — ${when!.description}.`
+        ? `Book ${serviceInfo.label} — ${when!.description}.`
         : hasService
-          ? `Service: ${serviceInfo!.label} — what date/time?`
+          ? `Service: ${serviceInfo.label} — what date/time?`
           : hasTime
             ? `Slot: ${when!.description} — which service?`
             : "Booking requested — need service and time.";
@@ -344,8 +376,8 @@ export function parseSalonBookingIntent(
   return {
     action,
     status,
-    service: serviceInfo?.service ?? null,
-    serviceLabel: serviceInfo?.label ?? null,
+    service: serviceInfo.service,
+    serviceLabel: serviceInfo.label,
     startDescription: when?.description ?? null,
     startIso: when?.iso ?? null,
     locale,
@@ -371,12 +403,18 @@ function shouldTryLlm(intent: SalonBookingIntent | null): boolean {
 }
 
 /** Regex first; falls back to Ollama/Gemma4 when confidence is low or no match. */
+export type IntentParseOptions = {
+  forceLlm?: boolean;
+  skipLlm?: boolean;
+  services?: ServiceOption[];
+};
+
 export async function parseSalonBookingIntentWithFallback(
   message: string,
   now = new Date(),
-  options?: { forceLlm?: boolean; skipLlm?: boolean }
+  options?: IntentParseOptions
 ): Promise<IntentParseResult> {
-  const regexIntent = parseSalonBookingIntent(message, now);
+  const regexIntent = parseSalonBookingIntent(message, now, options?.services);
 
   if (!options?.forceLlm && regexIntent?.confidence === "high") {
     return { intent: regexIntent, source: "regex" };
@@ -396,7 +434,7 @@ export async function parseSalonBookingIntentWithFallback(
     (options?.forceLlm || shouldTryLlm(regexIntent));
 
   if (tryLlm) {
-    const llmIntent = await parseSalonIntentWithLlm(message);
+    const llmIntent = await parseBookingIntentWithLlm(message, options?.services);
     if (llmIntent) return { intent: llmIntent, source: "llm" };
   }
 

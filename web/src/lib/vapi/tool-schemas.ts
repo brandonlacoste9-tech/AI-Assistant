@@ -10,7 +10,8 @@ export const VAPI_TOOL_FUNCTIONS = [
         service_id: { type: "string", description: "UUID of the service from the services list" },
         service_name: {
           type: "string",
-          description: "Service name if service_id unknown (e.g. coupe, barbe, coloration)",
+          description:
+            "Service name if service_id unknown — match caller intent (e.g. haircut, sink repair, HVAC tune-up, dental cleaning)",
         },
         preferred_date: { type: "string", description: "YYYY-MM-DD in America/Montreal" },
         preferred_time: { type: "string", description: "HH:MM 24h optional" },

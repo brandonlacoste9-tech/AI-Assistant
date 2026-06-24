@@ -1,5 +1,5 @@
-import { buildSalonSystemPrompt, type BusinessVoiceContext } from "@/lib/vapi/prompt";
-import { salonFirstMessage } from "@/lib/vapi/prompt-utils";
+import { buildReceptionistSystemPrompt, type BusinessVoiceContext } from "@/lib/vapi/prompt";
+import { receptionistFirstMessage } from "@/lib/vapi/prompt-utils";
 import { VAPI_TOOL_FUNCTIONS } from "@/lib/vapi/tool-schemas";
 import { BRAND_NAME, BRAND_PRODUCT_SLUG } from "@/lib/site-config";
 import { endCallMessage, getReceptionistVoice, transferMessage } from "@/lib/vapi/voice-config";
@@ -10,7 +10,7 @@ export function buildJustBookMeAssistantPayload(opts: {
   transferNumber?: string | null;
   businessId?: string;
 }) {
-  const systemPrompt = buildSalonSystemPrompt(opts.business);
+  const systemPrompt = buildReceptionistSystemPrompt(opts.business);
 
   const modelTools: Record<string, unknown>[] = VAPI_TOOL_FUNCTIONS.map((fn) => ({
     type: "function",
@@ -34,7 +34,7 @@ export function buildJustBookMeAssistantPayload(opts: {
 
   return {
     name: `${BRAND_NAME} — ${opts.business.name}`,
-    firstMessage: salonFirstMessage(opts.business.name, lang),
+    firstMessage: receptionistFirstMessage(opts.business.name, lang),
     firstMessageMode: "assistant-speaks-first",
     endCallMessage: endCallMessage(lang),
     transcriber: {

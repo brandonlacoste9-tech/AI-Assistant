@@ -9,7 +9,7 @@ import {
 } from "@/lib/twilio/booking-reply";
 import { BRAND_NAME } from "@/lib/site-config";
 import { getSupabaseService } from "@/lib/supabase/server";
-import { createAppointment, resolveBusinessId } from "@/lib/vapi/booking-service";
+import { createAppointment, loadBusinessContext, resolveBusinessId } from "@/lib/vapi/booking-service";
 import { getVapiDefaultBusinessId } from "@/lib/vapi/config";
 import { getTwilioAuthToken } from "@/lib/twilio/config";
 import twilio from "twilio";
@@ -105,6 +105,9 @@ export async function handleInboundSms(payload: InboundSmsPayload): Promise<stri
   const locale = business?.default_language === "en" ? "en" : "fr";
   const businessName = business?.name ?? BRAND_NAME;
 
+  const ctx = await loadBusinessContext(businessId);
+  const services = (ctx?.services ?? []).map((s) => ({ id: s.id, name: s.name }));
+
   if (/\b(stop|arret|arrêt|unsubscribe)\b/i.test(lower)) {
     return formatReply(locale, [
       locale === "fr"
@@ -116,8 +119,8 @@ export async function handleInboundSms(payload: InboundSmsPayload): Promise<stri
   if (/\b(start|subscribe)\b/i.test(lower) && body.length < 16) {
     return formatReply(locale, [
       locale === "fr"
-        ? `Merci! Écrivez-nous pour réserver chez ${businessName}. Ex: « Coupe demain 14h »`
-        : `Thanks! Text us to book at ${businessName}. Try: "Haircut tomorrow at 2pm"`,
+        ? `Merci! Écrivez-nous pour réserver chez ${businessName}. Ex: « Coupe demain 14h » ou « Réparer mon évier vendredi »`
+        : `Thanks! Text us to book at ${businessName}. Try: "Haircut tomorrow at 2pm" or "Fix my sink Friday"`,
     ]);
   }
 
@@ -169,7 +172,7 @@ export async function handleInboundSms(payload: InboundSmsPayload): Promise<stri
     }
   }
 
-  const { intent } = await parseSalonBookingIntentWithFallback(body);
+  const { intent } = await parseSalonBookingIntentWithFallback(body, new Date(), { services });
 
   if (!intent || intent.action === "none") {
     await logSmsConversation({
@@ -183,8 +186,8 @@ export async function handleInboundSms(payload: InboundSmsPayload): Promise<stri
 
     return formatReply(locale, [
       locale === "fr"
-        ? `Bonjour! C'est ${businessName}. Pour réserver, écrivez le service et l'heure (ex: « Coupe vendredi 10h »). Pour parler à quelqu'un, écrivez « humain ».`
-        : `Hi, this is ${businessName}. To book, text the service and time — e.g. "Haircut Friday at 10am". Text HUMAN to speak with someone on our team.`,
+        ? `Bonjour! C'est ${businessName}. Comment puis-je vous aider? Pour réserver, écrivez votre besoin et l'heure (ex: « Coupe vendredi 10h », « Évier à réparer lundi »). Écrivez « humain » pour parler à l'équipe.`
+        : `Hi, this is ${businessName}. How can I help you today? To book, text what you need and when — e.g. "Haircut Friday at 10am" or "Fix my sink Monday". Text HUMAN to reach our team.`,
     ]);
   }
 
