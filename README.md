@@ -23,9 +23,13 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## Deploy
+## Deploy (Netlify)
 
-Works on **Netlify**, **Railway**, **Render**, or **Vercel**. See `web/README.md`.
+1. [docs/SUPABASE_SETUP.md](docs/SUPABASE_SETUP.md) — create project + run migrations
+2. [docs/NETLIFY_DEPLOY.md](docs/NETLIFY_DEPLOY.md) — connect repo + env vars
+3. Copy [netlify.env.example](netlify.env.example) → fill → import or paste in UI
+
+Also works on Railway, Render, or Vercel.
 
 ## Docs
 
