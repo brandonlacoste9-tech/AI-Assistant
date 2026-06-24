@@ -1,12 +1,18 @@
+import { getSupabaseAnonKey, getSupabaseUrl } from "@/lib/supabase/config";
+import { getSiteUrl } from "@/lib/site-config";
 import { getSupabaseService } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   const checks: Record<string, boolean | string> = {
-    supabase_url: Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()),
-    supabase_anon: Boolean(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim()),
+    supabase_url: Boolean(getSupabaseUrl()),
+    supabase_anon: Boolean(getSupabaseAnonKey()),
     supabase_service: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()),
-    site_url: process.env.NEXT_PUBLIC_SITE_URL?.trim() || "missing",
+    site_url: getSiteUrl(),
+    env_overrides: Boolean(
+      process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() &&
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim()
+    ),
   };
 
   const db = getSupabaseService();
