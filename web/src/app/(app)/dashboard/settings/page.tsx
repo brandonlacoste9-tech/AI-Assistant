@@ -29,6 +29,7 @@ export default async function SettingsPage() {
   let profile = {
     name: ctx.businessName,
     city: null as string | null,
+    industry: null as string | null,
     default_language: ctx.defaultLanguage,
     working_hours: {} as Record<string, { open: string; close: string }>,
     forward_to_number: null as string | null,
@@ -44,7 +45,7 @@ export default async function SettingsPage() {
     const { data } = await supabase
       .from("businesses")
       .select(
-        "name, city, default_language, working_hours, forward_to_number, vapi_assistant_id, phone_number, slug, voice_greeting, voice_instructions"
+        "name, city, default_language, working_hours, forward_to_number, vapi_assistant_id, phone_number, slug, voice_greeting, voice_instructions, industry"
       )
       .eq("id", ctx.businessId)
       .single();
@@ -58,6 +59,7 @@ export default async function SettingsPage() {
       profile = {
         name: data.name,
         city: data.city,
+        industry: data.industry,
         default_language: data.default_language,
         working_hours: (data.working_hours as typeof profile.working_hours) ?? {},
         forward_to_number: data.forward_to_number,

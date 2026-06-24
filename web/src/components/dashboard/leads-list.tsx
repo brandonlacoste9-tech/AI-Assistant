@@ -14,6 +14,7 @@ type Lead = {
   pipeline_stage: string;
   notes: string | null;
   captured_at: string;
+  metadata?: Record<string, string | null> | null;
 };
 
 const STAGES = ["new", "contacted", "booked", "lost"] as const;
@@ -99,6 +100,30 @@ export function LeadsList({
                 <p className="mt-1 break-words text-xs text-[var(--muted-fg)]">
                   {sourceLabels[lead.source] ?? lead.source} · {when}
                 </p>
+                {lead.metadata?.urgency && (
+                  <span
+                    className={`mt-2 inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
+                      lead.metadata.urgency === "high"
+                        ? "bg-red-100 text-red-700"
+                        : lead.metadata.urgency === "medium"
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-green-100 text-green-700"
+                    }`}
+                  >
+                    {lead.metadata.urgency} Urgency
+                  </span>
+                )}
+                {lead.metadata?.service_needed && (
+                  <p className="mt-2 text-sm font-medium text-[var(--foreground)]">
+                    Service: <span className="font-normal">{lead.metadata.service_needed}</span>
+                  </p>
+                )}
+                {lead.metadata?.diagnostic_data && (
+                  <p className="mt-1 text-sm text-[var(--muted-fg)]">
+                    <span className="font-medium text-[var(--foreground)]">Diagnostics:</span>{" "}
+                    {lead.metadata.diagnostic_data}
+                  </p>
+                )}
                 <label className="mt-3 block text-xs text-[var(--muted-fg)]">
                   {dict.dashboard.leads.notes}
                   <textarea

@@ -16,6 +16,7 @@ export async function createSupabaseServerClient() {
 
   const cookieStore = await cookies();
   return createServerClient(env.url, env.anonKey, {
+    cookieOptions: { maxAge: 31536000 }, // 1 year (Remember me)
     cookies: {
       getAll() {
         return cookieStore.getAll();

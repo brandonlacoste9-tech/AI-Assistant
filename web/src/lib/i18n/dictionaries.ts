@@ -164,6 +164,8 @@ export type Dictionary = {
       profileSubtitle: string;
       businessName: string;
       city: string;
+      industry: string;
+      industryPlaceholder: string;
       forwardTo: string;
       forwardToPlaceholder: string;
       save: string;
@@ -719,6 +721,8 @@ const fr: Dictionary = {
       profileSubtitle: "Modifiez vos infos — l'agent vocal se synchronise automatiquement.",
       businessName: "Nom de l'entreprise",
       city: "Ville",
+      industry: "Industrie / Spécialité",
+      industryPlaceholder: "ex. Salon de coiffure, Plombier, Clinique dentaire",
       forwardTo: "Transfert vers (optionnel)",
       forwardToPlaceholder: "+1 514 555 1234",
       save: "Enregistrer et synchroniser",
@@ -743,13 +747,13 @@ const fr: Dictionary = {
       syncError: "Échec de la synchronisation — réessayez.",
       customTitle: "Personnaliser ce que dit l'IA",
       customSubtitle:
-        "Écrivez votre propre accueil et des consignes — l'agent vocal les utilise au prochain enregistrement.",
-      greetingLabel: "Message d'accueil (première phrase)",
-      greetingHint: "Laissez vide pour l'accueil par défaut. L'IA dit ce texte en premier.",
-      instructionsLabel: "Consignes supplémentaires",
+        "Dites à votre IA exactement comment parler à vos clients.",
+      greetingLabel: "Comment l'IA doit-elle répondre au téléphone?",
+      greetingHint: "Exemple: 'Bonjour! Merci d'appeler la Clinique. Comment puis-je vous aider?'",
+      instructionsLabel: "Règles à suivre par l'IA",
       instructionsPlaceholder:
-        "Ex: Toujours demander s'il s'agit d'une urgence. Mentionner nos estimations gratuites. Ne pas prendre de paiement par téléphone.",
-      instructionsHint: "Ton, phrases à utiliser, infos à mentionner, règles spéciales.",
+        "Écrivez des règles simples ici. Par exemple: 'Demander s'ils sont déjà venus' ou 'Nous acceptons seulement l'argent comptant'.",
+      instructionsHint: "Écrivez ce que vous voulez que l'IA sache, dans vos propres mots.",
       saveCustom: "Enregistrer et synchroniser",
       saving: "Enregistrement…",
       customSaved: "Personnalisation enregistrée — agent vocal mis à jour.",
@@ -1318,6 +1322,8 @@ const en: Dictionary = {
       profileSubtitle: "Edit your details — the voice agent syncs automatically on save.",
       businessName: "Business name",
       city: "City",
+      industry: "Industry / Specialty",
+      industryPlaceholder: "e.g. Hair Salon, Plumber, Dental Office",
       forwardTo: "Forward calls to (optional)",
       forwardToPlaceholder: "+1 514 555 1234",
       save: "Save & sync voice",
@@ -1342,13 +1348,13 @@ const en: Dictionary = {
       syncError: "Sync failed — please try again.",
       customTitle: "Customize what your AI says",
       customSubtitle:
-        "Write your own greeting and extra instructions — the voice agent uses them on save.",
-      greetingLabel: "Opening greeting (first thing callers hear)",
-      greetingHint: "Leave blank for the default greeting. The AI speaks this line first.",
-      instructionsLabel: "Extra instructions",
+        "Tell your AI exactly how to talk to your customers.",
+      greetingLabel: "How should the AI answer the phone?",
+      greetingHint: "Example: 'Hi! Thanks for calling the Clinic. How can I help you today?'",
+      instructionsLabel: "Rules for the AI to follow",
       instructionsPlaceholder:
-        "E.g. Always ask if it's an emergency. Mention free estimates. Never take payment over the phone.",
-      instructionsHint: "Tone, phrases to use, info to mention, special rules.",
+        "Write simple rules here. For example: 'Always ask if they have been here before' or 'Tell them we only accept cash'.",
+      instructionsHint: "Write exactly what you want the AI to know, in plain English.",
       saveCustom: "Save & sync voice",
       saving: "Saving…",
       customSaved: "Customization saved — voice agent updated.",

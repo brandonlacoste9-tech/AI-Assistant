@@ -18,7 +18,7 @@ export async function GET() {
   const { data: business, error } = await supabase
     .from("businesses")
     .select(
-      "name, city, default_language, working_hours, forward_to_number, voice_greeting, voice_instructions"
+      "name, city, default_language, working_hours, forward_to_number, voice_greeting, voice_instructions, industry"
     )
     .eq("id", businessId)
     .single();
@@ -38,6 +38,7 @@ export async function GET() {
     business: {
       name: business.name,
       city: business.city,
+      industry: business.industry,
       default_language: business.default_language,
       working_hours: business.working_hours ?? {},
       forward_to_number: business.forward_to_number,
@@ -62,6 +63,7 @@ export async function PATCH(req: Request) {
     forward_to_number,
     voice_greeting,
     voice_instructions,
+    industry,
     services,
     sync_voice = true,
   } = body;
@@ -69,6 +71,7 @@ export async function PATCH(req: Request) {
   const updates: Record<string, unknown> = {};
   if (typeof name === "string" && name.trim()) updates.name = name.trim();
   if (typeof city === "string") updates.city = city.trim() || null;
+  if (typeof industry === "string") updates.industry = industry.trim() || null;
   if (default_language === "fr" || default_language === "en") {
     updates.default_language = default_language;
   }

@@ -1,7 +1,6 @@
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/types";
 import { DashboardMockup } from "@/components/marketing/dashboard-mockup";
-import { DemoLink } from "@/components/ui/demo-link";
 import { ArrowRight, MapPin } from "lucide-react";
 import Link from "next/link";
 
@@ -31,13 +30,10 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="#waitlist" className="btn-primary px-6 py-3.5 text-sm">
+              <Link href="/signup" className="btn-primary px-6 py-3.5 text-sm">
                 {dict.hero.ctaPrimary}
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <DemoLink className="btn-secondary border-white/20 bg-white/5 px-6 py-3.5 text-sm text-white hover:bg-white/10">
-                {dict.hero.ctaSecondary}
-              </DemoLink>
             </div>
 
             <div className="mt-10 flex flex-wrap gap-6 border-t border-white/10 pt-8">

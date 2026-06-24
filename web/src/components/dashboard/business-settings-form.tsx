@@ -38,6 +38,7 @@ export function BusinessSettingsForm({
   initial: {
     name: string;
     city: string | null;
+    industry: string | null;
     default_language: string;
     working_hours: HoursRow;
     forward_to_number: string | null;
@@ -48,6 +49,7 @@ export function BusinessSettingsForm({
   const [status, setStatus] = useState<"idle" | "loading" | "error" | "done">("idle");
   const [name, setName] = useState(initial.name);
   const [city, setCity] = useState(initial.city ?? "");
+  const [industry, setIndustry] = useState(initial.industry ?? "");
   const [language, setLanguage] = useState(initial.default_language);
   const [forwardTo, setForwardTo] = useState(initial.forward_to_number ?? "");
   const [hours, setHours] = useState<HoursRow>({ ...DEFAULT_HOURS, ...initial.working_hours });
@@ -70,6 +72,7 @@ export function BusinessSettingsForm({
       body: JSON.stringify({
         name,
         city,
+        industry,
         default_language: language,
         working_hours: hours,
         forward_to_number: forwardTo,
@@ -102,6 +105,10 @@ export function BusinessSettingsForm({
         <div>
           <label className="text-sm text-[var(--muted-fg)]">{t.city}</label>
           <Input className="mt-1" value={city} onChange={(e) => setCity(e.target.value)} />
+        </div>
+        <div>
+          <label className="text-sm text-[var(--muted-fg)]">{t.industry}</label>
+          <Input className="mt-1" value={industry} onChange={(e) => setIndustry(e.target.value)} placeholder={t.industryPlaceholder} />
         </div>
         <div>
           <label className="text-sm text-[var(--muted-fg)]">{t.language}</label>

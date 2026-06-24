@@ -2,7 +2,6 @@ import { HeroSection } from "@/components/marketing/hero-section";
 import { VerticalsSection } from "@/components/marketing/verticals-section";
 import { SectionHeading } from "@/components/marketing/section-heading";
 import { SocialProof } from "@/components/marketing/social-proof";
-import { WaitlistForm } from "@/components/marketing/waitlist-form";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
 import {
@@ -134,20 +133,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section id="waitlist" className="scroll-mt-20 bg-[var(--muted)] py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="grid items-start gap-12 lg:grid-cols-2">
-            <SectionHeading
-              label={fr ? "Accès anticipé" : "Early access"}
-              title={t.waitlist.title}
-              description={t.waitlist.subtitle}
-            />
-            <div className="card p-6 sm:p-8">
-              <WaitlistForm dict={t} locale={locale} />
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">

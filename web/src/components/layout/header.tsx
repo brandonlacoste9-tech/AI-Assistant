@@ -1,6 +1,5 @@
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/types";
-import { DemoNavLink } from "@/components/ui/demo-link";
 import { LanguageToggle } from "@/components/ui/language-toggle";
 import { Logo } from "@/components/ui/logo";
 import Link from "next/link";
@@ -17,7 +16,6 @@ export function Header({ locale }: { locale: Locale }) {
           <Link href="/pricing" className="transition-colors hover:text-[var(--primary)]">
             {t.nav.pricing}
           </Link>
-          <DemoNavLink>{t.nav.demo}</DemoNavLink>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -28,7 +26,7 @@ export function Header({ locale }: { locale: Locale }) {
           >
             {t.nav.login}
           </Link>
-          <Link href="/#waitlist" className="btn-primary hidden px-4 py-2 text-sm sm:inline-flex">
+          <Link href="/signup" className="btn-primary hidden px-4 py-2 text-sm sm:inline-flex">
             {t.nav.trial}
           </Link>
         </div>

@@ -11,6 +11,7 @@ import {
 } from "@/lib/vapi/conversations";
 import type { VapiToolName } from "@/lib/vapi/tool-schemas";
 import { getVapiDefaultBusinessId, getVapiWebhookSecret } from "@/lib/vapi/config";
+import { incrementUsage } from "@/lib/usage/increment-usage";
 
 type RawToolCall = {
   id: string;
@@ -259,6 +260,9 @@ export async function handleVapiToolCalls(body: VapiWebhookBody) {
             name: params.name as string | undefined,
             intent: String(params.intent ?? "Voice inquiry"),
             locale: (params.locale as "fr" | "en") ?? "fr",
+            urgency: params.urgency as "high" | "medium" | "low" | undefined,
+            service_needed: params.service_needed as string | undefined,
+            diagnostic_data: params.diagnostic_data as string | undefined,
           });
           break;
         default:
@@ -315,5 +319,10 @@ export async function handleVapiEndOfCall(body: VapiWebhookBody) {
     await sendMissedCallRecovery({ businessId, fromNumber }).catch((e) =>
       console.error("[vapi] missed-call SMS:", e)
     );
+  }
+
+  if (duration != null && duration > 0) {
+    const voiceMinutes = Math.ceil(duration / 60);
+    await incrementUsage(businessId, { voiceMinutes });
   }
 }

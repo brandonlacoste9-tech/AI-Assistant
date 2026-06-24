@@ -2,6 +2,7 @@ import { BRAND_NAME } from "@/lib/site-config";
 import { sendOutboundSms } from "@/lib/twilio/send-outbound-sms";
 import { bookingConfirmationSms } from "@/lib/twilio/templates";
 import { getSupabaseService } from "@/lib/supabase/server";
+import { incrementUsage } from "@/lib/usage/increment-usage";
 import {
   generateSlotTimes,
   hasSchedulingConflict,
@@ -393,6 +394,8 @@ export async function createAppointment(args: {
   });
   const sms = await sendOutboundSms(args.businessId, phone, smsBody);
 
+  await incrementUsage(args.businessId, { bookings: 1 });
+
   return {
     ok: true as const,
     appointment_id: appt.id,
@@ -409,6 +412,9 @@ export async function captureLead(args: {
   name?: string;
   intent: string;
   locale?: "fr" | "en";
+  urgency?: "high" | "medium" | "low";
+  service_needed?: string;
+  diagnostic_data?: string;
 }) {
   const phone = normalizePhone(args.phone);
   const supabase = getSupabaseService();
@@ -423,6 +429,11 @@ export async function captureLead(args: {
       source: "phone_ai",
       pipeline_stage: "new",
       notes: args.intent,
+      metadata: {
+        urgency: args.urgency,
+        service_needed: args.service_needed,
+        diagnostic_data: args.diagnostic_data,
+      },
     })
     .select("id")
     .single();

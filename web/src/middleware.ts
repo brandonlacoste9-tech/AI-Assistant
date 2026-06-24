@@ -12,6 +12,7 @@ export async function middleware(request: NextRequest) {
   if (!url || !anonKey) return response;
 
   const supabase = createServerClient(url, anonKey, {
+    cookieOptions: { maxAge: 31536000 }, // 1 year (Remember me)
     cookies: {
       getAll() {
         return request.cookies.getAll();

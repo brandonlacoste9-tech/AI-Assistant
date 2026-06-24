@@ -21,6 +21,7 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [businessType, setBusinessType] = useState<BusinessType>("salon");
+  const [industry, setIndustry] = useState("");
   const [hours, setHours] = useState<Record<string, { open: string; close: string }>>({
     mon: { open: "09:00", close: "17:00" },
     tue: { open: "09:00", close: "17:00" },
@@ -62,7 +63,7 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
   }
 
   async function nextFromType() {
-    const ok = await saveStep({ business_type: businessType });
+    const ok = await saveStep({ business_type: businessType, industry });
     if (ok) setStep(2);
   }
 
@@ -140,7 +141,18 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
               </button>
             ))}
           </div>
-          <Button type="button" onClick={nextFromType} disabled={status === "loading"}>
+          <div className="mt-4 border-t border-[var(--border)] pt-4">
+            <label className="text-sm font-medium text-[var(--foreground)]">{dict.dashboard.settings.industry}</label>
+            <p className="mb-2 text-sm text-[var(--muted-fg)]">
+              {fr ? "Quel est votre domaine exact? (ex: Clinique Dentaire)" : "What is your exact field? (e.g. Dental Clinic)"}
+            </p>
+            <Input
+              value={industry}
+              onChange={(e) => setIndustry(e.target.value)}
+              placeholder={dict.dashboard.settings.industryPlaceholder}
+            />
+          </div>
+          <Button type="button" onClick={nextFromType} disabled={status === "loading"} className="mt-4">
             {dict.onboarding.next}
           </Button>
         </div>

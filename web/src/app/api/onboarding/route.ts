@@ -11,7 +11,7 @@ export async function POST(req: Request) {
   const { supabase, businessId } = auth;
 
   const body = await req.json();
-  const { business_type, working_hours, services, complete } = body;
+  const { business_type, industry, working_hours, services, complete } = body;
 
   if (business_type && BUSINESS_TYPES.includes(business_type as BusinessType)) {
     const type = business_type as BusinessType;
@@ -23,6 +23,9 @@ export async function POST(req: Request) {
 
     const lang = biz?.default_language === "en" ? "en" : "fr";
     const updates: Record<string, unknown> = { business_type: type };
+    if (typeof industry === "string" && industry.trim().length > 0) {
+      updates.industry = industry.trim();
+    }
     if (!biz?.voice_instructions?.trim()) {
       updates.voice_instructions = defaultVoiceInstructions(type, lang);
     }

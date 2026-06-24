@@ -16,7 +16,7 @@ export default async function LeadsPage() {
   if (supabase) {
     const { data } = await supabase
       .from("leads")
-      .select("id, contact_name, contact_phone, source, pipeline_stage, notes, captured_at")
+      .select("id, contact_name, contact_phone, source, pipeline_stage, notes, captured_at, metadata")
       .eq("business_id", ctx.businessId)
       .order("captured_at", { ascending: false })
       .limit(100);
