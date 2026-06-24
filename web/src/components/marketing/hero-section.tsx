@@ -50,16 +50,11 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
             </div>
           </div>
 
-          <div className="lg:pl-4 relative w-full">
-            {/* Intense brownish gold glow behind the mockup */}
-            <div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[150%] w-[150%] pointer-events-none" 
-              style={{
-                background: 'radial-gradient(circle at center, rgba(196, 168, 130, 0.4) 0%, rgba(196, 168, 130, 0.15) 30%, transparent 70%)',
-                filter: 'blur(40px)',
-              }}
-            />
-            <div className="relative">
+          <div className="lg:pl-4 relative w-full h-full flex items-center justify-center">
+            {/* Massive glowing orb behind the dashboard */}
+            <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c4a882] opacity-40 blur-[120px] pointer-events-none" />
+            
+            <div className="relative z-10 w-full">
               <DashboardMockup locale={locale} />
             </div>
           </div>
