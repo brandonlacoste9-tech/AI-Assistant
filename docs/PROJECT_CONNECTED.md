@@ -47,7 +47,20 @@ node scripts/run-migration.mjs ulbfaxhsbbckotcbmslk supabase/migrations/001_init
 node scripts/configure-auth.mjs ulbfaxhsbbckotcbmslk https://resilient-khapse-ecd31c.netlify.app
 ```
 
+## Env var reference
+
+| Variable | Netlify | Local `.env.local` | Purpose |
+|----------|---------|-------------------|---------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Yes | Yes | Supabase client |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Yes | Public client |
+| `SUPABASE_SERVICE_ROLE_KEY` | Yes (secret) | Yes | API routes (waitlist, signup) |
+| `NEXT_PUBLIC_SITE_URL` | Yes | Yes | Auth redirects, links |
+| `DATABASE_URL` | **No** | Optional | `psql`, TablePlus, migration CLI only |
+
+The live Next.js app does **not** use `DATABASE_URL` — only the Supabase JS keys.
+
 ## Security
 
+- **Rotate database password** if the Postgres URI was shared in chat: Supabase → Project Settings → Database → Reset password
 - Rotate your Supabase personal access token (`sbp_...`) if it was shared in chat
-- Never commit `web/.env.local` or service role keys
+- Never commit `web/.env.local`, `DATABASE_URL`, or service role keys
