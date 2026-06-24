@@ -10,6 +10,9 @@
   --border: #e4ddd2;
   --border-strong: #cfc5b6;
 
+  --leather: #eae0d3;
+  --leather-stitch: #c4a882;
+
   --primary: #1e3a5f;
   --primary-hover: #152d4a;
   --primary-light: #e8eef5;
@@ -61,10 +64,41 @@ html {
 }
 
 .card {
+  position: relative;
   border-radius: var(--radius-xl);
-  border: 1px solid var(--border);
+  border: 2px dashed rgba(196, 168, 130, 0.5);
   background: var(--surface);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-card), inset 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+.leather {
+  background-color: var(--leather);
+  background-image:
+    radial-gradient(ellipse at 30% 30%, rgba(196, 168, 130, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(196, 168, 130, 0.06) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+.stitch-box {
+  position: relative;
+  border: 2px dashed rgba(196, 168, 130, 0.6);
+  border-radius: var(--radius-xl);
+  background-color: var(--surface);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stitch-box-interactive {
+  cursor: pointer;
+}
+.stitch-box-interactive:hover {
+  border-color: rgba(196, 168, 130, 0.9);
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.04),
+    0 0 16px rgba(196, 168, 130, 0.15),
+    inset 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .card-dark {
