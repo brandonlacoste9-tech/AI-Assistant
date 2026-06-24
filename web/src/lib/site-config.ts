@@ -3,7 +3,9 @@ export const BRAND_DOMAIN = "justbookme.ca";
 export const BRAND_PRODUCT_SLUG = "justbookme";
 
 export function getContactEmail(): string {
-  return `contact@${BRAND_DOMAIN}`;
+  return (
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || `info@${BRAND_DOMAIN}`
+  );
 }
 
 export function getSiteUrl(): string {

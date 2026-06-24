@@ -552,7 +552,7 @@ const fr: Dictionary = {
         {
           heading: "Vos droits (Loi 25)",
           paragraphs: [
-            "Vous pouvez demander l'accès, la rectification ou la suppression de vos renseignements personnels en écrivant à contact@justbookme.ca.",
+            "Vous pouvez demander l'accès, la rectification ou la suppression de vos renseignements personnels en écrivant à info@justbookme.ca.",
           ],
         },
       ],
@@ -1076,7 +1076,7 @@ const en: Dictionary = {
         {
           heading: "Your rights (Law 25)",
           paragraphs: [
-            "You may request access, correction, or deletion of your personal information by emailing contact@justbookme.ca.",
+            "You may request access, correction, or deletion of your personal information by emailing info@justbookme.ca.",
           ],
         },
       ],
