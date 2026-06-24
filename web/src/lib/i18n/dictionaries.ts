@@ -372,14 +372,14 @@ const fr: Dictionary = {
   nav: {
     pricing: "Tarification",
     demo: "Réserver une démo",
-    trial: "Liste d'attente",
+    trial: "Essai gratuit",
     login: "Connexion",
   },
   hero: {
     headline: "Arrêtez de perdre des rendez-vous à cause des appels manqués.",
     subhead:
       "JustBookMe répond au téléphone 24 h/24, prend les rendez-vous et envoie les rappels par SMS — en français ou en anglais. Conçu pour les salons, barbershops, métiers et entreprises de services.",
-    ctaPrimary: "Réserver ma place fondateur",
+    ctaPrimary: "Essayer gratuitement",
     ctaSecondary: "Réserver une démo de 15 minutes",
     trust: "Conçu au Québec · Bilingue · Essai 14 jours sans carte",
   },
@@ -973,14 +973,14 @@ const en: Dictionary = {
   nav: {
     pricing: "Pricing",
     demo: "Book a demo",
-    trial: "Join waitlist",
+    trial: "Start free trial",
     login: "Log in",
   },
   hero: {
     headline: "Stop losing bookings to missed calls.",
     subhead:
       "JustBookMe answers your phone 24/7, books appointments, and follows up by SMS — in French or English. Built for service businesses that can't afford to miss a call.",
-    ctaPrimary: "Claim founder spot",
+    ctaPrimary: "Start free trial",
     ctaSecondary: "Book a 15-minute demo",
     trust: "Built in Quebec · Bilingual · 14-day trial, no card",
   },
