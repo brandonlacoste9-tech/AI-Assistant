@@ -30,7 +30,7 @@ export function Logo({
             variant === "light" ? "text-white" : "text-[var(--foreground)]"
           )}
         >
-          RendezVous<span className="text-[var(--accent)]">.</span>
+          JustBook<span className="text-[var(--accent)]">Me</span>
         </span>
       )}
     </Link>

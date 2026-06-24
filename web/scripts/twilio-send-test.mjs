@@ -39,7 +39,7 @@ if (!to) {
 }
 
 const body =
-  "RendezVous AI (test): Bonjour! Votre coupe est confirmée demain à 14h. — (819) 581-1130";
+  "JustBookMe (test): Bonjour! Votre coupe est confirmée demain à 14h. — (819) 581-1130";
 
 try {
   const msg = await client.messages.create({ to, from, body });

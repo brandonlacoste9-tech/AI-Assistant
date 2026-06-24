@@ -1,5 +1,10 @@
-import { getVapiPublicKey, isVapiConfigured } from "@/lib/vapi/config";
-import { listAssistants } from "@/lib/vapi/client";
+import {
+  getVapiAssistantId,
+  getVapiDefaultBusinessId,
+  getVapiPublicKey,
+  isVapiConfigured,
+} from "@/lib/vapi/config";
+import { listAssistants, listPhoneNumbers } from "@/lib/vapi/client";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -10,13 +15,17 @@ export async function GET() {
     });
   }
 
-  const { data, error, status } = await listAssistants();
+  const [assistants, phones] = await Promise.all([listAssistants(), listPhoneNumbers()]);
 
   return NextResponse.json({
     configured: true,
     public_key_set: Boolean(getVapiPublicKey()),
-    api_reachable: !error && status === 200,
-    assistant_count: Array.isArray(data) ? data.length : 0,
-    error: error ?? undefined,
+    assistant_id: getVapiAssistantId() ?? undefined,
+    default_business_id: getVapiDefaultBusinessId() ?? undefined,
+    api_reachable: !assistants.error && assistants.status === 200,
+    assistant_count: Array.isArray(assistants.data) ? assistants.data.length : 0,
+    phone_count: Array.isArray(phones.data) ? phones.data.length : 0,
+    webhook_path: "/api/vapi/webhook",
+    error: assistants.error ?? phones.error ?? undefined,
   });
 }

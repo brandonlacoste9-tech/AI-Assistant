@@ -16,9 +16,11 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="lg:pl-64">
+    <div className="min-h-dvh lg:pl-64">
       <DashboardNav dict={t} businessName={ctx.businessName} />
-      <div className="px-4 py-8 sm:px-8">{children}</div>
+      <main className="min-w-0 overflow-x-hidden px-4 py-6 pb-12 sm:px-8 sm:py-8">
+        {children}
+      </main>
     </div>
   );
 }

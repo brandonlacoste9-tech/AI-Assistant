@@ -1,4 +1,5 @@
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { getContactEmail } from "@/lib/site-config";
 import Link from "next/link";
 
 export function LegalPage({
@@ -43,10 +44,10 @@ export function LegalPage({
         <p className="mt-12 text-sm text-[var(--muted-fg)]">
           {dict.legal.contact}:{" "}
           <a
-            href="mailto:contact@rendezvousai.ca"
+            href={`mailto:${getContactEmail()}`}
             className="font-medium text-[var(--primary)] hover:underline"
           >
-            contact@rendezvousai.ca
+            {getContactEmail()}
           </a>
         </p>
       </div>

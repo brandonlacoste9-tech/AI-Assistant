@@ -25,14 +25,16 @@ export default async function LeadsPage() {
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[340px_1fr]">
-      <LeadForm dict={t} />
-      <div>
-        <h1 className="font-display text-2xl font-semibold text-[var(--foreground)]">
-          {t.dashboard.nav.leads}
-        </h1>
-        <div className="mt-6">
-          <LeadsList dict={t} leads={leads} locale={locale} />
+    <div className="mx-auto w-full max-w-4xl">
+      <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,320px)_1fr] lg:items-start">
+        <LeadForm dict={t} />
+        <div className="min-w-0">
+          <h1 className="font-display text-2xl font-semibold text-[var(--foreground)]">
+            {t.dashboard.nav.leads}
+          </h1>
+          <div className="mt-6">
+            <LeadsList dict={t} leads={leads} locale={locale} />
+          </div>
         </div>
       </div>
     </div>

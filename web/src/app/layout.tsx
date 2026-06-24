@@ -1,6 +1,6 @@
 import { getLocale } from "@/lib/i18n/get-locale";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { getSiteUrl } from "@/lib/site-config";
+import { BRAND_NAME, getSiteUrl } from "@/lib/site-config";
 import type { Metadata } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
@@ -30,10 +30,10 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t.meta.title,
       description: t.meta.description,
       url: siteUrl,
-      siteName: "RendezVous AI",
+      siteName: BRAND_NAME,
       locale: locale === "fr" ? "fr_CA" : "en_CA",
       type: "website",
-      images: [{ url: "/logo.svg", width: 512, height: 512, alt: "RendezVous AI" }],
+      images: [{ url: "/logo.svg", width: 512, height: 512, alt: BRAND_NAME }],
     },
     twitter: {
       card: "summary",

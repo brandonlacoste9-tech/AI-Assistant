@@ -1,5 +1,5 @@
 {
-  "name": "rendezvous-ai-web",
+  "name": "justbookme-web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,8 +11,14 @@
     "test:intent": "npx tsx scripts/test-salon-intent.mjs",
     "test:intent:llm": "npx tsx scripts/test-intent-llm.mjs",
     "test:vapi": "node scripts/vapi-test.mjs",
+    "vapi:provision": "node scripts/vapi-provision.mjs",
+    "vapi:provision:update": "node scripts/vapi-provision.mjs --update",
+    "test:vapi:webhook": "node scripts/test-vapi-webhook.mjs",
     "verify": "node scripts/verify-all.mjs",
-    "verify:prod": "node scripts/verify-all.mjs https://resilient-khapse-ecd31c.netlify.app"
+    "verify:prod": "node scripts/verify-all.mjs https://justbookme.ca",
+    "twilio:sms-webhook": "node scripts/twilio-set-sms-webhook.mjs",
+    "cron:reminders": "node scripts/run-reminders-cron.mjs",
+    "stripe:setup": "node scripts/stripe-setup.mjs"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",

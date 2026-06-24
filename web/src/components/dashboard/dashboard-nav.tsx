@@ -1,6 +1,7 @@
 "use client";
 
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { BRAND_NAME } from "@/lib/site-config";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import { Calendar, LayoutDashboard, LogOut, Settings, Users } from "lucide-react";
@@ -32,14 +33,19 @@ export function DashboardNav({
   }
 
   return (
-    <aside className="flex w-full flex-col border-b border-[var(--border)] bg-[var(--surface)] lg:fixed lg:inset-y-0 lg:w-64 lg:border-b-0 lg:border-r">
-      <div className="border-b border-[var(--border)] px-5 py-5">
+    <aside className="z-40 flex w-full shrink-0 flex-col border-b border-[var(--border)] bg-[var(--surface)] lg:fixed lg:inset-y-0 lg:h-dvh lg:w-64 lg:border-b-0 lg:border-r">
+      <div className="shrink-0 border-b border-[var(--border)] px-4 py-4 sm:px-5 sm:py-5">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--muted-fg)]">
-          RendezVous AI
+          {BRAND_NAME}
         </p>
-        <p className="mt-1 truncate font-semibold text-[var(--foreground)]">{businessName}</p>
+        <p
+          className="mt-1 line-clamp-2 text-sm font-semibold leading-snug text-[var(--foreground)] sm:text-base"
+          title={businessName}
+        >
+          {businessName}
+        </p>
       </div>
-      <nav className="flex flex-1 gap-1 overflow-x-auto px-3 py-4 lg:flex-col lg:overflow-visible">
+      <nav className="flex min-h-0 flex-1 flex-wrap gap-1 px-3 py-3 lg:flex-col lg:flex-nowrap lg:overflow-y-auto lg:py-4">
         {links.map(({ href, icon: Icon, key }) => {
           const active =
             href === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(href);
@@ -48,26 +54,26 @@ export function DashboardNav({
               key={href}
               href={href}
               className={cn(
-                "flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium whitespace-nowrap transition-colors",
+                "flex shrink-0 items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors lg:shrink",
                 active
                   ? "bg-[var(--primary-light)] text-[var(--primary)]"
                   : "text-[var(--muted-fg)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]"
               )}
             >
               <Icon className="h-4 w-4 shrink-0" />
-              {dict.dashboard.nav[key]}
+              <span className="whitespace-nowrap">{dict.dashboard.nav[key]}</span>
             </Link>
           );
         })}
       </nav>
-      <div className="border-t border-[var(--border)] p-3">
+      <div className="mt-auto shrink-0 border-t border-[var(--border)] bg-[var(--surface)] p-3">
         <button
           type="button"
           onClick={logout}
           className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-[var(--muted-fg)] transition-colors hover:bg-[var(--muted)] hover:text-[var(--foreground)]"
         >
-          <LogOut className="h-4 w-4" />
-          {dict.dashboard.nav.logout}
+          <LogOut className="h-4 w-4 shrink-0" />
+          <span>{dict.dashboard.nav.logout}</span>
         </button>
       </div>
     </aside>

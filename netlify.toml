@@ -11,6 +11,9 @@
 [build.environment]
   NODE_VERSION = "22"
   NPM_FLAGS = "--legacy-peer-deps"
+  # NEXT_PUBLIC_* values are inlined into the client bundle by design.
+  # Omit duplicate/legacy Supabase env names Netlify may mark as secrets.
+  SECRETS_SCAN_OMIT_KEYS = "SUPABASE_URL,SUPABASE_URL_STRING,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_PUBLISHABLE_KEY,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
 
 # Next.js App Router API routes + SSR
 [functions]

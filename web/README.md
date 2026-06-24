@@ -1,6 +1,6 @@
-# RendezVous AI — Web
+# JustBookMe — Web
 
-Next.js 15 marketing site + signup for RendezVous AI.
+Next.js 15 marketing site + signup for [JustBookMe](https://justbookme.ca).
 
 ## Pages
 

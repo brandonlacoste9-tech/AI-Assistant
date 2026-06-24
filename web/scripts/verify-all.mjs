@@ -41,7 +41,7 @@ function fail(msg, detail) {
   failed++;
 }
 
-console.log(`RendezVous AI — verify-all @ ${BASE}\n`);
+console.log(`JustBookMe — verify-all @ ${BASE}\n`);
 
 // 1. Env
 console.log("── Environment (.env.local) ──");

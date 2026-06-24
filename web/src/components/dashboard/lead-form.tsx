@@ -37,7 +37,7 @@ export function LeadForm({ dict }: { dict: Dictionary }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="card space-y-4 p-5">
+    <form onSubmit={onSubmit} className="card w-full min-w-0 space-y-4 p-5">
       <h2 className="font-semibold text-[var(--foreground)]">{dict.dashboard.leads.add}</h2>
       <Input name="contact_name" placeholder={dict.dashboard.leads.name} required />
       <Input name="contact_phone" type="tel" placeholder={dict.dashboard.leads.phone} />

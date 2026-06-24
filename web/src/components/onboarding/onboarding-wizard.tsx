@@ -52,11 +52,19 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
   }
 
   async function finish() {
-    const ok = await saveStep({ complete: true });
-    if (ok) {
-      router.push("/dashboard");
-      router.refresh();
+    setStatus("loading");
+    const res = await fetch("/api/onboarding", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ complete: true }),
+    });
+    if (!res.ok) {
+      setStatus("error");
+      return;
     }
+    setStatus("idle");
+    router.push("/dashboard");
+    router.refresh();
   }
 
   const dayLabels: Record<string, string> = dict.onboarding.days;

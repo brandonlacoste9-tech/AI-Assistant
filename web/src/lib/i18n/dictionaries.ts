@@ -96,7 +96,27 @@ export type Dictionary = {
       settings: string;
       logout: string;
     };
-    stats: { bookingsToday: string; activeLeads: string; recoveredCalls: string };
+    stats: {
+      bookingsToday: string;
+      activeLeads: string;
+      recoveredCalls: string;
+      voiceCallsToday: string;
+      recoveredRevenue: string;
+    };
+    calls: {
+      title: string;
+      empty: string;
+      sms: string;
+      unknownCaller: string;
+      recovered: string;
+      outcomes: {
+        booked: string;
+        lead_captured: string;
+        transferred: string;
+        dropped: string;
+        other: string;
+      };
+    };
     trial: { title: string; plan: string; ends: string };
     settings: {
       subtitle: string;
@@ -105,6 +125,30 @@ export type Dictionary = {
       plan: string;
       language: string;
       billingNote: string;
+      profileTitle: string;
+      profileSubtitle: string;
+      businessName: string;
+      city: string;
+      forwardTo: string;
+      forwardToPlaceholder: string;
+      save: string;
+      saving: string;
+      saved: string;
+      saveError: string;
+    };
+    voice: {
+      title: string;
+      subtitle: string;
+      status: string;
+      statusReady: string;
+      statusPending: string;
+      line: string;
+      agentId: string;
+      sharedLineNote: string;
+      syncCta: string;
+      syncing: string;
+      syncDone: string;
+      syncError: string;
     };
     bookings: {
       add: string;
@@ -116,6 +160,10 @@ export type Dictionary = {
       cancel: string;
       empty: string;
       error: string;
+      sendSms: string;
+      smsSent: string;
+      smsError: string;
+      noPhone: string;
     };
     leads: {
       add: string;
@@ -125,8 +173,29 @@ export type Dictionary = {
       save: string;
       empty: string;
       error: string;
-      sources: { manual: string; missedCall: string; webForm: string };
+      sources: { manual: string; missedCall: string; webForm: string; sms: string };
       stages: { new: string; contacted: string; booked: string; lost: string };
+    };
+    billing: {
+      title: string;
+      subtitle: string;
+      notConfigured: string;
+      currentPlan: string;
+      trialEnds: string;
+      nextBilling: string;
+      status: string;
+      statuses: Record<string, string>;
+      checkoutCanceled: string;
+      pastDue: string;
+      trialBanner: string;
+      monthly: string;
+      annual: string;
+      manageBilling: string;
+      subscribe: string;
+      error: string;
+      successTitle: string;
+      successBody: string;
+      backToSettings: string;
     };
   };
   onboarding: {
@@ -151,9 +220,9 @@ export type Dictionary = {
 
 const fr: Dictionary = {
   meta: {
-    title: "RendezVous AI — Ne manquez plus un rendez-vous",
+    title: "JustBookMe — Ne manquez plus un rendez-vous",
     description:
-      "Réceptionniste IA bilingue pour salons, barbershops et entreprises de services au Québec. Appels manqués, réservations et rappels SMS automatiques.",
+      "Réceptionniste IA bilingue pour salons, métiers et entreprises de services. Appels manqués, réservations et rappels SMS — partout au Canada.",
   },
   nav: {
     pricing: "Tarification",
@@ -164,7 +233,7 @@ const fr: Dictionary = {
   hero: {
     headline: "Arrêtez de perdre des rendez-vous à cause des appels manqués.",
     subhead:
-      "RendezVous AI répond au téléphone 24 h/24, prend les rendez-vous et envoie les rappels par SMS — en français ou en anglais. Conçu pour les salons, barbershops et entreprises de services au Québec.",
+      "JustBookMe répond au téléphone 24 h/24, prend les rendez-vous et envoie les rappels par SMS — en français ou en anglais. Conçu pour les salons, barbershops, métiers et entreprises de services.",
     ctaPrimary: "Réserver ma place fondateur",
     ctaSecondary: "Réserver une démo de 15 minutes",
     trust: "Conçu au Québec · Bilingue · Essai 14 jours sans carte",
@@ -216,14 +285,14 @@ const fr: Dictionary = {
     rows: [
       { label: "5 appels manqués / semaine × 80 $", value: "1 600 $/mois" },
       { label: "4 no-shows / semaine × 100 $", value: "1 600 $/mois" },
-      { label: "RendezVous AI Pro", value: "149 $/mois" },
+      { label: "JustBookMe Pro", value: "149 $/mois" },
     ],
     punchline: "Un seul rendez-vous récupéré par semaine paie l'abonnement.",
   },
   waitlist: {
     title: "Rejoignez la liste d'attente",
     subtitle:
-      "Soyez parmi les 10 premiers salons et barbershops au Québec à tester RendezVous AI. Tarif fondateur garanti à vie.",
+      "Soyez parmi les 10 premiers salons et barbershops au Québec à tester JustBookMe. Tarif fondateur garanti à vie.",
     fields: {
       businessName: "Nom du salon",
       contactName: "Votre nom",
@@ -269,7 +338,7 @@ const fr: Dictionary = {
   },
   footer: {
     cta: "Prêt à ne plus perdre de clients?",
-    rights: "RendezVous AI · Montréal, QC",
+    rights: "JustBookMe · Montréal, QC",
     privacy: "Confidentialité",
     terms: "Conditions",
   },
@@ -356,7 +425,7 @@ const fr: Dictionary = {
   },
   login: {
     title: "Connexion",
-    subtitle: "Accédez à votre tableau de bord RendezVous AI.",
+    subtitle: "Accédez à votre tableau de bord JustBookMe.",
     fields: { email: "Courriel", password: "Mot de passe" },
     submit: "Se connecter",
     registered: "Compte créé! Connectez-vous pour continuer.",
@@ -373,7 +442,7 @@ const fr: Dictionary = {
         {
           heading: "Responsable",
           paragraphs: [
-            "RendezVous AI (« nous ») exploite rendezvousai.ca et les services associés pour les salons et entreprises de services au Québec.",
+            "JustBookMe (« nous ») exploite justbookme.ca et les services associés pour les salons et entreprises de services au Québec.",
           ],
         },
         {
@@ -392,7 +461,7 @@ const fr: Dictionary = {
         {
           heading: "Vos droits (Loi 25)",
           paragraphs: [
-            "Vous pouvez demander l'accès, la rectification ou la suppression de vos renseignements personnels en écrivant à contact@rendezvousai.ca.",
+            "Vous pouvez demander l'accès, la rectification ou la suppression de vos renseignements personnels en écrivant à contact@justbookme.ca.",
           ],
         },
       ],
@@ -403,7 +472,7 @@ const fr: Dictionary = {
         {
           heading: "Service",
           paragraphs: [
-            "RendezVous AI fournit une réceptionniste IA et des outils de réservation pour les entreprises de services. Les fonctionnalités peuvent évoluer pendant la phase pilote.",
+            "JustBookMe fournit une réceptionniste IA et des outils de réservation pour les entreprises de services. Les fonctionnalités peuvent évoluer pendant la phase pilote.",
           ],
         },
         {
@@ -440,7 +509,23 @@ const fr: Dictionary = {
     stats: {
       bookingsToday: "Rendez-vous aujourd'hui",
       activeLeads: "Leads actifs",
-      recoveredCalls: "Appels récupérés",
+      recoveredCalls: "Réservations par IA",
+      voiceCallsToday: "Appels et SMS",
+      recoveredRevenue: "Revenu récupéré",
+    },
+    calls: {
+      title: "Activité d'aujourd'hui",
+      empty: "Aucun appel ou SMS pour le moment.",
+      sms: "SMS",
+      unknownCaller: "Numéro inconnu",
+      recovered: "Récupéré",
+      outcomes: {
+        booked: "Réservé",
+        lead_captured: "Lead capturé",
+        transferred: "Transféré",
+        dropped: "Manqué",
+        other: "Autre",
+      },
     },
     trial: { title: "Votre essai", plan: "Forfait", ends: "Se termine le" },
     settings: {
@@ -450,6 +535,31 @@ const fr: Dictionary = {
       plan: "Forfait",
       language: "Langue",
       billingNote: "La facturation Stripe sera disponible lors de l'activation complète du forfait.",
+      profileTitle: "Profil de l'entreprise",
+      profileSubtitle: "Modifiez vos infos — l'agent vocal se synchronise automatiquement.",
+      businessName: "Nom de l'entreprise",
+      city: "Ville",
+      forwardTo: "Transfert vers (optionnel)",
+      forwardToPlaceholder: "+1 514 555 1234",
+      save: "Enregistrer et synchroniser",
+      saving: "Enregistrement…",
+      saved: "Enregistré — agent vocal mis à jour.",
+      saveError: "Erreur — réessayez.",
+    },
+    voice: {
+      title: "Réceptionniste IA",
+      subtitle: "Votre agent vocal est créé automatiquement à partir de vos services et heures.",
+      status: "Statut",
+      statusReady: "Actif",
+      statusPending: "En attente — terminez l'onboarding ou synchronisez",
+      line: "Ligne",
+      agentId: "Agent Vapi",
+      sharedLineNote:
+        "En essai, la ligne partagée pointe vers le dernier agent synchronisé. Chaque salon reçoit son propre agent vocal.",
+      syncCta: "Synchroniser l'agent vocal",
+      syncing: "Synchronisation…",
+      syncDone: "Agent vocal mis à jour avec vos infos actuelles.",
+      syncError: "Échec de la synchronisation — réessayez.",
     },
     bookings: {
       add: "Nouveau rendez-vous",
@@ -461,6 +571,10 @@ const fr: Dictionary = {
       cancel: "Annuler",
       empty: "Aucun rendez-vous pour le moment.",
       error: "Erreur — réessayez.",
+      sendSms: "SMS",
+      smsSent: "SMS envoyé",
+      smsError: "Échec SMS",
+      noPhone: "Pas de téléphone",
     },
     leads: {
       add: "Nouveau lead",
@@ -470,8 +584,35 @@ const fr: Dictionary = {
       save: "Enregistrer",
       empty: "Aucun lead pour le moment.",
       error: "Erreur — réessayez.",
-      sources: { manual: "Manuel", missedCall: "Appel manqué", webForm: "Formulaire web" },
+      sources: { manual: "Manuel", missedCall: "Appel manqué", webForm: "Formulaire web", sms: "SMS" },
       stages: { new: "Nouveau", contacted: "Contacté", booked: "Réservé", lost: "Perdu" },
+    },
+    billing: {
+      title: "Facturation",
+      subtitle: "Gérez votre forfait et vos paiements.",
+      notConfigured: "La facturation n'est pas encore activée sur ce site.",
+      currentPlan: "Forfait actuel",
+      trialEnds: "Fin de l'essai",
+      nextBilling: "Prochaine facturation",
+      status: "Statut",
+      statuses: {
+        trialing: "Essai",
+        active: "Actif",
+        past_due: "Paiement en retard",
+        canceled: "Annulé",
+        unpaid: "Impayé",
+      },
+      checkoutCanceled: "Paiement annulé — vous pouvez réessayer quand vous voulez.",
+      pastDue: "Votre paiement a échoué. Mettez à jour votre carte pour éviter une interruption.",
+      trialBanner: "Ajoutez un mode de paiement avant la fin de l'essai pour conserver l'accès.",
+      monthly: "Mensuel",
+      annual: "Annuel",
+      manageBilling: "Gérer la facturation",
+      subscribe: "S'abonner",
+      error: "Erreur — réessayez ou contactez le support.",
+      successTitle: "Paiement configuré",
+      successBody: "Merci! Votre abonnement est en cours d'activation.",
+      backToSettings: "Retour aux paramètres",
     },
   },
   onboarding: {
@@ -503,17 +644,18 @@ const fr: Dictionary = {
     },
     done: {
       title: "C'est prêt!",
-      subtitle: "Votre tableau de bord est activé. Vous pouvez ajouter des rendez-vous et des leads.",
-      cta: "Ouvrir le tableau de bord",
+      subtitle:
+        "On configure votre réceptionniste IA avec le nom de votre salon, vos services et vos heures.",
+      cta: "Activer mon tableau de bord",
     },
   },
 };
 
 const en: Dictionary = {
   meta: {
-    title: "RendezVous AI — Never miss a booking again",
+    title: "JustBookMe — Never miss a booking again",
     description:
-      "Bilingual AI receptionist for Quebec salons, barbershops & service businesses. Missed calls, bookings, and SMS reminders.",
+      "Bilingual AI receptionist for salons, trades & service businesses. Missed calls, bookings, and SMS reminders — book me, simply.",
   },
   nav: {
     pricing: "Pricing",
@@ -524,7 +666,7 @@ const en: Dictionary = {
   hero: {
     headline: "Stop losing bookings to missed calls.",
     subhead:
-      "RendezVous AI answers your phone 24/7, books appointments, and follows up by SMS — in French or English. Built for Quebec service businesses.",
+      "JustBookMe answers your phone 24/7, books appointments, and follows up by SMS — in French or English. Built for service businesses that can't afford to miss a call.",
     ctaPrimary: "Claim founder spot",
     ctaSecondary: "Book a 15-minute demo",
     trust: "Built in Quebec · Bilingual · 14-day trial, no card",
@@ -576,14 +718,14 @@ const en: Dictionary = {
     rows: [
       { label: "5 missed calls/week × $80", value: "$1,600/month" },
       { label: "4 no-shows/week × $100", value: "$1,600/month" },
-      { label: "RendezVous AI Pro", value: "$149/month" },
+      { label: "JustBookMe Pro", value: "$149/month" },
     ],
     punchline: "Recover one appointment per week and the subscription pays for itself.",
   },
   waitlist: {
     title: "Join the waitlist",
     subtitle:
-      "Be among the first 10 Quebec salons & barbershops to try RendezVous AI. Founder pricing locked for life.",
+      "Be among the first 10 Quebec salons & barbershops to try JustBookMe. Founder pricing locked for life.",
     fields: {
       businessName: "Business name",
       contactName: "Your name",
@@ -629,7 +771,7 @@ const en: Dictionary = {
   },
   footer: {
     cta: "Ready to stop losing clients?",
-    rights: "RendezVous AI · Montreal, QC",
+    rights: "JustBookMe · Montreal, QC",
     privacy: "Privacy",
     terms: "Terms",
   },
@@ -716,7 +858,7 @@ const en: Dictionary = {
   },
   login: {
     title: "Log in",
-    subtitle: "Access your RendezVous AI dashboard.",
+    subtitle: "Access your JustBookMe dashboard.",
     fields: { email: "Email", password: "Password" },
     submit: "Log in",
     registered: "Account created! Sign in to continue.",
@@ -733,7 +875,7 @@ const en: Dictionary = {
         {
           heading: "Data controller",
           paragraphs: [
-            "RendezVous AI (« we ») operates rendezvousai.ca and related services for Quebec service businesses.",
+            "JustBookMe (« we ») operates justbookme.ca and related services for Quebec service businesses.",
           ],
         },
         {
@@ -752,7 +894,7 @@ const en: Dictionary = {
         {
           heading: "Your rights (Law 25)",
           paragraphs: [
-            "You may request access, correction, or deletion of your personal information by emailing contact@rendezvousai.ca.",
+            "You may request access, correction, or deletion of your personal information by emailing contact@justbookme.ca.",
           ],
         },
       ],
@@ -763,7 +905,7 @@ const en: Dictionary = {
         {
           heading: "Service",
           paragraphs: [
-            "RendezVous AI provides an AI receptionist and booking tools for service businesses. Features may evolve during the pilot phase.",
+            "JustBookMe provides an AI receptionist and booking tools for service businesses. Features may evolve during the pilot phase.",
           ],
         },
         {
@@ -800,7 +942,23 @@ const en: Dictionary = {
     stats: {
       bookingsToday: "Bookings today",
       activeLeads: "Active leads",
-      recoveredCalls: "Recovered calls",
+      recoveredCalls: "AI bookings",
+      voiceCallsToday: "Calls & texts",
+      recoveredRevenue: "Recovered revenue",
+    },
+    calls: {
+      title: "Today's activity",
+      empty: "No calls or texts yet.",
+      sms: "SMS",
+      unknownCaller: "Unknown number",
+      recovered: "Recovered",
+      outcomes: {
+        booked: "Booked",
+        lead_captured: "Lead captured",
+        transferred: "Transferred",
+        dropped: "Missed",
+        other: "Other",
+      },
     },
     trial: { title: "Your trial", plan: "Plan", ends: "Ends on" },
     settings: {
@@ -810,6 +968,31 @@ const en: Dictionary = {
       plan: "Plan",
       language: "Language",
       billingNote: "Stripe billing will be available when full plan activation ships.",
+      profileTitle: "Business profile",
+      profileSubtitle: "Edit your details — the voice agent syncs automatically on save.",
+      businessName: "Business name",
+      city: "City",
+      forwardTo: "Forward calls to (optional)",
+      forwardToPlaceholder: "+1 514 555 1234",
+      save: "Save & sync voice",
+      saving: "Saving…",
+      saved: "Saved — voice agent updated.",
+      saveError: "Error — please try again.",
+    },
+    voice: {
+      title: "AI receptionist",
+      subtitle: "Your voice agent is built automatically from your services and hours.",
+      status: "Status",
+      statusReady: "Active",
+      statusPending: "Pending — finish onboarding or sync",
+      line: "Phone line",
+      agentId: "Vapi agent",
+      sharedLineNote:
+        "During trial, the shared line routes to the last synced agent. Each salon gets its own voice agent.",
+      syncCta: "Sync voice agent",
+      syncing: "Syncing…",
+      syncDone: "Voice agent updated with your latest business info.",
+      syncError: "Sync failed — please try again.",
     },
     bookings: {
       add: "New booking",
@@ -821,6 +1004,10 @@ const en: Dictionary = {
       cancel: "Cancel",
       empty: "No bookings yet.",
       error: "Error — please try again.",
+      sendSms: "SMS",
+      smsSent: "SMS sent",
+      smsError: "SMS failed",
+      noPhone: "No phone",
     },
     leads: {
       add: "New lead",
@@ -830,8 +1017,35 @@ const en: Dictionary = {
       save: "Save",
       empty: "No leads yet.",
       error: "Error — please try again.",
-      sources: { manual: "Manual", missedCall: "Missed call", webForm: "Web form" },
+      sources: { manual: "Manual", missedCall: "Missed call", webForm: "Web form", sms: "SMS" },
       stages: { new: "New", contacted: "Contacted", booked: "Booked", lost: "Lost" },
+    },
+    billing: {
+      title: "Billing",
+      subtitle: "Manage your plan and payments.",
+      notConfigured: "Billing is not enabled on this site yet.",
+      currentPlan: "Current plan",
+      trialEnds: "Trial ends",
+      nextBilling: "Next billing date",
+      status: "Status",
+      statuses: {
+        trialing: "Trial",
+        active: "Active",
+        past_due: "Past due",
+        canceled: "Canceled",
+        unpaid: "Unpaid",
+      },
+      checkoutCanceled: "Checkout canceled — you can try again anytime.",
+      pastDue: "Your payment failed. Update your card to avoid interruption.",
+      trialBanner: "Add a payment method before your trial ends to keep access.",
+      monthly: "Monthly",
+      annual: "Annual",
+      manageBilling: "Manage billing",
+      subscribe: "Subscribe",
+      error: "Something went wrong — try again or contact support.",
+      successTitle: "Payment set up",
+      successBody: "Thank you! Your subscription is being activated.",
+      backToSettings: "Back to settings",
     },
   },
   onboarding: {
@@ -863,8 +1077,9 @@ const en: Dictionary = {
     },
     done: {
       title: "You're all set!",
-      subtitle: "Your dashboard is live. Add bookings and leads to get started.",
-      cta: "Open dashboard",
+      subtitle:
+        "We're setting up your AI receptionist with your salon name, services, and hours.",
+      cta: "Activate my dashboard",
     },
   },
 };

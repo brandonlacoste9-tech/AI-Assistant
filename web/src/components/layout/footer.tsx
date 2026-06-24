@@ -1,4 +1,5 @@
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { getContactEmail } from "@/lib/site-config";
 import type { Locale } from "@/lib/i18n/types";
 import { Logo } from "@/components/ui/logo";
 import Link from "next/link";
@@ -26,8 +27,8 @@ export function Footer({ locale }: { locale: Locale }) {
           <Link href="/terms" className="transition-colors hover:text-white">
             {t.footer.terms}
           </Link>
-          <a href="mailto:contact@rendezvousai.ca" className="transition-colors hover:text-white">
-            contact@rendezvousai.ca
+          <a href={`mailto:${getContactEmail()}`} className="transition-colors hover:text-white">
+            {getContactEmail()}
           </a>
         </div>
       </div>

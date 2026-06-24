@@ -1,0 +1,111 @@
+"use client";
+
+import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { MessageSquare, Phone } from "lucide-react";
+
+export type DashboardCall = {
+  id: string;
+  channel: string;
+  from_number: string | null;
+  started_at: string;
+  duration_seconds: number | null;
+  outcome: string;
+  summary: string | null;
+  transcript: string | null;
+  recovered_revenue_cents: number | null;
+};
+
+const OUTCOME_STYLES: Record<string, string> = {
+  booked: "bg-[var(--primary-light)] text-[var(--primary)]",
+  lead_captured: "bg-[var(--teal-light)] text-[var(--teal)]",
+  transferred: "bg-[var(--accent-light)] text-[var(--accent-hover)]",
+  dropped: "bg-red-50 text-red-700",
+  other: "bg-[var(--muted)] text-[var(--muted-fg)]",
+};
+
+export function CallsList({
+  dict,
+  calls,
+  locale,
+}: {
+  dict: Dictionary;
+  calls: DashboardCall[];
+  locale: string;
+}) {
+  if (calls.length === 0) {
+    return (
+      <p className="text-sm text-[var(--muted-fg)]">{dict.dashboard.calls.empty}</p>
+    );
+  }
+
+  return (
+    <ul className="space-y-3">
+      {calls.map((call) => {
+        const when = new Date(call.started_at).toLocaleString(
+          locale === "fr" ? "fr-CA" : "en-CA",
+          { hour: "numeric", minute: "2-digit", month: "short", day: "numeric" }
+        );
+        const isSms = call.channel === "sms";
+        const duration = isSms
+          ? dict.dashboard.calls.sms
+          : call.duration_seconds != null
+            ? `${Math.max(1, Math.round(call.duration_seconds / 60))} min`
+            : "—";
+        const outcomeKey = call.outcome as keyof typeof dict.dashboard.calls.outcomes;
+        const outcomeLabel =
+          dict.dashboard.calls.outcomes[outcomeKey] ?? call.outcome;
+        const excerpt =
+          call.summary ??
+          (call.transcript ? call.transcript.slice(0, 120) + (call.transcript.length > 120 ? "…" : "") : null);
+        const recovered =
+          call.recovered_revenue_cents && call.recovered_revenue_cents > 0
+            ? (call.recovered_revenue_cents / 100).toLocaleString(locale === "fr" ? "fr-CA" : "en-CA", {
+                style: "currency",
+                currency: "CAD",
+              })
+            : null;
+
+        return (
+          <li key={call.id} className="card p-4">
+            <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-start">
+              <div className="flex min-w-0 items-start gap-3">
+                <div
+                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${isSms ? "bg-[var(--teal-light)]" : "bg-[var(--primary-light)]"}`}
+                >
+                  {isSms ? (
+                    <MessageSquare className="h-4 w-4 text-[var(--teal)]" />
+                  ) : (
+                    <Phone className="h-4 w-4 text-[var(--primary)]" />
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <p className="break-words font-medium text-[var(--foreground)]">
+                    {call.from_number ?? dict.dashboard.calls.unknownCaller}
+                  </p>
+                  <p className="text-sm text-[var(--muted-fg)]">
+                    {when} · {duration}
+                  </p>
+                  {excerpt && (
+                    <p className="mt-2 line-clamp-2 break-words text-sm text-[var(--muted-fg)]">
+                      {excerpt}
+                    </p>
+                  )}
+                  {recovered && (
+                    <p className="mt-1 text-xs font-medium text-[var(--teal)]">
+                      {dict.dashboard.calls.recovered}: {recovered}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <span
+                className={`shrink-0 self-start rounded-full px-2.5 py-1 text-xs font-medium capitalize sm:justify-self-end ${OUTCOME_STYLES[call.outcome] ?? OUTCOME_STYLES.other}`}
+              >
+                {outcomeLabel}
+              </span>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}

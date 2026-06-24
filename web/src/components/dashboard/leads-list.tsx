@@ -45,6 +45,14 @@ export function LeadsList({
     lost: dict.dashboard.leads.stages.lost,
   };
 
+  const sourceLabels: Record<string, string> = {
+    manual: dict.dashboard.leads.sources.manual,
+    missed_call: dict.dashboard.leads.sources.missedCall,
+    web_form: dict.dashboard.leads.sources.webForm,
+    sms: dict.dashboard.leads.sources.sms,
+    phone_ai: dict.dashboard.leads.sources.missedCall,
+  };
+
   return (
     <ul className="space-y-3">
       {leads.map((lead) => {
@@ -53,18 +61,18 @@ export function LeadsList({
         );
         return (
           <li key={lead.id} className="card p-4">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <p className="font-medium text-[var(--foreground)]">{lead.contact_name}</p>
+            <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
+              <div className="min-w-0">
+                <p className="break-words font-medium text-[var(--foreground)]">{lead.contact_name}</p>
                 {lead.contact_phone && (
-                  <p className="text-sm text-[var(--muted-fg)]">{lead.contact_phone}</p>
+                  <p className="break-all text-sm text-[var(--muted-fg)]">{lead.contact_phone}</p>
                 )}
-                <p className="mt-1 text-xs text-[var(--muted-fg)]">
-                  {lead.source} · {when}
+                <p className="mt-1 break-words text-xs text-[var(--muted-fg)]">
+                  {sourceLabels[lead.source] ?? lead.source} · {when}
                 </p>
               </div>
               <select
-                className="select-field w-auto min-w-[140px]"
+                className="select-field w-full sm:w-auto sm:min-w-[140px] sm:justify-self-end"
                 value={lead.pipeline_stage}
                 onChange={(e) => updateStage(lead.id, e.target.value)}
               >

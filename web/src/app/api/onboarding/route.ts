@@ -1,4 +1,5 @@
 import { getApiUser } from "@/lib/auth/api-auth";
+import { provisionVoiceForBusiness } from "@/lib/vapi/provision-service";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -33,13 +34,25 @@ export async function POST(req: Request) {
     }
   }
 
+  let voice: { assistant_id?: string; phone_linked?: boolean; error?: string } | undefined;
+
   if (complete) {
     const { error } = await supabase
       .from("businesses")
       .update({ onboarding_completed: true })
       .eq("id", businessId);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+    const provisioned = await provisionVoiceForBusiness(businessId);
+    if (provisioned.ok) {
+      voice = {
+        assistant_id: provisioned.assistantId,
+        phone_linked: provisioned.phoneLinked,
+      };
+    } else {
+      voice = { error: provisioned.error };
+    }
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, voice });
 }

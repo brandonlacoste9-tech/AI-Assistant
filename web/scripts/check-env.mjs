@@ -35,7 +35,7 @@ function warnWrong(key, badPrefix, hint) {
 
 let missing = 0;
 
-console.log("RendezVous AI — app credentials\n");
+console.log("JustBookMe — app credentials\n");
 
 console.log("── Core (required) ──");
 for (const key of required) {
@@ -63,13 +63,26 @@ const vapiPublic = set("NEXT_PUBLIC_VAPI_PUBLIC_KEY");
 console.log(`${vapiPrivate ? "✓" : "○"} VAPI_PRIVATE_KEY (server)`);
 console.log(`${vapiPublic ? "✓" : "○"} NEXT_PUBLIC_VAPI_PUBLIC_KEY`);
 
+console.log("\n── Stripe (billing) ──");
+const stripeKey = set("STRIPE_SECRET_KEY");
+const stripeWebhook = set("STRIPE_WEBHOOK_SECRET");
+const stripePrices = [
+  "STRIPE_PRICE_STARTER_MONTHLY",
+  "STRIPE_PRICE_STARTER_ANNUAL",
+  "STRIPE_PRICE_PRO_MONTHLY",
+  "STRIPE_PRICE_PRO_ANNUAL",
+  "STRIPE_PRICE_PREMIUM_MONTHLY",
+  "STRIPE_PRICE_PREMIUM_ANNUAL",
+].filter(set);
+console.log(`${stripeKey ? "✓" : "○"} STRIPE_SECRET_KEY`);
+console.log(`${stripeWebhook ? "✓" : "○"} STRIPE_WEBHOOK_SECRET`);
+console.log(`${stripePrices.length === 6 ? "✓" : "○"} price IDs (${stripePrices.length}/6)`);
+if (stripeKey && stripePrices.length < 6) {
+  console.log("  → run: npm run stripe:setup");
+}
+
 console.log("\n── Optional ──");
-for (const key of [
-  "NEXT_PUBLIC_CALENDLY_URL",
-  "OLLAMA_BASE_URL",
-  "STRIPE_SECRET_KEY",
-  "DATABASE_URL",
-]) {
+for (const key of ["NEXT_PUBLIC_CALENDLY_URL", "OLLAMA_BASE_URL", "DATABASE_URL", "CRON_SECRET"]) {
   console.log(`${set(key) ? "✓" : "○"} ${key}`);
 }
 

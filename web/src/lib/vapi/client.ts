@@ -48,3 +48,30 @@ export type VapiAssistant = { id: string; name?: string };
 export async function listAssistants() {
   return vapiFetch<VapiAssistant[]>("/assistant", { method: "GET" });
 }
+
+export async function createAssistant(payload: Record<string, unknown>) {
+  return vapiFetch<VapiAssistant>("/assistant", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function updateAssistant(id: string, payload: Record<string, unknown>) {
+  return vapiFetch<VapiAssistant>(`/assistant/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(payload),
+  });
+}
+
+export type VapiPhoneNumber = { id: string; number?: string };
+
+export async function listPhoneNumbers() {
+  return vapiFetch<VapiPhoneNumber[]>("/phone-number", { method: "GET" });
+}
+
+export async function importTwilioPhoneNumber(payload: Record<string, unknown>) {
+  return vapiFetch<VapiPhoneNumber>("/phone-number", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}

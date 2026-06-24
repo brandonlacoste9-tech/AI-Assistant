@@ -40,7 +40,7 @@ export function BookingForm({ dict, services }: { dict: Dictionary; services: Se
   }
 
   return (
-    <form onSubmit={onSubmit} className="card space-y-4 p-5">
+    <form onSubmit={onSubmit} className="card w-full min-w-0 space-y-4 p-5">
       <h2 className="font-semibold text-[var(--foreground)]">{dict.dashboard.bookings.add}</h2>
       <Input name="customer_name" placeholder={dict.dashboard.bookings.customerName} required />
       <Input name="customer_phone" type="tel" placeholder={dict.dashboard.bookings.phone} />

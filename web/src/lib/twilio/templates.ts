@@ -22,7 +22,7 @@ export function bookingConfirmationSms(p: BookingSmsParams): string {
   }
 
   const svc = p.serviceName ? ` (${p.serviceName})` : "";
-  return `${p.businessName}: Hi ${p.customerName}, your appointment${svc} is confirmed for ${when}. Reply CANCEL to cancel.`;
+  return `${p.businessName}: Hi ${p.customerName}, you're all set${svc} for ${when}. Reply CANCEL if you need to cancel.`;
 }
 
 export function bookingReminderSms(p: BookingSmsParams): string {
@@ -36,5 +36,5 @@ export function bookingReminderSms(p: BookingSmsParams): string {
     return `${p.businessName}: Rappel — rendez-vous demain à ${time}. Répondez OUI pour confirmer ou ANNULER.`;
   }
 
-  return `${p.businessName}: Reminder — appointment tomorrow at ${time}. Reply YES to confirm or CANCEL.`;
+  return `${p.businessName}: Friendly reminder — your appointment is tomorrow at ${time}. Reply YES to confirm or CANCEL to cancel.`;
 }

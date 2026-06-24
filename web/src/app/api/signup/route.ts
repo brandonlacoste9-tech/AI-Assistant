@@ -69,6 +69,7 @@ export async function POST(req: Request) {
       .insert({
         name: business_name,
         slug: `${slug}-${userId.slice(0, 8)}`,
+        city: city ?? null,
         default_language,
         plan: "trial",
         trial_ends_at: trialEnds.toISOString(),
