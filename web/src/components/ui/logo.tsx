@@ -19,27 +19,14 @@ export function Logo({
   return (
     <a
       href={href}
-      className={cn("group relative z-50 inline-flex items-center gap-2.5", className)}
+      className={cn("group relative z-50 inline-flex items-center", className)}
       aria-label="JustBookMe home"
     >
-      <Image
-        src="/logo.svg"
-        alt=""
-        width={size}
-        height={size}
-        className="pointer-events-none shrink-0 transition-transform group-hover:scale-105"
-        priority
+      <img
+        src="/logo-new.png"
+        alt="JustBookMe"
+        className="pointer-events-none h-12 w-auto shrink-0 transition-transform group-hover:scale-105"
       />
-      {showWordmark && (
-        <span
-          className={cn(
-            "pointer-events-none font-display text-lg font-semibold",
-            variant === "light" ? "text-white" : "text-[var(--foreground)]"
-          )}
-        >
-          JustBook<span className="text-[var(--accent)]">Me</span>
-        </span>
-      )}
     </a>
   );
 }
