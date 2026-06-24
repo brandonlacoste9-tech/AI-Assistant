@@ -4,13 +4,14 @@ import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { Logo } from "@/components/ui/logo";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
-import { Calendar, LayoutDashboard, LogOut, Settings, Users } from "lucide-react";
+import { Calendar, LayoutDashboard, LogOut, Phone, Settings, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 const links = [
   { href: "/dashboard", icon: LayoutDashboard, key: "today" as const },
   { href: "/dashboard/bookings", icon: Calendar, key: "bookings" as const },
+  { href: "/dashboard/calls", icon: Phone, key: "calls" as const },
   { href: "/dashboard/leads", icon: Users, key: "leads" as const },
   { href: "/dashboard/settings", icon: Settings, key: "settings" as const },
 ];

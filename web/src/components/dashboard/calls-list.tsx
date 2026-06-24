@@ -4,6 +4,7 @@ import { DeleteItemButton } from "@/components/dashboard/delete-item-button";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { MessageSquare, Phone } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export type DashboardCall = {
   id: string;
@@ -35,6 +36,7 @@ export function CallsList({
   locale: string;
 }) {
   const router = useRouter();
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
   async function deleteCall(id: string) {
     const res = await fetch(`/api/conversations?id=${encodeURIComponent(id)}`, {
@@ -99,9 +101,26 @@ export function CallsList({
                     {when} · {duration}
                   </p>
                   {excerpt && (
-                    <p className="mt-2 line-clamp-2 break-words text-sm text-[var(--muted-fg)]">
-                      {excerpt}
-                    </p>
+                    <div className="mt-2">
+                      <p
+                        className={`break-words text-sm text-[var(--muted-fg)] ${expanded[call.id] ? "" : "line-clamp-2"}`}
+                      >
+                        {expanded[call.id] && call.transcript ? call.transcript : excerpt}
+                      </p>
+                      {(call.transcript?.length ?? 0) > 120 && (
+                        <button
+                          type="button"
+                          className="mt-1 text-xs font-medium text-[var(--primary)]"
+                          onClick={() =>
+                            setExpanded((e) => ({ ...e, [call.id]: !e[call.id] }))
+                          }
+                        >
+                          {expanded[call.id]
+                            ? dict.dashboard.calls.showLess
+                            : dict.dashboard.calls.showMore}
+                        </button>
+                      )}
+                    </div>
                   )}
                   {recovered && (
                     <p className="mt-1 text-xs font-medium text-[var(--teal)]">

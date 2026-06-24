@@ -1,4 +1,12 @@
 import { parseSalonBookingIntentWithFallback } from "@/lib/intent/salon-intent-bridge";
+import {
+  cancelAppointmentByReply,
+  confirmAppointmentByReply,
+  findUpcomingAppointment,
+  formatWhen,
+  isCancelReply,
+  isConfirmReply,
+} from "@/lib/twilio/booking-reply";
 import { BRAND_NAME } from "@/lib/site-config";
 import { getSupabaseService } from "@/lib/supabase/server";
 import { createAppointment, resolveBusinessId } from "@/lib/vapi/booking-service";
@@ -105,12 +113,60 @@ export async function handleInboundSms(payload: InboundSmsPayload): Promise<stri
     ]);
   }
 
-  if (/\b(start|oui|yes)\b/i.test(lower) && body.length < 12) {
+  if (/\b(start|subscribe)\b/i.test(lower) && body.length < 16) {
     return formatReply(locale, [
       locale === "fr"
         ? `Merci! Écrivez-nous pour réserver chez ${businessName}. Ex: « Coupe demain 14h »`
         : `Thanks! Text us to book at ${businessName}. Try: "Haircut tomorrow at 2pm"`,
     ]);
+  }
+
+  if (isCancelReply(body) || isConfirmReply(body)) {
+    const appt = await findUpcomingAppointment(businessId, from);
+    if (appt) {
+      const when = formatWhen(appt.starts_at, locale);
+      if (isCancelReply(body)) {
+        const ok = await cancelAppointmentByReply(businessId, appt.id);
+        await logSmsConversation({
+          businessId,
+          fromNumber: from,
+          messageSid: payload.MessageSid,
+          body,
+          outcome: ok ? "other" : "other",
+          summary: ok ? `SMS cancel: ${appt.customer_name}` : "Cancel failed",
+          appointmentId: appt.id,
+        });
+        return formatReply(locale, [
+          ok
+            ? locale === "fr"
+              ? `Votre rendez-vous du ${when} est annulé.`
+              : `Your appointment on ${when} has been canceled.`
+            : locale === "fr"
+              ? "Impossible d'annuler — appelez-nous."
+              : "Could not cancel — please call us.",
+        ]);
+      }
+
+      const ok = await confirmAppointmentByReply(businessId, appt.id);
+      await logSmsConversation({
+        businessId,
+        fromNumber: from,
+        messageSid: payload.MessageSid,
+        body,
+        outcome: "booked",
+        summary: ok ? `SMS confirm: ${appt.customer_name}` : "Confirm failed",
+        appointmentId: appt.id,
+      });
+      return formatReply(locale, [
+        ok
+          ? locale === "fr"
+            ? `Parfait! Rendez-vous confirmé pour ${when}.`
+            : `Great — you're confirmed for ${when}.`
+          : locale === "fr"
+            ? "Impossible de confirmer — appelez-nous."
+            : "Could not confirm — please call us.",
+      ]);
+    }
   }
 
   const { intent } = await parseSalonBookingIntentWithFallback(body);

@@ -94,6 +94,7 @@ export type Dictionary = {
       bookings: string;
       leads: string;
       settings: string;
+      calls: string;
       logout: string;
     };
     stats: {
@@ -110,6 +111,9 @@ export type Dictionary = {
       sms: string;
       unknownCaller: string;
       recovered: string;
+      historySubtitle: string;
+      showMore: string;
+      showLess: string;
       outcomes: {
         booked: string;
         lead_captured: string;
@@ -184,6 +188,9 @@ export type Dictionary = {
         noShow: string;
         completed: string;
       };
+      edit: string;
+      saveEdit: string;
+      cancelEdit: string;
     };
     leads: {
       add: string;
@@ -193,6 +200,8 @@ export type Dictionary = {
       save: string;
       saveNotes: string;
       savingNotes: string;
+      bookCta: string;
+      bookHint: string;
       empty: string;
       error: string;
       sources: { manual: string; missedCall: string; webForm: string; sms: string };
@@ -526,6 +535,7 @@ const fr: Dictionary = {
       bookings: "Rendez-vous",
       leads: "Leads",
       settings: "Paramètres",
+      calls: "Appels",
       logout: "Déconnexion",
     },
     stats: {
@@ -542,6 +552,9 @@ const fr: Dictionary = {
       sms: "SMS",
       unknownCaller: "Numéro inconnu",
       recovered: "Récupéré",
+      historySubtitle: "Historique des appels et SMS.",
+      showMore: "Voir plus",
+      showLess: "Réduire",
       outcomes: {
         booked: "Réservé",
         lead_captured: "Lead capturé",
@@ -617,6 +630,9 @@ const fr: Dictionary = {
         noShow: "Absent",
         completed: "Terminé",
       },
+      edit: "Modifier",
+      saveEdit: "Enregistrer",
+      cancelEdit: "Annuler",
     },
     leads: {
       add: "Nouveau lead",
@@ -626,6 +642,8 @@ const fr: Dictionary = {
       save: "Enregistrer",
       saveNotes: "Enregistrer les notes",
       savingNotes: "Enregistrement…",
+      bookCta: "Réserver",
+      bookHint: "Créez un rendez-vous — le lead passera à « Réservé ».",
       empty: "Aucun lead pour le moment.",
       error: "Erreur — réessayez.",
       sources: { manual: "Manuel", missedCall: "Appel manqué", webForm: "Formulaire web", sms: "SMS" },
@@ -981,6 +999,7 @@ const en: Dictionary = {
       bookings: "Bookings",
       leads: "Leads",
       settings: "Settings",
+      calls: "Calls",
       logout: "Log out",
     },
     stats: {
@@ -997,6 +1016,9 @@ const en: Dictionary = {
       sms: "SMS",
       unknownCaller: "Unknown number",
       recovered: "Recovered",
+      historySubtitle: "Full call and SMS history.",
+      showMore: "Show more",
+      showLess: "Show less",
       outcomes: {
         booked: "Booked",
         lead_captured: "Lead captured",
@@ -1072,6 +1094,9 @@ const en: Dictionary = {
         noShow: "No-show",
         completed: "Completed",
       },
+      edit: "Edit",
+      saveEdit: "Save",
+      cancelEdit: "Cancel",
     },
     leads: {
       add: "New lead",
@@ -1081,6 +1106,8 @@ const en: Dictionary = {
       save: "Save",
       saveNotes: "Save notes",
       savingNotes: "Saving…",
+      bookCta: "Book",
+      bookHint: "Create an appointment — the lead will move to Booked.",
       empty: "No leads yet.",
       error: "Error — please try again.",
       sources: { manual: "Manual", missedCall: "Missed call", webForm: "Web form", sms: "SMS" },

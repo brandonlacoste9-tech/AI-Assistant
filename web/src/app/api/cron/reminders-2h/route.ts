@@ -1,4 +1,4 @@
-import { run24hReminders } from "@/lib/cron/reminder-job";
+import { run2hReminders } from "@/lib/cron/reminder-job";
 import { NextResponse } from "next/server";
 
 function authorize(req: Request): boolean {
@@ -14,7 +14,7 @@ export async function GET(req: Request) {
   }
 
   try {
-    const result = await run24hReminders();
+    const result = await run2hReminders();
     return NextResponse.json({ ok: true, ...result });
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Reminder job failed";

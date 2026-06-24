@@ -2,6 +2,7 @@
 
 import { DeleteItemButton } from "@/components/dashboard/delete-item-button";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -122,7 +123,13 @@ export function LeadsList({
                   </button>
                 )}
               </div>
-              <div className="flex items-center gap-2 sm:justify-self-end">
+              <div className="flex flex-wrap items-center gap-2 sm:justify-self-end">
+                <Link
+                  href={`/dashboard/bookings?lead=${lead.id}`}
+                  className="rounded-lg bg-[var(--primary-light)] px-3 py-2 text-sm font-medium text-[var(--primary)] hover:opacity-90"
+                >
+                  {dict.dashboard.leads.bookCta}
+                </Link>
                 <select
                   className="select-field w-full sm:w-auto sm:min-w-[140px]"
                   value={lead.pipeline_stage}

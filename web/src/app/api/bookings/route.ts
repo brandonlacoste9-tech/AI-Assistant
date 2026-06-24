@@ -1,3 +1,4 @@
+import { updateBookingDetails } from "@/lib/appointments/update-booking";
 import { getApiUser } from "@/lib/auth/api-auth";
 import { sendBookingSms } from "@/lib/twilio/send-booking-sms";
 import { NextResponse } from "next/server";
@@ -111,18 +112,38 @@ export async function PATCH(req: Request) {
   const { supabase, businessId } = auth;
 
   const body = await req.json();
-  const { id, status } = body;
-  if (!id || !status || !BOOKING_STATUSES.includes(status)) {
-    return NextResponse.json({ error: "Missing or invalid id/status" }, { status: 400 });
+  const { id, status, starts_at, service_id, notes, customer_name } = body;
+  if (!id) {
+    return NextResponse.json({ error: "Missing id" }, { status: 400 });
   }
 
-  const { error } = await supabase
-    .from("appointments")
-    .update({ status })
-    .eq("id", id)
-    .eq("business_id", businessId);
+  if (starts_at !== undefined || service_id !== undefined || notes !== undefined || customer_name !== undefined) {
+    const result = await updateBookingDetails({
+      supabase,
+      businessId,
+      appointmentId: id,
+      starts_at,
+      service_id,
+      notes,
+      customer_name,
+    });
+    if (!result.ok) {
+      return NextResponse.json({ error: result.error }, { status: 400 });
+    }
+  }
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (status !== undefined) {
+    if (!BOOKING_STATUSES.includes(status as (typeof BOOKING_STATUSES)[number])) {
+      return NextResponse.json({ error: "Invalid status" }, { status: 400 });
+    }
+    const { error } = await supabase
+      .from("appointments")
+      .update({ status })
+      .eq("id", id)
+      .eq("business_id", businessId);
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
   return NextResponse.json({ ok: true });
 }
 

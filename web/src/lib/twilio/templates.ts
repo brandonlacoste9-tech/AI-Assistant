@@ -38,3 +38,17 @@ export function bookingReminderSms(p: BookingSmsParams): string {
 
   return `${p.businessName}: Friendly reminder — your appointment is tomorrow at ${time}. Reply YES to confirm or CANCEL to cancel.`;
 }
+
+export function bookingReminder2hSms(p: BookingSmsParams): string {
+  const time = p.startsAt.toLocaleString(p.locale === "fr" ? "fr-CA" : "en-CA", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "America/Montreal",
+  });
+
+  if (p.locale === "fr") {
+    return `${p.businessName}: Rappel — rendez-vous dans 2 h (${time}). Répondez OUI pour confirmer ou ANNULER.`;
+  }
+
+  return `${p.businessName}: Reminder — your appointment is in 2 hours (${time}). Reply YES to confirm or CANCEL to cancel.`;
+}
