@@ -9,6 +9,7 @@
     "lint": "next lint",
     "check:env": "node scripts/check-env.mjs",
     "test:intent": "npx tsx scripts/test-salon-intent.mjs",
+    "test:intent:llm": "npx tsx scripts/test-intent-llm.mjs",
     "verify": "node scripts/verify-all.mjs",
     "verify:prod": "node scripts/verify-all.mjs https://resilient-khapse-ecd31c.netlify.app"
   },

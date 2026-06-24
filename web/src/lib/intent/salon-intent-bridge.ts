@@ -1,7 +1,10 @@
 /**
- * Deterministic booking intent extraction (regex-first, LLM fallback later).
+ * Deterministic booking intent extraction (regex-first, Gemma4/Ollama LLM fallback).
  * Inspired by Flow Guru assistantActions — adapted for Quebec salon voice/SMS.
  */
+
+import { isOllamaConfigured } from "@/lib/llm/ollama";
+import { parseSalonIntentWithLlm } from "@/lib/intent/llm-intent";
 
 export type SalonService =
   | "coupe"
@@ -350,4 +353,52 @@ export function parseSalonBookingIntent(
     summary,
     raw,
   };
+}
+
+export type IntentParseSource = "regex" | "llm" | null;
+
+export type IntentParseResult = {
+  intent: SalonBookingIntent | null;
+  source: IntentParseSource;
+};
+
+function shouldTryLlm(intent: SalonBookingIntent | null): boolean {
+  if (!intent) return true;
+  if (intent.confidence === "low") return true;
+  if (intent.action === "none") return true;
+  if (intent.status === "needs_input" && intent.confidence !== "high") return true;
+  return false;
+}
+
+/** Regex first; falls back to Ollama/Gemma4 when confidence is low or no match. */
+export async function parseSalonBookingIntentWithFallback(
+  message: string,
+  now = new Date(),
+  options?: { forceLlm?: boolean; skipLlm?: boolean }
+): Promise<IntentParseResult> {
+  const regexIntent = parseSalonBookingIntent(message, now);
+
+  if (!options?.forceLlm && regexIntent?.confidence === "high") {
+    return { intent: regexIntent, source: "regex" };
+  }
+
+  if (
+    !options?.forceLlm &&
+    regexIntent?.confidence === "medium" &&
+    regexIntent.status === "executed"
+  ) {
+    return { intent: regexIntent, source: "regex" };
+  }
+
+  const tryLlm =
+    !options?.skipLlm &&
+    isOllamaConfigured() &&
+    (options?.forceLlm || shouldTryLlm(regexIntent));
+
+  if (tryLlm) {
+    const llmIntent = await parseSalonIntentWithLlm(message);
+    if (llmIntent) return { intent: llmIntent, source: "llm" };
+  }
+
+  return { intent: regexIntent, source: regexIntent ? "regex" : null };
 }
