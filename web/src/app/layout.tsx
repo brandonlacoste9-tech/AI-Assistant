@@ -3,6 +3,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { BRAND_NAME, getSiteUrl } from "@/lib/site-config";
 import type { Metadata } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -49,9 +50,11 @@ export default async function RootLayout({
   const locale = await getLocale();
 
   return (
-    <html lang={locale === "fr" ? "fr-CA" : "en-CA"}>
+    <html lang={locale === "fr" ? "fr-CA" : "en-CA"} suppressHydrationWarning>
       <body className={`${dmSans.variable} ${fraunces.variable} min-h-screen antialiased`}>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

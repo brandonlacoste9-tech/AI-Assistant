@@ -2,6 +2,7 @@
 
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { Logo } from "@/components/ui/logo";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import { Calendar, Contact, LayoutDashboard, LogOut, Phone, Settings, Users } from "lucide-react";
@@ -67,14 +68,17 @@ export function DashboardNav({
         })}
       </nav>
       <div className="mt-auto shrink-0 border-t border-[var(--border)] bg-[var(--surface)] p-3">
-        <button
-          type="button"
-          onClick={logout}
-          className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-[var(--muted-fg)] transition-colors hover:bg-[var(--muted)] hover:text-[var(--foreground)]"
-        >
-          <LogOut className="h-4 w-4 shrink-0" />
-          <span>{dict.dashboard.nav.logout}</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={logout}
+            className="flex flex-1 items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-[var(--muted-fg)] transition-colors hover:bg-[var(--muted)] hover:text-[var(--foreground)]"
+          >
+            <LogOut className="h-4 w-4 shrink-0" />
+            <span>{dict.dashboard.nav.logout}</span>
+          </button>
+          <ThemeToggle />
+        </div>
       </div>
     </aside>
   );

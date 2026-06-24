@@ -32,6 +32,36 @@
   --shadow-hero: 0 24px 48px rgba(0, 0, 0, 0.25);
 }
 
+.dark {
+  --background: #3e2617;
+  --foreground: #f4ecd8;
+  --surface: #4a2d1a;
+  --surface-elevated: #5c3a21;
+  --muted: #6b4426;
+  --muted-fg: #d2b48c;
+  --border: #754b2a;
+  --border-strong: #8c5a32;
+
+  --leather: #3e2617;
+  --leather-stitch: #d4a373;
+
+  --primary: #d4a373;
+  --primary-hover: #e8b971;
+  --primary-light: #6b4426;
+  --accent: #d4a373;
+  --accent-hover: #b8865a;
+  --accent-light: #6b4426;
+  --teal: #4bc090;
+  --teal-light: #1f4f3c;
+
+  --hero-from: #2c1b10;
+  --hero-to: #4a2d1a;
+  --hero-glow: rgba(212, 163, 115, 0.15);
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-hero: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
