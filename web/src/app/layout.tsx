@@ -1,7 +1,9 @@
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import { FounderBanner } from "@/components/marketing/founder-banner";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { getSiteUrl } from "@/lib/site-config";
 import type { Metadata } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
@@ -21,12 +23,25 @@ const fraunces = Fraunces({
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const t = getDictionary(locale);
+  const siteUrl = getSiteUrl();
   return {
     title: t.meta.title,
     description: t.meta.description,
-    icons: {
-      icon: "/logo.svg",
-      apple: "/logo.svg",
+    icons: { icon: "/logo.svg", apple: "/logo.svg" },
+    metadataBase: new URL(siteUrl),
+    openGraph: {
+      title: t.meta.title,
+      description: t.meta.description,
+      url: siteUrl,
+      siteName: "RendezVous AI",
+      locale: locale === "fr" ? "fr_CA" : "en_CA",
+      type: "website",
+      images: [{ url: "/logo.svg", width: 512, height: 512, alt: "RendezVous AI" }],
+    },
+    twitter: {
+      card: "summary",
+      title: t.meta.title,
+      description: t.meta.description,
     },
   };
 }
@@ -40,6 +55,7 @@ export default async function RootLayout({
     <html lang={locale === "fr" ? "fr-CA" : "en-CA"}>
       <body className={`${dmSans.variable} ${fraunces.variable} min-h-screen antialiased`}>
         <Header locale={locale} />
+        <FounderBanner locale={locale} />
         <main>{children}</main>
         <Footer locale={locale} />
       </body>

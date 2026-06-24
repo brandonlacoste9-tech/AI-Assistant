@@ -8,6 +8,7 @@ import { useState } from "react";
 
 export function WaitlistForm({ dict, locale }: { dict: Dictionary; locale: string }) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [founderCode, setFounderCode] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -23,6 +24,7 @@ export function WaitlistForm({ dict, locale }: { dict: Dictionary; locale: strin
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error ?? data.warning ?? "failed");
+      setFounderCode(data.founder_code ?? null);
       setStatus("success");
       e.currentTarget.reset();
     } catch {
@@ -31,10 +33,19 @@ export function WaitlistForm({ dict, locale }: { dict: Dictionary; locale: strin
   }
 
   if (status === "success") {
+    const fr = locale === "fr";
     return (
       <div className="flex items-start gap-3 rounded-xl border border-[var(--teal)]/30 bg-[var(--teal-light)] p-5">
         <CheckCircle2 className="h-5 w-5 shrink-0 text-[var(--teal)]" />
-        <p className="text-sm font-medium text-[var(--teal)]">{dict.waitlist.success}</p>
+        <div>
+          <p className="text-sm font-medium text-[var(--teal)]">{dict.waitlist.success}</p>
+          {founderCode && (
+            <p className="mt-2 text-sm text-[var(--foreground)]">
+              {fr ? "Votre code fondateur : " : "Your founder code: "}
+              <span className="font-mono font-semibold text-[var(--primary)]">{founderCode}</span>
+            </p>
+          )}
+        </div>
       </div>
     );
   }

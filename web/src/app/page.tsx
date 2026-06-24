@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/marketing/hero-section";
 import { SectionHeading } from "@/components/marketing/section-heading";
+import { SocialProof } from "@/components/marketing/social-proof";
 import { WaitlistForm } from "@/components/marketing/waitlist-form";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
@@ -24,6 +25,8 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection dict={t} locale={locale} />
+
+      <SocialProof locale={locale} />
 
       <section className="relative py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
