@@ -57,6 +57,12 @@ if (twilioAc && twilioToken && !twilioPhone) {
   console.log("  → Buy +1 514/438 number in Twilio Console");
 }
 
+console.log("\n── Vapi (AI voice) ──");
+const vapiPrivate = set("VAPI_PRIVATE_KEY");
+const vapiPublic = set("NEXT_PUBLIC_VAPI_PUBLIC_KEY");
+console.log(`${vapiPrivate ? "✓" : "○"} VAPI_PRIVATE_KEY (server)`);
+console.log(`${vapiPublic ? "✓" : "○"} NEXT_PUBLIC_VAPI_PUBLIC_KEY`);
+
 console.log("\n── Optional ──");
 for (const key of [
   "NEXT_PUBLIC_CALENDLY_URL",
