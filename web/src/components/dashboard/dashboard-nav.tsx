@@ -35,7 +35,7 @@ export function DashboardNav({
   return (
     <aside className="z-40 flex w-full shrink-0 flex-col border-b border-[var(--border)] bg-[var(--surface)] lg:fixed lg:inset-y-0 lg:h-dvh lg:w-64 lg:border-b-0 lg:border-r">
       <div className="shrink-0 border-b border-[var(--border)] px-4 py-4 sm:px-5 sm:py-5">
-        <Logo size={32} />
+        <Logo href="/" size={32} className="w-fit" />
         <p
           className="mt-3 line-clamp-2 text-sm font-semibold leading-snug text-[var(--foreground)] sm:text-base"
           title={businessName}
