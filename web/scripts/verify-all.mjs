@@ -116,7 +116,7 @@ try {
   fail("POST /api/waitlist validation", e.message);
 }
 
-// 6. Signup API (expect 400 without full body or 503 if misconfigured)
+// 6. Signup API validation
 try {
   const res = await fetch(`${BASE}/api/signup`, {
     method: "POST",
@@ -128,6 +128,33 @@ try {
   else fail("POST /api/signup (empty)", `unexpected ${res.status}`);
 } catch (e) {
   fail("POST /api/signup", e.message);
+}
+
+// 7. Signup API full flow (unique email)
+const signupEmail = `verify-${Date.now()}@mailinator.com`;
+try {
+  const res = await fetch(`${BASE}/api/signup`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: signupEmail,
+      password: "VerifyTest2026!Aa",
+      business_name: "Verify Barber Test",
+      city: "Montréal",
+      plan: "pro",
+      locale: "fr",
+    }),
+  });
+  const data = await res.json();
+  if (res.status === 200 && data.ok && data.business_id) {
+    pass(`POST /api/signup (full) → account + business created`);
+  } else if (res.status === 400 && data.error?.includes("rate limit")) {
+    pass("POST /api/signup (full) → skipped (Supabase rate limit)");
+  } else {
+    fail(`POST /api/signup (full) → ${res.status}`, JSON.stringify(data));
+  }
+} catch (e) {
+  fail("POST /api/signup (full)", e.message);
 }
 
 console.log(`\n${failed === 0 ? "All checks passed." : `${failed} check(s) failed.`}`);

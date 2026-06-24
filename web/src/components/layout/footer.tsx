@@ -15,8 +15,8 @@ export function Footer({ locale }: { locale: Locale }) {
             <p className="font-display mt-6 text-2xl font-semibold">{t.footer.cta}</p>
             <p className="mt-2 text-sm text-white/60">{t.footer.rights}</p>
           </div>
-          <Link href="/signup?plan=pro" className="btn-primary px-6 py-3 text-sm">
-            {locale === "fr" ? "Commencer l'essai" : "Start trial"}
+          <Link href="/#waitlist" className="btn-primary px-6 py-3 text-sm">
+            {locale === "fr" ? "Réserver ma place" : "Join waitlist"}
           </Link>
         </div>
         <div className="mt-10 flex flex-wrap gap-6 border-t border-white/10 pt-8 text-sm text-white/50">

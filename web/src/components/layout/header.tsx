@@ -22,7 +22,7 @@ export function Header({ locale }: { locale: Locale }) {
 
         <div className="flex items-center gap-3">
           <LanguageToggle locale={locale} />
-          <Link href="/signup?plan=pro" className="btn-primary hidden px-4 py-2 text-sm sm:inline-flex">
+          <Link href="/#waitlist" className="btn-primary hidden px-4 py-2 text-sm sm:inline-flex">
             {t.nav.trial}
           </Link>
         </div>

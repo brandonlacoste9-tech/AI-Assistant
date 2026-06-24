@@ -1,4 +1,4 @@
-import { createSupabaseServerClient, getSupabaseService } from "@/lib/supabase/server";
+import { getSupabaseService } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -19,37 +19,40 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const supabase = await createSupabaseServerClient();
-    if (!supabase) {
+    if (password.length < 8) {
+      return NextResponse.json({ error: "Password must be at least 8 characters" }, { status: 400 });
+    }
+
+    const service = getSupabaseService();
+    if (!service) {
       console.warn("[signup] Supabase not configured");
       return NextResponse.json(
-        {
-          error: "Signup unavailable — Supabase env vars not configured on server.",
-        },
+        { error: "Signup unavailable — server not configured." },
         { status: 503 }
       );
     }
 
-    const { data: authData, error: authError } = await supabase.auth.signUp({
+    const { data: authData, error: authError } = await service.auth.admin.createUser({
       email,
       password,
-      options: {
-        data: { full_name: business_name },
-      },
+      email_confirm: true,
+      user_metadata: { full_name: business_name },
     });
 
     if (authError) {
+      const msg = authError.message.toLowerCase();
+      if (msg.includes("already") || msg.includes("registered")) {
+        return NextResponse.json(
+          { error: "An account already exists with this email. Try the waitlist or use another email." },
+          { status: 400 }
+        );
+      }
       return NextResponse.json({ error: authError.message }, { status: 400 });
     }
 
     const userId = authData.user?.id;
     if (!userId) {
       return NextResponse.json({ error: "Signup failed" }, { status: 500 });
-    }
-
-    const service = getSupabaseService();
-    if (!service) {
-      return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
     }
 
     const slug = business_name
@@ -75,6 +78,7 @@ export async function POST(req: Request) {
 
     if (bizError) {
       console.error("[signup] business", bizError);
+      await service.auth.admin.deleteUser(userId);
       return NextResponse.json({ error: bizError.message }, { status: 500 });
     }
 
@@ -90,16 +94,26 @@ export async function POST(req: Request) {
 
     if (userError) {
       console.error("[signup] user", userError);
+      await service.from("businesses").delete().eq("id", business.id);
+      await service.auth.admin.deleteUser(userId);
       return NextResponse.json({ error: userError.message }, { status: 500 });
     }
 
-    await service.from("subscriptions").insert({
+    const { error: subError } = await service.from("subscriptions").insert({
       business_id: business.id,
       status: "trialing",
       plan,
     });
 
-    return NextResponse.json({ ok: true, business_id: business.id });
+    if (subError) {
+      console.error("[signup] subscription", subError);
+    }
+
+    return NextResponse.json({
+      ok: true,
+      business_id: business.id,
+      message: "Account created. We will contact you within 48 hours to activate your trial.",
+    });
   } catch (err) {
     console.error("[signup]", err);
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });

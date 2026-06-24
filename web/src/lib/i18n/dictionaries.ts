@@ -81,14 +81,14 @@ const fr: Dictionary = {
   nav: {
     pricing: "Tarification",
     demo: "Réserver une démo",
-    trial: "Essai gratuit",
+    trial: "Liste d'attente",
     login: "Connexion",
   },
   hero: {
     headline: "Arrêtez de perdre des rendez-vous à cause des appels manqués.",
     subhead:
       "RendezVous AI répond au téléphone 24 h/24, prend les rendez-vous et envoie les rappels par SMS — en français ou en anglais. Conçu pour les salons, barbershops et entreprises de services au Québec.",
-    ctaPrimary: "Essai gratuit de 14 jours",
+    ctaPrimary: "Réserver ma place fondateur",
     ctaSecondary: "Réserver une démo de 15 minutes",
     trust: "Conçu au Québec · Bilingue · Essai 14 jours sans carte",
   },
@@ -274,7 +274,7 @@ const fr: Dictionary = {
     },
     langOptions: { fr: "Français", en: "English" },
     submit: "Créer mon compte",
-    success: "Compte créé! Vérifiez votre courriel pour confirmer.",
+    success: "Compte créé! On vous contacte sous 48 h pour activer votre essai de 14 jours.",
     hasAccount: "Déjà un compte?",
   },
 };
@@ -288,14 +288,14 @@ const en: Dictionary = {
   nav: {
     pricing: "Pricing",
     demo: "Book a demo",
-    trial: "Free trial",
+    trial: "Join waitlist",
     login: "Log in",
   },
   hero: {
     headline: "Stop losing bookings to missed calls.",
     subhead:
       "RendezVous AI answers your phone 24/7, books appointments, and follows up by SMS — in French or English. Built for Quebec service businesses.",
-    ctaPrimary: "Start free 14-day trial",
+    ctaPrimary: "Claim founder spot",
     ctaSecondary: "Book a 15-minute demo",
     trust: "Built in Quebec · Bilingual · 14-day trial, no card",
   },
@@ -481,7 +481,7 @@ const en: Dictionary = {
     },
     langOptions: { fr: "Français", en: "English" },
     submit: "Create account",
-    success: "Account created! Check your email to confirm.",
+    success: "Account created! We'll contact you within 48 hours to activate your 14-day trial.",
     hasAccount: "Already have an account?",
   },
 };

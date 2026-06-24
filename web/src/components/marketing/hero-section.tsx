@@ -31,7 +31,7 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/signup?plan=pro" className="btn-primary px-6 py-3.5 text-sm">
+              <Link href="#waitlist" className="btn-primary px-6 py-3.5 text-sm">
                 {dict.hero.ctaPrimary}
                 <ArrowRight className="h-4 w-4" />
               </Link>

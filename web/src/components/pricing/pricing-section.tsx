@@ -99,7 +99,7 @@ export function PricingSection({ locale }: { locale: Locale }) {
                   ))}
                 </ul>
                 <Link
-                  href={`/signup?plan=${key}`}
+                  href={`/#waitlist`}
                   className={cn(
                     "mt-8 block rounded-xl py-3.5 text-center text-sm font-semibold transition-all",
                     popular
