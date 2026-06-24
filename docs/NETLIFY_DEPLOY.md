@@ -111,3 +111,9 @@ netlify deploy --prod   # production
 | Waitlist 500 | `SUPABASE_SERVICE_ROLE_KEY` wrong or migration not run |
 | Auth redirect error | Add Netlify URL to Supabase redirect allowlist |
 | Wrong site URL in emails | Update `NEXT_PUBLIC_SITE_URL` and redeploy |
+| Edge: `Could not resolve "@opentelemetry/api"` | Phase 0 ships **without** `src/middleware.ts`. API routes use service role. Re-add middleware for `/dashboard` with `npm install @opentelemetry/api` |
+| Plugin warns Node 20 vs 22 | `netlify.toml` sets `NODE_VERSION = "22"` |
+
+## Build log notes
+
+A successful deploy may still show an Edge Functions bundling warning if `middleware.ts` imports `@supabase/ssr`. The marketing site does not need Edge middleware — waitlist and signup use `/api/*` server routes.

@@ -1,7 +1,18 @@
+/**
+ * Supabase session refresh for protected routes (dashboard — Phase 1).
+ *
+ * Not active on Netlify marketing deploy: @supabase/ssr in Edge middleware
+ * triggers a bundler error (@opentelemetry/api). Re-enable when /dashboard ships
+ * by restoring src/middleware.ts and adding:
+ *   npm install @opentelemetry/api
+ *
+ * See docs/NETLIFY_DEPLOY.md
+ */
+
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest) {
+export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
@@ -26,9 +37,3 @@ export async function middleware(request: NextRequest) {
   await supabase.auth.getUser();
   return response;
 }
-
-export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-  ],
-};
