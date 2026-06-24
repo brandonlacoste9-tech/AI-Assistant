@@ -1,4 +1,5 @@
 import { BRAND_NAME } from "@/lib/site-config";
+import { recordOutboundSms } from "@/lib/usage/increment-usage";
 import { sendSms } from "@/lib/twilio/client";
 import { bookingConfirmationSms } from "@/lib/twilio/templates";
 import { getSupabaseService } from "@/lib/supabase/server";
@@ -392,6 +393,7 @@ export async function createAppointment(args: {
     locale: smsLocale,
   });
   const sms = await sendSms(phone, smsBody);
+  if (sms.ok) recordOutboundSms(args.businessId);
 
   return {
     ok: true as const,

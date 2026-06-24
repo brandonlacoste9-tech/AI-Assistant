@@ -1,4 +1,5 @@
 import { getSupabaseService } from "@/lib/supabase/server";
+import { recordOutboundSms } from "@/lib/usage/increment-usage";
 import { sendSms } from "@/lib/twilio/client";
 
 export async function sendMissedCallRecovery(opts: {
@@ -29,6 +30,7 @@ export async function sendMissedCallRecovery(opts: {
 
   const result = await sendSms(phone, body);
   if (!result.ok) return { ok: false };
+  recordOutboundSms(opts.businessId);
 
   await supabase.from("leads").insert({
     business_id: opts.businessId,

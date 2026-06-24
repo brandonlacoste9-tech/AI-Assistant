@@ -36,6 +36,7 @@ Supabase ref: `ulbfaxhsbbckotcbmslk`
 | `stripe/checkout`, `stripe/webhook`, `stripe/portal` | Billing |
 | `vapi/webhook` | Voice assistant events |
 | `cron/reminders`, `cron/reminders-2h` | Scheduled SMS reminders |
+| `cron/usage-rollup` | Nightly usage_counters refresh (bookings + voice) |
 
 ## Core libs
 
@@ -75,6 +76,7 @@ Fonts: DM Sans (body), Fraunces (display) — loaded in root layout.
 npm run build          # Required before marking work done
 npm run verify:prod    # Smoke test production
 npm run cron:reminders # Test reminder cron locally
+npm run cron:usage-rollup # Refresh usage_counters for all businesses
 npm run vapi:provision # Provision voice assistant
 ```
 

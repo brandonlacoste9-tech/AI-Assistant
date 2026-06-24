@@ -19,6 +19,7 @@
     "twilio:sms-webhook": "node scripts/twilio-set-sms-webhook.mjs",
     "cron:reminders": "node scripts/run-reminders-cron.mjs",
     "cron:reminders-2h": "node scripts/run-reminders-2h-cron.mjs",
+    "cron:usage-rollup": "node scripts/run-usage-rollup-cron.mjs",
     "stripe:setup": "node scripts/stripe-setup.mjs"
   },
   "dependencies": {

@@ -1,4 +1,5 @@
 import { getSupabaseService } from "@/lib/supabase/server";
+import { recordOutboundSms } from "@/lib/usage/increment-usage";
 import { sendSms } from "@/lib/twilio/client";
 import { bookingReminder2hSms, bookingReminderSms } from "@/lib/twilio/templates";
 import { montrealDayBoundsIso } from "@/lib/vapi/timezone";
@@ -80,6 +81,7 @@ export async function run24hReminders(): Promise<{ sent: number; skipped: number
     const result = await sendSms(phone, body);
     if (result.ok) {
       sent++;
+      recordOutboundSms(appt.business_id);
       await supabase
         .from("appointments")
         .update({ reminder_24h_sent_at: new Date().toISOString() })
@@ -136,6 +138,7 @@ export async function run2hReminders(): Promise<{ sent: number; skipped: number 
     const result = await sendSms(phone, body);
     if (result.ok) {
       sent++;
+      recordOutboundSms(appt.business_id);
       await supabase
         .from("appointments")
         .update({ reminder_2h_sent_at: new Date().toISOString() })
