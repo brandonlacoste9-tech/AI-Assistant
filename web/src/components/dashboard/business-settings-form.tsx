@@ -3,6 +3,7 @@
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -159,7 +160,7 @@ export function BusinessSettingsForm({
         <p className="mt-1 text-sm text-[var(--muted-fg)]">{dict.onboarding.services.subtitle}</p>
         <div className="mt-4 space-y-3">
           {services.map((svc, i) => (
-            <div key={svc.id ?? i} className="grid gap-2 sm:grid-cols-[1fr_6rem_6rem]">
+            <div key={svc.id ?? i} className="grid gap-2 sm:grid-cols-[1fr_6rem_6rem_auto] sm:items-center">
               <Input
                 value={svc.name}
                 onChange={(e) => {
@@ -192,6 +193,16 @@ export function BusinessSettingsForm({
                 }}
                 placeholder={dict.onboarding.services.price}
               />
+              <button
+                type="button"
+                aria-label={t.removeService}
+                title={t.removeService}
+                disabled={services.length <= 1}
+                onClick={() => setServices(services.filter((_, idx) => idx !== i))}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-[var(--muted-fg)] transition-colors hover:bg-red-50 hover:text-red-600 disabled:opacity-30"
+              >
+                <Trash2 className="h-4 w-4" />
+              </button>
             </div>
           ))}
         </div>

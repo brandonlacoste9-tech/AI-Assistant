@@ -102,6 +102,7 @@ export type Dictionary = {
       recoveredCalls: string;
       voiceCallsToday: string;
       recoveredRevenue: string;
+      noShowsToday: string;
     };
     calls: {
       title: string;
@@ -142,6 +143,7 @@ export type Dictionary = {
       saving: string;
       saved: string;
       saveError: string;
+      removeService: string;
     };
     voice: {
       title: string;
@@ -171,6 +173,17 @@ export type Dictionary = {
       smsSent: string;
       smsError: string;
       noPhone: string;
+      sendReminder: string;
+      filterUpcoming: string;
+      filterPast: string;
+      filterAll: string;
+      statuses: {
+        booked: string;
+        confirmed: string;
+        cancelled: string;
+        noShow: string;
+        completed: string;
+      };
     };
     leads: {
       add: string;
@@ -178,6 +191,8 @@ export type Dictionary = {
       phone: string;
       notes: string;
       save: string;
+      saveNotes: string;
+      savingNotes: string;
       empty: string;
       error: string;
       sources: { manual: string; missedCall: string; webForm: string; sms: string };
@@ -519,6 +534,7 @@ const fr: Dictionary = {
       recoveredCalls: "Réservations par IA",
       voiceCallsToday: "Appels et SMS",
       recoveredRevenue: "Revenu récupéré",
+      noShowsToday: "Absences aujourd'hui",
     },
     calls: {
       title: "Activité d'aujourd'hui",
@@ -559,6 +575,7 @@ const fr: Dictionary = {
       saving: "Enregistrement…",
       saved: "Enregistré — agent vocal mis à jour.",
       saveError: "Erreur — réessayez.",
+      removeService: "Retirer le service",
     },
     voice: {
       title: "Réceptionniste IA",
@@ -589,6 +606,17 @@ const fr: Dictionary = {
       smsSent: "SMS envoyé",
       smsError: "Échec SMS",
       noPhone: "Pas de téléphone",
+      sendReminder: "Rappel",
+      filterUpcoming: "À venir",
+      filterPast: "Passés",
+      filterAll: "Tous",
+      statuses: {
+        booked: "Réservé",
+        confirmed: "Confirmé",
+        cancelled: "Annulé",
+        noShow: "Absent",
+        completed: "Terminé",
+      },
     },
     leads: {
       add: "Nouveau lead",
@@ -596,6 +624,8 @@ const fr: Dictionary = {
       phone: "Téléphone",
       notes: "Notes",
       save: "Enregistrer",
+      saveNotes: "Enregistrer les notes",
+      savingNotes: "Enregistrement…",
       empty: "Aucun lead pour le moment.",
       error: "Erreur — réessayez.",
       sources: { manual: "Manuel", missedCall: "Appel manqué", webForm: "Formulaire web", sms: "SMS" },
@@ -959,6 +989,7 @@ const en: Dictionary = {
       recoveredCalls: "AI bookings",
       voiceCallsToday: "Calls & texts",
       recoveredRevenue: "Recovered revenue",
+      noShowsToday: "No-shows today",
     },
     calls: {
       title: "Today's activity",
@@ -999,6 +1030,7 @@ const en: Dictionary = {
       saving: "Saving…",
       saved: "Saved — voice agent updated.",
       saveError: "Error — please try again.",
+      removeService: "Remove service",
     },
     voice: {
       title: "AI receptionist",
@@ -1029,6 +1061,17 @@ const en: Dictionary = {
       smsSent: "SMS sent",
       smsError: "SMS failed",
       noPhone: "No phone",
+      sendReminder: "Reminder",
+      filterUpcoming: "Upcoming",
+      filterPast: "Past",
+      filterAll: "All",
+      statuses: {
+        booked: "Booked",
+        confirmed: "Confirmed",
+        cancelled: "Cancelled",
+        noShow: "No-show",
+        completed: "Completed",
+      },
     },
     leads: {
       add: "New lead",
@@ -1036,6 +1079,8 @@ const en: Dictionary = {
       phone: "Phone",
       notes: "Notes",
       save: "Save",
+      saveNotes: "Save notes",
+      savingNotes: "Saving…",
       empty: "No leads yet.",
       error: "Error — please try again.",
       sources: { manual: "Manual", missedCall: "Missed call", webForm: "Web form", sms: "SMS" },

@@ -40,11 +40,9 @@ export function CallsList({
     const res = await fetch(`/api/conversations?id=${encodeURIComponent(id)}`, {
       method: "DELETE",
     });
-    if (!res.ok) {
-      window.alert(dict.dashboard.common.deleteError);
-      return;
-    }
+    if (!res.ok) return false;
     router.refresh();
+    return true;
   }
 
   if (calls.length === 0) {
@@ -121,6 +119,7 @@ export function CallsList({
                 <DeleteItemButton
                   label={dict.dashboard.common.delete}
                   confirmMessage={dict.dashboard.common.deleteConfirmCall}
+                  errorMessage={dict.dashboard.common.deleteError}
                   onDelete={() => deleteCall(call.id)}
                 />
               </div>

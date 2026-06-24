@@ -3,6 +3,7 @@
 import { DeleteItemButton } from "@/components/dashboard/delete-item-button";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type Lead = {
   id: string;
@@ -10,6 +11,7 @@ type Lead = {
   contact_phone: string | null;
   source: string;
   pipeline_stage: string;
+  notes: string | null;
   captured_at: string;
 };
 
@@ -25,6 +27,8 @@ export function LeadsList({
   locale: string;
 }) {
   const router = useRouter();
+  const [notesDraft, setNotesDraft] = useState<Record<string, string>>({});
+  const [savingNotes, setSavingNotes] = useState<Record<string, boolean>>({});
 
   async function updateStage(id: string, pipeline_stage: string) {
     await fetch("/api/leads", {
@@ -35,15 +39,24 @@ export function LeadsList({
     router.refresh();
   }
 
-  async function deleteLead(id: string) {
-    const res = await fetch(`/api/leads?id=${encodeURIComponent(id)}`, {
-      method: "DELETE",
+  async function saveNotes(id: string) {
+    const notes = notesDraft[id];
+    if (notes === undefined) return;
+    setSavingNotes((s) => ({ ...s, [id]: true }));
+    await fetch("/api/leads", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, notes }),
     });
-    if (!res.ok) {
-      window.alert(dict.dashboard.common.deleteError);
-      return;
-    }
+    setSavingNotes((s) => ({ ...s, [id]: false }));
     router.refresh();
+  }
+
+  async function deleteLead(id: string) {
+    const res = await fetch(`/api/leads?id=${encodeURIComponent(id)}`, { method: "DELETE" });
+    if (!res.ok) return false;
+    router.refresh();
+    return true;
   }
 
   if (leads.length === 0) {
@@ -71,9 +84,12 @@ export function LeadsList({
         const when = new Date(lead.captured_at).toLocaleDateString(
           locale === "fr" ? "fr-CA" : "en-CA"
         );
+        const draft = notesDraft[lead.id] ?? lead.notes ?? "";
+        const notesDirty = draft !== (lead.notes ?? "");
+
         return (
           <li key={lead.id} className="card p-4">
-            <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
+            <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-start">
               <div className="min-w-0">
                 <p className="break-words font-medium text-[var(--foreground)]">{lead.contact_name}</p>
                 {lead.contact_phone && (
@@ -82,6 +98,29 @@ export function LeadsList({
                 <p className="mt-1 break-words text-xs text-[var(--muted-fg)]">
                   {sourceLabels[lead.source] ?? lead.source} · {when}
                 </p>
+                <label className="mt-3 block text-xs text-[var(--muted-fg)]">
+                  {dict.dashboard.leads.notes}
+                  <textarea
+                    className="mt-1 w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-sm text-[var(--foreground)]"
+                    rows={2}
+                    value={draft}
+                    onChange={(e) =>
+                      setNotesDraft((d) => ({ ...d, [lead.id]: e.target.value }))
+                    }
+                  />
+                </label>
+                {notesDirty && (
+                  <button
+                    type="button"
+                    className="mt-1 text-xs font-medium text-[var(--primary)]"
+                    disabled={savingNotes[lead.id]}
+                    onClick={() => saveNotes(lead.id)}
+                  >
+                    {savingNotes[lead.id]
+                      ? dict.dashboard.leads.savingNotes
+                      : dict.dashboard.leads.saveNotes}
+                  </button>
+                )}
               </div>
               <div className="flex items-center gap-2 sm:justify-self-end">
                 <select
@@ -98,6 +137,7 @@ export function LeadsList({
                 <DeleteItemButton
                   label={dict.dashboard.common.delete}
                   confirmMessage={dict.dashboard.common.deleteConfirmLead}
+                  errorMessage={dict.dashboard.common.deleteError}
                   onDelete={() => deleteLead(lead.id)}
                 />
               </div>

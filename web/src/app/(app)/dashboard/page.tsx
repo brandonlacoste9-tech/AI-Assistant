@@ -3,7 +3,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { requireOnboardedContext } from "@/lib/auth/get-business-context";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { Calendar, DollarSign, Phone, TrendingUp } from "lucide-react";
+import { Calendar, DollarSign, Phone, TrendingUp, UserX } from "lucide-react";
 
 export default async function DashboardPage() {
   const ctx = await requireOnboardedContext();
@@ -21,6 +21,7 @@ export default async function DashboardPage() {
   let voiceCallsToday = 0;
   let aiBookingsToday = 0;
   let recoveredRevenueCents = 0;
+  let noShowsToday = 0;
   let calls: Parameters<typeof CallsList>[0]["calls"] = [];
 
   if (supabase) {
@@ -38,8 +39,17 @@ export default async function DashboardPage() {
       .eq("business_id", ctx.businessId)
       .in("pipeline_stage", ["new", "contacted"]);
 
+    const { count: noShowCount } = await supabase
+      .from("appointments")
+      .select("id", { count: "exact", head: true })
+      .eq("business_id", ctx.businessId)
+      .eq("status", "no_show")
+      .gte("starts_at", todayStart.toISOString())
+      .lte("starts_at", todayEnd.toISOString());
+
     bookingsToday = apptCount ?? 0;
     activeLeads = leadCount ?? 0;
+    noShowsToday = noShowCount ?? 0;
 
     const { data: convos, count: callCount } = await supabase
       .from("conversations")
@@ -102,6 +112,13 @@ export default async function DashboardPage() {
       bg: "bg-[var(--primary-light)]",
     },
     {
+      label: t.dashboard.stats.noShowsToday,
+      value: String(noShowsToday),
+      icon: UserX,
+      accent: "text-red-600",
+      bg: "bg-red-50",
+    },
+    {
       label: t.dashboard.stats.activeLeads,
       value: String(activeLeads),
       icon: TrendingUp,
@@ -121,7 +138,7 @@ export default async function DashboardPage() {
       </h1>
       <p className="mt-1 text-sm text-[var(--muted-fg)]">{t.dashboard.subtitle}</p>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (

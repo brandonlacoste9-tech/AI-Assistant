@@ -29,6 +29,7 @@ export async function POST(req: Request) {
       }));
 
     if (rows.length > 0) {
+      await supabase.from("services").delete().eq("business_id", businessId);
       const { error } = await supabase.from("services").insert(rows);
       if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     }

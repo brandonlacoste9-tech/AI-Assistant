@@ -54,15 +54,29 @@ export async function PATCH(req: Request) {
   const { supabase, businessId } = auth;
 
   const body = await req.json();
-  const { id, pipeline_stage } = body;
+  const { id, pipeline_stage, notes } = body;
 
-  if (!id || !pipeline_stage || !STAGES.includes(pipeline_stage)) {
-    return NextResponse.json({ error: "Invalid id or stage" }, { status: 400 });
+  if (!id) {
+    return NextResponse.json({ error: "Missing id" }, { status: 400 });
+  }
+
+  const updates: { pipeline_stage?: string; notes?: string | null } = {};
+  if (pipeline_stage !== undefined) {
+    if (!STAGES.includes(pipeline_stage as (typeof STAGES)[number])) {
+      return NextResponse.json({ error: "Invalid stage" }, { status: 400 });
+    }
+    updates.pipeline_stage = pipeline_stage;
+  }
+  if (notes !== undefined) {
+    updates.notes = notes?.trim() ? notes.trim() : null;
+  }
+  if (Object.keys(updates).length === 0) {
+    return NextResponse.json({ error: "Nothing to update" }, { status: 400 });
   }
 
   const { error } = await supabase
     .from("leads")
-    .update({ pipeline_stage })
+    .update(updates)
     .eq("id", id)
     .eq("business_id", businessId);
 

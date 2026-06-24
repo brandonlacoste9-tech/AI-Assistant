@@ -1,5 +1,8 @@
 import { getApiUser } from "@/lib/auth/api-auth";
+import { sendBookingSms } from "@/lib/twilio/send-booking-sms";
 import { NextResponse } from "next/server";
+
+const BOOKING_STATUSES = ["booked", "confirmed", "cancelled", "no_show", "completed"] as const;
 
 export async function GET() {
   const auth = await getApiUser();
@@ -86,7 +89,20 @@ export async function POST(req: Request) {
     .single();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json({ ok: true, id: data.id });
+
+  let sms_sent = false;
+  if (customer_phone) {
+    const sms = await sendBookingSms({
+      supabase,
+      businessId,
+      bookingId: data.id,
+      template: "confirmation",
+      phoneOverride: customer_phone,
+    });
+    sms_sent = sms.ok;
+  }
+
+  return NextResponse.json({ ok: true, id: data.id, sms_sent });
 }
 
 export async function PATCH(req: Request) {
@@ -96,8 +112,8 @@ export async function PATCH(req: Request) {
 
   const body = await req.json();
   const { id, status } = body;
-  if (!id || !status) {
-    return NextResponse.json({ error: "Missing id or status" }, { status: 400 });
+  if (!id || !status || !BOOKING_STATUSES.includes(status)) {
+    return NextResponse.json({ error: "Missing or invalid id/status" }, { status: 400 });
   }
 
   const { error } = await supabase
