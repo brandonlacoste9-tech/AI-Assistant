@@ -1,5 +1,7 @@
 import { BillingCard } from "@/components/dashboard/billing-card";
 import { BusinessSettingsForm } from "@/components/dashboard/business-settings-form";
+import { EmbedCard } from "@/components/dashboard/embed-card";
+import { StaffCard } from "@/components/dashboard/staff-card";
 import { VoiceSettingsCard } from "@/components/dashboard/voice-settings-card";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
@@ -7,6 +9,7 @@ import { requireOnboardedContext } from "@/lib/auth/get-business-context";
 import { isStripeConfigured } from "@/lib/stripe/client";
 import { getTwilioPhoneNumber } from "@/lib/twilio/config";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getUsageSnapshot } from "@/lib/usage/get-usage";
 import { Suspense } from "react";
 
 export default async function SettingsPage() {
@@ -17,6 +20,8 @@ export default async function SettingsPage() {
 
   let assistantId: string | null = null;
   let phoneNumber: string | null = null;
+  let slug = "";
+  let staffRows: { id: string; display_name: string; active: boolean }[] = [];
   let profile = {
     name: ctx.businessName,
     city: null as string | null,
@@ -35,7 +40,7 @@ export default async function SettingsPage() {
     const { data } = await supabase
       .from("businesses")
       .select(
-        "name, city, default_language, working_hours, forward_to_number, vapi_assistant_id, phone_number"
+        "name, city, default_language, working_hours, forward_to_number, vapi_assistant_id, phone_number, slug"
       )
       .eq("id", ctx.businessId)
       .single();
@@ -43,6 +48,7 @@ export default async function SettingsPage() {
     if (data) {
       assistantId = data.vapi_assistant_id ?? null;
       phoneNumber = data.phone_number ?? null;
+      slug = (data.slug as string) ?? "";
       profile = {
         name: data.name,
         city: data.city,
@@ -61,7 +67,20 @@ export default async function SettingsPage() {
       .order("name");
 
     profile.services = services ?? [];
+
+    const { data: staffData } = await supabase
+      .from("staff")
+      .select("id, display_name, active")
+      .eq("business_id", ctx.businessId)
+      .eq("active", true)
+      .order("display_name");
+    staffRows = staffData ?? [];
   }
+
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+    process.env.URL?.trim() ||
+    "https://justbookme.ca";
 
   let billing = {
     plan: ctx.plan,
@@ -70,6 +89,7 @@ export default async function SettingsPage() {
     currentPeriodEnd: null as string | null,
     hasStripeCustomer: false,
     stripeConfigured: isStripeConfigured(),
+    usage: null as Awaited<ReturnType<typeof getUsageSnapshot>> | null,
   };
 
   if (supabase) {
@@ -85,13 +105,15 @@ export default async function SettingsPage() {
       .eq("business_id", ctx.businessId)
       .maybeSingle();
 
+    const plan = sub?.plan ?? bizBilling?.plan ?? ctx.plan;
     billing = {
-      plan: sub?.plan ?? bizBilling?.plan ?? ctx.plan,
+      plan,
       trialEndsAt: bizBilling?.trial_ends_at ?? ctx.trialEndsAt,
       subscriptionStatus: sub?.status ?? null,
       currentPeriodEnd: sub?.current_period_end ?? null,
       hasStripeCustomer: Boolean(bizBilling?.stripe_customer_id),
       stripeConfigured: isStripeConfigured(),
+      usage: await getUsageSnapshot({ supabase, businessId: ctx.businessId, plan }),
     };
   }
 
@@ -125,6 +147,10 @@ export default async function SettingsPage() {
         phoneNumber={phoneNumber}
         platformPhone={getTwilioPhoneNumber()}
       />
+
+      <StaffCard dict={t} initial={staffRows} />
+
+      {slug && <EmbedCard dict={t} slug={slug} siteUrl={siteUrl} />}
 
       <Suspense fallback={null}>
         <BillingCard dict={t} locale={locale} billing={billing} />

@@ -27,7 +27,7 @@ export async function POST(req: Request) {
   const { supabase, businessId } = auth;
 
   const body = await req.json();
-  const { customer_name, customer_phone, service_id, starts_at, notes } = body;
+  const { customer_name, customer_phone, service_id, staff_id, starts_at, notes } = body;
 
   if (!customer_name || !starts_at) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -79,6 +79,7 @@ export async function POST(req: Request) {
       business_id: businessId,
       customer_id: customerId,
       service_id: service_id ?? null,
+      staff_id: staff_id ?? null,
       customer_name,
       starts_at: start.toISOString(),
       ends_at: end.toISOString(),

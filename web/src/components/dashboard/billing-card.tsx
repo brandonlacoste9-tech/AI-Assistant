@@ -1,6 +1,8 @@
 "use client";
 
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { usagePercent } from "@/lib/usage/plan-limits";
+import type { UsageSnapshot } from "@/lib/usage/get-usage";
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -12,7 +14,42 @@ type BillingState = {
   currentPeriodEnd: string | null;
   hasStripeCustomer: boolean;
   stripeConfigured: boolean;
+  usage: UsageSnapshot | null;
 };
+
+function UsageMeter({
+  label,
+  used,
+  limit,
+  unlimitedLabel,
+}: {
+  label: string;
+  used: number;
+  limit: number | null;
+  unlimitedLabel: string;
+}) {
+  const pct = usagePercent(used, limit);
+  const displayLimit = limit === null ? unlimitedLabel : String(limit);
+
+  return (
+    <div>
+      <div className="flex justify-between text-xs">
+        <span className="text-[var(--muted-fg)]">{label}</span>
+        <span className="font-medium text-[var(--foreground)]">
+          {used} / {displayLimit}
+        </span>
+      </div>
+      {pct !== null && (
+        <div className="mt-1 h-2 overflow-hidden rounded-full bg-[var(--muted)]">
+          <div
+            className={`h-full rounded-full transition-all ${pct >= 90 ? "bg-red-500" : "bg-[var(--primary)]"}`}
+            style={{ width: `${pct}%` }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function BillingCard({
   dict,
@@ -106,6 +143,36 @@ export function BillingCard({
               </div>
             )}
           </dl>
+
+          {billing.usage && (
+            <div className="mt-6 space-y-3 border-t border-[var(--border)] pt-4">
+              <p className="text-sm font-medium text-[var(--foreground)]">{t.usageTitle}</p>
+              <UsageMeter
+                label={t.usageBookings}
+                used={billing.usage.bookings}
+                limit={billing.usage.limits.bookings}
+                unlimitedLabel={t.unlimited}
+              />
+              <UsageMeter
+                label={t.usageSms}
+                used={billing.usage.sms}
+                limit={billing.usage.limits.sms}
+                unlimitedLabel={t.unlimited}
+              />
+              <UsageMeter
+                label={t.usageVoice}
+                used={billing.usage.voiceMinutes}
+                limit={billing.usage.limits.voiceMinutes}
+                unlimitedLabel={t.unlimited}
+              />
+              <UsageMeter
+                label={t.usageStaff}
+                used={billing.usage.staff}
+                limit={billing.usage.limits.staff}
+                unlimitedLabel={t.unlimited}
+              />
+            </div>
+          )}
 
           {canceled && (
             <p className="mt-4 text-sm text-[var(--muted-fg)]">{t.checkoutCanceled}</p>

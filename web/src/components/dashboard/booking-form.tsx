@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type Service = { id: string; name: string };
+type StaffMember = { id: string; display_name: string };
 
 type Prefill = {
   customer_name: string;
@@ -17,11 +18,13 @@ type Prefill = {
 export function BookingForm({
   dict,
   services,
+  staff,
   prefill,
   leadId,
 }: {
   dict: Dictionary;
   services: Service[];
+  staff?: StaffMember[];
   prefill?: Prefill | null;
   leadId?: string | null;
 }) {
@@ -51,6 +54,7 @@ export function BookingForm({
         customer_name: form.get("customer_name"),
         customer_phone: form.get("customer_phone"),
         service_id: form.get("service_id") || null,
+        staff_id: form.get("staff_id") || null,
         starts_at: form.get("starts_at"),
         notes: form.get("notes"),
       }),
@@ -108,6 +112,16 @@ export function BookingForm({
           </option>
         ))}
       </select>
+      {staff && staff.length > 0 && (
+        <select name="staff_id" className="select-field" defaultValue="">
+          <option value="">{dict.dashboard.bookings.staffOptional}</option>
+          {staff.map((s) => (
+            <option key={s.id} value={s.id}>
+              {s.display_name}
+            </option>
+          ))}
+        </select>
+      )}
       <Input name="starts_at" type="datetime-local" required />
       <Input
         name="notes"

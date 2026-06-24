@@ -93,6 +93,7 @@ export type Dictionary = {
       today: string;
       bookings: string;
       leads: string;
+      customers: string;
       settings: string;
       calls: string;
       logout: string;
@@ -128,6 +129,7 @@ export type Dictionary = {
       deleteConfirmBooking: string;
       deleteConfirmLead: string;
       deleteConfirmCall: string;
+      deleteConfirmCustomer: string;
       deleteError: string;
     };
     settings: {
@@ -168,6 +170,7 @@ export type Dictionary = {
       customerName: string;
       phone: string;
       serviceOptional: string;
+      staffOptional: string;
       notes: string;
       save: string;
       cancel: string;
@@ -207,6 +210,57 @@ export type Dictionary = {
       sources: { manual: string; missedCall: string; webForm: string; sms: string };
       stages: { new: string; contacted: string; booked: string; lost: string };
     };
+    customers: {
+      subtitle: string;
+      empty: string;
+      phone: string;
+      email: string;
+      added: string;
+      save: string;
+      saving: string;
+    };
+    staff: {
+      title: string;
+      subtitle: string;
+      empty: string;
+      namePlaceholder: string;
+      add: string;
+      remove: string;
+      error: string;
+    };
+    embed: {
+      title: string;
+      subtitle: string;
+      bookingPage: string;
+      embedCode: string;
+      copy: string;
+      copyEmbed: string;
+      copied: string;
+      iframeTitle: string;
+    };
+    embedForm: {
+      name: string;
+      phone: string;
+      notes: string;
+      submit: string;
+      success: string;
+      error: string;
+    };
+    publicBook: {
+      title: string;
+      name: string;
+      phone: string;
+      email: string;
+      service: string;
+      date: string;
+      time: string;
+      notes: string;
+      submit: string;
+      success: string;
+      error: string;
+      noSlots: string;
+      pickService: string;
+    };
     billing: {
       title: string;
       subtitle: string;
@@ -227,6 +281,12 @@ export type Dictionary = {
       successTitle: string;
       successBody: string;
       backToSettings: string;
+      usageTitle: string;
+      usageBookings: string;
+      usageSms: string;
+      usageVoice: string;
+      usageStaff: string;
+      unlimited: string;
     };
   };
   onboarding: {
@@ -534,6 +594,7 @@ const fr: Dictionary = {
       today: "Aujourd'hui",
       bookings: "Rendez-vous",
       leads: "Leads",
+      customers: "Clients",
       settings: "Paramètres",
       calls: "Appels",
       logout: "Déconnexion",
@@ -569,6 +630,7 @@ const fr: Dictionary = {
       deleteConfirmBooking: "Supprimer ce rendez-vous? Cette action est irréversible.",
       deleteConfirmLead: "Supprimer ce lead? Cette action est irréversible.",
       deleteConfirmCall: "Supprimer cette activité? Cette action est irréversible.",
+      deleteConfirmCustomer: "Supprimer ce client? Cette action est irréversible.",
       deleteError: "Échec de la suppression — réessayez.",
     },
     settings: {
@@ -610,6 +672,7 @@ const fr: Dictionary = {
       customerName: "Nom du client",
       phone: "Téléphone",
       serviceOptional: "Service (optionnel)",
+      staffOptional: "Employé (optionnel)",
       notes: "Notes",
       save: "Enregistrer",
       cancel: "Annuler",
@@ -649,6 +712,57 @@ const fr: Dictionary = {
       sources: { manual: "Manuel", missedCall: "Appel manqué", webForm: "Formulaire web", sms: "SMS" },
       stages: { new: "Nouveau", contacted: "Contacté", booked: "Réservé", lost: "Perdu" },
     },
+    customers: {
+      subtitle: "Clients créés automatiquement lors des réservations.",
+      empty: "Aucun client pour le moment.",
+      phone: "Téléphone",
+      email: "Courriel",
+      added: "Ajouté le",
+      save: "Enregistrer",
+      saving: "Enregistrement…",
+    },
+    staff: {
+      title: "Équipe",
+      subtitle: "Ajoutez des employés pour les associer aux rendez-vous.",
+      empty: "Aucun employé — ajoutez le premier ci-dessous.",
+      namePlaceholder: "Nom affiché",
+      add: "Ajouter",
+      remove: "Retirer",
+      error: "Erreur — réessayez.",
+    },
+    embed: {
+      title: "Widget web",
+      subtitle: "Partagez votre page de réservation ou intégrez le formulaire de contact.",
+      bookingPage: "Page de réservation publique",
+      embedCode: "Code d'intégration (iframe)",
+      copy: "Copier le lien",
+      copyEmbed: "Copier le code",
+      copied: "Copié!",
+      iframeTitle: "Contactez-nous",
+    },
+    embedForm: {
+      name: "Votre nom",
+      phone: "Téléphone",
+      notes: "Message (optionnel)",
+      submit: "Envoyer",
+      success: "Merci! Nous vous contacterons bientôt.",
+      error: "Erreur — réessayez.",
+    },
+    publicBook: {
+      title: "Réserver en ligne",
+      name: "Votre nom",
+      phone: "Téléphone",
+      email: "Courriel (optionnel)",
+      service: "Choisir un service",
+      date: "Date",
+      time: "Heure",
+      notes: "Notes (optionnel)",
+      submit: "Confirmer la réservation",
+      success: "Réservation confirmée! Vous recevrez une confirmation par SMS si un numéro a été fourni.",
+      error: "Impossible de réserver — choisissez un autre créneau.",
+      noSlots: "Aucun créneau disponible ce jour.",
+      pickService: "Aucun service disponible pour le moment.",
+    },
     billing: {
       title: "Facturation",
       subtitle: "Gérez votre forfait et vos paiements.",
@@ -675,6 +789,12 @@ const fr: Dictionary = {
       successTitle: "Paiement configuré",
       successBody: "Merci! Votre abonnement est en cours d'activation.",
       backToSettings: "Retour aux paramètres",
+      usageTitle: "Utilisation ce mois-ci",
+      usageBookings: "Réservations",
+      usageSms: "SMS",
+      usageVoice: "Minutes voix",
+      usageStaff: "Employés actifs",
+      unlimited: "Illimité",
     },
   },
   onboarding: {
@@ -998,6 +1118,7 @@ const en: Dictionary = {
       today: "Today",
       bookings: "Bookings",
       leads: "Leads",
+      customers: "Customers",
       settings: "Settings",
       calls: "Calls",
       logout: "Log out",
@@ -1033,6 +1154,7 @@ const en: Dictionary = {
       deleteConfirmBooking: "Delete this booking? This cannot be undone.",
       deleteConfirmLead: "Delete this lead? This cannot be undone.",
       deleteConfirmCall: "Delete this activity? This cannot be undone.",
+      deleteConfirmCustomer: "Delete this customer? This cannot be undone.",
       deleteError: "Could not delete — please try again.",
     },
     settings: {
@@ -1074,6 +1196,7 @@ const en: Dictionary = {
       customerName: "Customer name",
       phone: "Phone",
       serviceOptional: "Service (optional)",
+      staffOptional: "Staff member (optional)",
       notes: "Notes",
       save: "Save",
       cancel: "Cancel",
@@ -1113,6 +1236,57 @@ const en: Dictionary = {
       sources: { manual: "Manual", missedCall: "Missed call", webForm: "Web form", sms: "SMS" },
       stages: { new: "New", contacted: "Contacted", booked: "Booked", lost: "Lost" },
     },
+    customers: {
+      subtitle: "Customers are created automatically when bookings are made.",
+      empty: "No customers yet.",
+      phone: "Phone",
+      email: "Email",
+      added: "Added",
+      save: "Save",
+      saving: "Saving…",
+    },
+    staff: {
+      title: "Team",
+      subtitle: "Add staff members to assign to bookings.",
+      empty: "No staff yet — add your first below.",
+      namePlaceholder: "Display name",
+      add: "Add",
+      remove: "Remove",
+      error: "Error — please try again.",
+    },
+    embed: {
+      title: "Web widget",
+      subtitle: "Share your booking page or embed a contact form on your site.",
+      bookingPage: "Public booking page",
+      embedCode: "Embed code (iframe)",
+      copy: "Copy link",
+      copyEmbed: "Copy code",
+      copied: "Copied!",
+      iframeTitle: "Contact us",
+    },
+    embedForm: {
+      name: "Your name",
+      phone: "Phone",
+      notes: "Message (optional)",
+      submit: "Send",
+      success: "Thanks! We'll be in touch soon.",
+      error: "Error — please try again.",
+    },
+    publicBook: {
+      title: "Book online",
+      name: "Your name",
+      phone: "Phone",
+      email: "Email (optional)",
+      service: "Choose a service",
+      date: "Date",
+      time: "Time",
+      notes: "Notes (optional)",
+      submit: "Confirm booking",
+      success: "Booking confirmed! You'll get an SMS confirmation if you provided a phone number.",
+      error: "Could not book — please pick another time slot.",
+      noSlots: "No available slots on this day.",
+      pickService: "No services available right now.",
+    },
     billing: {
       title: "Billing",
       subtitle: "Manage your plan and payments.",
@@ -1139,6 +1313,12 @@ const en: Dictionary = {
       successTitle: "Payment set up",
       successBody: "Thank you! Your subscription is being activated.",
       backToSettings: "Back to settings",
+      usageTitle: "Usage this month",
+      usageBookings: "Bookings",
+      usageSms: "SMS",
+      usageVoice: "Voice minutes",
+      usageStaff: "Active staff",
+      unlimited: "Unlimited",
     },
   },
   onboarding: {

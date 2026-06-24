@@ -18,6 +18,7 @@ export default async function BookingsPage({
 
   let bookings: Parameters<typeof BookingsList>[0]["bookings"] = [];
   let services: { id: string; name: string }[] = [];
+  let staff: { id: string; display_name: string }[] = [];
   let leadPrefill: Parameters<typeof BookingForm>[0]["prefill"] = null;
   const leadId = params.lead ?? null;
 
@@ -45,11 +46,19 @@ export default async function BookingsPage({
       .order("starts_at", { ascending: true })
       .limit(50);
 
-    const { data: svc } = await supabase
-      .from("services")
-      .select("id, name")
-      .eq("business_id", ctx.businessId)
-      .eq("active", true);
+    const [{ data: svc }, { data: staffRows }] = await Promise.all([
+      supabase
+        .from("services")
+        .select("id, name")
+        .eq("business_id", ctx.businessId)
+        .eq("active", true),
+      supabase
+        .from("staff")
+        .select("id, display_name")
+        .eq("business_id", ctx.businessId)
+        .eq("active", true)
+        .order("display_name"),
+    ]);
 
     bookings = (appts ?? []).map((a) => {
       const svcJoin = a.services as { name: string } | { name: string }[] | null;
@@ -68,12 +77,13 @@ export default async function BookingsPage({
       };
     });
     services = svc ?? [];
+    staff = staffRows ?? [];
   }
 
   return (
     <div className="mx-auto w-full max-w-4xl">
       <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,320px)_1fr] lg:items-start">
-        <BookingForm dict={t} services={services} prefill={leadPrefill} leadId={leadId} />
+        <BookingForm dict={t} services={services} staff={staff} prefill={leadPrefill} leadId={leadId} />
         <div className="min-w-0">
           <h1 className="font-display text-2xl font-semibold text-[var(--foreground)]">
             {t.dashboard.nav.bookings}
