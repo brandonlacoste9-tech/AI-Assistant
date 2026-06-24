@@ -12,6 +12,7 @@ export function SignupForm({ dict, locale }: { dict: Dictionary; locale: string 
   const router = useRouter();
   const searchParams = useSearchParams();
   const plan = searchParams.get("plan") ?? "pro";
+  const interval = searchParams.get("interval") === "year" ? "year" : "month";
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -46,6 +47,12 @@ export function SignupForm({ dict, locale }: { dict: Dictionary; locale: string 
       if (supabase) {
         const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
         if (!signInError) {
+          try {
+            sessionStorage.setItem("pendingSubscribePlan", plan);
+            sessionStorage.setItem("pendingSubscribeInterval", interval);
+          } catch {
+            /* ignore */
+          }
           router.push("/onboarding");
           router.refresh();
           return;

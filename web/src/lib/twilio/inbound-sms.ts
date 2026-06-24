@@ -92,11 +92,15 @@ export async function handleInboundSms(payload: InboundSmsPayload): Promise<stri
   }
 
   const supabase = getSupabaseService();
-  let business: { name: string; default_language: string } | null = null;
+  let business: {
+    name: string;
+    default_language: string;
+    voice_instructions: string | null;
+  } | null = null;
   if (supabase) {
     const { data } = await supabase
       .from("businesses")
-      .select("name, default_language")
+      .select("name, default_language, voice_instructions")
       .eq("id", businessId)
       .single();
     business = data;
@@ -184,10 +188,17 @@ export async function handleInboundSms(payload: InboundSmsPayload): Promise<stri
       summary: "General SMS inquiry",
     });
 
+    const customNote = business?.voice_instructions?.trim();
+    const extra = customNote
+      ? locale === "fr"
+        ? `\n\n${customNote.slice(0, 200)}`
+        : `\n\n${customNote.slice(0, 200)}`
+      : "";
+
     return formatReply(locale, [
       locale === "fr"
-        ? `Bonjour! C'est ${businessName}. Comment puis-je vous aider? Pour réserver, écrivez votre besoin et l'heure (ex: « Coupe vendredi 10h », « Évier à réparer lundi »). Écrivez « humain » pour parler à l'équipe.`
-        : `Hi, this is ${businessName}. How can I help you today? To book, text what you need and when — e.g. "Haircut Friday at 10am" or "Fix my sink Monday". Text HUMAN to reach our team.`,
+        ? `Bonjour! C'est ${businessName}. Comment puis-je vous aider? Pour réserver, écrivez votre besoin et l'heure (ex: « Coupe vendredi 10h », « Évier à réparer lundi »). Écrivez « humain » pour parler à l'équipe.${extra}`
+        : `Hi, this is ${businessName}. How can I help you today? To book, text what you need and when — e.g. "Haircut Friday at 10am" or "Fix my sink Monday". Text HUMAN to reach our team.${extra}`,
     ]);
   }
 

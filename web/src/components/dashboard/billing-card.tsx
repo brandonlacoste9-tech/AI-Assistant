@@ -3,9 +3,10 @@
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { usagePercent } from "@/lib/usage/plan-limits";
 import type { UsageSnapshot } from "@/lib/usage/get-usage";
+import { isValidPlan } from "@/lib/stripe/plans";
 import { Button } from "@/components/ui/button";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 type BillingState = {
   plan: string;
@@ -15,6 +16,7 @@ type BillingState = {
   hasStripeCustomer: boolean;
   stripeConfigured: boolean;
   usage: UsageSnapshot | null;
+  pendingSubscribePlan: string | null;
 };
 
 function UsageMeter({
@@ -60,10 +62,18 @@ export function BillingCard({
   locale: string;
   billing: BillingState;
 }) {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const canceled = searchParams.get("billing") === "canceled";
+  const subscribeParam = searchParams.get("subscribe");
+  const intervalParam = searchParams.get("interval");
+  const autoStarted = useRef(false);
+
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
-  const [interval, setInterval] = useState<"month" | "year">("month");
+  const [errorDetail, setErrorDetail] = useState<string | null>(null);
+  const [interval, setInterval] = useState<"month" | "year">(
+    intervalParam === "year" ? "year" : "month"
+  );
   const t = dict.dashboard.billing;
 
   const trialEndLabel = billing.trialEndsAt
@@ -74,8 +84,14 @@ export function BillingCard({
     ? new Date(billing.currentPeriodEnd).toLocaleDateString(locale === "fr" ? "fr-CA" : "en-CA")
     : null;
 
+  const hasActiveSubscription =
+    billing.subscriptionStatus === "active" || billing.subscriptionStatus === "trialing";
+
+  const canSubscribe = billing.stripeConfigured && !hasActiveSubscription;
+
   async function startCheckout(plan: string) {
     setStatus("loading");
+    setErrorDetail(null);
     const res = await fetch("/api/stripe/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -84,6 +100,7 @@ export function BillingCard({
     const data = await res.json();
     if (!res.ok || !data.url) {
       setStatus("error");
+      setErrorDetail(data.error ?? t.error);
       return;
     }
     window.location.href = data.url;
@@ -91,19 +108,34 @@ export function BillingCard({
 
   async function openPortal() {
     setStatus("loading");
+    setErrorDetail(null);
     const res = await fetch("/api/stripe/portal", { method: "POST" });
     const data = await res.json();
     if (!res.ok || !data.url) {
       setStatus("error");
+      setErrorDetail(data.error ?? t.error);
       return;
     }
     window.location.href = data.url;
   }
 
+  useEffect(() => {
+    if (autoStarted.current || !canSubscribe) return;
+    const plan =
+      subscribeParam && isValidPlan(subscribeParam)
+        ? subscribeParam
+        : billing.pendingSubscribePlan && isValidPlan(billing.pendingSubscribePlan)
+          ? billing.pendingSubscribePlan
+          : null;
+    if (!plan) return;
+    autoStarted.current = true;
+    startCheckout(plan).finally(() => {
+      router.replace("/dashboard/settings");
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const isPastDue = billing.subscriptionStatus === "past_due";
-  const hasStripeBilling =
-    billing.hasStripeCustomer &&
-    (billing.subscriptionStatus === "active" || billing.subscriptionStatus === "trialing");
 
   return (
     <div className="card mt-8 w-full min-w-0 p-6">
@@ -121,13 +153,13 @@ export function BillingCard({
               <dt className="text-[var(--muted-fg)]">{t.currentPlan}</dt>
               <dd className="font-medium capitalize text-[var(--foreground)]">{billing.plan}</dd>
             </div>
-            {trialEndLabel && !billing.hasStripeCustomer && (
+            {trialEndLabel && !hasActiveSubscription && (
               <div className="grid gap-1 sm:grid-cols-[auto_1fr] sm:gap-4">
                 <dt className="text-[var(--muted-fg)]">{t.trialEnds}</dt>
                 <dd className="font-medium text-[var(--foreground)]">{trialEndLabel}</dd>
               </div>
             )}
-            {periodEndLabel && hasStripeBilling && (
+            {periodEndLabel && hasActiveSubscription && (
               <div className="grid gap-1 sm:grid-cols-[auto_1fr] sm:gap-4">
                 <dt className="text-[var(--muted-fg)]">{t.nextBilling}</dt>
                 <dd className="font-medium text-[var(--foreground)]">{periodEndLabel}</dd>
@@ -182,34 +214,30 @@ export function BillingCard({
             <p className="mt-4 text-sm font-medium text-red-600">{t.pastDue}</p>
           )}
 
-          {!billing.hasStripeCustomer && !isPastDue && trialEndLabel && (
+          {canSubscribe && !isPastDue && trialEndLabel && (
             <p className="mt-4 text-sm text-amber-700">{t.trialBanner}</p>
           )}
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            <button
-              type="button"
-              className={`rounded-lg px-3 py-1.5 text-sm ${interval === "month" ? "bg-[var(--primary)] text-white" : "bg-[var(--muted)]"}`}
-              onClick={() => setInterval("month")}
-            >
-              {t.monthly}
-            </button>
-            <button
-              type="button"
-              className={`rounded-lg px-3 py-1.5 text-sm ${interval === "year" ? "bg-[var(--primary)] text-white" : "bg-[var(--muted)]"}`}
-              onClick={() => setInterval("year")}
-            >
-              {t.annual}
-            </button>
-          </div>
+          {canSubscribe && (
+            <>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  className={`rounded-lg px-3 py-1.5 text-sm ${interval === "month" ? "bg-[var(--primary)] text-white" : "bg-[var(--muted)]"}`}
+                  onClick={() => setInterval("month")}
+                >
+                  {t.monthly}
+                </button>
+                <button
+                  type="button"
+                  className={`rounded-lg px-3 py-1.5 text-sm ${interval === "year" ? "bg-[var(--primary)] text-white" : "bg-[var(--muted)]"}`}
+                  onClick={() => setInterval("year")}
+                >
+                  {t.annual}
+                </button>
+              </div>
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            {billing.hasStripeCustomer ? (
-              <Button type="button" variant="secondary" disabled={status === "loading"} onClick={openPortal}>
-                {t.manageBilling}
-              </Button>
-            ) : (
-              <>
+              <div className="mt-4 flex flex-wrap gap-2">
                 {(["starter", "pro", "premium"] as const).map((plan) => (
                   <Button
                     key={plan}
@@ -221,11 +249,26 @@ export function BillingCard({
                     {t.subscribe} {plan}
                   </Button>
                 ))}
-              </>
-            )}
-          </div>
+              </div>
+            </>
+          )}
 
-          {status === "error" && <p className="mt-3 text-sm text-red-600">{t.error}</p>}
+          {hasActiveSubscription && billing.hasStripeCustomer && (
+            <div className="mt-4">
+              <Button
+                type="button"
+                variant="secondary"
+                disabled={status === "loading"}
+                onClick={openPortal}
+              >
+                {t.manageBilling}
+              </Button>
+            </div>
+          )}
+
+          {status === "error" && (
+            <p className="mt-3 text-sm text-red-600">{errorDetail ?? t.error}</p>
+          )}
         </>
       )}
     </div>

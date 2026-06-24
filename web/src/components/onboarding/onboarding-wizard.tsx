@@ -1,17 +1,26 @@
 "use client";
 
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import {
+  defaultServicesForType,
+  type BusinessType,
+} from "@/lib/onboarding/presets";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
 
+const BUSINESS_TYPES: BusinessType[] = ["salon", "trade", "office"];
+
 export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: string }) {
   const router = useRouter();
+  const fr = locale === "fr";
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [businessType, setBusinessType] = useState<BusinessType>("salon");
   const [hours, setHours] = useState<Record<string, { open: string; close: string }>>({
     mon: { open: "09:00", close: "17:00" },
     tue: { open: "09:00", close: "17:00" },
@@ -21,10 +30,16 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
     sat: { open: "10:00", close: "15:00" },
     sun: { open: "", close: "" },
   });
-  const [services, setServices] = useState([
-    { name: locale === "fr" ? "Coupe" : "Haircut", duration_minutes: 45, price_cents: 4500 },
-    { name: locale === "fr" ? "Couleur" : "Color", duration_minutes: 90, price_cents: 12000 },
-  ]);
+  const [services, setServices] = useState(
+    defaultServicesForType("salon", fr ? "fr" : "en")
+  );
+
+  const ot = dict.onboarding;
+  const typeLabels: Record<BusinessType, { title: string; desc: string }> = {
+    salon: { title: ot.businessTypes.salon, desc: ot.businessTypes.salonDesc },
+    trade: { title: ot.businessTypes.trade, desc: ot.businessTypes.tradeDesc },
+    office: { title: ot.businessTypes.office, desc: ot.businessTypes.officeDesc },
+  };
 
   async function saveStep(payload: Record<string, unknown>) {
     setStatus("loading");
@@ -41,14 +56,24 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
     return true;
   }
 
+  function selectType(type: BusinessType) {
+    setBusinessType(type);
+    setServices(defaultServicesForType(type, fr ? "fr" : "en"));
+  }
+
+  async function nextFromType() {
+    const ok = await saveStep({ business_type: businessType });
+    if (ok) setStep(2);
+  }
+
   async function nextFromHours() {
     const ok = await saveStep({ working_hours: hours });
-    if (ok) setStep(2);
+    if (ok) setStep(3);
   }
 
   async function nextFromServices() {
     const ok = await saveStep({ services });
-    if (ok) setStep(3);
+    if (ok) setStep(4);
   }
 
   async function finish() {
@@ -63,7 +88,25 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
       return;
     }
     setStatus("idle");
-    router.push("/dashboard");
+
+    let subscribe = "";
+    let interval = "month";
+    try {
+      subscribe = sessionStorage.getItem("pendingSubscribePlan") ?? "";
+      interval = sessionStorage.getItem("pendingSubscribeInterval") ?? "month";
+      sessionStorage.removeItem("pendingSubscribePlan");
+      sessionStorage.removeItem("pendingSubscribeInterval");
+    } catch {
+      /* ignore */
+    }
+
+    if (subscribe && ["starter", "pro", "premium"].includes(subscribe)) {
+      router.push(
+        `/dashboard/settings?subscribe=${subscribe}&interval=${interval === "year" ? "year" : "month"}`
+      );
+    } else {
+      router.push("/dashboard");
+    }
     router.refresh();
   }
 
@@ -72,10 +115,38 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
   return (
     <div className="mx-auto max-w-lg">
       <p className="text-sm font-medium text-[var(--primary)]">
-        {dict.onboarding.step} {step}/3
+        {dict.onboarding.step} {step}/4
       </p>
 
       {step === 1 && (
+        <div className="card mt-6 space-y-4 p-6">
+          <h2 className="font-display text-xl font-semibold">{ot.businessTypes.title}</h2>
+          <p className="text-sm text-[var(--muted-fg)]">{ot.businessTypes.subtitle}</p>
+          <div className="space-y-2">
+            {BUSINESS_TYPES.map((type) => (
+              <button
+                key={type}
+                type="button"
+                onClick={() => selectType(type)}
+                className={cn(
+                  "w-full rounded-xl border p-4 text-left transition-colors",
+                  businessType === type
+                    ? "border-[var(--primary)] bg-[var(--primary-light)]"
+                    : "border-[var(--border)] hover:border-[var(--primary)]/40"
+                )}
+              >
+                <p className="font-semibold text-[var(--foreground)]">{typeLabels[type].title}</p>
+                <p className="mt-1 text-sm text-[var(--muted-fg)]">{typeLabels[type].desc}</p>
+              </button>
+            ))}
+          </div>
+          <Button type="button" onClick={nextFromType} disabled={status === "loading"}>
+            {dict.onboarding.next}
+          </Button>
+        </div>
+      )}
+
+      {step === 2 && (
         <div className="card mt-6 space-y-4 p-6">
           <h2 className="font-display text-xl font-semibold">{dict.onboarding.hours.title}</h2>
           <p className="text-sm text-[var(--muted-fg)]">{dict.onboarding.hours.subtitle}</p>
@@ -104,7 +175,7 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
         </div>
       )}
 
-      {step === 2 && (
+      {step === 3 && (
         <div className="card mt-6 space-y-4 p-6">
           <h2 className="font-display text-xl font-semibold">{dict.onboarding.services.title}</h2>
           <p className="text-sm text-[var(--muted-fg)]">{dict.onboarding.services.subtitle}</p>
@@ -156,7 +227,7 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
         </div>
       )}
 
-      {step === 3 && (
+      {step === 4 && (
         <div className="card mt-6 space-y-4 p-6 text-center">
           <h2 className="font-display text-xl font-semibold">{dict.onboarding.done.title}</h2>
           <p className="text-sm text-[var(--muted-fg)]">{dict.onboarding.done.subtitle}</p>

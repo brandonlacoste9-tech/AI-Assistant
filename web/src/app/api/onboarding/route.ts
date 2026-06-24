@@ -1,6 +1,9 @@
 import { getApiUser } from "@/lib/auth/api-auth";
+import { defaultVoiceInstructions, type BusinessType } from "@/lib/onboarding/presets";
 import { provisionVoiceForBusiness } from "@/lib/vapi/provision-service";
 import { NextResponse } from "next/server";
+
+const BUSINESS_TYPES: BusinessType[] = ["salon", "trade", "office"];
 
 export async function POST(req: Request) {
   const auth = await getApiUser();
@@ -8,7 +11,25 @@ export async function POST(req: Request) {
   const { supabase, businessId } = auth;
 
   const body = await req.json();
-  const { working_hours, services, complete } = body;
+  const { business_type, working_hours, services, complete } = body;
+
+  if (business_type && BUSINESS_TYPES.includes(business_type as BusinessType)) {
+    const type = business_type as BusinessType;
+    const { data: biz } = await supabase
+      .from("businesses")
+      .select("default_language, voice_instructions")
+      .eq("id", businessId)
+      .single();
+
+    const lang = biz?.default_language === "en" ? "en" : "fr";
+    const updates: Record<string, unknown> = { business_type: type };
+    if (!biz?.voice_instructions?.trim()) {
+      updates.voice_instructions = defaultVoiceInstructions(type, lang);
+    }
+
+    const { error } = await supabase.from("businesses").update(updates).eq("id", businessId);
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 
   if (working_hours) {
     const { error } = await supabase

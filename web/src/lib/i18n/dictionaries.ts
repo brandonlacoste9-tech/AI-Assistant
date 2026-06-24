@@ -317,6 +317,22 @@ export type Dictionary = {
       add: string;
     };
     done: { title: string; subtitle: string; cta: string };
+    businessTypes: {
+      title: string;
+      subtitle: string;
+      salon: string;
+      salonDesc: string;
+      trade: string;
+      tradeDesc: string;
+      office: string;
+      officeDesc: string;
+    };
+  };
+  verticals: {
+    label: string;
+    title: string;
+    subtitle: string;
+    items: { title: string; desc: string; examples: string[] }[];
   };
 };
 
@@ -822,7 +838,7 @@ const fr: Dictionary = {
     },
   },
   onboarding: {
-    title: "Configurez votre salon",
+    title: "Configurez votre entreprise",
     subtitle: "Quelques étapes pour activer votre tableau de bord.",
     step: "Étape",
     next: "Continuer",
@@ -851,9 +867,42 @@ const fr: Dictionary = {
     done: {
       title: "C'est prêt!",
       subtitle:
-        "On configure votre réceptionniste IA avec le nom de votre salon, vos services et vos heures.",
+        "On configure votre réceptionniste IA avec le nom de votre entreprise, vos services et vos heures.",
       cta: "Activer mon tableau de bord",
     },
+    businessTypes: {
+      title: "Type d'entreprise",
+      subtitle: "On adapte vos services et l'agent vocal à votre secteur.",
+      salon: "Salon & barbershop",
+      salonDesc: "Coiffure, couleur, barbe, soins.",
+      trade: "Métiers & services",
+      tradeDesc: "Plomberie, HVAC, électricité, réparations.",
+      office: "Bureau & clinique",
+      officeDesc: "Dentiste, physiothérapie, consultation professionnelle.",
+    },
+  },
+  verticals: {
+    label: "Pour qui",
+    title: "Conçu pour votre type d'entreprise",
+    subtitle:
+      "Même réceptionniste IA — adaptée aux salons, aux métiers et aux bureaux de services.",
+    items: [
+      {
+        title: "Salons & barbershops",
+        desc: "L'IA comprend « je veux une coupe », propose des créneaux et envoie les rappels SMS.",
+        examples: ["Coupe & couleur", "Barbe & fade", "Rappels automatiques"],
+      },
+      {
+        title: "Métiers & services",
+        desc: "Plombiers, HVAC, électriciens — l'IA qualifie l'urgence et réserve la visite.",
+        examples: ["Réparation évier / fuite", "Service chauffage / clim", "Appels d'urgence"],
+      },
+      {
+        title: "Bureaux & cliniques",
+        desc: "Dentistes, cliniques, consultations — prise de rendez-vous professionnelle.",
+        examples: ["Nettoyage dentaire", "Consultation", "Nouveaux patients"],
+      },
+    ],
   },
 };
 
@@ -1388,9 +1437,42 @@ const en: Dictionary = {
     done: {
       title: "You're all set!",
       subtitle:
-        "We're setting up your AI receptionist with your salon name, services, and hours.",
+        "We're setting up your AI receptionist with your business name, services, and hours.",
       cta: "Activate my dashboard",
     },
+    businessTypes: {
+      title: "Business type",
+      subtitle: "We'll tailor your services and voice agent to your industry.",
+      salon: "Salon & barbershop",
+      salonDesc: "Haircuts, color, beard, treatments.",
+      trade: "Trades & field service",
+      tradeDesc: "Plumbing, HVAC, electrical, repairs.",
+      office: "Office & clinic",
+      officeDesc: "Dental, physio, professional consultations.",
+    },
+  },
+  verticals: {
+    label: "Who it's for",
+    title: "Built for your kind of business",
+    subtitle:
+      "Same AI receptionist — tuned for salons, trades, and professional offices.",
+    items: [
+      {
+        title: "Salons & barbershops",
+        desc: "AI understands \"I want a haircut\", offers slots, and sends SMS reminders.",
+        examples: ["Cuts & color", "Beard & fade", "Auto reminders"],
+      },
+      {
+        title: "Trades & field service",
+        desc: "Plumbers, HVAC, electricians — AI qualifies urgency and books the visit.",
+        examples: ["Sink / leak repair", "Heating & AC service", "Emergency calls"],
+      },
+      {
+        title: "Offices & clinics",
+        desc: "Dental, clinics, consultations — professional appointment booking.",
+        examples: ["Dental cleaning", "Consultation", "New patients"],
+      },
+    ],
   },
 };
 

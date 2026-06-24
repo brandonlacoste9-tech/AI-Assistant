@@ -52,25 +52,37 @@ export async function POST(req: Request) {
   const trialDays = remainingTrialDays(business?.trial_ends_at ?? null);
   const locale = business?.default_language === "en" ? "en" : "fr";
 
-  const session = await stripe.checkout.sessions.create({
-    mode: "subscription",
-    customer: business?.stripe_customer_id ?? undefined,
-    customer_email: business?.stripe_customer_id ? undefined : (profile?.email ?? user.email ?? undefined),
-    line_items: [{ price: priceId, quantity: 1 }],
-    subscription_data: {
-      metadata: { business_id: businessId, plan },
-      ...(trialDays > 0 ? { trial_period_days: trialDays } : {}),
-    },
-    automatic_tax: { enabled: true },
-    billing_address_collection: "required",
-    customer_update: { address: "auto" },
-    tax_id_collection: { enabled: true },
-    locale: locale === "fr" ? "fr-CA" : "en",
-    success_url: `${siteUrl}/dashboard/billing/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${siteUrl}/dashboard/settings?billing=canceled`,
-    metadata: { business_id: businessId, plan, interval },
-    allow_promotion_codes: true,
-  });
+  try {
+    const session = await stripe.checkout.sessions.create({
+      mode: "subscription",
+      customer: business?.stripe_customer_id ?? undefined,
+      customer_email: business?.stripe_customer_id
+        ? undefined
+        : (profile?.email ?? user.email ?? undefined),
+      line_items: [{ price: priceId, quantity: 1 }],
+      subscription_data: {
+        metadata: { business_id: businessId, plan },
+        ...(trialDays > 0 ? { trial_period_days: trialDays } : {}),
+      },
+      automatic_tax: { enabled: true },
+      billing_address_collection: "required",
+      customer_update: { address: "auto" },
+      tax_id_collection: { enabled: true },
+      locale: locale === "fr" ? "fr-CA" : "en",
+      success_url: `${siteUrl}/dashboard/billing/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteUrl}/dashboard/settings?billing=canceled`,
+      metadata: { business_id: businessId, plan, interval },
+      allow_promotion_codes: true,
+    });
 
-  return NextResponse.json({ url: session.url });
+    if (!session.url) {
+      return NextResponse.json({ error: "Checkout session missing URL" }, { status: 500 });
+    }
+
+    return NextResponse.json({ url: session.url });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Checkout failed";
+    console.error("[stripe/checkout]", message);
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }

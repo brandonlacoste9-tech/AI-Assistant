@@ -1,6 +1,7 @@
 import { createPublicBooking, getPublicServices } from "@/lib/public/public-booking";
 import { resolveBusinessBySlug } from "@/lib/public/resolve-business";
 import { getSupabaseService } from "@/lib/supabase/server";
+import { sendBookingSms } from "@/lib/twilio/send-booking-sms";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -60,7 +61,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: result.error }, { status: 400 });
     }
 
-    return NextResponse.json({ ok: true, id: result.id });
+    let sms_sent = false;
+    if (customer_phone && db) {
+      const sms = await sendBookingSms({
+        supabase: db,
+        businessId: business.id,
+        bookingId: result.id,
+        template: "confirmation",
+        phoneOverride: customer_phone,
+      });
+      sms_sent = sms.ok;
+    }
+
+    return NextResponse.json({ ok: true, id: result.id, sms_sent });
   } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }

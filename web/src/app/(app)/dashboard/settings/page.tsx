@@ -94,6 +94,7 @@ export default async function SettingsPage() {
     hasStripeCustomer: false,
     stripeConfigured: isStripeConfigured(),
     usage: null as Awaited<ReturnType<typeof getUsageSnapshot>> | null,
+    pendingSubscribePlan: null as string | null,
   };
 
   if (supabase) {
@@ -110,14 +111,20 @@ export default async function SettingsPage() {
       .maybeSingle();
 
     const plan = sub?.plan ?? bizBilling?.plan ?? ctx.plan;
+    const subStatus = sub?.status ?? null;
+    const subPlan = sub?.plan ?? plan;
     billing = {
-      plan,
+      plan: subPlan,
       trialEndsAt: bizBilling?.trial_ends_at ?? ctx.trialEndsAt,
-      subscriptionStatus: sub?.status ?? null,
+      subscriptionStatus: subStatus,
       currentPeriodEnd: sub?.current_period_end ?? null,
       hasStripeCustomer: Boolean(bizBilling?.stripe_customer_id),
       stripeConfigured: isStripeConfigured(),
-      usage: await getUsageSnapshot({ supabase, businessId: ctx.businessId, plan }),
+      usage: await getUsageSnapshot({ supabase, businessId: ctx.businessId, plan: subPlan }),
+      pendingSubscribePlan:
+        subStatus !== "active" && subStatus !== "trialing" && subPlan !== "trial"
+          ? subPlan
+          : null,
     };
   }
 

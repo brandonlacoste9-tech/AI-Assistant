@@ -99,12 +99,10 @@ export function PricingSection({ locale }: { locale: Locale }) {
                   ))}
                 </ul>
                 <Link
-                  href={`/#waitlist`}
+                  href={`/signup?plan=${key}&interval=${annual ? "year" : "month"}`}
                   className={cn(
                     "mt-8 block rounded-xl py-3.5 text-center text-sm font-semibold transition-all",
-                    popular
-                      ? "btn-primary"
-                      : "btn-secondary"
+                    popular ? "btn-primary" : "btn-secondary"
                   )}
                 >
                   {t.pricing.cta}

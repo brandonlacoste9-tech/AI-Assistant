@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/marketing/hero-section";
+import { VerticalsSection } from "@/components/marketing/verticals-section";
 import { SectionHeading } from "@/components/marketing/section-heading";
 import { SocialProof } from "@/components/marketing/social-proof";
 import { WaitlistForm } from "@/components/marketing/waitlist-form";
@@ -27,6 +28,8 @@ export default async function HomePage() {
       <HeroSection dict={t} locale={locale} />
 
       <SocialProof locale={locale} />
+
+      <VerticalsSection dict={t} />
 
       <section className="relative py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
