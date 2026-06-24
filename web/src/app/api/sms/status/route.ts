@@ -23,6 +23,7 @@ export async function GET() {
     from_set: Boolean(from),
     messaging_service: Boolean(getTwilioMessagingServiceSid()),
     phone_number: Boolean(getTwilioPhoneNumber()),
+    phone_number_sid: Boolean(process.env.TWILIO_PHONE_NUMBER_SID?.trim()),
     hint:
       !accountSid && process.env.TWILIO_ACCOUNT_SID?.trim()?.startsWith("US")
         ? "Use Account SID (AC…) from Twilio Console → Account Info, not User SID (US…)."
