@@ -1,5 +1,6 @@
 "use client";
 
+import { DeleteItemButton } from "@/components/dashboard/delete-item-button";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
@@ -44,6 +45,17 @@ export function BookingsList({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status }),
     });
+    router.refresh();
+  }
+
+  async function deleteBooking(id: string) {
+    const res = await fetch(`/api/bookings?id=${encodeURIComponent(id)}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      window.alert(dict.dashboard.common.deleteError);
+      return;
+    }
     router.refresh();
   }
 
@@ -94,6 +106,11 @@ export function BookingsList({
                     {dict.dashboard.bookings.cancel}
                   </Button>
                 )}
+                <DeleteItemButton
+                  label={dict.dashboard.common.delete}
+                  confirmMessage={dict.dashboard.common.deleteConfirmBooking}
+                  onDelete={() => deleteBooking(b.id)}
+                />
               </div>
             </div>
           </li>

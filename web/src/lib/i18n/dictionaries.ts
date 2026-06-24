@@ -118,6 +118,13 @@ export type Dictionary = {
       };
     };
     trial: { title: string; plan: string; ends: string };
+    common: {
+      delete: string;
+      deleteConfirmBooking: string;
+      deleteConfirmLead: string;
+      deleteConfirmCall: string;
+      deleteError: string;
+    };
     settings: {
       subtitle: string;
       business: string;
@@ -528,6 +535,13 @@ const fr: Dictionary = {
       },
     },
     trial: { title: "Votre essai", plan: "Forfait", ends: "Se termine le" },
+    common: {
+      delete: "Supprimer",
+      deleteConfirmBooking: "Supprimer ce rendez-vous? Cette action est irréversible.",
+      deleteConfirmLead: "Supprimer ce lead? Cette action est irréversible.",
+      deleteConfirmCall: "Supprimer cette activité? Cette action est irréversible.",
+      deleteError: "Échec de la suppression — réessayez.",
+    },
     settings: {
       subtitle: "Informations de votre compte.",
       business: "Entreprise",
@@ -961,6 +975,13 @@ const en: Dictionary = {
       },
     },
     trial: { title: "Your trial", plan: "Plan", ends: "Ends on" },
+    common: {
+      delete: "Delete",
+      deleteConfirmBooking: "Delete this booking? This cannot be undone.",
+      deleteConfirmLead: "Delete this lead? This cannot be undone.",
+      deleteConfirmCall: "Delete this activity? This cannot be undone.",
+      deleteError: "Could not delete — please try again.",
+    },
     settings: {
       subtitle: "Your account information.",
       business: "Business",

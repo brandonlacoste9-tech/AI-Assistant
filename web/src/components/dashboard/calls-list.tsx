@@ -1,7 +1,9 @@
 "use client";
 
+import { DeleteItemButton } from "@/components/dashboard/delete-item-button";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { MessageSquare, Phone } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export type DashboardCall = {
   id: string;
@@ -32,6 +34,19 @@ export function CallsList({
   calls: DashboardCall[];
   locale: string;
 }) {
+  const router = useRouter();
+
+  async function deleteCall(id: string) {
+    const res = await fetch(`/api/conversations?id=${encodeURIComponent(id)}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      window.alert(dict.dashboard.common.deleteError);
+      return;
+    }
+    router.refresh();
+  }
+
   if (calls.length === 0) {
     return (
       <p className="text-sm text-[var(--muted-fg)]">{dict.dashboard.calls.empty}</p>
@@ -97,11 +112,18 @@ export function CallsList({
                   )}
                 </div>
               </div>
-              <span
-                className={`shrink-0 self-start rounded-full px-2.5 py-1 text-xs font-medium capitalize sm:justify-self-end ${OUTCOME_STYLES[call.outcome] ?? OUTCOME_STYLES.other}`}
-              >
-                {outcomeLabel}
-              </span>
+              <div className="flex shrink-0 items-center gap-2 self-start sm:justify-self-end">
+                <span
+                  className={`rounded-full px-2.5 py-1 text-xs font-medium capitalize ${OUTCOME_STYLES[call.outcome] ?? OUTCOME_STYLES.other}`}
+                >
+                  {outcomeLabel}
+                </span>
+                <DeleteItemButton
+                  label={dict.dashboard.common.delete}
+                  confirmMessage={dict.dashboard.common.deleteConfirmCall}
+                  onDelete={() => deleteCall(call.id)}
+                />
+              </div>
             </div>
           </li>
         );

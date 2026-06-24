@@ -1,5 +1,6 @@
 "use client";
 
+import { DeleteItemButton } from "@/components/dashboard/delete-item-button";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { useRouter } from "next/navigation";
 
@@ -31,6 +32,17 @@ export function LeadsList({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, pipeline_stage }),
     });
+    router.refresh();
+  }
+
+  async function deleteLead(id: string) {
+    const res = await fetch(`/api/leads?id=${encodeURIComponent(id)}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      window.alert(dict.dashboard.common.deleteError);
+      return;
+    }
     router.refresh();
   }
 
@@ -71,17 +83,24 @@ export function LeadsList({
                   {sourceLabels[lead.source] ?? lead.source} · {when}
                 </p>
               </div>
-              <select
-                className="select-field w-full sm:w-auto sm:min-w-[140px] sm:justify-self-end"
-                value={lead.pipeline_stage}
-                onChange={(e) => updateStage(lead.id, e.target.value)}
-              >
-                {STAGES.map((s) => (
-                  <option key={s} value={s}>
-                    {stageLabels[s]}
-                  </option>
-                ))}
-              </select>
+              <div className="flex items-center gap-2 sm:justify-self-end">
+                <select
+                  className="select-field w-full sm:w-auto sm:min-w-[140px]"
+                  value={lead.pipeline_stage}
+                  onChange={(e) => updateStage(lead.id, e.target.value)}
+                >
+                  {STAGES.map((s) => (
+                    <option key={s} value={s}>
+                      {stageLabels[s]}
+                    </option>
+                  ))}
+                </select>
+                <DeleteItemButton
+                  label={dict.dashboard.common.delete}
+                  confirmMessage={dict.dashboard.common.deleteConfirmLead}
+                  onDelete={() => deleteLead(lead.id)}
+                />
+              </div>
             </div>
           </li>
         );
