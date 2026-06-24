@@ -1,4 +1,5 @@
 import { BillingCard } from "@/components/dashboard/billing-card";
+import { OutboundSmsBanner } from "@/components/dashboard/outbound-sms-banner";
 import { BusinessSettingsForm } from "@/components/dashboard/business-settings-form";
 import { EmbedCard } from "@/components/dashboard/embed-card";
 import { StaffCard } from "@/components/dashboard/staff-card";
@@ -10,6 +11,7 @@ import { isStripeConfigured } from "@/lib/stripe/client";
 import { getTwilioPhoneNumber } from "@/lib/twilio/config";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getUsageSnapshot } from "@/lib/usage/get-usage";
+import { getOutboundSmsStatus } from "@/lib/usage/outbound-sms-status";
 import { Suspense } from "react";
 
 export default async function SettingsPage() {
@@ -128,12 +130,16 @@ export default async function SettingsPage() {
     };
   }
 
+  const smsStatus = await getOutboundSmsStatus(ctx.businessId);
+
   return (
     <div className="mx-auto w-full max-w-2xl">
       <h1 className="font-display text-2xl font-semibold text-[var(--foreground)]">
         {t.dashboard.nav.settings}
       </h1>
       <p className="mt-1 text-sm text-[var(--muted-fg)]">{t.dashboard.settings.subtitle}</p>
+
+      <OutboundSmsBanner dict={t} status={smsStatus} />
 
       <dl className="card mt-8 divide-y divide-[var(--border)]">
         {[

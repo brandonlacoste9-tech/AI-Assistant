@@ -44,7 +44,23 @@ const verify = spawnSync("node", ["scripts/verify-all.mjs", BASE], {
 });
 if (verify.status !== 0) failed++;
 
-// 2. Integration endpoints
+// 2. Production health flags
+console.log("\n── Production health ──");
+try {
+  const res = await fetch(`${BASE}/api/health`);
+  const health = await res.json();
+  if (health.checks?.cron_secret === true) pass("CRON_SECRET configured on production");
+  else fail("CRON_SECRET on production", "Set in Netlify env — reminders won't run");
+  if (health.checks?.usage_enforce === true) {
+    console.log("  ⚠ USAGE_ENFORCE=true on production — outbound SMS may pause at 2× limit");
+  } else {
+    pass("USAGE_ENFORCE off (pilot-safe)");
+  }
+} catch (e) {
+  fail("GET /api/health flags", e.message);
+}
+
+// 3. Integration endpoints
 console.log("\n── Pilot integrations ──");
 
 const integrationPaths = [
@@ -64,7 +80,7 @@ for (const { path, name } of integrationPaths) {
   }
 }
 
-// 3. Cron auth (must reject without secret)
+// 4. Cron auth (must reject without secret)
 console.log("\n── Cron security ──");
 for (const path of ["/api/cron/reminders", "/api/cron/usage-rollup"]) {
   try {
@@ -76,7 +92,7 @@ for (const path of ["/api/cron/reminders", "/api/cron/usage-rollup"]) {
   }
 }
 
-// 4. Optional cron trigger with secret
+// 5. Optional cron trigger with secret
 const secret = process.env.CRON_SECRET?.trim();
 if (secret) {
   console.log("\n── Cron execution (CRON_SECRET set) ──");
@@ -94,7 +110,7 @@ if (secret) {
   console.log("\n○ CRON_SECRET not set locally — skip live cron test");
 }
 
-// 5. Public book page pattern
+// 6. Public book page pattern
 console.log("\n── Public booking ──");
 try {
   const res = await fetch(`${BASE}/api/public/book?slug=__smoke_test__`);

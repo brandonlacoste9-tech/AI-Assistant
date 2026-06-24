@@ -1,9 +1,11 @@
 import { CallsList } from "@/components/dashboard/calls-list";
+import { OutboundSmsBanner } from "@/components/dashboard/outbound-sms-banner";
 import { SetupChecklistCard } from "@/components/dashboard/setup-checklist-card";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { requireOnboardedContext } from "@/lib/auth/get-business-context";
 import { getSetupChecklist } from "@/lib/onboarding/setup-checklist";
+import { getOutboundSmsStatus } from "@/lib/usage/outbound-sms-status";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { Calendar, DollarSign, Phone, TrendingUp, UserX } from "lucide-react";
 
@@ -27,6 +29,7 @@ export default async function DashboardPage() {
   let calls: Parameters<typeof CallsList>[0]["calls"] = [];
   let checklist = null as Awaited<ReturnType<typeof getSetupChecklist>> | null;
   let bookUrl: string | null = null;
+  const smsStatus = await getOutboundSmsStatus(ctx.businessId);
 
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
@@ -156,6 +159,8 @@ export default async function DashboardPage() {
         {t.dashboard.title}
       </h1>
       <p className="mt-1 text-sm text-[var(--muted-fg)]">{t.dashboard.subtitle}</p>
+
+      <OutboundSmsBanner dict={t} status={smsStatus} />
 
       {checklist && (
         <SetupChecklistCard dict={t} checklist={checklist} bookUrl={bookUrl} />

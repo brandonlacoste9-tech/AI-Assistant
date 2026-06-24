@@ -137,6 +137,14 @@ export type Dictionary = {
         bookPage: string;
       };
     };
+    smsStatus: {
+      pausedTitle: string;
+      pausedBody: string;
+      warnTitle: string;
+      warnBody: string;
+      usageLine: string;
+      billingLink: string;
+    };
     common: {
       delete: string;
       deleteConfirmBooking: string;
@@ -681,6 +689,16 @@ const fr: Dictionary = {
         greeting: "Personnaliser le message d'accueil",
         bookPage: "Publier votre lien de réservation",
       },
+    },
+    smsStatus: {
+      pausedTitle: "SMS automatiques en pause",
+      pausedBody:
+        "Les confirmations et rappels SMS sont temporairement suspendus — votre ligne téléphonique et les SMS entrants fonctionnent toujours.",
+      warnTitle: "Limite SMS presque atteinte",
+      warnBody:
+        "Vous approchez de la limite d'envoi SMS de votre forfait. Passez au forfait Pro si vous avez besoin de plus de capacité.",
+      usageLine: "Utilisation : {used} / {limit} SMS ce mois-ci",
+      billingLink: "Voir la facturation →",
     },
     common: {
       delete: "Supprimer",
@@ -1270,6 +1288,16 @@ const en: Dictionary = {
         greeting: "Customize your phone greeting",
         bookPage: "Publish your booking link",
       },
+    },
+    smsStatus: {
+      pausedTitle: "Automated SMS paused",
+      pausedBody:
+        "Confirmation and reminder texts are temporarily paused — your phone line and inbound texts still work.",
+      warnTitle: "SMS limit almost reached",
+      warnBody:
+        "You're approaching your plan's outbound SMS limit. Upgrade to Pro if you need more capacity.",
+      usageLine: "Usage: {used} / {limit} SMS this month",
+      billingLink: "View billing →",
     },
     common: {
       delete: "Delete",
