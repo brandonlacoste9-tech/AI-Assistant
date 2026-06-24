@@ -1,6 +1,7 @@
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/types";
 import { LanguageToggle } from "@/components/ui/language-toggle";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Logo } from "@/components/ui/logo";
 import Link from "next/link";
 
@@ -19,6 +20,7 @@ export function Header({ locale }: { locale: Locale }) {
         </nav>
 
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <LanguageToggle locale={locale} />
           <Link
             href="/login"
