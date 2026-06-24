@@ -13,6 +13,7 @@
     "verify:prod": "node scripts/verify-all.mjs https://resilient-khapse-ecd31c.netlify.app"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.9.1",
     "@supabase/ssr": "^0.12.0",
     "@supabase/supabase-js": "^2.108.2",
     "clsx": "^2.1.1",
@@ -24,8 +25,8 @@
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.15.8",
     "@eslint/eslintrc": "^3",
+    "@netlify/plugin-nextjs": "^5.15.8",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
