@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/marketing/section-heading";
 import { SignupForm } from "@/components/signup/signup-form";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
@@ -8,11 +9,10 @@ export default async function SignupPage() {
   const t = getDictionary(locale);
 
   return (
-    <section className="py-16">
+    <section className="py-20">
       <div className="mx-auto max-w-md px-4 sm:px-6">
-        <h1 className="text-2xl font-bold">{t.signup.title}</h1>
-        <p className="mt-2 text-[var(--muted-fg)]">{t.signup.subtitle}</p>
-        <div className="mt-8 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+        <SectionHeading title={t.signup.title} description={t.signup.subtitle} />
+        <div className="card mt-8 p-6 sm:p-8">
           <Suspense fallback={<p className="text-sm text-[var(--muted-fg)]">Loading…</p>}>
             <SignupForm dict={t} locale={locale} />
           </Suspense>

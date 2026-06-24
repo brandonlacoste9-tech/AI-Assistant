@@ -45,8 +45,8 @@ export function SignupForm({ dict, locale }: { dict: Dictionary; locale: string 
 
   if (status === "success") {
     return (
-      <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-center">
-        <p className="font-medium text-green-800">{dict.signup.success}</p>
+      <div className="rounded-xl border border-[var(--teal)]/30 bg-[var(--teal-light)] p-6 text-center">
+        <p className="font-medium text-[var(--teal)]">{dict.signup.success}</p>
       </div>
     );
   }
@@ -81,7 +81,7 @@ export function SignupForm({ dict, locale }: { dict: Dictionary; locale: string 
         <select
           name="default_language"
           defaultValue={locale === "en" ? "en" : "fr"}
-          className="h-11 w-full rounded-lg border border-[var(--border)] bg-white px-3 text-sm"
+          className="select-field"
         >
           <option value="fr">{dict.signup.langOptions.fr}</option>
           <option value="en">{dict.signup.langOptions.en}</option>

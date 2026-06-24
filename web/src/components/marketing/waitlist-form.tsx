@@ -3,6 +3,7 @@
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 
 export function WaitlistForm({ dict, locale }: { dict: Dictionary; locale: string }) {
@@ -31,9 +32,10 @@ export function WaitlistForm({ dict, locale }: { dict: Dictionary; locale: strin
 
   if (status === "success") {
     return (
-      <p className="rounded-xl border border-green-200 bg-green-50 p-4 text-green-800">
-        {dict.waitlist.success}
-      </p>
+      <div className="flex items-start gap-3 rounded-xl border border-[var(--teal)]/30 bg-[var(--teal-light)] p-5">
+        <CheckCircle2 className="h-5 w-5 shrink-0 text-[var(--teal)]" />
+        <p className="text-sm font-medium text-[var(--teal)]">{dict.waitlist.success}</p>
+      </div>
     );
   }
 
@@ -44,20 +46,12 @@ export function WaitlistForm({ dict, locale }: { dict: Dictionary; locale: strin
       <Input name="email" type="email" placeholder={dict.waitlist.fields.email} required />
       <Input name="phone" type="tel" placeholder={dict.waitlist.fields.phone} />
       <Input name="city" placeholder={dict.waitlist.fields.city} required />
-      <select
-        name="staff_count"
-        className="h-11 rounded-lg border border-[var(--border)] bg-white px-3 text-sm"
-        defaultValue="1-3"
-      >
+      <select name="staff_count" className="select-field" defaultValue="1-3">
         <option value="1-3">1–3</option>
         <option value="4-8">4–8</option>
         <option value="9+">9+</option>
       </select>
-      <select
-        name="primary_pain"
-        className="h-11 rounded-lg border border-[var(--border)] bg-white px-3 text-sm sm:col-span-2"
-        required
-      >
+      <select name="primary_pain" className="select-field sm:col-span-2" required>
         <option value="">{dict.waitlist.fields.pain}</option>
         {dict.waitlist.pains.map((p) => (
           <option key={p.value} value={p.value}>
@@ -70,7 +64,9 @@ export function WaitlistForm({ dict, locale }: { dict: Dictionary; locale: strin
           {status === "loading" ? "…" : dict.waitlist.submit}
         </Button>
         {status === "error" && (
-          <p className="mt-2 text-sm text-red-600">Error — please try again.</p>
+          <p className="mt-2 text-sm text-red-600">
+            {locale === "fr" ? "Erreur — réessayez." : "Error — please try again."}
+          </p>
         )}
       </div>
     </form>

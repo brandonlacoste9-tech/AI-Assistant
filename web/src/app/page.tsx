@@ -1,7 +1,17 @@
+import { HeroSection } from "@/components/marketing/hero-section";
+import { SectionHeading } from "@/components/marketing/section-heading";
 import { WaitlistForm } from "@/components/marketing/waitlist-form";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
-import { Check, Phone, Calendar, MessageSquare, BarChart3, Users } from "lucide-react";
+import {
+  BarChart3,
+  Calendar,
+  Check,
+  MessageSquare,
+  Phone,
+  Sparkles,
+  Users,
+} from "lucide-react";
 import Link from "next/link";
 
 const featureIcons = [Phone, Calendar, MessageSquare, Users, BarChart3];
@@ -9,67 +19,53 @@ const featureIcons = [Phone, Calendar, MessageSquare, Users, BarChart3];
 export default async function HomePage() {
   const locale = await getLocale();
   const t = getDictionary(locale);
+  const fr = locale === "fr";
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-[var(--border)] bg-white">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--primary-light)_0%,_transparent_60%)]" />
-        <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-          <p className="text-sm font-medium text-[var(--primary)]">{t.hero.trust}</p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-[var(--foreground)] sm:text-5xl">
-            {t.hero.headline}
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-[var(--muted-fg)]">{t.hero.subhead}</p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link
-              href="/signup?plan=pro"
-              className="rounded-lg bg-[var(--primary)] px-6 py-3 text-sm font-medium text-white hover:bg-[var(--primary-hover)]"
-            >
-              {t.hero.ctaPrimary}
-            </Link>
-            <Link
-              href="#waitlist"
-              className="rounded-lg border border-[var(--border)] bg-white px-6 py-3 text-sm font-medium hover:bg-[var(--muted)]"
-            >
-              {t.hero.ctaSecondary}
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HeroSection dict={t} locale={locale} />
 
-      <section className="py-16">
+      <section className="relative py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="text-2xl font-bold">{t.howItWorks.title}</h2>
-          <ol className="mt-8 grid gap-6 sm:grid-cols-3">
+          <SectionHeading
+            label={fr ? "Processus" : "Process"}
+            title={t.howItWorks.title}
+          />
+          <ol className="mt-12 grid gap-6 sm:grid-cols-3">
             {t.howItWorks.steps.map((step, i) => (
-              <li
-                key={step}
-                className="rounded-xl border border-[var(--border)] bg-white p-6 shadow-sm"
-              >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--primary-light)] text-sm font-bold text-[var(--primary)]">
+              <li key={step} className="card group relative p-7 transition-shadow hover:shadow-lg">
+                <span className="font-display flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--primary)] text-lg font-bold text-white">
                   {i + 1}
                 </span>
-                <p className="mt-4 text-[var(--foreground)]">{step}</p>
+                <p className="mt-5 leading-relaxed text-[var(--foreground)]">{step}</p>
+                {i < 2 && (
+                  <span className="absolute -right-3 top-1/2 hidden h-0.5 w-6 bg-[var(--border)] sm:block" />
+                )}
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section className="border-y border-[var(--border)] bg-[var(--surface)] py-16">
+      <section className="border-y border-[var(--border)] bg-[var(--surface-elevated)] py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="text-2xl font-bold">{t.features.title}</h2>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <SectionHeading
+            label={fr ? "Fonctionnalités" : "Features"}
+            title={t.features.title}
+          />
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {t.features.items.map((item, i) => {
               const Icon = featureIcons[i] ?? Phone;
               return (
                 <div
                   key={item.title}
-                  className="rounded-xl border border-[var(--border)] bg-white p-6"
+                  className="card p-6 transition-transform hover:-translate-y-0.5"
                 >
-                  <Icon className="h-6 w-6 text-[var(--primary)]" />
-                  <h3 className="mt-3 font-semibold">{item.title}</h3>
-                  <p className="mt-2 text-sm text-[var(--muted-fg)]">{item.desc}</p>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--primary-light)]">
+                    <Icon className="h-5 w-5 text-[var(--primary)]" />
+                  </div>
+                  <h3 className="mt-4 font-semibold text-[var(--foreground)]">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--muted-fg)]">{item.desc}</p>
                 </div>
               );
             })}
@@ -77,60 +73,87 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="text-2xl font-bold">{t.builtForQuebec.title}</h2>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-            {t.builtForQuebec.items.map((item) => (
-              <li key={item} className="flex items-center gap-2 text-[var(--foreground)]">
-                <Check className="h-5 w-5 text-[var(--primary)]" />
-                {item}
-              </li>
-            ))}
-          </ul>
+          <div className="card overflow-hidden">
+            <div className="grid lg:grid-cols-2">
+              <div className="bg-gradient-to-br from-[var(--primary)] to-[#2a5080] p-8 sm:p-10">
+                <Sparkles className="h-6 w-6 text-[var(--accent)]" />
+                <h2 className="font-display mt-4 text-2xl font-semibold text-white sm:text-3xl">
+                  {t.builtForQuebec.title}
+                </h2>
+                <ul className="mt-8 space-y-4">
+                  {t.builtForQuebec.items.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-white/90">
+                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-[var(--accent)]" />
+                      <span className="text-sm leading-relaxed sm:text-base">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-[var(--surface)] p-8 sm:p-10">
+                <SectionHeading title={t.roi.title} />
+                <div className="mt-6 space-y-3">
+                  {t.roi.rows.map((row, i) => (
+                    <div
+                      key={row.label}
+                      className={`flex items-center justify-between rounded-xl px-4 py-3 ${
+                        i === t.roi.rows.length - 1
+                          ? "bg-[var(--teal-light)] border border-[var(--teal)]/20"
+                          : "bg-[var(--muted)]"
+                      }`}
+                    >
+                      <span className="text-sm text-[var(--muted-fg)]">{row.label}</span>
+                      <span
+                        className={`font-display font-semibold ${
+                          i === t.roi.rows.length - 1 ? "text-[var(--teal)]" : "text-[var(--foreground)]"
+                        }`}
+                      >
+                        {row.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-6 text-sm font-medium text-[var(--primary)]">{t.roi.punchline}</p>
+                <Link
+                  href="/pricing"
+                  className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[var(--accent-hover)] hover:underline"
+                >
+                  {fr ? "Voir les forfaits" : "See plans"}
+                  <span>→</span>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="border-y border-[var(--border)] bg-white py-16">
+      <section id="waitlist" className="scroll-mt-20 bg-[var(--muted)] py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="text-2xl font-bold">{t.roi.title}</h2>
-          <div className="mt-6 overflow-hidden rounded-xl border border-[var(--border)]">
-            <table className="w-full text-left text-sm">
-              <tbody>
-                {t.roi.rows.map((row) => (
-                  <tr key={row.label} className="border-b border-[var(--border)] last:border-0">
-                    <td className="px-4 py-3 text-[var(--muted-fg)]">{row.label}</td>
-                    <td className="px-4 py-3 text-right font-semibold">{row.value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="mt-4 font-medium text-[var(--primary)]">{t.roi.punchline}</p>
-          <Link href="/pricing" className="mt-4 inline-block text-sm font-medium text-[var(--primary)] hover:underline">
-            {locale === "fr" ? "Voir les forfaits →" : "See plans →"}
-          </Link>
-        </div>
-      </section>
-
-      <section id="waitlist" className="py-16 scroll-mt-20">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6">
-          <h2 className="text-2xl font-bold">{t.waitlist.title}</h2>
-          <p className="mt-2 text-[var(--muted-fg)]">{t.waitlist.subtitle}</p>
-          <div className="mt-8">
-            <WaitlistForm dict={t} locale={locale} />
+          <div className="grid items-start gap-12 lg:grid-cols-2">
+            <SectionHeading
+              label={fr ? "Accès anticipé" : "Early access"}
+              title={t.waitlist.title}
+              description={t.waitlist.subtitle}
+            />
+            <div className="card p-6 sm:p-8">
+              <WaitlistForm dict={t} locale={locale} />
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-[var(--border)] bg-[var(--surface)] py-16">
+      <section className="py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <h2 className="text-2xl font-bold">{t.faq.title}</h2>
-          <dl className="mt-8 space-y-6">
+          <SectionHeading
+            label="FAQ"
+            title={t.faq.title}
+          />
+          <dl className="mt-10 space-y-4">
             {t.faq.items.map((item) => (
-              <div key={item.q} className="rounded-xl border border-[var(--border)] bg-white p-5">
-                <dt className="font-semibold">{item.q}</dt>
-                <dd className="mt-2 text-sm text-[var(--muted-fg)]">{item.a}</dd>
+              <div key={item.q} className="card p-6">
+                <dt className="font-semibold text-[var(--foreground)]">{item.q}</dt>
+                <dd className="mt-3 text-sm leading-relaxed text-[var(--muted-fg)]">{item.a}</dd>
               </div>
             ))}
           </dl>

@@ -21,7 +21,7 @@ export function LanguageToggle({
   return (
     <div
       className={cn(
-        "inline-flex rounded-lg border border-[var(--border)] bg-white p-0.5 text-xs font-medium",
+        "inline-flex rounded-lg border border-[var(--border)] bg-[var(--surface)] p-0.5 text-xs font-semibold",
         className
       )}
       role="group"
@@ -33,9 +33,9 @@ export function LanguageToggle({
           type="button"
           onClick={() => setLocale(lang)}
           className={cn(
-            "rounded-md px-2.5 py-1.5 uppercase transition-colors",
+            "rounded-md px-2.5 py-1.5 uppercase transition-all",
             locale === lang
-              ? "bg-[var(--primary)] text-white"
+              ? "bg-[var(--primary)] text-white shadow-sm"
               : "text-[var(--muted-fg)] hover:text-[var(--foreground)]"
           )}
         >
