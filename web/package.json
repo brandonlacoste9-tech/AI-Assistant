@@ -16,6 +16,7 @@
     "test:vapi:webhook": "node scripts/test-vapi-webhook.mjs",
     "verify": "node scripts/verify-all.mjs",
     "verify:prod": "node scripts/verify-all.mjs https://justbookme.ca",
+    "pilot:smoke": "node scripts/pilot-smoke.mjs https://justbookme.ca",
     "twilio:sms-webhook": "node scripts/twilio-set-sms-webhook.mjs",
     "cron:reminders": "node scripts/run-reminders-cron.mjs",
     "cron:reminders-2h": "node scripts/run-reminders-2h-cron.mjs",
@@ -28,7 +29,7 @@
     "@supabase/supabase-js": "^2.108.2",
     "clsx": "^2.1.1",
     "lucide-react": "^1.21.0",
-    "next": "^15.3.8",
+    "next": "^15.5.18",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "stripe": "^22.2.3",
@@ -43,7 +44,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "^15.3.8",
+    "eslint-config-next": "^15.5.18",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

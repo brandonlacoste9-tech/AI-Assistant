@@ -1,6 +1,5 @@
 import { getSupabaseService } from "@/lib/supabase/server";
-import { recordOutboundSms } from "@/lib/usage/increment-usage";
-import { sendSms } from "@/lib/twilio/client";
+import { sendOutboundSms } from "@/lib/twilio/send-outbound-sms";
 
 export async function sendMissedCallRecovery(opts: {
   businessId: string;
@@ -28,9 +27,8 @@ export async function sendMissedCallRecovery(opts: {
       ? `Bonjour! Vous avez appelé ${name} — on a manqué votre appel. Répondez à ce SMS pour réserver ou écrivez HUMAN pour qu'on vous rappelle.`
       : `Hi! You called ${name} — we missed you. Reply to this text to book, or text HUMAN and we'll call you back.`;
 
-  const result = await sendSms(phone, body);
+  const result = await sendOutboundSms(opts.businessId, phone, body);
   if (!result.ok) return { ok: false };
-  recordOutboundSms(opts.businessId);
 
   await supabase.from("leads").insert({
     business_id: opts.businessId,

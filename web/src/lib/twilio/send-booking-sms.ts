@@ -1,14 +1,6 @@
-import { recordOutboundSms } from "@/lib/usage/increment-usage";
-import { sendSms } from "@/lib/twilio/client";
+import { sendOutboundSms } from "@/lib/twilio/send-outbound-sms";
 import { bookingConfirmationSms, bookingReminderSms } from "@/lib/twilio/templates";
 import type { SupabaseClient } from "@supabase/supabase-js";
-
-function toE164(phone: string): string {
-  const normalized = phone.replace(/\D/g, "");
-  if (normalized.length === 10) return `+1${normalized}`;
-  if (normalized.startsWith("1")) return `+${normalized}`;
-  return phone.startsWith("+") ? phone : `+${normalized}`;
-}
 
 export async function sendBookingSms({
   supabase,
@@ -56,8 +48,7 @@ export async function sendBookingSms({
       ? bookingReminderSms({ businessName: business.name, customerName, startsAt, serviceName, locale })
       : bookingConfirmationSms({ businessName: business.name, customerName, startsAt, serviceName, locale });
 
-  const result = await sendSms(toE164(phone), body);
+  const result = await sendOutboundSms(businessId, phone, body);
   if (!result.ok) return { ok: false, error: result.error };
-  recordOutboundSms(businessId);
   return { ok: true, sid: result.sid };
 }

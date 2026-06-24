@@ -75,6 +75,7 @@ Fonts: DM Sans (body), Fraunces (display) — loaded in root layout.
 ```bash
 npm run build          # Required before marking work done
 npm run verify:prod    # Smoke test production
+npm run pilot:smoke    # Full pre-pilot check (verify + crons + integrations)
 npm run cron:reminders # Test reminder cron locally
 npm run cron:usage-rollup # Refresh usage_counters for all businesses
 npm run vapi:provision # Provision voice assistant

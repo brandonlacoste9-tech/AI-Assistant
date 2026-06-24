@@ -13,6 +13,8 @@ export async function GET() {
       process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() &&
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim()
     ),
+    cron_secret: Boolean(process.env.CRON_SECRET?.trim()),
+    usage_enforce: process.env.USAGE_ENFORCE?.trim() === "true",
   };
 
   const db = getSupabaseService();
