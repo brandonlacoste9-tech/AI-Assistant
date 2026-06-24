@@ -76,7 +76,7 @@ const fr: Dictionary = {
   meta: {
     title: "RendezVous AI — Ne manquez plus un rendez-vous",
     description:
-      "Réceptionniste IA bilingue pour salons et entreprises de services au Québec. Appels manqués, réservations et rappels SMS automatiques.",
+      "Réceptionniste IA bilingue pour salons, barbershops et entreprises de services au Québec. Appels manqués, réservations et rappels SMS automatiques.",
   },
   nav: {
     pricing: "Tarification",
@@ -87,7 +87,7 @@ const fr: Dictionary = {
   hero: {
     headline: "Arrêtez de perdre des rendez-vous à cause des appels manqués.",
     subhead:
-      "RendezVous AI répond au téléphone 24 h/24, prend les rendez-vous et envoie les rappels par SMS — en français ou en anglais. Conçu pour les entreprises de services au Québec.",
+      "RendezVous AI répond au téléphone 24 h/24, prend les rendez-vous et envoie les rappels par SMS — en français ou en anglais. Conçu pour les salons, barbershops et entreprises de services au Québec.",
     ctaPrimary: "Essai gratuit de 14 jours",
     ctaSecondary: "Réserver une démo de 15 minutes",
     trust: "Conçu au Québec · Bilingue · Essai 14 jours sans carte",
@@ -146,7 +146,7 @@ const fr: Dictionary = {
   waitlist: {
     title: "Rejoignez la liste d'attente",
     subtitle:
-      "Soyez parmi les 10 premiers salons au Québec à tester RendezVous AI. Tarif fondateur garanti à vie.",
+      "Soyez parmi les 10 premiers salons et barbershops au Québec à tester RendezVous AI. Tarif fondateur garanti à vie.",
     fields: {
       businessName: "Nom du salon",
       contactName: "Votre nom",
@@ -283,7 +283,7 @@ const en: Dictionary = {
   meta: {
     title: "RendezVous AI — Never miss a booking again",
     description:
-      "Bilingual AI receptionist for Quebec service businesses. Missed calls, bookings, and automatic SMS reminders.",
+      "Bilingual AI receptionist for Quebec salons, barbershops & service businesses. Missed calls, bookings, and SMS reminders.",
   },
   nav: {
     pricing: "Pricing",
@@ -353,7 +353,7 @@ const en: Dictionary = {
   waitlist: {
     title: "Join the waitlist",
     subtitle:
-      "Be among the first 10 Quebec salons to try RendezVous AI. Founder pricing locked for life.",
+      "Be among the first 10 Quebec salons & barbershops to try RendezVous AI. Founder pricing locked for life.",
     fields: {
       businessName: "Business name",
       contactName: "Your name",

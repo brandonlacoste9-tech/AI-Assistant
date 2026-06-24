@@ -6,6 +6,8 @@
 
 Replace `{first_name}`, `{business_name}`, `{neighbourhood}` before sending.
 
+**Prospect list:** `prospect-list-montreal.csv` — 37 leads (20 barbershops · 17 salons). Fill phones/emails from Google Maps before sending.
+
 ---
 
 ## Email 1 — Problem hook (Day 0)
@@ -69,6 +71,32 @@ Bonne continuation avec {business_name}!
 
 Brandon
 ```
+
+---
+
+## Email 1 — Barbershop variant (Day 0)
+
+**Subject:** `{business_name} — appels manqués quand vous êtes en fade?`
+
+```
+Bonjour {first_name},
+
+Les barbershops que je visite à {neighbourhood} ont le même problème :
+quand vous êtes en coupe, le téléphone sonne et personne ne répond.
+
+RendezVous AI prend les rendez-vous (fade, line-up, barbe) en français et en anglais,
+et envoie les rappels SMS — pendant que vous êtes avec un client.
+
+10 places fondateur au Québec : essai 14 jours gratuit + configuration gratuite + 30 % à vie.
+
+15 minutes pour une démo?
+→ https://resilient-khapse-ecd31c.netlify.app/#waitlist
+
+Brandon
+RendezVous AI
+```
+
+**Hot lead example:** Emporium Barbershop note « peu de rdv par téléphone » — parfait pour ce pitch.
 
 ---
 

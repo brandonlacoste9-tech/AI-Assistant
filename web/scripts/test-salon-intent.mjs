@@ -14,6 +14,7 @@ const expectations = [
   ["Je veux parler à quelqu'un svp", (r) => r?.action === "transfer.human"],
   ["Annuler mon rendez-vous de mardi", (r) => r?.action === "booking.cancel"],
   ["Balayage vendredi à 10h30", (r) => r?.action === "booking.create" && r.confidence === "high"],
+  ["I need a skin fade tomorrow at 3pm", (r) => r?.action === "booking.create" && r?.service === "coupe"],
 ];
 
 let passed = 0;

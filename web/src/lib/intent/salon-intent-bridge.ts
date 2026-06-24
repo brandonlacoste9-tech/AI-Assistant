@@ -69,7 +69,28 @@ const SERVICE_PATTERNS: { service: SalonService; label: string; patterns: RegExp
   {
     service: "barbe",
     label: "barbe",
-    patterns: [/\bbarbe\b/i, /\bbeard\b/i, /\brasage\b/i],
+    patterns: [
+      /\bbarbe\b/i,
+      /\bbeard\b/i,
+      /\brasage\b/i,
+      /\bshave\b/i,
+      /\btrim\s+beard\b/i,
+    ],
+  },
+  {
+    service: "coupe",
+    label: "fade / coupe homme",
+    patterns: [
+      /\bfade\b/i,
+      /\bskin\s*fade\b/i,
+      /\bline[- ]?up\b/i,
+      /\blineup\b/i,
+      /\btaper\b/i,
+      /\bbuzz\s*cut\b/i,
+      /\bcoupe\s+homme\b/i,
+      /\bmen'?s?\s+cut\b/i,
+      /\bbarber\s*cut\b/i,
+    ],
   },
 ];
 

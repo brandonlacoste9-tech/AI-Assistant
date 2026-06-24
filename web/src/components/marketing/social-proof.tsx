@@ -8,7 +8,7 @@ export function SocialProof({ locale }: { locale: Locale }) {
     <section className="border-y border-[var(--border)] bg-[var(--surface)] py-14">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <p className="section-label text-center">
-          {fr ? "Conçu pour les salons" : "Built for salons"}
+          {fr ? "Salons & barbershops" : "Salons & barbershops"}
         </p>
         <div className="mt-8 grid gap-6 sm:grid-cols-3">
           {[
