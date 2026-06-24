@@ -2,6 +2,10 @@
 
 ## 1. Create project
 
+**Connected project:** `ulbfaxhsbbckotcbmslk` — see [PROJECT_CONNECTED.md](PROJECT_CONNECTED.md)
+
+If starting fresh:
+
 1. Go to [supabase.com/dashboard](https://supabase.com/dashboard) → **New project**
 2. **Name:** `rendezvous-ai`
 3. **Region:** `East US (North Virginia)` — closest default; note for Law 25 docs
