@@ -53,13 +53,12 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
           <div className="lg:pl-4 relative w-full h-full flex items-center justify-center">
             {/* Massive glowing orb behind the dashboard */}
             <div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none z-0" 
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0" 
               style={{
-                width: '700px',
-                height: '700px',
-                backgroundColor: '#c4a882',
-                opacity: 0.5,
-                filter: 'blur(120px)',
+                width: '800px',
+                height: '800px',
+                background: 'radial-gradient(circle at center, rgba(210, 175, 125, 0.8) 0%, rgba(180, 140, 80, 0.4) 30%, transparent 65%)',
+                mixBlendMode: 'color-dodge',
               }}
             />
             
