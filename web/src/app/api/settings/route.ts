@@ -18,7 +18,7 @@ export async function GET() {
   const { data: business, error } = await supabase
     .from("businesses")
     .select(
-      "name, city, default_language, working_hours, forward_to_number, voice_greeting, voice_instructions, industry"
+      "name, city, default_language, working_hours, forward_to_number, voice_greeting, voice_instructions, industry, ai_personality, bilingual_mode"
     )
     .eq("id", businessId)
     .single();
@@ -65,6 +65,8 @@ export async function PATCH(req: Request) {
     voice_instructions,
     industry,
     services,
+    ai_personality,
+    bilingual_mode,
     sync_voice = true,
   } = body;
 
@@ -88,6 +90,12 @@ export async function PATCH(req: Request) {
   if (voice_instructions !== undefined) {
     const ins = typeof voice_instructions === "string" ? voice_instructions.trim() : "";
     updates.voice_instructions = ins ? ins.slice(0, 2000) : null;
+  }
+  if (ai_personality === "friendly" || ai_personality === "luxury" || ai_personality === "corporate") {
+    updates.ai_personality = ai_personality;
+  }
+  if (typeof bilingual_mode === "boolean") {
+    updates.bilingual_mode = bilingual_mode;
   }
 
   if (Object.keys(updates).length > 0) {

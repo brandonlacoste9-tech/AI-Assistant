@@ -25,6 +25,8 @@ export default async function SettingsPage() {
   let slug = "";
   let voiceGreeting: string | null = null;
   let voiceInstructions: string | null = null;
+  let aiPersonality = "friendly";
+  let bilingualMode = false;
   let staffRows: { id: string; display_name: string; active: boolean }[] = [];
   let profile = {
     name: ctx.businessName,
@@ -46,7 +48,7 @@ export default async function SettingsPage() {
     const { data } = await supabase
       .from("businesses")
       .select(
-        "name, city, default_language, working_hours, forward_to_number, vapi_assistant_id, phone_number, slug, voice_greeting, voice_instructions, industry"
+        "name, city, default_language, working_hours, forward_to_number, vapi_assistant_id, phone_number, slug, voice_greeting, voice_instructions, industry, ai_personality, bilingual_mode"
       )
       .eq("id", ctx.businessId)
       .single();
@@ -57,6 +59,8 @@ export default async function SettingsPage() {
       slug = (data.slug as string) ?? "";
       voiceGreeting = (data.voice_greeting as string | null) ?? null;
       voiceInstructions = (data.voice_instructions as string | null) ?? null;
+      aiPersonality = (data.ai_personality as string | null) ?? "friendly";
+      bilingualMode = Boolean(data.bilingual_mode);
       profile = {
         name: data.name,
         city: data.city,
@@ -170,6 +174,8 @@ export default async function SettingsPage() {
         platformPhone={getTwilioPhoneNumber()}
         initialGreeting={voiceGreeting}
         initialInstructions={voiceInstructions}
+        initialPersonality={aiPersonality}
+        initialBilingual={bilingualMode}
       />
 
       <StaffCard dict={t} initial={staffRows} />
