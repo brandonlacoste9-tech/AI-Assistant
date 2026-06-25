@@ -106,7 +106,6 @@ export function VoiceSettingsCard({
 
           <div className="mt-6 space-y-4 border-t border-[var(--border)] pt-6">
             <div>
-            <div>
               <h3 className="text-sm font-semibold text-[var(--foreground)]">AI Customization</h3>
               <p className="mt-1 text-xs text-[var(--muted-fg)]">Configure how your AI assistant speaks and behaves.</p>
             </div>
