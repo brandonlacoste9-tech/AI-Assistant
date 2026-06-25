@@ -526,13 +526,13 @@ const fr: Dictionary = {
         ],
       },
       premium: {
-        name: "Premium",
+        name: "White-Glove AI",
         features: [
-          "Multi-succursales (5)",
-          "Employés illimités",
-          "5 000 SMS",
-          "2 500 min voix",
-          "Voix avancée + marque blanche",
+          "Tout du forfait Pro",
+          "Création d'IA sur mesure",
+          "Intégration agenda complet",
+          "Voix premium dédiée",
+          "Soutien VIP 24/7",
         ],
       },
     },
@@ -1127,13 +1127,13 @@ const en: Dictionary = {
         ],
       },
       premium: {
-        name: "Premium",
+        name: "White-Glove AI",
         features: [
-          "Multi-location (5)",
-          "Unlimited staff",
-          "5,000 SMS",
-          "2,500 voice min",
-          "Advanced voice + white-label",
+          "Everything in Pro",
+          "Custom AI Build (DFY)",
+          "Full calendar integration",
+          "Dedicated premium voice",
+          "24/7 VIP support",
         ],
       },
     },
@@ -1574,5 +1574,5 @@ export function getDictionary(locale: Locale): Dictionary {
 export const PLAN_PRICES = {
   starter: { monthly: 49, annual: 490 },
   pro: { monthly: 149, annual: 1490 },
-  premium: { monthly: 349, annual: 3490 },
+  premium: { monthly: 299, annual: 2990 },
 } as const;

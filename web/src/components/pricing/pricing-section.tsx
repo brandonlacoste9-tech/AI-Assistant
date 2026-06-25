@@ -99,13 +99,13 @@ export function PricingSection({ locale }: { locale: Locale }) {
                   ))}
                 </ul>
                 <Link
-                  href={`/signup?plan=${key}&interval=${annual ? "year" : "month"}`}
+                  href={key === "premium" ? "mailto:sales@justbookme.ca" : `/signup?plan=${key}&interval=${annual ? "year" : "month"}`}
                   className={cn(
                     "mt-8 block rounded-xl py-3.5 text-center text-sm font-semibold transition-all",
                     popular ? "btn-primary" : "btn-secondary"
                   )}
                 >
-                  {t.pricing.cta}
+                  {key === "premium" ? t.pricing.contact : t.pricing.cta}
                 </Link>
               </div>
             );
