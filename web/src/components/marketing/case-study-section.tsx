@@ -3,11 +3,7 @@
 import { Sparkles, PhoneCall, ArrowRight } from "lucide-react";
 import { VapiWebCallButton } from "@/components/vapi-web-call-button";
 import Link from "next/link";
-import { useLanguage } from "@/components/language-provider";
-
-export function CaseStudySection() {
-  const { language } = useLanguage();
-  const fr = language === "fr";
+export function CaseStudySection({ fr }: { fr: boolean }) {
 
   return (
     <section className="relative overflow-hidden py-24 bg-[#0a0a0a] text-[#ededed]">

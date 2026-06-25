@@ -64,7 +64,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <CaseStudySection />
+      <CaseStudySection fr={fr} />
 
       <SocialProof locale={locale} />
 
