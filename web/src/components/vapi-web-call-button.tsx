@@ -9,9 +9,9 @@ const VAPI_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY || "dummy_key";
 export function VapiWebCallButton({ 
   assistantOverrides 
 }: { 
-  assistantOverrides?: Record<string, any> 
+  assistantOverrides?: Record<string, unknown> 
 }) {
-  const [vapi, setVapi] = useState<any>(null);
+  const [vapi, setVapi] = useState<Vapi | null>(null);
   const [callStatus, setCallStatus] = useState<"idle" | "loading" | "active">("idle");
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export function VapiWebCallButton({
     
     vapiInstance.on("call-start", () => setCallStatus("active"));
     vapiInstance.on("call-end", () => setCallStatus("idle"));
-    vapiInstance.on("error", (e: any) => {
+    vapiInstance.on("error", (e: unknown) => {
       console.error(e);
       setCallStatus("idle");
     });

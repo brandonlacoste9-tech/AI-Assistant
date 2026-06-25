@@ -1,4 +1,4 @@
-import { PhoneCall, Sparkles, Clock, CalendarDays } from "lucide-react";
+import { PhoneCall, Sparkles, CalendarDays } from "lucide-react";
 import { VapiWebCallButton } from "@/components/vapi-web-call-button";
 
 export default function VicParkDemoPage() {
@@ -28,7 +28,7 @@ export default function VicParkDemoPage() {
             </h1>
             <p className="mx-auto mt-8 max-w-2xl text-lg text-white/70 sm:text-xl">
               What is the Westmount clinic losing to voicemail at 10 PM? Every missed call is a missed Fraxel or CoolSculpting consultation. 
-              Meet your new digital concierge, trained specifically on Victoria Park's elite treatments.
+              Meet your new digital concierge, trained specifically on Victoria Park&apos;s elite treatments.
             </p>
 
             <div className="mt-12 flex flex-col items-center justify-center gap-6 sm:flex-row">
