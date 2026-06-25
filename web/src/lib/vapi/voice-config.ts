@@ -1,9 +1,6 @@
-/** Azure neural voices tuned for Quebec service-business reception. */
 export function getReceptionistVoice(defaultLanguage: "fr" | "en") {
-  if (defaultLanguage === "en") {
-    return { provider: "azure" as const, voiceId: "en-CA-ClaraNeural" };
-  }
-  return { provider: "azure" as const, voiceId: "fr-CA-SylvieNeural" };
+  // ElevenLabs voices are natively multilingual, so Sarah can speak both English and French fluently.
+  return { provider: "11labs" as const, voiceId: "rachel" }; // Using Rachel/Sarah equivalent
 }
 
 export function endCallMessage(defaultLanguage: "fr" | "en"): string {

@@ -44,8 +44,8 @@ export function VapiWebCallButton({
           systemPrompt: assistantOverrides?.voiceGreeting || "Hello, how can I help?"
         },
         voice: {
-          provider: "openai",
-          voiceId: "alloy"
+          provider: "11labs",
+          voiceId: "rachel"
         },
         ...assistantOverrides
       };
