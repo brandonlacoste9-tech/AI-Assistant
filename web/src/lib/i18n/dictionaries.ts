@@ -365,9 +365,9 @@ export type Dictionary = {
 
 const fr: Dictionary = {
   meta: {
-    title: "JustBookMe — Ne manquez plus un rendez-vous",
+    title: "JustBookMe — Ne perdez plus aucun rendez-vous",
     description:
-      "Réceptionniste IA bilingue pour salons, métiers et entreprises de services. Appels manqués, réservations et rappels SMS — partout au Canada.",
+      "Réceptionniste IA bilingue pour salons de luxe, spas médicaux et cliniques. Appels manqués, réservations et rappels SMS — partout au Canada.",
   },
   nav: {
     pricing: "Tarification",
@@ -943,22 +943,22 @@ const fr: Dictionary = {
     label: "Pour qui",
     title: "Conçu pour votre type d'entreprise",
     subtitle:
-      "Même réceptionniste IA — adaptée aux salons, aux métiers et aux bureaux de services.",
+      "Le même réceptionniste IA — adapté aux salons de luxe, spas médicaux et cliniques.",
     items: [
       {
-        title: "Salons & barbershops",
-        desc: "L'IA comprend « je veux une coupe », propose des créneaux et envoie les rappels SMS.",
-        examples: ["Coupe & couleur", "Barbe & fade", "Rappels automatiques"],
+        title: "Salons de luxe",
+        desc: "L'IA comprend « je veux un balayage », propose des créneaux et envoie des rappels.",
+        examples: ["Coupe & coloration", "Extensions", "Coiffure de mariage"],
       },
       {
-        title: "Métiers & services",
-        desc: "Plombiers, HVAC, électriciens — l'IA qualifie l'urgence et réserve la visite.",
-        examples: ["Réparation évier / fuite", "Service chauffage / clim", "Appels d'urgence"],
+        title: "Spas médicaux",
+        desc: "Automatisez les consultations pour injections et laser avec un concierge numérique raffiné.",
+        examples: ["Injections", "Épilation au laser", "Consultations"],
       },
       {
-        title: "Bureaux & cliniques",
-        desc: "Dentistes, cliniques, consultations — prise de rendez-vous professionnelle.",
-        examples: ["Nettoyage dentaire", "Consultation", "Nouveaux patients"],
+        title: "Cliniques d'esthétique",
+        desc: "Une expérience de réservation haut de gamme pour vos soins spécialisés.",
+        examples: ["Évaluation de la peau", "Soins du visage", "Nouveaux patients"],
       },
     ],
   },
@@ -968,7 +968,7 @@ const en: Dictionary = {
   meta: {
     title: "JustBookMe — Never miss a booking again",
     description:
-      "Bilingual AI receptionist for salons, trades & service businesses. Missed calls, bookings, and SMS reminders — book me, simply.",
+      "Bilingual AI receptionist for luxury salons, med spas & high-end clinics. Missed calls, bookings, and SMS reminders — book me, simply.",
   },
   nav: {
     pricing: "Pricing",
@@ -1544,22 +1544,22 @@ const en: Dictionary = {
     label: "Who it's for",
     title: "Built for your kind of business",
     subtitle:
-      "Same AI receptionist — tuned for salons, trades, and professional offices.",
+      "Same AI receptionist — tuned for luxury salons, med spas, and high-end clinics.",
     items: [
       {
-        title: "Salons & barbershops",
-        desc: "AI understands \"I want a haircut\", offers slots, and sends SMS reminders.",
-        examples: ["Cuts & color", "Beard & fade", "Auto reminders"],
+        title: "Luxury Salons",
+        desc: "AI understands \"I want a balayage\", offers slots, and sends SMS reminders.",
+        examples: ["Cut & color", "Extensions", "Bridal styling"],
       },
       {
-        title: "Trades & field service",
-        desc: "Plumbers, HVAC, electricians — AI qualifies urgency and books the visit.",
-        examples: ["Sink / leak repair", "Heating & AC service", "Emergency calls"],
+        title: "Med Spas",
+        desc: "Automate consultations for Botox, laser, and fillers with a polished digital concierge.",
+        examples: ["Injectables", "Laser hair removal", "Consultations"],
       },
       {
-        title: "Offices & clinics",
-        desc: "Dental, clinics, consultations — professional appointment booking.",
-        examples: ["Dental cleaning", "Consultation", "New patients"],
+        title: "Aesthetic Clinics",
+        desc: "Premium booking experience for high-ticket clients and specialized treatments.",
+        examples: ["Skin assessment", "Facial treatments", "New patients"],
       },
     ],
   },
