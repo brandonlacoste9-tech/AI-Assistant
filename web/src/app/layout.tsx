@@ -25,6 +25,18 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t.meta.title,
     description: t.meta.description,
+    keywords: [
+      "AI receptionist",
+      "Quebec AI",
+      "Medispa AI",
+      "Salon booking software",
+      "Missed calls AI",
+      "Bilingual AI receptionist",
+      "JustBookMe",
+    ],
+    authors: [{ name: BRAND_NAME }],
+    creator: BRAND_NAME,
+    publisher: BRAND_NAME,
     icons: { icon: "/logo.svg", apple: "/logo.svg" },
     metadataBase: new URL(siteUrl),
     openGraph: {
