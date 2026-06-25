@@ -45,7 +45,8 @@ export function VapiWebCallButton({
         },
         voice: {
           provider: "11labs",
-          voiceId: "rachel"
+          voiceId: "EXAVITQu4vr4xnSDxMaL",
+          model: "eleven_turbo_v2_5"
         },
         ...assistantOverrides
       };

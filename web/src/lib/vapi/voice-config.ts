@@ -1,6 +1,6 @@
 export function getReceptionistVoice(defaultLanguage: "fr" | "en") {
   // ElevenLabs voices are natively multilingual, so Sarah can speak both English and French fluently.
-  return { provider: "11labs" as const, voiceId: "rachel" }; // Using Rachel/Sarah equivalent
+  return { provider: "11labs" as const, voiceId: "EXAVITQu4vr4xnSDxMaL", model: "eleven_turbo_v2_5" }; // Using Sarah explicitly
 }
 
 export function endCallMessage(defaultLanguage: "fr" | "en"): string {
