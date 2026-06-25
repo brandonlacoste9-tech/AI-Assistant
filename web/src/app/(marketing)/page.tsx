@@ -40,26 +40,23 @@ export default async function HomePage() {
               : "Try it for yourself! Click below to speak with our AI concierge. Ask about our pricing, or try to book a consultation."}
           </p>
           
-          <div className="mt-10 flex flex-col items-center justify-center gap-6 sm:flex-row">
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 shadow-xl w-full max-w-md">
-              <div className="flex w-full justify-center">
-                <VapiWebCallButton 
-                  assistantOverrides={{
-                    name: "JustBookMe Demo",
-                    voiceGreeting: fr 
-                      ? "Bonjour, merci d'appeler Just Book Me. Je suis votre réceptionniste IA. Comment puis-je vous aider aujourd'hui?"
-                      : "Hi, thanks for calling Just Book Me! I am the demo AI receptionist. How can I help you today?",
-                    voiceInstructions: fr 
-                      ? "You are the demo AI for JustBookMe. Speak French. Explain that JustBookMe costs $29/month for unlimited AI calls. We integrate with any scheduling system."
-                      : "You are the demo AI for JustBookMe. Speak English. Explain that JustBookMe costs $29/month for unlimited AI calls. We integrate with any scheduling system.",
-                    services: [
-                      { id: "sales_call", name: "Sales Consultation", duration_minutes: 30, price_cents: 0 },
-                      { id: "support", name: "Technical Support", duration_minutes: 15, price_cents: 0 }
-                    ]
-                  }}
-                />
-              </div>
-            </div>
+          <div className="mt-12 flex flex-col items-center justify-center gap-6 sm:flex-row">
+            {/* Web Call Button injected here */}
+            <VapiWebCallButton 
+              assistantOverrides={{
+                name: "JustBookMe Demo",
+                voiceGreeting: fr 
+                  ? "Bonjour, merci d'appeler Just Book Me. Je suis votre réceptionniste IA. Comment puis-je vous aider aujourd'hui?"
+                  : "Hi, thanks for calling Just Book Me! I am the demo AI receptionist. How can I help you today?",
+                voiceInstructions: fr 
+                  ? "You are the demo AI for JustBookMe. Speak French. Explain that JustBookMe costs $29/month for unlimited AI calls. We integrate with any scheduling system."
+                  : "You are the demo AI for JustBookMe. Speak English. Explain that JustBookMe costs $29/month for unlimited AI calls. We integrate with any scheduling system.",
+                services: [
+                  { id: "sales_call", name: "Sales Consultation", duration_minutes: 30, price_cents: 0 },
+                  { id: "support", name: "Technical Support", duration_minutes: 15, price_cents: 0 }
+                ]
+              }}
+            />
           </div>
         </div>
       </section>
