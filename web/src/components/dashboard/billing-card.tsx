@@ -282,11 +282,11 @@ export function BillingCard({
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2">
-                {(["starter", "pro", "premium"] as const).map((plan) => (
+                {(["starter", "white_glove"] as const).map((plan) => (
                   <Button
                     key={plan}
                     type="button"
-                    variant={plan === "pro" ? "primary" : "secondary"}
+                    variant={plan === "white_glove" ? "primary" : "secondary"}
                     disabled={status === "loading"}
                     onClick={() => startCheckout(plan)}
                   >

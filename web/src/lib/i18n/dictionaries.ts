@@ -48,8 +48,7 @@ export type Dictionary = {
     taxNote: string;
     plans: {
       starter: { name: string; features: string[] };
-      pro: { name: string; features: string[] };
-      premium: { name: string; features: string[] };
+      white_glove: { name: string; features: string[] };
     };
     billingFaq: { q: string; a: string }[];
   };
@@ -506,33 +505,22 @@ const fr: Dictionary = {
       "Les prix affichés n'incluent pas les taxes applicables. TPS/TVQ calculées à la caisse.",
     plans: {
       starter: {
-        name: "Starter",
+        name: "Starter (DIY)",
         features: [
-          "1 employé",
-          "100 réservations/mois",
-          "200 SMS",
-          "100 min voix",
-          "Widget web + calendrier",
+          "Créez votre propre IA",
+          "500 SMS / mois",
+          "200 min voix / mois",
+          "Widget web + agenda",
         ],
       },
-      pro: {
-        name: "Pro",
+      white_glove: {
+        name: "Clé en Main",
         features: [
-          "Jusqu'à 5 employés",
-          "Réservations illimitées",
-          "1 000 SMS",
-          "500 min voix",
-          "Automatisation SMS + pipeline",
-        ],
-      },
-      premium: {
-        name: "White-Glove AI",
-        features: [
-          "Tout du forfait Pro",
-          "Création d'IA sur mesure",
-          "Intégration agenda complet",
-          "Voix premium dédiée",
-          "Soutien VIP 24/7",
+          "Tout du forfait Starter",
+          "Création de votre IA sur mesure",
+          "Configuration des lignes téléphoniques",
+          "100% Géré pour vous (Soutien VIP)",
+          "+$149 Frais de configuration initiaux",
         ],
       },
     },
@@ -1107,33 +1095,22 @@ const en: Dictionary = {
       "Prices shown exclude applicable taxes. PST/QST calculated at checkout.",
     plans: {
       starter: {
-        name: "Starter",
+        name: "Starter (DIY)",
         features: [
-          "1 staff member",
-          "100 bookings/month",
-          "200 SMS",
-          "100 voice min",
+          "Build your own AI",
+          "500 SMS / month",
+          "200 voice min / month",
           "Web widget + calendar",
         ],
       },
-      pro: {
-        name: "Pro",
-        features: [
-          "Up to 5 staff",
-          "Unlimited bookings",
-          "1,000 SMS",
-          "500 voice min",
-          "SMS automation + pipeline",
-        ],
-      },
-      premium: {
+      white_glove: {
         name: "White-Glove AI",
         features: [
-          "Everything in Pro",
-          "Custom AI Build (DFY)",
-          "Full calendar integration",
-          "Dedicated premium voice",
-          "24/7 VIP support",
+          "Everything in Starter",
+          "Custom AI built by us",
+          "We handle phone porting",
+          "100% Done-for-you VIP support",
+          "+$149 one-time setup fee",
         ],
       },
     },
@@ -1572,7 +1549,6 @@ export function getDictionary(locale: Locale): Dictionary {
 }
 
 export const PLAN_PRICES = {
-  starter: { monthly: 49, annual: 490 },
-  pro: { monthly: 149, annual: 1490 },
-  premium: { monthly: 299, annual: 2990 },
+  starter: { monthly: 79, annual: 790 },
+  white_glove: { monthly: 199, annual: 1990 },
 } as const;

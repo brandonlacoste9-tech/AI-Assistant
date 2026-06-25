@@ -1,4 +1,4 @@
-export type PlanId = "starter" | "pro" | "premium";
+export type PlanId = "starter" | "white_glove";
 export type BillingInterval = "month" | "year";
 
 const PRICE_ENV: Record<PlanId, Record<BillingInterval, string>> = {
@@ -6,13 +6,9 @@ const PRICE_ENV: Record<PlanId, Record<BillingInterval, string>> = {
     month: "STRIPE_PRICE_STARTER_MONTHLY",
     year: "STRIPE_PRICE_STARTER_ANNUAL",
   },
-  pro: {
-    month: "STRIPE_PRICE_PRO_MONTHLY",
-    year: "STRIPE_PRICE_PRO_ANNUAL",
-  },
-  premium: {
-    month: "STRIPE_PRICE_PREMIUM_MONTHLY",
-    year: "STRIPE_PRICE_PREMIUM_ANNUAL",
+  white_glove: {
+    month: "STRIPE_PRICE_WHITE_GLOVE_MONTHLY",
+    year: "STRIPE_PRICE_WHITE_GLOVE_ANNUAL",
   },
 };
 
@@ -32,7 +28,7 @@ export function planFromPriceId(priceId: string): PlanId | null {
 }
 
 export function isValidPlan(plan: string): plan is PlanId {
-  return plan === "starter" || plan === "pro" || plan === "premium";
+  return plan === "starter" || plan === "white_glove";
 }
 
 export function remainingTrialDays(trialEndsAt: string | null): number {

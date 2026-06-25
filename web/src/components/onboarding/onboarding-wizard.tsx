@@ -101,7 +101,7 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
       /* ignore */
     }
 
-    if (subscribe && ["starter", "pro", "premium"].includes(subscribe)) {
+    if (subscribe && ["starter", "white_glove"].includes(subscribe)) {
       router.push(
         `/dashboard/settings?subscribe=${subscribe}&interval=${interval === "year" ? "year" : "month"}`
       );

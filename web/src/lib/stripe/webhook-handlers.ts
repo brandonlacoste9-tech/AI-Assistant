@@ -41,7 +41,7 @@ export async function handleCheckoutCompleted(session: Stripe.Checkout.Session) 
         business_id: businessId,
         stripe_subscription_id: subscriptionId,
         status: "trialing",
-        plan: plan ?? "pro",
+        plan: plan ?? "starter",
       },
       { onConflict: "business_id" }
     );

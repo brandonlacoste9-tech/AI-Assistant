@@ -9,18 +9,16 @@ export type PlanLimits = {
   staff: number | null;
 };
 
-const LIMITS: Record<PlanId | "trial", PlanLimits> = {
-  trial: { bookings: null, sms: 1000, voiceMinutes: 500, staff: 5 },
-  starter: { bookings: 100, sms: 200, voiceMinutes: 100, staff: 1 },
-  pro: { bookings: null, sms: 1000, voiceMinutes: 500, staff: 5 },
-  premium: { bookings: null, sms: 5000, voiceMinutes: 2500, staff: null },
+const PLAN_LIMITS: Record<PlanId, PlanLimits> = {
+  starter: { bookings: null, sms: 500, voiceMinutes: 200, staff: 2 },
+  white_glove: { bookings: null, sms: 5000, voiceMinutes: 2500, staff: null },
 };
 
-export function getPlanLimits(plan: string): PlanLimits {
-  if (plan === "starter" || plan === "pro" || plan === "premium") {
-    return LIMITS[plan];
+export function getPlanLimits(plan: string | null): PlanLimits {
+  if (plan === "starter" || plan === "white_glove") {
+    return PLAN_LIMITS[plan];
   }
-  return LIMITS.trial;
+  return { bookings: null, sms: 0, voiceMinutes: 0, staff: 0 };
 }
 
 export function usagePercent(used: number, limit: number | null): number | null {
