@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/marketing/section-heading";
 import { getDictionary, PLAN_PRICES } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
-import { Check } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -107,6 +107,13 @@ export function PricingSection({ locale }: { locale: Locale }) {
                 >
                   {key === "premium" ? t.pricing.contact : t.pricing.cta}
                 </Link>
+                {key === "premium" && (
+                  <Link href="/vicpark" className="mt-4 flex items-center justify-center gap-1.5 text-xs font-semibold text-[var(--accent)] hover:underline group">
+                    <Sparkles className="h-3.5 w-3.5 transition-transform group-hover:scale-110" />
+                    {locale === "fr" ? "Voir un exemple sur mesure" : "View a custom live build"}
+                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                  </Link>
+                )}
               </div>
             );
           })}

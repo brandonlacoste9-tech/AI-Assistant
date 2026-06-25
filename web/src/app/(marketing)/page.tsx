@@ -60,6 +60,14 @@ export default async function HomePage() {
               }}
             />
           </div>
+          
+          <div className="mt-8 flex justify-center">
+            <Link href="/vicpark" className="group flex items-center justify-center gap-2 text-sm font-semibold text-[var(--accent)] hover:underline">
+              <Sparkles className="h-4 w-4 transition-transform group-hover:scale-110" />
+              {fr ? "Voir un exemple sur mesure pour une clinique" : "See a custom build for a luxury clinic"}
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
         </div>
       </section>
 
