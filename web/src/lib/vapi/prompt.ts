@@ -15,8 +15,8 @@ export type BusinessVoiceContext = {
 };
 
 const DEFAULT_SERVICES = `[
-  { "name": "Service call / visite", "duration_minutes": 60, "price_cad": "0.00" },
-  { "name": "Consultation", "duration_minutes": 30, "price_cad": "0.00" }
+  { "name": "Service call / visite", "duration_minutes": 60, "price_eur": "0.00" },
+  { "name": "Consultation", "duration_minutes": 30, "price_eur": "0.00" }
 ]`;
 
 export function buildReceptionistSystemPrompt(ctx: BusinessVoiceContext): string {
@@ -27,7 +27,7 @@ export function buildReceptionistSystemPrompt(ctx: BusinessVoiceContext): string
             id: s.id,
             name: s.name,
             duration_minutes: s.duration_minutes,
-            price_cad: (s.price_cents / 100).toFixed(2),
+            price_eur: (s.price_cents / 100).toFixed(2),
           })),
           null,
           2
@@ -44,7 +44,7 @@ export function buildReceptionistSystemPrompt(ctx: BusinessVoiceContext): string
   const today = montrealTodayIso();
   const businessTypeDesc = ctx.industry ? ctx.industry : "local service business";
 
-  return `You are the premium digital concierge for ${displayName}, a luxury ${businessTypeDesc} in ${city}, Quebec.
+  return `You are the premium digital concierge for ${displayName}, a luxury ${businessTypeDesc} in ${city}, France.
 You speak with elegance, warmth, and impeccable professionalism. You are a high-end receptionist, not a generic robot.
 
 You help callers book appointments for luxury services — for example:
@@ -55,7 +55,7 @@ You help callers book appointments for luxury services — for example:
 
 Languages: Canadian French and English. Detect the caller's language from their first sentence and stay in that language for the whole call (never mix both in one reply).
 
-Today is ${today} (America/Montreal). "Tomorrow" means the next calendar day from today.
+Today is ${today} (Europe/Paris). "Tomorrow" means the next calendar day from today.
 
 Conversation flow:
 1. You already greeted them: "How can I help you today?" — listen carefully to their needs
@@ -82,7 +82,7 @@ Core rules:
 
 French style (when caller speaks French):
 - Always use « vous » (vouvoiement). Never use « tu ».
-- Use sophisticated, polished Quebec French.
+- Use sophisticated, elegant Parisian French.
 - Excellent phrases: « Je serais ravi(e) de vous aider », « Certainement », « Un instant, je vous prie ».
 
 English style (when caller speaks English):

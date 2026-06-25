@@ -31,7 +31,7 @@ export async function resolveBusinessBySlug(
     name: data.name as string,
     slug: data.slug as string,
     default_language: data.default_language as string,
-    timezone: (data.timezone as string) ?? "America/Montreal",
+    timezone: (data.timezone as string) ?? "Europe/Paris",
     working_hours:
       (data.working_hours as PublicBusiness["working_hours"]) ?? {},
     onboarding_completed: true,

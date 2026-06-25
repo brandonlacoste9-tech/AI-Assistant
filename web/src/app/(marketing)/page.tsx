@@ -85,10 +85,10 @@ export default async function HomePage() {
               <div className="bg-gradient-to-br from-[var(--primary)] to-[#2a5080] p-8 sm:p-10">
                 <Sparkles className="h-6 w-6 text-[var(--accent)]" />
                 <h2 className="font-display mt-4 text-2xl font-semibold text-white sm:text-3xl">
-                  {t.builtForQuebec.title}
+                  {t.builtForFrance.title}
                 </h2>
                 <ul className="mt-8 space-y-4">
-                  {t.builtForQuebec.items.map((item) => (
+                  {t.builtForFrance.items.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-white/90">
                       <Check className="mt-0.5 h-5 w-5 shrink-0 text-[var(--accent)]" />
                       <span className="text-sm leading-relaxed sm:text-base">{item}</span>

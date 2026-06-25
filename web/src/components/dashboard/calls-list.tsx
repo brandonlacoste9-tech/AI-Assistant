@@ -76,7 +76,7 @@ export function CallsList({
           call.recovered_revenue_cents && call.recovered_revenue_cents > 0
             ? (call.recovered_revenue_cents / 100).toLocaleString(locale === "fr" ? "fr-CA" : "en-CA", {
                 style: "currency",
-                currency: "CAD",
+                currency: "EUR",
               })
             : null;
 

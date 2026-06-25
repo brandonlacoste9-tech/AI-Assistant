@@ -1,4 +1,4 @@
-export const MONTREAL_TZ = "America/Montreal";
+export const MONTREAL_TZ = "Europe/Paris";
 
 /** Convert a Montreal local date/time to UTC ISO string. */
 export function montrealLocalToIso(

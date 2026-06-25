@@ -13,7 +13,7 @@ export const VAPI_TOOL_FUNCTIONS = [
           description:
             "Service name if service_id unknown — match caller intent (e.g. haircut, sink repair, HVAC tune-up, dental cleaning)",
         },
-        preferred_date: { type: "string", description: "YYYY-MM-DD in America/Montreal" },
+        preferred_date: { type: "string", description: "YYYY-MM-DD in Europe/Paris" },
         preferred_time: { type: "string", description: "HH:MM 24h optional" },
       },
       required: ["preferred_date"],
@@ -29,7 +29,7 @@ export const VAPI_TOOL_FUNCTIONS = [
         customer_phone: { type: "string", description: "E.164 or 10-digit North American" },
         service_id: { type: "string" },
         service_name: { type: "string" },
-        starts_at: { type: "string", description: "ISO8601 start time in America/Montreal" },
+        starts_at: { type: "string", description: "ISO8601 start time in Europe/Paris" },
         locale: { type: "string", enum: ["fr", "en"] },
       },
       required: ["customer_name", "customer_phone", "starts_at"],
