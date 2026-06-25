@@ -4,17 +4,23 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Play, Pause } from "lucide-react";
 
-type Message = {
+export type TranscriptMessage = {
   id: number;
   text: string;
   sender: "ai" | "user";
 };
 
-export function AnimatedTranscript({ fr }: { fr: boolean }) {
+interface AnimatedTranscriptProps {
+  fr?: boolean;
+  customMessages?: TranscriptMessage[];
+  title?: string;
+}
+
+export function AnimatedTranscript({ fr = false, customMessages, title }: AnimatedTranscriptProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
 
-  const messages: Message[] = fr
+  const defaultMessages: TranscriptMessage[] = fr
     ? [
         { id: 1, sender: "ai", text: "Bonjour, Victoria Park Medispa. Comment puis-je vous aider ?" },
         { id: 2, sender: "user", text: "Salut, j'aimerais prendre rendez-vous pour du Botox." },
@@ -29,6 +35,8 @@ export function AnimatedTranscript({ fr }: { fr: boolean }) {
         { id: 4, sender: "user", text: "Yes, this is my second time." },
         { id: 5, sender: "ai", text: "Perfect. I have an opening this Thursday at 2:00 PM. Does that work for you?" },
       ];
+
+  const messages = customMessages || defaultMessages;
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -62,7 +70,7 @@ export function AnimatedTranscript({ fr }: { fr: boolean }) {
             AI
           </div>
           <div>
-            <p className="text-sm font-semibold text-[var(--foreground)]">Medispa AI</p>
+            <p className="text-sm font-semibold text-[var(--foreground)]">{title || "Medispa AI"}</p>
             <p className="text-xs text-[var(--muted-fg)]">
               {isPlaying ? (fr ? "En train de taper..." : "Typing...") : (fr ? "Hors ligne" : "Offline")}
             </p>

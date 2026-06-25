@@ -3,7 +3,19 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
-export function AiPhoneFrame({ children }: { children: ReactNode }) {
+interface AiPhoneFrameProps {
+  children: ReactNode;
+  avatarSrc?: string;
+  name?: string;
+  title?: string;
+}
+
+export function AiPhoneFrame({ 
+  children,
+  avatarSrc = "/ai-avatar.png",
+  name = "Chloé",
+  title = "Medispa AI Concierge"
+}: AiPhoneFrameProps) {
   return (
     <div className="relative mx-auto w-full max-w-[320px]">
       {/* Animated glowing orb behind the phone */}
@@ -26,16 +38,16 @@ export function AiPhoneFrame({ children }: { children: ReactNode }) {
         <div className="absolute left-1/2 top-3 h-1.5 w-16 -translate-x-1/2 rounded-full bg-white/20" />
         
         <div className="mt-6 flex flex-col items-center justify-center">
-          <div className="mb-6 h-24 w-24 overflow-hidden rounded-full border-2 border-white/20 shadow-[0_0_30px_rgba(var(--primary-rgb),0.5)]">
+          <div className="mb-6 h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-white/20 shadow-[0_0_30px_rgba(var(--primary-rgb),0.5)]">
             <img 
-              src="/ai-avatar.png" 
+              src={avatarSrc} 
               alt="AI Receptionist"
               className="h-full w-full object-cover"
             />
           </div>
           
-          <h3 className="mb-1 font-display text-lg font-semibold text-white">Chloé</h3>
-          <p className="mb-8 text-sm text-white/70">Medispa AI Concierge</p>
+          <h3 className="mb-1 font-display text-lg font-semibold text-white">{name}</h3>
+          <p className="mb-8 text-sm text-white/70">{title}</p>
           
           {children}
           

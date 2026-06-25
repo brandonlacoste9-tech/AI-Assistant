@@ -21,6 +21,7 @@
     "cron:reminders": "node scripts/run-reminders-cron.mjs",
     "cron:reminders-2h": "node scripts/run-reminders-2h-cron.mjs",
     "cron:usage-rollup": "node scripts/run-usage-rollup-cron.mjs",
+    "cron:marketing": "node scripts/run-marketing-cron.mjs",
     "stripe:setup": "node scripts/stripe-setup.mjs"
   },
   "dependencies": {
@@ -33,11 +34,13 @@
     "lucide-react": "^1.21.0",
     "next": "^15.5.18",
     "next-themes": "^0.4.6",
+    "openai": "^6.45.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "stripe": "^22.2.3",
     "tailwind-merge": "^3.6.0",
-    "twilio": "^6.0.2"
+    "twilio": "^6.0.2",
+    "twitter-api-v2": "^1.29.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

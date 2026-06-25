@@ -6,7 +6,6 @@ import { SocialProof } from "@/components/marketing/social-proof";
 import { PricingSection } from "@/components/pricing/pricing-section";
 import { FadeIn } from "@/components/ui/fade-in";
 import { AiPhoneFrame } from "@/components/marketing/ai-phone-frame";
-import { AnimatedTranscript } from "@/components/marketing/animated-transcript";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
 import {
@@ -43,13 +42,13 @@ export default async function HomePage() {
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-lg text-[var(--muted-fg)]">
                 {fr 
-                  ? "Essayez-le par vous-même ! Cliquez ci-dessous pour parler avec notre concierge IA, ou regardez une transcription d'appel simulée." 
-                  : "Try it for yourself! Click below to speak with our AI concierge, or watch a simulated call transcript."}
+                  ? "Essayez-le par vous-même ! Cliquez ci-dessous pour parler avec notre concierge IA." 
+                  : "Try it for yourself! Click below to speak with our AI concierge."}
               </p>
             </FadeIn>
           </div>
           
-          <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="mt-16 flex justify-center w-full max-w-md mx-auto">
             <FadeIn delay={0.2} className="flex justify-center w-full">
               <AiPhoneFrame>
                 <VapiWebCallButton 
@@ -68,10 +67,6 @@ export default async function HomePage() {
                   }}
                 />
               </AiPhoneFrame>
-            </FadeIn>
-
-            <FadeIn delay={0.4} className="flex justify-center w-full">
-              <AnimatedTranscript fr={fr} />
             </FadeIn>
           </div>
         </div>

@@ -7,9 +7,11 @@ import { PhoneCall, Mic, Loader2 } from "lucide-react";
 const VAPI_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY || "dummy_key";
 
 export function VapiWebCallButton({ 
-  assistantOverrides 
+  assistantOverrides,
+  className
 }: { 
-  assistantOverrides?: Record<string, unknown> 
+  assistantOverrides?: Record<string, unknown>;
+  className?: string;
 }) {
   const [vapi, setVapi] = useState<Vapi | null>(null);
   const [callStatus, setCallStatus] = useState<"idle" | "loading" | "active">("idle");
@@ -40,35 +42,30 @@ export function VapiWebCallButton({
       const { 
         voiceGreeting, 
         voiceInstructions, 
-        services, 
+        services,
+        systemPrompt: customSystemPrompt,
+        name,
         ...restOverrides 
       } = assistantOverrides || {};
 
-      const systemPrompt = `
+      const finalSystemPrompt = customSystemPrompt || `
 ${voiceInstructions || "You are a helpful assistant."}
 
 ${services ? `Services available:\n${JSON.stringify(services, null, 2)}` : ""}
       `.trim();
 
       const assistant = {
-        name: restOverrides.name || "Demo Assistant",
+        name: name as string || "Demo Assistant",
         firstMessage: voiceGreeting as string | undefined,
         firstMessageMode: "assistant-speaks-first",
-        transcriber: {
-          provider: "deepgram",
-          model: "nova-2",
-          language: "multi",
-          smartFormat: true,
-        },
         model: {
           provider: "openai",
           model: "gpt-4o",
-          messages: [{ role: "system", content: systemPrompt }],
+          messages: [{ role: "system", content: finalSystemPrompt }],
         },
         voice: {
-          provider: "11labs",
-          voiceId: "EXAVITQu4vr4xnSDxMaL",
-          model: "eleven_turbo_v2_5"
+          provider: "openai",
+          voiceId: "alloy",
         },
         ...restOverrides
       };
@@ -87,11 +84,11 @@ ${services ? `Services available:\n${JSON.stringify(services, null, 2)}` : ""}
     <button
       onClick={toggleCall}
       disabled={!vapi || callStatus === "loading"}
-      className={`flex items-center justify-center gap-3 rounded-full px-8 py-4 text-lg font-semibold transition-all shadow-xl ${
+      className={`flex items-center justify-center gap-3 rounded-full px-8 py-4 text-sm font-medium transition-all shadow-xl ${
         callStatus === "active" 
           ? "bg-red-500 text-white hover:bg-red-600 animate-pulse" 
           : "bg-gradient-to-r from-[#d4af37] to-[#a38020] text-black hover:scale-105"
-      }`}
+      } ${className || ""}`}
     >
       {callStatus === "loading" && <Loader2 className="h-6 w-6 animate-spin" />}
       {callStatus === "idle" && <PhoneCall className="h-6 w-6" />}
