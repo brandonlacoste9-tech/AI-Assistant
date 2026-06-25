@@ -99,7 +99,7 @@ export default async function DashboardPage() {
     recoveredRevenueCents > 0
       ? (recoveredRevenueCents / 100).toLocaleString(locale === "fr" ? "fr-CA" : "en-CA", {
           style: "currency",
-          currency: "EUR",
+          currency: "CAD",
           maximumFractionDigits: 0,
         })
       : "$0";

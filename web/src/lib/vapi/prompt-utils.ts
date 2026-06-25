@@ -3,7 +3,7 @@ export function displayBusinessName(name: string): string {
 }
 
 export function montrealTodayIso(): string {
-  return new Date().toLocaleDateString("en-CA", { timeZone: "Europe/Paris" });
+  return new Date().toLocaleDateString("en-CA", { timeZone: "America/Montreal" });
 }
 
 /** Universal greeting — assistant speaks first, then listens for any service need. */

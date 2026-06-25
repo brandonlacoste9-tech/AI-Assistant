@@ -20,7 +20,7 @@ function buildSystemPrompt(services?: ServiceOption[]): string {
       ? services.map((s) => `- ${s.name}`).join("\n")
       : "(none configured — use service_label as free text)";
 
-  return `You extract booking intent from customer messages for a high-end service business in France (French or English).
+  return `You extract booking intent from customer messages for a Quebec service business (French or English).
 Businesses may be salons, plumbers, HVAC, dental offices, or other trades.
 
 Configured services:

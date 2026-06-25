@@ -13,7 +13,7 @@ export function bookingConfirmationSms(p: BookingSmsParams): string {
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
-    timeZone: "Europe/Paris",
+    timeZone: "America/Montreal",
   });
 
   if (p.locale === "fr") {
@@ -29,7 +29,7 @@ export function bookingReminderSms(p: BookingSmsParams): string {
   const time = p.startsAt.toLocaleString(p.locale === "fr" ? "fr-CA" : "en-CA", {
     hour: "numeric",
     minute: "2-digit",
-    timeZone: "Europe/Paris",
+    timeZone: "America/Montreal",
   });
 
   if (p.locale === "fr") {
@@ -43,7 +43,7 @@ export function bookingReminder2hSms(p: BookingSmsParams): string {
   const time = p.startsAt.toLocaleString(p.locale === "fr" ? "fr-CA" : "en-CA", {
     hour: "numeric",
     minute: "2-digit",
-    timeZone: "Europe/Paris",
+    timeZone: "America/Montreal",
   });
 
   if (p.locale === "fr") {

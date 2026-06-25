@@ -53,7 +53,7 @@ export async function loadBusinessVoiceContext(
     name: displayBusinessName(business.name),
     city: business.city,
     defaultLanguage: business.default_language === "en" ? "en" : "fr",
-    timezone: business.timezone || "Europe/Paris",
+    timezone: business.timezone || "America/Montreal",
     workingHours: business.working_hours as Record<string, unknown> | null,
     services: (services ?? []).map((s) => ({
       id: s.id,

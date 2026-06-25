@@ -108,7 +108,7 @@ export async function createPublicBooking({
   if (Number.isNaN(start.getTime())) return { ok: false, error: "Invalid date/time" };
   const end = new Date(start.getTime() + durationMinutes * 60_000);
 
-  const preferredDate = start.toLocaleDateString("en-CA", { timeZone: "Europe/Paris" });
+  const preferredDate = start.toLocaleDateString("en-CA", { timeZone: "America/Montreal" });
   const dayBounds = montrealDayBoundsIso(preferredDate);
   if (dayBounds) {
     const { data: conflicts } = await db

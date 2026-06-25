@@ -11,7 +11,7 @@ export type Dictionary = {
     trust: string;
   };
   howItWorks: { title: string; steps: string[] };
-  builtForFrance: { title: string; items: string[] };
+  builtForQuebec: { title: string; items: string[] };
   features: { title: string; items: { title: string; desc: string }[] };
   roi: { title: string; rows: { label: string; value: string }[]; punchline: string };
   waitlist: {
@@ -381,7 +381,7 @@ const fr: Dictionary = {
       "JustBookMe répond à vos appels 24 h/24 avec une IA bilingue au ton raffiné. Rehaussez l'image de votre marque et réservez vos clients haut de gamme instantanément.",
     ctaPrimary: "Essayer gratuitement",
     ctaSecondary: "Réserver une démo de 15 minutes",
-    trust: "Conçu pour la France · Bilingue · Essai 14 jours sans carte",
+    trust: "Conçu au Québec · Bilingue · Essai 14 jours sans carte",
   },
   howItWorks: {
     title: "Comment ça fonctionne",
@@ -391,13 +391,13 @@ const fr: Dictionary = {
       "Vous consultez chaque matin votre tableau de bord des revenus récupérés.",
     ],
   },
-  builtForFrance: {
-    title: "Conçu pour la France",
+  builtForQuebec: {
+    title: "Conçu pour le Québec",
     items: [
       "Bilingue FR/EN avec une voix naturelle",
-      "Tarification en EUR, facturation TVA",
-      "Conforme au RGPD",
-      "Soutien local, heures d'affaires CET",
+      "Prix en CAD, facturation TPS/TVQ",
+      "Conforme à la Loi 25",
+      "Soutien local, heures d'affaires EST/EDT",
     ],
   },
   features: {
@@ -437,7 +437,7 @@ const fr: Dictionary = {
   waitlist: {
     title: "Rejoignez la liste d'attente",
     subtitle:
-      "Soyez parmi les 10 premiers salons de luxe en France à tester JustBookMe. Tarif fondateur garanti à vie.",
+      "Soyez parmi les 10 premiers salons et barbershops au Québec à tester JustBookMe. Tarif fondateur garanti à vie.",
     fields: {
       businessName: "Nom du salon",
       contactName: "Votre nom",
@@ -490,7 +490,7 @@ const fr: Dictionary = {
   pricing: {
     title: "Tarification simple",
     subtitle:
-      "Pour les entreprises de services en France. Essai gratuit de 14 jours. Annulation en tout temps.",
+      "Pour les entreprises de services au Québec. Essai gratuit de 14 jours. Annulation en tout temps.",
     monthly: "Mensuel",
     annual: "Annuel",
     save: "Économisez 17 %",
@@ -587,7 +587,7 @@ const fr: Dictionary = {
         {
           heading: "Responsable",
           paragraphs: [
-            "JustBookMe (« nous ») exploite justbookme.ca et les services associés pour les salons de luxe en France.",
+            "JustBookMe (« nous ») exploite justbookme.ca et les services associés pour les salons et entreprises de services au Québec.",
           ],
         },
         {
@@ -982,7 +982,7 @@ const en: Dictionary = {
       "JustBookMe answers your phone 24/7 with a polished, bilingual AI. Elevate your brand, book high-ticket clients instantly, and never miss a call again.",
     ctaPrimary: "Start free trial",
     ctaSecondary: "Book a 15-minute demo",
-    trust: "Built for France · Bilingual · 14-day trial, no card",
+    trust: "Built in Quebec · Bilingual · 14-day trial, no card",
   },
   howItWorks: {
     title: "How it works",
@@ -992,13 +992,13 @@ const en: Dictionary = {
       "You check your recovered-revenue dashboard every morning.",
     ],
   },
-  builtForFrance: {
-    title: "Built for France",
+  builtForQuebec: {
+    title: "Built for Quebec",
     items: [
       "Bilingual FR/EN with native-quality voice",
-      "EUR pricing, TVA invoicing",
-      "Compliant with GDPR",
-      "Local support, CET business hours",
+      "CAD pricing, PST/QST invoicing",
+      "Compliant with Quebec privacy law (Law 25)",
+      "Local support, business hours in EST/EDT",
     ],
   },
   features: {
@@ -1038,7 +1038,7 @@ const en: Dictionary = {
   waitlist: {
     title: "Join the waitlist",
     subtitle:
-      "Be among the first 10 French luxury salons to try JustBookMe. Founder pricing locked for life.",
+      "Be among the first 10 Quebec salons & barbershops to try JustBookMe. Founder pricing locked for life.",
     fields: {
       businessName: "Business name",
       contactName: "Your name",
@@ -1091,7 +1091,7 @@ const en: Dictionary = {
   pricing: {
     title: "Simple pricing",
     subtitle:
-      "For French service businesses. 14-day free trial. Cancel anytime.",
+      "For Quebec service businesses. 14-day free trial. Cancel anytime.",
     monthly: "Monthly",
     annual: "Annual",
     save: "Save 17%",
@@ -1188,7 +1188,7 @@ const en: Dictionary = {
         {
           heading: "Data controller",
           paragraphs: [
-            "JustBookMe (« we ») operates justbookme.ca and related services for luxury salons in France.",
+            "JustBookMe (« we ») operates justbookme.ca and related services for Quebec service businesses.",
           ],
         },
         {

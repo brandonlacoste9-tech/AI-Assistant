@@ -6,7 +6,7 @@ import { montrealDayBoundsIso } from "@/lib/vapi/timezone";
 function tomorrowMontrealIso(): string {
   const d = new Date();
   d.setDate(d.getDate() + 1);
-  return d.toLocaleDateString("en-CA", { timeZone: "Europe/Paris" });
+  return d.toLocaleDateString("en-CA", { timeZone: "America/Montreal" });
 }
 
 type ApptRow = {
