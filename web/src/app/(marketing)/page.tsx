@@ -14,6 +14,7 @@ import {
   Users,
 } from "lucide-react";
 import Link from "next/link";
+import { VapiWebCallButton } from "@/components/vapi-web-call-button";
 
 const featureIcons = [Phone, Calendar, MessageSquare, Users, BarChart3];
 
@@ -25,6 +26,41 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection dict={t} locale={locale} />
+
+      {/* Interactive AI Demo Section */}
+      <section className="relative overflow-hidden bg-[var(--surface-elevated)] py-20 border-b border-[var(--border)]">
+        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
+          <SectionHeading
+            label={fr ? "Démo en direct" : "Live Demo"}
+            title={fr ? "Parlez à notre réceptionniste IA" : "Talk to our AI Receptionist"}
+          />
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-[var(--muted-fg)]">
+            {fr 
+              ? "Essayez-le par vous-même ! Cliquez ci-dessous pour parler avec notre concierge IA. Posez des questions sur nos tarifs, ou demandez à réserver une consultation." 
+              : "Try it for yourself! Click below to speak with our AI concierge. Ask about our pricing, or try to book a consultation."}
+          </p>
+          
+          <div className="mt-10 flex flex-col items-center justify-center gap-6 sm:flex-row">
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 shadow-xl w-full max-w-md">
+              <VapiWebCallButton 
+                assistantOverrides={{
+                  name: "JustBookMe Demo",
+                  voiceGreeting: fr 
+                    ? "Bonjour, merci d'appeler Just Book Me. Je suis votre réceptionniste IA. Comment puis-je vous aider aujourd'hui?"
+                    : "Hi, thanks for calling Just Book Me! I am the demo AI receptionist. How can I help you today?",
+                  voiceInstructions: fr 
+                    ? "You are the demo AI for JustBookMe. Speak French. Explain that JustBookMe costs $29/month for unlimited AI calls. We integrate with any scheduling system."
+                    : "You are the demo AI for JustBookMe. Speak English. Explain that JustBookMe costs $29/month for unlimited AI calls. We integrate with any scheduling system.",
+                  services: [
+                    { id: "sales_call", name: "Sales Consultation", duration_minutes: 30, price_cents: 0 },
+                    { id: "support", name: "Technical Support", duration_minutes: 15, price_cents: 0 }
+                  ]
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
       <SocialProof locale={locale} />
 
