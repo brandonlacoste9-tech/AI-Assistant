@@ -52,6 +52,7 @@ export function VapiWebCallButton({
       };
 
       try {
+        // @ts-expect-error - Vapi SDK types conflict with loosely typed overrides
         await vapi?.start(assistant);
       } catch (err) {
         console.error("Failed to start call:", err);
