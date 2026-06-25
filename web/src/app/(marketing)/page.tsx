@@ -41,7 +41,7 @@ export default async function HomePage() {
           </p>
           
           <div className="mt-10 flex flex-col items-center justify-center gap-6 sm:flex-row">
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 shadow-xl w-full max-w-md">
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 shadow-xl w-full max-w-md flex justify-center">
               <VapiWebCallButton 
                 assistantOverrides={{
                   name: "JustBookMe Demo",

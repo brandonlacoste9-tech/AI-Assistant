@@ -37,18 +37,33 @@ export function VapiWebCallButton({
     } else {
       setCallStatus("loading");
       
+      const { 
+        voiceGreeting, 
+        voiceInstructions, 
+        services, 
+        ...restOverrides 
+      } = assistantOverrides || {};
+
+      const systemPrompt = `
+${voiceInstructions || "You are a helpful assistant."}
+
+${services ? `Services available:\n${JSON.stringify(services, null, 2)}` : ""}
+      `.trim();
+
       const assistant = {
+        name: restOverrides.name || "Demo Assistant",
+        firstMessage: voiceGreeting as string | undefined,
         model: {
           provider: "openai",
           model: "gpt-4o",
-          systemPrompt: assistantOverrides?.voiceGreeting || "Hello, how can I help?"
+          systemPrompt: systemPrompt
         },
         voice: {
           provider: "11labs",
           voiceId: "EXAVITQu4vr4xnSDxMaL",
           model: "eleven_turbo_v2_5"
         },
-        ...assistantOverrides
+        ...restOverrides
       };
 
       try {
