@@ -53,10 +53,17 @@ ${services ? `Services available:\n${JSON.stringify(services, null, 2)}` : ""}
       const assistant = {
         name: restOverrides.name || "Demo Assistant",
         firstMessage: voiceGreeting as string | undefined,
+        firstMessageMode: "assistant-speaks-first",
+        transcriber: {
+          provider: "deepgram",
+          model: "nova-2",
+          language: "multi",
+          smartFormat: true,
+        },
         model: {
           provider: "openai",
           model: "gpt-4o",
-          systemPrompt: systemPrompt
+          messages: [{ role: "system", content: systemPrompt }],
         },
         voice: {
           provider: "11labs",
