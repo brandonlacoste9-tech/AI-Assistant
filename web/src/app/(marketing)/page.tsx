@@ -30,10 +30,12 @@ export default async function HomePage() {
       {/* Interactive AI Demo Section */}
       <section className="relative overflow-hidden bg-[var(--surface-elevated)] py-20 border-b border-[var(--border)]">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
-          <SectionHeading
-            label={fr ? "Démo en direct" : "Live Demo"}
-            title={fr ? "Parlez à notre réceptionniste IA" : "Talk to our AI Receptionist"}
-          />
+          <div className="mx-auto max-w-2xl">
+            <p className="section-label">{fr ? "Démo en direct" : "Live Demo"}</p>
+            <h2 className="font-display mt-2 text-3xl font-semibold tracking-tight sm:text-4xl text-[var(--foreground)]">
+              {fr ? "Parlez à notre réceptionniste IA" : "Talk to our AI Receptionist"}
+            </h2>
+          </div>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-[var(--muted-fg)]">
             {fr 
               ? "Essayez-le par vous-même ! Cliquez ci-dessous pour parler avec notre concierge IA. Posez des questions sur nos tarifs, ou demandez à réserver une consultation." 
