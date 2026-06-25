@@ -946,9 +946,9 @@ const fr: Dictionary = {
       "Le même réceptionniste IA — adapté aux salons de luxe, spas médicaux et cliniques.",
     items: [
       {
-        title: "Salons de luxe",
-        desc: "L'IA comprend « je veux un balayage », propose des créneaux et envoie des rappels.",
-        examples: ["Coupe & coloration", "Extensions", "Coiffure de mariage"],
+        title: "Salons & Barbershops de luxe",
+        desc: "L'IA comprend « je veux un balayage » ou « un fade », propose des créneaux et envoie des rappels.",
+        examples: ["Coupe & coloration", "Fade & barbe", "Extensions"],
       },
       {
         title: "Spas médicaux",
@@ -1547,9 +1547,9 @@ const en: Dictionary = {
       "Same AI receptionist — tuned for luxury salons, med spas, and high-end clinics.",
     items: [
       {
-        title: "Luxury Salons",
-        desc: "AI understands \"I want a balayage\", offers slots, and sends SMS reminders.",
-        examples: ["Cut & color", "Extensions", "Bridal styling"],
+        title: "Luxury Salons & Barbershops",
+        desc: "AI understands \"I want a balayage\" or \"a fade\", offers slots, and sends SMS reminders.",
+        examples: ["Cut & color", "Beard & fade", "Extensions"],
       },
       {
         title: "Med Spas",
