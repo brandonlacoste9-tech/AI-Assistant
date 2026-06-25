@@ -426,13 +426,13 @@ const fr: Dictionary = {
     ],
   },
   roi: {
-    title: "Combien vous coûte un appel manqué?",
+    title: "Combien vous coûte un appel manqué à 22h?",
     rows: [
-      { label: "5 appels manqués / semaine × 80 $", value: "1 600 $/mois" },
-      { label: "4 no-shows / semaine × 100 $", value: "1 600 $/mois" },
-      { label: "JustBookMe Pro", value: "149 $/mois" },
+      { label: "5 appels manqués / semaine × 500 $ (Soins)", value: "10 000 $/mois" },
+      { label: "4 no-shows / semaine × 150 $ (Dépôts perdus)", value: "2 400 $/mois" },
+      { label: "JustBookMe Concierge", value: "399 $/mois" },
     ],
-    punchline: "Un seul rendez-vous récupéré par semaine paie l'abonnement.",
+    punchline: "Un seul appel récupéré par mois paie l'abonnement.",
   },
   waitlist: {
     title: "Rejoignez la liste d'attente",
@@ -1027,13 +1027,13 @@ const en: Dictionary = {
     ],
   },
   roi: {
-    title: "What does a missed call cost you?",
+    title: "What does a missed 10 PM call cost you?",
     rows: [
-      { label: "5 missed calls/week × $80", value: "$1,600/month" },
-      { label: "4 no-shows/week × $100", value: "$1,600/month" },
-      { label: "JustBookMe Pro", value: "$149/month" },
+      { label: "5 missed calls/week × $500 (Treatments)", value: "$10,000/month" },
+      { label: "4 no-shows/week × $150 (Lost deposits)", value: "$2,400/month" },
+      { label: "JustBookMe Concierge", value: "$399/month" },
     ],
-    punchline: "Recover one appointment per week and the subscription pays for itself.",
+    punchline: "Recover a single $500 appointment per month and the service pays for itself.",
   },
   waitlist: {
     title: "Join the waitlist",
