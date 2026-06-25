@@ -14,6 +14,8 @@ export function VoiceSettingsCard({
   platformPhone,
   initialGreeting,
   initialInstructions,
+  initialPersonality,
+  initialBilingual,
 }: {
   dict: Dictionary;
   locale: string;
