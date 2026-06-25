@@ -64,11 +64,11 @@ export function VapiWebCallButton({
     <button
       onClick={toggleCall}
       disabled={!vapi || callStatus === "loading"}
-      className={\`flex items-center justify-center gap-3 rounded-full px-8 py-4 text-lg font-semibold transition-all shadow-xl \${
+      className={`flex items-center justify-center gap-3 rounded-full px-8 py-4 text-lg font-semibold transition-all shadow-xl ${
         callStatus === "active" 
           ? "bg-red-500 text-white hover:bg-red-600 animate-pulse" 
           : "bg-gradient-to-r from-[#d4af37] to-[#a38020] text-black hover:scale-105"
-      }\`}
+      }`}
     >
       {callStatus === "loading" && <Loader2 className="h-6 w-6 animate-spin" />}
       {callStatus === "idle" && <PhoneCall className="h-6 w-6" />}
