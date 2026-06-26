@@ -1,4 +1,6 @@
-export function getReceptionistVoice(defaultLanguage: "fr" | "en") {
+import type { Tables } from "@/lib/supabase/database.types";
+
+export function getReceptionistVoice(_defaultLanguage: "fr" | "en") {
   // ElevenLabs voices are natively multilingual, so Sarah can speak both English and French fluently.
   return { provider: "11labs" as const, voiceId: "EXAVITQu4vr4xnSDxMaL", model: "eleven_turbo_v2_5" }; // Using Sarah explicitly
 }

@@ -1,6 +1,5 @@
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/types";
-import { DashboardMockup } from "@/components/marketing/dashboard-mockup";
 import { ArrowRight, MapPin } from "lucide-react";
 import Link from "next/link";
 

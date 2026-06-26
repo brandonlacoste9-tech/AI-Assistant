@@ -1,24 +1,16 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import Image from "next/image";
+import Link from "next/link";
+import { cn } from "@/lib/utils/tailwind";
 
 export function Logo({
   className,
-  showWordmark = true,
-  size = 36,
-  variant = "dark",
-  href = "/",
 }: {
   className?: string;
-  showWordmark?: boolean;
-  size?: number;
-  variant?: "dark" | "light";
-  href?: string;
 }) {
   return (
-    <a
-      href={href}
+    <Link
+      href="/"
       className={cn("group relative z-50 inline-flex items-center", className)}
       aria-label="JustBookMe home"
     >

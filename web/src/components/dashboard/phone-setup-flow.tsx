@@ -5,10 +5,8 @@ import { Phone, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 
 export function PhoneSetupFlow({
-  dict,
   initialPhoneNumber,
 }: {
-  dict: Dictionary;
   initialPhoneNumber: string | null;
 }) {
   const [phoneNumber, setPhoneNumber] = useState(initialPhoneNumber);
@@ -31,7 +29,7 @@ export function PhoneSetupFlow({
       if (data.phoneNumber) {
         setPhoneNumber(data.phoneNumber);
       }
-    } catch (err: any) {
+    } catch {
       setError("Number provisioning is not yet available in the backend. Please contact support to manually assign a number.");
     } finally {
       setLoading(false);
@@ -89,7 +87,7 @@ export function PhoneSetupFlow({
             <div className="rounded-lg border border-[var(--border)] bg-[var(--background-alt)] p-5">
               <h3 className="font-medium text-[var(--foreground)]">Step 2: Forward Missed Calls</h3>
               <p className="mt-1 text-sm text-[var(--muted-fg)]">
-                Dial the following code on your salon's phone (the one you currently use) to forward unanswered calls to the AI:
+                Dial the following code on your salon&apos;s phone (the one you currently use) to forward unanswered calls to the AI:
               </p>
               
               <div className="mt-4 space-y-3">
