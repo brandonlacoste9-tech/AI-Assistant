@@ -7,67 +7,50 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
   const fr = locale === "fr";
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[var(--hero-from)] via-[var(--hero-to)] to-[#2a4f7a]">
-      <div className="grain absolute inset-0" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,var(--hero-glow)_0%,transparent_50%)]" />
-      <div className="absolute -right-24 top-1/4 h-96 w-96 rounded-full bg-[var(--accent)]/5 blur-3xl" />
+    <section className="relative overflow-hidden bg-slate-950">
+      {/* Full-width faded background image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-luminosity"
+        style={{ backgroundImage: "url('/bg-barbershop.jpg')" }}
+      />
+      
+      {/* Gradients to fade into the content below and ensure text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] via-slate-950/60 to-slate-950/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-transparent to-slate-950/80" />
 
-      <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm text-white/80 backdrop-blur-sm">
-              <MapPin className="h-3.5 w-3.5 text-[var(--accent)]" />
-              {dict.hero.trust}
-            </div>
-
-            <h1 className="font-display mt-6 text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
-              {dict.hero.headline}
-            </h1>
-
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
-              {dict.hero.subhead}
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/signup" className="btn-primary px-6 py-3.5 text-sm">
-                {dict.hero.ctaPrimary}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-
-            <div className="mt-10 flex flex-wrap gap-6 border-t border-white/10 pt-8">
-              {[
-                { value: "24/7", label: fr ? "Disponible" : "Available" },
-                { value: "FR/EN", label: fr ? "Bilingue" : "Bilingual" },
-                { value: "$149", label: fr ? "À partir de" : "Starting at" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <p className="font-display text-2xl font-bold text-[var(--accent)]">{stat.value}</p>
-                  <p className="text-xs text-white/50">{stat.label}</p>
-                </div>
-              ))}
-            </div>
+      <div className="relative mx-auto max-w-4xl px-4 pb-28 pt-24 text-center sm:px-6 sm:pb-36 sm:pt-32">
+        <div className="flex flex-col items-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm text-white/90 backdrop-blur-md">
+            <MapPin className="h-3.5 w-3.5 text-[var(--accent)]" />
+            {dict.hero.trust}
           </div>
 
-          <div className="lg:pl-4 relative w-full h-full flex items-center justify-center">
-            {/* Massive glowing orb behind the picture */}
-            <div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0" 
-              style={{
-                width: '800px',
-                height: '800px',
-                background: 'radial-gradient(circle at center, rgba(210, 175, 125, 0.8) 0%, rgba(180, 140, 80, 0.4) 30%, transparent 65%)',
-                mixBlendMode: 'color-dodge',
-              }}
-            />
-            
-            <div className="relative z-10 mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 shadow-2xl lg:max-w-md">
-              <img 
-                src="/salon-hero.png"
-                alt={fr ? "Une expérience salon haut de gamme" : "Premium salon experience"}
-                className="w-full object-cover"
-              />
-            </div>
+          <h1 className="font-display mt-8 text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-[4rem] text-balance">
+            {dict.hero.headline}
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl text-balance">
+            {dict.hero.subhead}
+          </p>
+
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <Link href="/signup" className="btn-primary px-8 py-4 text-base shadow-xl shadow-[var(--primary)]/20">
+              {dict.hero.ctaPrimary}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-16 flex flex-wrap justify-center gap-8 sm:gap-16 border-t border-white/10 pt-10">
+            {[
+              { value: "24/7", label: fr ? "Disponible" : "Available" },
+              { value: "FR/EN", label: fr ? "Bilingue" : "Bilingual" },
+              { value: "$149", label: fr ? "À partir de" : "Starting at" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <p className="font-display text-3xl font-bold text-[var(--accent)] drop-shadow-md">{stat.value}</p>
+                <p className="mt-1 text-sm font-medium text-white/70 uppercase tracking-wider">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
