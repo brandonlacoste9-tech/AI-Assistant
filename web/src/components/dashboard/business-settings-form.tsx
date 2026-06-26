@@ -206,21 +206,47 @@ export function BusinessSettingsForm({
               key={day}
               className="grid grid-cols-[minmax(0,4rem)_1fr_1fr] items-center gap-2 sm:grid-cols-[5rem_1fr_1fr]"
             >
-              <span className="text-sm font-medium">{dayLabels[day]}</span>
-              <Input
-                type="time"
-                value={hours[day]?.open ?? ""}
-                onChange={(e) =>
-                  setHours((h) => ({ ...h, [day]: { ...h[day], open: e.target.value } }))
-                }
-              />
-              <Input
-                type="time"
-                value={hours[day]?.close ?? ""}
-                onChange={(e) =>
-                  setHours((h) => ({ ...h, [day]: { ...h[day], close: e.target.value } }))
-                }
-              />
+              <div className="flex flex-col">
+                <span className="text-sm font-medium">{dayLabels[day]}</span>
+                <label className="flex cursor-pointer items-center gap-1.5 mt-1 text-[10px] text-[var(--muted-fg)] hover:text-[var(--foreground)] transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={!hours[day]?.open && !hours[day]?.close}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setHours((h) => ({ ...h, [day]: { open: "", close: "" } }));
+                      } else {
+                        setHours((h) => ({ ...h, [day]: { open: "09:00", close: "17:00" } }));
+                      }
+                    }}
+                    className="h-3 w-3 rounded border-[var(--border)] bg-transparent text-[var(--primary)] focus:ring-[var(--primary)]"
+                  />
+                  Closed
+                </label>
+              </div>
+              
+              {!hours[day]?.open && !hours[day]?.close ? (
+                <div className="col-span-2 flex h-10 items-center justify-center rounded-md border border-[var(--border)] bg-[var(--muted)]/30 text-sm font-medium text-[var(--muted-fg)] transition-all">
+                  Not available
+                </div>
+              ) : (
+                <>
+                  <Input
+                    type="time"
+                    value={hours[day]?.open ?? ""}
+                    onChange={(e) =>
+                      setHours((h) => ({ ...h, [day]: { ...h[day], open: e.target.value } }))
+                    }
+                  />
+                  <Input
+                    type="time"
+                    value={hours[day]?.close ?? ""}
+                    onChange={(e) =>
+                      setHours((h) => ({ ...h, [day]: { ...h[day], close: e.target.value } }))
+                    }
+                  />
+                </>
+              )}
             </div>
           ))}
         </div>
