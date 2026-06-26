@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: [
       "AI receptionist",
       "Quebec AI",
-      "Medispa AI",
+      "Salon AI",
       "Salon booking software",
       "Missed calls AI",
       "Bilingual AI receptionist",

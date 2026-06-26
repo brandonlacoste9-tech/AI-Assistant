@@ -13,8 +13,8 @@ interface AiPhoneFrameProps {
 export function AiPhoneFrame({ 
   children,
   avatarSrc = "/ai-avatar.png",
-  name = "Chloé",
-  title = "Medispa AI Concierge"
+  name = "Sarah",
+  title = "Salon AI Receptionist"
 }: AiPhoneFrameProps) {
   return (
     <div className="relative mx-auto w-full max-w-[320px]">

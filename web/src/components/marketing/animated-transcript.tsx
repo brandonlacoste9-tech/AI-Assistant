@@ -22,18 +22,20 @@ export function AnimatedTranscript({ fr = false, customMessages, title }: Animat
 
   const defaultMessages: TranscriptMessage[] = fr
     ? [
-        { id: 1, sender: "ai", text: "Bonjour, Victoria Park Medispa. Comment puis-je vous aider ?" },
-        { id: 2, sender: "user", text: "Salut, j'aimerais prendre rendez-vous pour du Botox." },
+        { id: 1, sender: "ai", text: "Bonjour, The Gentlemen's Barbershop. Comment puis-je vous aider ?" },
+        { id: 2, sender: "user", text: "Salut, j'aimerais prendre rendez-vous pour une coupe de cheveux." },
         { id: 3, sender: "ai", text: "Absolument. Êtes-vous déjà client chez nous ?" },
         { id: 4, sender: "user", text: "Oui, c'est ma deuxième fois." },
-        { id: 5, sender: "ai", text: "Parfait. J'ai une disponibilité ce jeudi à 14h00. Est-ce que cela vous convient ?" },
+        { id: 5, sender: "ai", text: "Génial ! Je vois une disponibilité avec Marc demain à 14h. Est-ce que ça vous convient ?" },
+        { id: 6, sender: "user", text: "Parfait, merci beaucoup !" },
       ]
     : [
-        { id: 1, sender: "ai", text: "Hello, Victoria Park Medispa. How can I help you today?" },
-        { id: 2, sender: "user", text: "Hi, I'd like to book an appointment for Botox." },
+        { id: 1, sender: "ai", text: "Hello, The Gentlemen's Barbershop. How can I help you today?" },
+        { id: 2, sender: "user", text: "Hi, I'd like to book an appointment for a haircut." },
         { id: 3, sender: "ai", text: "Absolutely. Are you a returning client with us?" },
         { id: 4, sender: "user", text: "Yes, this is my second time." },
-        { id: 5, sender: "ai", text: "Perfect. I have an opening this Thursday at 2:00 PM. Does that work for you?" },
+        { id: 5, sender: "ai", text: "Great! I have an opening with Marc tomorrow at 2 PM. Does that work for you?" },
+        { id: 6, sender: "user", text: "Perfect, thank you!" },
       ];
 
   const messages = customMessages || defaultMessages;
@@ -70,7 +72,7 @@ export function AnimatedTranscript({ fr = false, customMessages, title }: Animat
             AI
           </div>
           <div>
-            <p className="text-sm font-semibold text-[var(--foreground)]">{title || "Medispa AI"}</p>
+            <p className="text-sm font-semibold text-[var(--foreground)]">{title || "Salon AI"}</p>
             <p className="text-xs text-[var(--muted-fg)]">
               {isPlaying ? (fr ? "En train de taper..." : "Typing...") : (fr ? "Hors ligne" : "Offline")}
             </p>
