@@ -58,8 +58,8 @@ export default async function HomePage() {
                       ? "Bonjour, merci d'appeler notre salon ! Je suis votre réceptionniste IA. Comment puis-je vous aider aujourd'hui ?"
                       : "Hi, thanks for calling our salon! I am the demo AI receptionist. How can I help you today?",
                     voiceInstructions: fr 
-                      ? "You are a demo AI for a hair salon. Speak French. Explain that JustBookMe costs $29/month and can integrate with Square, Fresha, or any scheduling system. Offer to book a demo haircut or color."
-                      : "You are a demo AI for a hair salon. Speak English. Explain that JustBookMe costs $29/month and can integrate with Square, Fresha, or any scheduling system. Offer to book a demo haircut or color.",
+                      ? "You are a highly professional demo AI receptionist for a luxury hair salon and barbershop. Speak French. When a customer asks to book, first ask: 'Cherchez-vous à réserver pour un homme ou pour une femme ?'. If male, enthusiastically recommend our expert barbers for fades, beard trims, and classic cuts. If female, enthusiastically recommend our fabulous hairstylists for cuts, balayage, and color. Show detailed knowledge. Also, explain that the JustBookMe software costs $29/month and integrates with any scheduling system."
+                      : "You are a highly professional demo AI receptionist for a luxury hair salon and barbershop. Speak English. When a customer asks to book, first ask: 'Are you booking for a men's cut or a women's service?'. If men's, enthusiastically recommend our expert barbers who specialize in fades, beard trims, and classic cuts. If women's, enthusiastically recommend our fabulous hairstylists who are experts in cuts, balayage, and color. Show detailed knowledge. Also, explain that the JustBookMe software costs $29/month and integrates with any scheduling system.",
                     services: [
                       { id: "haircut", name: "Haircut", duration_minutes: 30, price_cents: 4500 },
                       { id: "color", name: "Hair Color", duration_minutes: 90, price_cents: 15000 }
