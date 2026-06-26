@@ -19,6 +19,6 @@ export function Logo({
         alt="JustBookMe"
         className="pointer-events-none h-12 w-auto shrink-0 rounded-xl transition-transform group-hover:scale-105"
       />
-    </a>
+    </Link>
   );
 }
