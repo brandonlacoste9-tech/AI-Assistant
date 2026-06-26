@@ -2,7 +2,7 @@ import { getLocale } from "@/lib/i18n/get-locale";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { BRAND_NAME, getSiteUrl } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { DM_Sans, Fraunces } from "next/font/google";
+import { DM_Sans, Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
@@ -12,10 +12,10 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -63,7 +63,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale === "fr" ? "fr-CA" : "en-CA"} suppressHydrationWarning>
-      <body className={`${dmSans.variable} ${fraunces.variable} min-h-screen antialiased`}>
+      <body className={`${dmSans.variable} ${playfair.variable} min-h-screen antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {/* Faded Global Background Image */}
           <div
