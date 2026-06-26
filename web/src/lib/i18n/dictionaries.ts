@@ -459,6 +459,10 @@ const fr: Dictionary = {
     title: "Questions fréquentes",
     items: [
       {
+        q: "Dois-je changer mon numéro de téléphone d'entreprise?",
+        a: "Pas du tout. Vous conservez votre numéro actuel. Vous configurez simplement le « Renvoi d'appel » avec votre fournisseur (Bell, Rogers, Vidéotron, etc.) pour que les appels sans réponse soient automatiquement transférés à votre assistante IA JustBookMe.",
+      },
+      {
         q: "Est-ce que ça ressemble à un robot?",
         a: "Non — voix naturelle entraînée sur des conversations réelles. Appelez notre ligne démo pour juger.",
       },
@@ -1048,6 +1052,10 @@ const en: Dictionary = {
   faq: {
     title: "Frequently asked questions",
     items: [
+      {
+        q: "Do I have to change my business phone number?",
+        a: "Not at all. You keep your existing number. You simply set up 'Call Forwarding' with your provider (Bell, Rogers, Telus, etc.) so that missed calls are automatically forwarded to your new JustBookMe AI assistant.",
+      },
       {
         q: "Does it sound like a robot?",
         a: "No — natural voice trained on real conversations. Call our demo line to hear it.",
