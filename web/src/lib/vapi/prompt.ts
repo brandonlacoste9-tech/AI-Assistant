@@ -44,7 +44,7 @@ export function buildReceptionistSystemPrompt(ctx: BusinessVoiceContext): string
   const city = ctx.city ?? "Montréal";
   const displayName = displayBusinessName(ctx.name);
   const today = montrealTodayIso();
-  const businessTypeDesc = ctx.industry ? ctx.industry : "local service business";
+  const businessTypeDesc = ctx.industry ? ctx.industry : "salon and barbershop";
 
   const personalityRules = {
     friendly: "You speak with incredible warmth, enthusiasm, and a highly approachable, friendly tone. You sound like a caring local business receptionist.",
