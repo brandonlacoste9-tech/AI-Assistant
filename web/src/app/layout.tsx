@@ -65,6 +65,11 @@ export default async function RootLayout({
     <html lang={locale === "fr" ? "fr-CA" : "en-CA"} suppressHydrationWarning>
       <body className={`${dmSans.variable} ${fraunces.variable} min-h-screen antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          {/* Faded Global Background Image */}
+          <div
+            className="pointer-events-none fixed inset-0 z-[-1] bg-cover bg-center bg-no-repeat opacity-[0.04] dark:opacity-[0.06]"
+            style={{ backgroundImage: "url('/bg-barbershop.jpg')" }}
+          />
           {children}
         </ThemeProvider>
       </body>
