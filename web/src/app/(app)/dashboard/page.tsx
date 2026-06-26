@@ -166,25 +166,47 @@ export default async function DashboardPage() {
         <SetupChecklistCard dict={t} checklist={checklist} bookUrl={bookUrl} />
       )}
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-        {stats.map((stat) => {
-          const Icon = stat.icon;
-          return (
-            <div key={stat.label} className="card min-w-0 p-5">
-              <div className="flex items-center gap-3">
-                <div
-                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${stat.bg}`}
-                >
-                  <Icon className={`h-5 w-5 ${stat.accent}`} />
-                </div>
-                <span className="font-display text-2xl font-bold text-[var(--foreground)]">
-                  {stat.value}
-                </span>
-              </div>
-              <p className="mt-3 break-words text-sm text-[var(--muted-fg)]">{stat.label}</p>
+      <div className="mt-8 grid gap-4 lg:grid-cols-4">
+        {/* Hero Metric: Recovered Revenue */}
+        <div className="card col-span-full flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[var(--hero-from)] via-[var(--hero-to)] to-[#2a4f7a] p-8 text-white lg:col-span-2">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,var(--hero-glow)_0%,transparent_50%)] opacity-30" />
+          <div className="relative z-10">
+            <div className="flex items-center gap-3 opacity-90">
+              <DollarSign className="h-6 w-6" />
+              <span className="font-medium text-lg">{t.dashboard.stats.recoveredRevenue}</span>
             </div>
-          );
-        })}
+            <p className="mt-4 font-display text-5xl font-bold tracking-tight">
+              {recoveredLabel}
+            </p>
+            <p className="mt-2 text-sm opacity-80">
+              Saved by your AI answering missed calls today
+            </p>
+          </div>
+        </div>
+
+        {/* Other Stats */}
+        <div className="col-span-full grid gap-4 sm:grid-cols-2 lg:col-span-2">
+          {stats
+            .filter((s) => s.label !== t.dashboard.stats.recoveredRevenue)
+            .map((stat) => {
+              const Icon = stat.icon;
+              return (
+                <div key={stat.label} className="card min-w-0 p-5">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${stat.bg}`}
+                    >
+                      <Icon className={`h-5 w-5 ${stat.accent}`} />
+                    </div>
+                    <span className="font-display text-2xl font-bold text-[var(--foreground)]">
+                      {stat.value}
+                    </span>
+                  </div>
+                  <p className="mt-3 break-words text-sm text-[var(--muted-fg)]">{stat.label}</p>
+                </div>
+              );
+            })}
+        </div>
       </div>
 
       <div className="card mt-8 p-6">

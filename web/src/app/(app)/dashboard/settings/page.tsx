@@ -4,6 +4,7 @@ import { BusinessSettingsForm } from "@/components/dashboard/business-settings-f
 import { EmbedCard } from "@/components/dashboard/embed-card";
 import { StaffCard } from "@/components/dashboard/staff-card";
 import { VoiceSettingsCard } from "@/components/dashboard/voice-settings-card";
+import { PhoneSetupFlow } from "@/components/dashboard/phone-setup-flow";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { requireOnboardedContext } from "@/lib/auth/get-business-context";
@@ -177,6 +178,8 @@ export default async function SettingsPage() {
         initialPersonality={aiPersonality}
         initialBilingual={bilingualMode}
       />
+
+      <PhoneSetupFlow dict={t} initialPhoneNumber={phoneNumber} />
 
       <StaffCard dict={t} initial={staffRows} />
 

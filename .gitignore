@@ -145,3 +145,10 @@ vite.config.ts.timestamp-*
 
 # Local Netlify folder
 .netlify
+AIBot/
+dental-clinics/
+medical-clinic/
+salon-/
+salons-and-barbers/
+toastface-bread/
+toastfacebread-original/
