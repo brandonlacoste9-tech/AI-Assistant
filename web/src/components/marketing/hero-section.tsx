@@ -10,13 +10,13 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
     <section className="relative overflow-hidden bg-slate-950">
       {/* Full-width faded background image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-luminosity"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
         style={{ backgroundImage: "url('/bg-barbershop.jpg')" }}
       />
       
       {/* Gradients to fade into the content below and ensure text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] via-slate-950/60 to-slate-950/20" />
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-transparent to-slate-950/80" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] via-slate-950/70 to-slate-950/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/60 via-transparent to-slate-950/60" />
 
       <div className="relative mx-auto max-w-4xl px-4 pb-28 pt-24 text-center sm:px-6 sm:pb-36 sm:pt-32">
         <div className="flex flex-col items-center">
