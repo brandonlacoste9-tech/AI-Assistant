@@ -95,6 +95,7 @@ export type Dictionary = {
       customers: string;
       settings: string;
       calls: string;
+      integrations: string;
       logout: string;
     };
     stats: {
@@ -642,7 +643,8 @@ const fr: Dictionary = {
       leads: "Liste d'attente",
       customers: "Clients",
       settings: "Paramètres",
-      calls: "Appels",
+      calls: "Historique",
+      integrations: "Intégrations",
       logout: "Déconnexion",
     },
     stats: {
@@ -1236,7 +1238,8 @@ const en: Dictionary = {
       leads: "Waitlist",
       customers: "Customers",
       settings: "Settings",
-      calls: "Calls",
+      calls: "Call History",
+      integrations: "Integrations",
       logout: "Log out",
     },
     stats: {

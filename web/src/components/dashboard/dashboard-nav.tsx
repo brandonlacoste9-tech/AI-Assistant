@@ -15,6 +15,7 @@ const links = [
   { href: "/dashboard/calls", icon: Phone, key: "calls" as const },
   { href: "/dashboard/leads", icon: Users, key: "leads" as const },
   { href: "/dashboard/customers", icon: Contact, key: "customers" as const },
+  { href: "/dashboard/integrations", icon: Calendar, key: "integrations" as const },
   { href: "/dashboard/settings", icon: Settings, key: "settings" as const },
 ];
 
