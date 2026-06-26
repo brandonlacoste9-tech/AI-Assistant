@@ -53,16 +53,16 @@ export default async function HomePage() {
               <AiPhoneFrame>
                 <VapiWebCallButton 
                   assistantOverrides={{
-                    name: "JustBookMe Demo",
+                    name: "Salon Demo AI",
                     voiceGreeting: fr 
-                      ? "Bonjour, merci d'appeler Just Book Me. Je suis votre réceptionniste IA. Comment puis-je vous aider aujourd'hui?"
-                      : "Hi, thanks for calling Just Book Me! I am the demo AI receptionist. How can I help you today?",
+                      ? "Bonjour, merci d'appeler notre salon ! Je suis votre réceptionniste IA. Comment puis-je vous aider aujourd'hui ?"
+                      : "Hi, thanks for calling our salon! I am the demo AI receptionist. How can I help you today?",
                     voiceInstructions: fr 
-                      ? "You are the demo AI for JustBookMe. Speak French. Explain that JustBookMe costs $29/month for unlimited AI calls. We integrate with any scheduling system."
-                      : "You are the demo AI for JustBookMe. Speak English. Explain that JustBookMe costs $29/month for unlimited AI calls. We integrate with any scheduling system.",
+                      ? "You are a demo AI for a hair salon. Speak French. Explain that JustBookMe costs $29/month and can integrate with Square, Fresha, or any scheduling system. Offer to book a demo haircut or color."
+                      : "You are a demo AI for a hair salon. Speak English. Explain that JustBookMe costs $29/month and can integrate with Square, Fresha, or any scheduling system. Offer to book a demo haircut or color.",
                     services: [
-                      { id: "sales_call", name: "Sales Consultation", duration_minutes: 30, price_cents: 0 },
-                      { id: "support", name: "Technical Support", duration_minutes: 15, price_cents: 0 }
+                      { id: "haircut", name: "Haircut", duration_minutes: 30, price_cents: 4500 },
+                      { id: "color", name: "Hair Color", duration_minutes: 90, price_cents: 15000 }
                     ]
                   }}
                 />

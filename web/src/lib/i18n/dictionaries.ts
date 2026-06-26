@@ -366,7 +366,7 @@ const fr: Dictionary = {
   meta: {
     title: "JustBookMe — Ne perdez plus aucun rendez-vous",
     description:
-      "Réceptionniste IA bilingue pour salons de luxe, spas médicaux et cliniques. Appels manqués, réservations et rappels SMS — partout au Canada.",
+      "Réceptionniste IA bilingue pour salons de coiffure, esthétique et barbershops. Appels manqués, réservations et rappels SMS — partout au Canada.",
   },
   nav: {
     pricing: "Tarification",
@@ -375,9 +375,9 @@ const fr: Dictionary = {
     login: "Connexion",
   },
   hero: {
-    headline: "Le concierge IA premium pour salons et cliniques de luxe.",
+    headline: "La réceptionniste IA bilingue pour salons et barbershops.",
     subhead:
-      "JustBookMe répond à vos appels 24 h/24 avec une IA bilingue au ton raffiné. Rehaussez l'image de votre marque et réservez vos clients haut de gamme instantanément.",
+      "Gardez les mains sur vos ciseaux. JustBookMe répond à vos appels manqués 24 h/24, prend les rendez-vous et remplit vos chaises avec une IA bilingue.",
     ctaPrimary: "Essayer gratuitement",
     ctaSecondary: "Réserver une démo de 15 minutes",
     trust: "Conçu au Québec · Bilingue · Essai 14 jours sans carte",
@@ -425,13 +425,13 @@ const fr: Dictionary = {
     ],
   },
   roi: {
-    title: "Combien vous coûte un appel manqué à 22h?",
+    title: "Combien vous coûte un appel manqué pendant une coupe?",
     rows: [
-      { label: "5 appels manqués / semaine × 500 $ (Soins)", value: "10 000 $/mois" },
-      { label: "4 no-shows / semaine × 150 $ (Dépôts perdus)", value: "2 400 $/mois" },
-      { label: "JustBookMe Concierge", value: "399 $/mois" },
+      { label: "5 coupes manquées / semaine × 45 $", value: "900 $/mois" },
+      { label: "2 balayages no-shows / semaine × 150 $ (Dépôts perdus)", value: "1 200 $/mois" },
+      { label: "JustBookMe Concierge", value: "39 $/mois" },
     ],
-    punchline: "Un seul appel récupéré par mois paie l'abonnement.",
+    punchline: "Une seule coupe récupérée par mois paie l'abonnement.",
   },
   waitlist: {
     title: "Rejoignez la liste d'attente",
@@ -918,35 +918,35 @@ const fr: Dictionary = {
     },
     businessTypes: {
       title: "Type d'établissement",
-      subtitle: "Nous adapterons votre IA de luxe à votre spécialité.",
-      salon: "Salon de luxe ou spa",
-      salonDesc: "Coiffure haut de gamme, esthétique, bien-être.",
-      trade: "Clinique esthétique",
-      tradeDesc: "Soins spécialisés, clinique privée.",
-      office: "Bureau professionnel",
-      officeDesc: "Consultations haut de gamme.",
+      subtitle: "Nous adapterons votre IA à votre spécialité.",
+      salon: "Salon de coiffure",
+      salonDesc: "Coupe femme, coloration, balayage.",
+      trade: "Barbershop",
+      tradeDesc: "Coupes hommes, dégradés, barbes.",
+      office: "Onglerie et esthétique",
+      officeDesc: "Manucure, cils, soins du visage.",
     },
   },
   verticals: {
     label: "Pour qui",
     title: "Conçu pour votre type d'entreprise",
     subtitle:
-      "Le même réceptionniste IA — adapté aux salons de luxe, spas médicaux et cliniques.",
+      "Le même réceptionniste IA — adapté aux salons de coiffure, barbershops et instituts de beauté.",
     items: [
       {
-        title: "Salons & Barbershops de luxe",
-        desc: "L'IA comprend « je veux un balayage » ou « un fade », propose des créneaux et envoie des rappels.",
-        examples: ["Coupe & coloration", "Fade & barbe", "Extensions"],
+        title: "Salons de coiffure",
+        desc: "L'IA comprend « je veux un balayage » ou « des mèches », propose des créneaux et envoie des rappels.",
+        examples: ["Coupe femme", "Balayage", "Coloration"],
       },
       {
-        title: "Spas médicaux",
-        desc: "Automatisez les consultations pour injections et laser avec un concierge numérique raffiné.",
-        examples: ["Injections", "Épilation au laser", "Consultations"],
+        title: "Barbershops",
+        desc: "Des prises de rendez-vous rapides pour les fades et les tailles de barbe, sans interrompre votre travail.",
+        examples: ["Fade", "Taille de barbe", "Coupe classique"],
       },
       {
-        title: "Cliniques d'esthétique",
-        desc: "Une expérience de réservation haut de gamme pour vos soins spécialisés.",
-        examples: ["Évaluation de la peau", "Soins du visage", "Nouveaux patients"],
+        title: "Esthétique & Ongles",
+        desc: "Une expérience de réservation impeccable pour vos clientes, avec rappels SMS automatiques.",
+        examples: ["Pose d'ongles", "Soin du visage", "Épilation"],
       },
     ],
   },
@@ -956,7 +956,7 @@ const en: Dictionary = {
   meta: {
     title: "JustBookMe — Never miss a booking again",
     description:
-      "Bilingual AI receptionist for luxury salons, med spas & high-end clinics. Missed calls, bookings, and SMS reminders — book me, simply.",
+      "Bilingual AI receptionist for hair salons, barbershops & beauty studios. Missed calls, bookings, and SMS reminders — book me, simply.",
   },
   nav: {
     pricing: "Pricing",
@@ -965,9 +965,9 @@ const en: Dictionary = {
     login: "Log in",
   },
   hero: {
-    headline: "The premium AI concierge for luxury salons and clinics.",
+    headline: "The Bilingual AI Receptionist for Barbers & Salons.",
     subhead:
-      "JustBookMe answers your phone 24/7 with a polished, bilingual AI. Elevate your brand, book high-ticket clients instantly, and never miss a call again.",
+      "Keep your hands on the scissors. Let JustBookMe answer missed calls, book appointments, and fill your chairs 24/7 in flawless French and English.",
     ctaPrimary: "Start free trial",
     ctaSecondary: "Book a 15-minute demo",
     trust: "Built in Quebec · Bilingual · 14-day trial, no card",
@@ -1015,13 +1015,13 @@ const en: Dictionary = {
     ],
   },
   roi: {
-    title: "What does a missed 10 PM call cost you?",
+    title: "What does a missed call during a haircut cost you?",
     rows: [
-      { label: "5 missed calls/week × $500 (Treatments)", value: "$10,000/month" },
-      { label: "4 no-shows/week × $150 (Lost deposits)", value: "$2,400/month" },
-      { label: "JustBookMe Concierge", value: "$399/month" },
+      { label: "5 missed haircuts/week × $45", value: "$900/month" },
+      { label: "2 color no-shows/week × $150 (Lost deposits)", value: "$1,200/month" },
+      { label: "JustBookMe Concierge", value: "$39/month" },
     ],
-    punchline: "Recover a single $500 appointment per month and the service pays for itself.",
+    punchline: "Recover a single $45 haircut per month and the service pays for itself.",
   },
   waitlist: {
     title: "Join the waitlist",
@@ -1508,35 +1508,35 @@ const en: Dictionary = {
     },
     businessTypes: {
       title: "Business type",
-      subtitle: "We'll tailor your luxury AI to your specialty.",
-      salon: "Luxury salon or spa",
-      salonDesc: "High-end hair, aesthetic, and wellness.",
-      trade: "Boutique clinic",
-      tradeDesc: "Specialized medical or aesthetic clinic.",
-      office: "Professional office",
-      officeDesc: "High-end professional consultations.",
+      subtitle: "We'll tailor your AI to your specialty.",
+      salon: "Hair Salon",
+      salonDesc: "Cut, color, extensions, and styling.",
+      trade: "Barbershop",
+      tradeDesc: "Fades, beard trims, and men's cuts.",
+      office: "Nails & Beauty",
+      officeDesc: "Manicures, lashes, and aesthetics.",
     },
   },
   verticals: {
     label: "Who it's for",
     title: "Built for your kind of business",
     subtitle:
-      "Same AI receptionist — tuned for luxury salons, med spas, and high-end clinics.",
+      "Same AI receptionist — tuned for hair salons, barbershops, and beauty studios.",
     items: [
       {
-        title: "Luxury Salons & Barbershops",
-        desc: "AI understands \"I want a balayage\" or \"a fade\", offers slots, and sends SMS reminders.",
-        examples: ["Cut & color", "Beard & fade", "Extensions"],
+        title: "Hair Salons",
+        desc: "AI understands \"I want a balayage\" or \"highlights\", offers slots, and sends SMS reminders.",
+        examples: ["Cut & color", "Balayage", "Extensions"],
       },
       {
-        title: "Med Spas",
-        desc: "Automate consultations for Botox, laser, and fillers with a polished digital concierge.",
-        examples: ["Injectables", "Laser hair removal", "Consultations"],
+        title: "Barbershops",
+        desc: "Fast booking for fades and beard trims, so you don't have to stop cutting.",
+        examples: ["Fades", "Beard trims", "Classic cuts"],
       },
       {
-        title: "Aesthetic Clinics",
-        desc: "Premium booking experience for high-ticket clients and specialized treatments.",
-        examples: ["Skin assessment", "Facial treatments", "New patients"],
+        title: "Nails & Beauty",
+        desc: "Premium booking experience for your clients, with automated SMS reminders.",
+        examples: ["Nails", "Lashes", "Facials"],
       },
     ],
   },
