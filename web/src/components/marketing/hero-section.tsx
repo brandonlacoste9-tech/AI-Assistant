@@ -64,8 +64,8 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
             
             <div className="relative z-10 mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 shadow-2xl lg:max-w-md">
               <img 
-                src={fr ? "/hero-fr.jpg" : "/hero-en.jpg"}
-                alt={fr ? "Arrêtez de perdre des réservations" : "Stop losing bookings"}
+                src="/salon-hero.png"
+                alt={fr ? "Une expérience salon haut de gamme" : "Premium salon experience"}
                 className="w-full object-cover"
               />
             </div>
