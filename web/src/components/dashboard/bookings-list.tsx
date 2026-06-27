@@ -147,7 +147,7 @@ export function BookingsList({
             className={cn(
               "rounded-lg px-3 py-1.5 text-sm font-medium transition-colors",
               filter === f.key
-                ? "bg-[var(--primary)] text-white"
+                ? "bg-[var(--primary)] text-[var(--background)]"
                 : "bg-[var(--muted)] text-[var(--muted-fg)] hover:text-[var(--foreground)]"
             )}
           >

@@ -68,7 +68,7 @@ export function AnimatedTranscript({ fr = false, customMessages, title }: Animat
     <div className="mx-auto w-full max-w-md overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-lg">
       <div className="flex items-center justify-between border-b border-[var(--border)] bg-[var(--muted)] px-4 py-3">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--primary)] text-xs font-bold text-white">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--primary)] text-xs font-bold text-[var(--background)]">
             AI
           </div>
           <div>
@@ -80,7 +80,7 @@ export function AnimatedTranscript({ fr = false, customMessages, title }: Animat
         </div>
         <button
           onClick={() => setIsPlaying(!isPlaying)}
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] transition-colors"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--primary)] text-[var(--background)] hover:bg-[var(--primary-hover)] transition-colors"
         >
           {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4 pl-0.5" />}
         </button>

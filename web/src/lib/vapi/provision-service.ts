@@ -16,6 +16,7 @@ import {
   getTwilioAuthToken,
   getTwilioPhoneNumber,
 } from "@/lib/twilio/config";
+import type { BusinessType } from "@/lib/onboarding/presets";
 
 export type VoiceProvisionResult =
   | { ok: true; assistantId: string; created: boolean; phoneLinked: boolean }
@@ -35,7 +36,7 @@ export async function loadBusinessVoiceContext(
   const { data: business } = await supabase
     .from("businesses")
     .select(
-      "id, name, city, timezone, default_language, working_hours, forward_to_number, voice_greeting, voice_instructions, industry, ai_personality, bilingual_mode"
+      "id, name, city, timezone, default_language, working_hours, forward_to_number, voice_greeting, voice_instructions, industry, ai_personality, bilingual_mode, business_type"
     )
     .eq("id", businessId)
     .single();
@@ -66,6 +67,7 @@ export async function loadBusinessVoiceContext(
     industry: (business.industry as string | null) ?? null,
     aiPersonality: (business.ai_personality as string | null) ?? "friendly",
     bilingualMode: Boolean(business.bilingual_mode),
+    businessType: (business.business_type as BusinessType) ?? "salon",
   };
 }
 

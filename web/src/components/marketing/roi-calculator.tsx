@@ -29,7 +29,7 @@ export function RoiCalculator({ fr }: Props) {
     <div className="card overflow-hidden">
       <div className="grid lg:grid-cols-2">
         {/* Left: Quebec card */}
-        <div className="bg-gradient-to-br from-[var(--primary)] to-[#2a5080] p-8 sm:p-10">
+        <div className="bg-gradient-to-br from-[#0f172a] to-[#2a5080] p-8 sm:p-10">
           <Sparkles className="h-6 w-6 text-[var(--accent)]" />
           <h2 className="font-display mt-4 text-2xl font-semibold text-white sm:text-3xl">
             {fr ? "Conçu pour le Québec" : "Built for Quebec"}

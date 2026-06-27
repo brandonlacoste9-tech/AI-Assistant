@@ -35,7 +35,7 @@ export function LanguageToggle({
           className={cn(
             "rounded-md px-2.5 py-1.5 uppercase transition-all",
             locale === lang
-              ? "bg-[var(--primary)] text-white shadow-sm"
+              ? "bg-[var(--primary)] text-[var(--background)] shadow-sm"
               : "text-[var(--muted-fg)] hover:text-[var(--foreground)]"
           )}
         >

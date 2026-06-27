@@ -127,7 +127,7 @@ export default async function HomePage() {
             <ol className="mt-12 grid gap-6 sm:grid-cols-3">
               {t.howItWorks.steps.map((step, i) => (
                 <li key={step} className="card group relative p-7 transition-shadow hover:shadow-lg">
-                  <span className="font-display flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--primary)] text-lg font-bold text-white">
+                  <span className="font-display flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--primary)] text-lg font-bold text-[var(--background)]">
                     {i + 1}
                   </span>
                   <p className="mt-5 leading-relaxed text-[var(--foreground)]">{step}</p>

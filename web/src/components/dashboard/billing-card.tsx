@@ -267,14 +267,14 @@ export function BillingCard({
               <div className="mt-4 flex flex-wrap gap-2">
                 <button
                   type="button"
-                  className={`rounded-lg px-3 py-1.5 text-sm ${interval === "month" ? "bg-[var(--primary)] text-white" : "bg-[var(--muted)]"}`}
+                  className={`rounded-lg px-3 py-1.5 text-sm ${interval === "month" ? "bg-[var(--primary)] text-[var(--background)]" : "bg-[var(--muted)]"}`}
                   onClick={() => setInterval("month")}
                 >
                   {t.monthly}
                 </button>
                 <button
                   type="button"
-                  className={`rounded-lg px-3 py-1.5 text-sm ${interval === "year" ? "bg-[var(--primary)] text-white" : "bg-[var(--muted)]"}`}
+                  className={`rounded-lg px-3 py-1.5 text-sm ${interval === "year" ? "bg-[var(--primary)] text-[var(--background)]" : "bg-[var(--muted)]"}`}
                   onClick={() => setInterval("year")}
                 >
                   {t.annual}

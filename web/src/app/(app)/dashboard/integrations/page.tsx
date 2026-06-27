@@ -91,7 +91,7 @@ export default async function IntegrationsPage() {
                 type="button"
                 className={`w-full rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                   integration.status === "available"
-                    ? "bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)]"
+                    ? "bg-[var(--primary)] text-[var(--background)] hover:bg-[var(--primary-hover)]"
                     : "bg-[var(--muted)] text-[var(--foreground)] hover:bg-[var(--border)]"
                 }`}
               >

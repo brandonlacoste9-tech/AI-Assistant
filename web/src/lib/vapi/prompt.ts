@@ -1,4 +1,5 @@
 import { displayBusinessName, montrealTodayIso } from "@/lib/vapi/prompt-utils";
+import type { BusinessType } from "@/lib/onboarding/presets";
 
 export { receptionistFirstMessage, salonFirstMessage } from "@/lib/vapi/prompt-utils";
 
@@ -14,12 +15,29 @@ export type BusinessVoiceContext = {
   industry?: string | null;
   aiPersonality?: string | null;
   bilingualMode?: boolean;
+  businessType?: BusinessType;
 };
 
 const DEFAULT_SERVICES = `[
   { "name": "Service call / visite", "duration_minutes": 60, "price_cad": "0.00" },
   { "name": "Consultation", "duration_minutes": 30, "price_cad": "0.00" }
 ]`;
+
+function getVerticalRules(type: BusinessType): string {
+  if (type === "salon" || type === "barbershop") {
+    return "- Salon Specifics: If a caller asks for a haircut or colour, gracefully ask if they are booking for a male or female. Let them know we have great barbers for men and fabulous hairstylists for women, with detailed knowledge of each.";
+  }
+  if (type === "clinic") {
+    return "- Medical Safety: You are NOT a doctor or medical professional. Never offer medical diagnoses, advice, or drug recommendations. If the caller describes an emergency, immediately direct them to hang up and call 911.";
+  }
+  if (type === "office") {
+    return "- Professional Boundary: You take detailed inquiries and book consultations. If a caller asks complex technical, financial, or legal questions, let them know you'll have a specialist follow up with them.";
+  }
+  if (type === "beauty") {
+    return "- Wellness Tone: Emphasize relaxation and rejuvenation. If appropriate, gently mention complementary enhancements (like adding a lash boost or facial mask) during booking.";
+  }
+  return "";
+}
 
 export function buildReceptionistSystemPrompt(ctx: BusinessVoiceContext): string {
   const servicesJson =
@@ -59,6 +77,8 @@ export function buildReceptionistSystemPrompt(ctx: BusinessVoiceContext): string
     ? `BILINGUAL RULE: You are fully BILINGUAL in English and French (Quebecois). You MUST instantly match the caller's language. If they speak French, reply in flawless French. If they speak English, reply in English. Never mix languages in one reply.`
     : `Languages: Canadian French and English. Detect the caller's language from their first sentence and stay in that language for the whole call.`;
 
+  const verticalRules = getVerticalRules(ctx.businessType ?? "salon");
+
   return `You are the digital concierge for ${displayName}, a ${businessTypeDesc} in ${city}.
 ${toneInstruction}
 
@@ -81,8 +101,7 @@ Goals (in order):
 
 Core rules:
 - The Consultation Mindset: If a caller asks for the price of a high-end service, proactively ask 1-2 qualifying questions about their goals BEFORE quoting the price.
-- Salon Specifics: If a caller asks for a haircut or colour, gracefully ask if they are booking for a male or female. Let them know we have great barbers for men and fabulous hairstylists for women, with detailed knowledge of each.
-- Location Rule: We are located only in ${city}. If the caller mentions another location or city, politely clarify that we only have one location in ${city}. Do NOT pretend we have multiple locations.
+${verticalRules ? `${verticalRules}\n` : ""}- Location Rule: We are located only in ${city}. If the caller mentions another location or city, politely clarify that we only have one location in ${city}. Do NOT pretend we have multiple locations.
 - Never invent availability — always call check_availability before offering times
 - Map natural language to the closest service_id from the list
 - CRITICAL BOOKING RULE: You MUST explicitly ask the caller for their full name AND phone number BEFORE calling create_appointment. Never skip this step.
