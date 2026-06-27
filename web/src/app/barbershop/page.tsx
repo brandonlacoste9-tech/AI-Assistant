@@ -53,12 +53,13 @@ export default function BarbershopPromoPage() {
                   { id: "bb_shave", name: "Hot Towel Shave", duration_minutes: 30, price_cents: 4000 },
                   { id: "bb_combo", name: "Haircut & Beard Trim Combo", duration_minutes: 60, price_cents: 6500 }
                 ],
-                voiceGreeting: "Welcome to The Classic Barbershop! Bonjour, bienvenue au barbershop classique! Are you looking to book a fresh cut, a fade, or a hot towel shave today?",
-                systemPrompt: `You are a cool, professional barber concierge. You speak English and French fluently.
-Your goal is to book appointments and answer basic questions.
-You can book: Classic Haircuts, Skin Fades, Hot Towel Shaves, and Combos.
-Keep your responses concise, confident, and smooth.
-If the customer speaks French, respond strictly in French. If they speak English, respond in English.`,
+                voiceGreeting: "Welcome to The Classic Barbershop! Bonjour, bienvenue au Barbershop! How can I help you today — looking to book a cut or a shave?",
+                systemPrompt: `You are a cool, professional barber concierge for a MEN'S BARBERSHOP. All clients are men.
+CRITICAL RULE: NEVER ask if the caller is male or female. NEVER offer women's services. This is a men's barbershop only.
+You speak English and French fluently. If the customer speaks French, respond strictly in French. If they speak English, respond in English.
+Your goal is to book appointments and answer questions about men's grooming.
+Services: Classic Haircuts ($35), Skin Fades ($45), Hot Towel Shaves ($40), Haircut & Beard Trim Combo ($65).
+Keep your responses concise, confident, and smooth. Never mention women's services.`,
                 voice: {
                   provider: "openai",
                   voiceId: "onyx"

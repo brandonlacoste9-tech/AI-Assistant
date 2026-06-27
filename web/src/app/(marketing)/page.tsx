@@ -71,15 +71,16 @@ export default async function HomePage() {
                     name: "Salon Demo AI",
                     voiceGreeting: fr
                       ? "Bonjour, merci d'appeler notre salon ! Je suis votre réceptionniste IA. Comment puis-je vous aider aujourd'hui ?"
-                      : "Hi, thanks for calling! I'm the AI receptionist for this salon. I can help you book a haircut, check availability, or answer any questions. How can I help you today?",
+                      : "Hi, thanks for calling! I'm the AI receptionist for this salon. How can I help you today?",
                     voiceInstructions: fr
-                      ? "You are a highly professional demo AI receptionist for a luxury hair salon and barbershop. Speak French. When a customer asks to book, first ask: 'Cherchez-vous à réserver pour un homme ou pour une femme ?'. If male, enthusiastically recommend our expert barbers for fades, beard trims, and classic cuts. If female, enthusiastically recommend our fabulous hairstylists for cuts, balayage, and color. Show detailed knowledge. Also, explain that the JustBookMe software costs $29/month and integrates with any scheduling system."
-                      : "You are a highly professional demo AI receptionist for a luxury hair salon and barbershop. Speak English. When a customer asks to book, first ask: 'Are you booking for a men's cut or a women's service?'. If men's, enthusiastically recommend our expert barbers who specialize in fades, beard trims, and classic cuts. If women's, enthusiastically recommend our fabulous hairstylists who are experts in cuts, balayage, and color. Show detailed knowledge. If they ask about pricing, let them know services start at $45. Keep it natural and warm.",
+                      ? "Tu es la réceptionniste IA d'un salon de coiffure haut de gamme pour femmes. Tu parles français. Ce salon est EXCLUSIVEMENT pour les femmes — ne demande JAMAIS si c'est pour un homme ou une femme. Assume toujours que la cliente est une femme. Tes services sont: coupes, balayage, couleur, mèches, soins capillaires et coiffures événementielles. Sois chaleureuse, élégante et professionnelle. Si la cliente veut prendre rendez-vous, demande quel service, puis la date et l'heure souhaitées, puis son nom et numéro de téléphone."
+                      : "You are the AI receptionist for a high-end women's hair salon. This salon serves WOMEN ONLY — never ask if they are male or female, never offer men's services. Assume every caller is a woman. Your services are: women's haircuts and styling, balayage, highlights, hair color, keratin treatments, and blowouts. Be warm, elegant, and professional. If the caller wants to book, ask which service they want, then their preferred date and time, then their name and phone number. Prices start at $65 for a cut and style.",
                     services: [
-                      { id: "haircut_m", name: "Men's Haircut", duration_minutes: 30, price_cents: 4500 },
-                      { id: "haircut_f", name: "Women's Cut & Style", duration_minutes: 60, price_cents: 7500 },
-                      { id: "color", name: "Hair Color / Balayage", duration_minutes: 90, price_cents: 15000 },
-                      { id: "beard", name: "Beard Trim", duration_minutes: 20, price_cents: 2500 },
+                      { id: "cut_style", name: "Women's Cut & Blow Dry", duration_minutes: 60, price_cents: 7500 },
+                      { id: "balayage", name: "Balayage / Highlights", duration_minutes: 120, price_cents: 18000 },
+                      { id: "color", name: "Full Hair Color", duration_minutes: 90, price_cents: 13000 },
+                      { id: "keratin", name: "Keratin Treatment", duration_minutes: 120, price_cents: 22000 },
+                      { id: "blowout", name: "Blowout", duration_minutes: 30, price_cents: 4500 },
                     ],
                   }}
                 />
