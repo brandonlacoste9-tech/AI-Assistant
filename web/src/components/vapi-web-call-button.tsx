@@ -134,8 +134,8 @@ ${services ? `Services available:\n${JSON.stringify(services, null, 2)}` : ""}
           {callStatus === "loading"
             ? "Connecting…"
             : callStatus === "active"
-            ? "End Demo Call"
-            : "🎙️ Try it Live — Talk to the AI"}
+            ? "End Call"
+            : "Call the Concierge"}
         </span>
       </button>
 
