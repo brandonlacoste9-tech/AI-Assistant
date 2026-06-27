@@ -5,9 +5,10 @@ import { Logo } from "@/components/ui/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
-import { Calendar, Contact, LayoutDashboard, LogOut, Phone, Settings, Users } from "lucide-react";
+import { Calendar, Contact, LayoutDashboard, LogOut, Phone, Settings, Users, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
 const links = [
   { href: "/dashboard", icon: LayoutDashboard, key: "today" as const },
@@ -28,6 +29,7 @@ export function DashboardNav({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   async function logout() {
     const supabase = createClient();
@@ -36,18 +38,28 @@ export function DashboardNav({
     router.refresh();
   }
 
-  return (
-    <aside className="z-40 flex w-full shrink-0 flex-col border-b border-[var(--border)] bg-[var(--surface)] lg:fixed lg:inset-y-0 lg:h-dvh lg:w-64 lg:border-b-0 lg:border-r">
-      <div className="shrink-0 border-b border-[var(--border)] px-4 py-4 sm:px-5 sm:py-5">
-        <Logo href="/" size={32} className="w-fit" />
-        <p
-          className="mt-3 line-clamp-2 text-sm font-semibold leading-snug text-[var(--foreground)] sm:text-base"
-          title={businessName}
+  const navContent = (
+    <div className="flex h-full flex-col bg-[var(--surface)]">
+      <div className="shrink-0 border-b border-[var(--border)] px-4 py-4 sm:px-5 sm:py-5 flex items-center justify-between lg:block">
+        <div>
+          <Logo href="/" size={32} className="w-fit" />
+          <p
+            className="mt-3 line-clamp-2 text-sm font-semibold leading-snug text-[var(--foreground)] sm:text-base"
+            title={businessName}
+          >
+            {businessName}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() => setMobileOpen(false)}
+          className="lg:hidden rounded-lg p-1.5 text-[var(--muted-fg)] hover:bg-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+          aria-label="Close menu"
         >
-          {businessName}
-        </p>
+          <X className="h-6 w-6" />
+        </button>
       </div>
-      <nav className="flex min-h-0 flex-1 flex-wrap gap-1 px-3 py-3 lg:flex-col lg:flex-nowrap lg:overflow-y-auto lg:py-4">
+      <nav className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto px-3 py-3 lg:py-4">
         {links.map(({ href, icon: Icon, key }) => {
           const active =
             href === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(href);
@@ -55,8 +67,9 @@ export function DashboardNav({
             <Link
               key={href}
               href={href}
+              onClick={() => setMobileOpen(false)}
               className={cn(
-                "flex shrink-0 items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors lg:shrink",
+                "flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                 active
                   ? "bg-[var(--primary-light)] text-[var(--primary)]"
                   : "text-[var(--muted-fg)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]"
@@ -81,6 +94,46 @@ export function DashboardNav({
           <ThemeToggle />
         </div>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Mobile Top Header */}
+      <header className="lg:hidden sticky top-0 z-30 flex h-16 items-center justify-between border-b border-[var(--border)] bg-[var(--surface)] px-4 sm:px-6">
+        <Logo href="/" size={28} />
+        <button
+          type="button"
+          onClick={() => setMobileOpen(true)}
+          className="rounded-lg p-2 text-[var(--muted-fg)] hover:bg-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+          aria-label="Open menu"
+        >
+          <Menu className="h-6 w-6" />
+        </button>
+      </header>
+
+      {/* Mobile Sidebar Overlay */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      {/* Mobile Sidebar Drawer */}
+      <aside
+        className={cn(
+          "fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-[var(--border)] bg-[var(--surface)] transition-transform duration-300 ease-in-out lg:hidden",
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        {navContent}
+      </aside>
+
+      {/* Desktop Sidebar (Fixed) */}
+      <aside className="hidden lg:flex fixed inset-y-0 left-0 z-40 w-64 flex-col border-r border-[var(--border)] bg-[var(--surface)]">
+        {navContent}
+      </aside>
+    </>
   );
 }
