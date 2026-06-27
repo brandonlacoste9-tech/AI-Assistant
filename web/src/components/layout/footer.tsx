@@ -34,7 +34,9 @@ export function Footer({ locale }: { locale: Locale }) {
               <p className="text-xs font-semibold uppercase tracking-widest text-white/30">Company</p>
               <Link href="/privacy" className="text-white/60 transition-colors hover:text-white">{t.footer.privacy}</Link>
               <Link href="/terms" className="text-white/60 transition-colors hover:text-white">{t.footer.terms}</Link>
-              <a href={`mailto:${getContactEmail()}`} className="text-white/60 transition-colors hover:text-white">{getContactEmail()}</a>
+              <a href={`mailto:${getContactEmail()}`} className="text-white/60 transition-colors hover:text-white">
+                {locale === "fr" ? "Questions? Écrivez-nous" : "Questions? Email us"}
+              </a>
             </div>
             <div className="flex flex-col gap-3">
               <p className="text-xs font-semibold uppercase tracking-widest text-white/30">Get Started</p>
@@ -51,9 +53,9 @@ export function Footer({ locale }: { locale: Locale }) {
         {/* Bottom bar */}
         <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/30">
           <p>© {new Date().getFullYear()} JustBookMe. {locale === "fr" ? "Tous droits réservés." : "All rights reserved."}</p>
-          <p className="text-white/20">Built in Montréal 🇨🇦</p>
+          <p className="text-white/20">Built in Canada 🇨🇦 &middot; Serving businesses worldwide</p>
         </div>
       </div>
     </footer>
   );
-}
+}

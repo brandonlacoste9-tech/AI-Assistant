@@ -487,7 +487,7 @@ const fr: Dictionary = {
   },
   footer: {
     cta: "Prêt à ne plus perdre de clients?",
-    rights: "JustBookMe · Montréal, QC",
+    rights: "JustBookMe · Canada & Monde",
     privacy: "Confidentialité",
     terms: "Conditions",
   },
@@ -558,7 +558,7 @@ const fr: Dictionary = {
     },
     langOptions: { fr: "Français", en: "English" },
     submit: "Créer mon compte",
-    success: "Compte créé! Connectez-vous pour configurer votre salon.",
+    success: "Compte créé! Connectez-vous pour configurer votre entreprise.",
     hasAccount: "Déjà un compte?",
   },
   login: {
@@ -734,7 +734,7 @@ const fr: Dictionary = {
       line: "Ligne",
       agentId: "Agent Vapi",
       sharedLineNote:
-        "En essai, la ligne partagée pointe vers le dernier agent synchronisé. Chaque salon reçoit son propre agent vocal.",
+        "En essai, la ligne partagée pointe vers le dernier agent synchronisé. Chaque entreprise reçoit son propre agent vocal.",
       syncCta: "Synchroniser l'agent vocal",
       syncing: "Synchronisation…",
       syncDone: "Agent vocal mis à jour avec vos infos actuelles.",
@@ -808,8 +808,8 @@ const fr: Dictionary = {
       saving: "Enregistrement…",
     },
     staff: {
-      title: "Coiffeurs & Barbiers",
-      subtitle: "Ajoutez vos coiffeurs et barbiers pour les associer aux rendez-vous.",
+      title: "Équipe & Employés",
+      subtitle: "Ajoutez les membres de votre équipe pour les associer aux rendez-vous.",
       empty: "Aucun employé — ajoutez le premier ci-dessous.",
       namePlaceholder: "Nom affiché",
       add: "Ajouter",
@@ -1087,7 +1087,7 @@ const en: Dictionary = {
   },
   footer: {
     cta: "Ready to stop losing clients?",
-    rights: "JustBookMe · Montreal, QC",
+    rights: "JustBookMe · Canada & Worldwide",
     privacy: "Privacy",
     terms: "Terms",
   },
@@ -1158,7 +1158,7 @@ const en: Dictionary = {
     },
     langOptions: { fr: "Français", en: "English" },
     submit: "Create account",
-    success: "Account created! Sign in to set up your business.",
+    success: "Account created! Sign in to set up your account.",
     hasAccount: "Already have an account?",
   },
   login: {
@@ -1334,7 +1334,7 @@ const en: Dictionary = {
       line: "Phone line",
       agentId: "Vapi agent",
       sharedLineNote:
-        "During trial, the shared line routes to the last synced agent. Each salon gets its own voice agent.",
+        "During trial, the shared line routes to the last synced agent. Each business gets its own dedicated voice agent.",
       syncCta: "Sync voice agent",
       syncing: "Syncing…",
       syncDone: "Voice agent updated with your latest business info.",
@@ -1408,8 +1408,8 @@ const en: Dictionary = {
       saving: "Saving…",
     },
     staff: {
-      title: "Stylists & Barbers",
-      subtitle: "Add stylists and barbers to assign to appointments.",
+      title: "Team & Staff",
+      subtitle: "Add your team members to assign them to appointments.",
       empty: "No staff yet — add your first below.",
       namePlaceholder: "Display name",
       add: "Add",

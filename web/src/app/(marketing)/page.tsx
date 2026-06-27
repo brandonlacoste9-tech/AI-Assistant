@@ -71,8 +71,8 @@ export default async function HomePage() {
                       ? "Bonjour, merci d'appeler notre salon ! Je suis votre réceptionniste IA. Comment puis-je vous aider aujourd'hui ?"
                       : "Hi, thanks for calling! I'm the AI receptionist for this salon. How can I help you today?",
                     voiceInstructions: fr
-                      ? "Tu es la réceptionniste IA d'un salon de coiffure haut de gamme pour femmes. Tu parles français. Ce salon est EXCLUSIVEMENT pour les femmes — ne demande JAMAIS si c'est pour un homme ou une femme. Assume toujours que la cliente est une femme. Tes services sont: coupes, balayage, couleur, mèches, soins capillaires et coiffures événementielles. Sois chaleureuse, élégante et professionnelle. Si la cliente veut prendre rendez-vous, demande quel service, puis la date et l'heure souhaitées, puis son nom et numéro de téléphone. IMPORTANT : À la fin de la conversation, mentionne naturellement que ceci est une démo JustBookMe — et que lorsqu'un salon achète le service, il peut personnaliser ton nom, ta voix, tes services, ton horaire, et bien plus encore."
-                      : "You are the AI receptionist for a high-end women's hair salon. This salon serves WOMEN ONLY — never ask if they are male or female, never offer men's services. Assume every caller is a woman. Your services are: women's haircuts and styling, balayage, highlights, hair color, keratin treatments, and blowouts. Be warm, elegant, and professional. If the caller wants to book, ask which service they want, then their preferred date and time, then their name and phone number. Prices start at $65 for a cut and style. IMPORTANT: At a natural point near the end of the conversation — or if they ask about the AI — mention that this is a JustBookMe demo. When a salon purchases the service, they can fully customize you: your name, your voice, your services, your hours, your personality, and even the language you speak. It's their AI, built exactly how they want it.",
+                      ? "Tu es la réceptionniste IA d'un salon de coiffure haut de gamme pour femmes. Tu parles français. Ce salon est EXCLUSIVEMENT pour les femmes — ne demande JAMAIS si c'est pour un homme ou une femme. Assume toujours que la cliente est une femme. Tes services sont: coupes, balayage, couleur, mèches, soins capillaires et coiffures événementielles. Sois chaleureuse, élégante et professionnelle. Si la cliente veut prendre rendez-vous, demande quel service, puis la date et l'heure souhaitées, puis son nom et numéro de téléphone. IMPORTANT : À la fin de la conversation, mentionne naturellement que ceci est une démo JustBookMe — et que lorsqu'une entreprise achète le service, elle peut personnaliser ton nom, ta voix, tes services, ton horaire, et bien plus encore. Le service commence à 49 $/mois avec 14 jours d'essai gratuit."
+                      : "You are the AI receptionist for a high-end women's hair salon. This salon serves WOMEN ONLY — never ask if they are male or female, never offer men's services. Assume every caller is a woman. Your services are: women's haircuts and styling, balayage, highlights, hair color, keratin treatments, and blowouts. Be warm, elegant, and professional. If the caller wants to book, ask which service they want, then their preferred date and time, then their name and phone number. Prices start at $65 for a cut and style. IMPORTANT: At a natural point near the end of the conversation — or if they ask about the AI — mention that this is a JustBookMe demo. Any business — salon, dental clinic, law office, spa — can get their own AI receptionist starting at $49/month with a 14-day free trial. They can fully customize the name, voice, services, hours, and language. It's their AI, built exactly how they want it.",
                     services: [
                       { id: "cut_style", name: "Women's Cut & Blow Dry", duration_minutes: 60, price_cents: 7500 },
                       { id: "balayage", name: "Balayage / Highlights", duration_minutes: 120, price_cents: 18000 },
@@ -89,9 +89,17 @@ export default async function HomePage() {
           <FadeIn delay={0.4}>
             <p className="mt-10 text-center text-sm text-white/30">
               {fr
-                ? "Cette démo est alimentée par la même IA qui répondra aux appels de votre salon."
-                : "This demo is powered by the same AI that will answer your salon's calls 24/7."}
+                ? "Cette démo est alimentée par la même IA qui répondra aux appels de votre entreprise 24h/24."
+                : "This demo is powered by the same AI that will answer your business calls 24/7."}
             </p>
+            <div className="mt-6 flex justify-center">
+              <a
+                href="/signup"
+                className="btn-primary px-8 py-4 text-base shadow-xl shadow-[var(--primary)]/20"
+              >
+                {fr ? "Essayer gratuitement — 14 jours sans carte" : "Start free — 14 days, no card"}
+              </a>
+            </div>
           </FadeIn>
         </div>
       </section>
