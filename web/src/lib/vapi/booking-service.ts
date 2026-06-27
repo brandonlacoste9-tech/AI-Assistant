@@ -400,7 +400,7 @@ export async function createAppointment(args: {
     serviceName: service?.name ?? null,
     locale: smsLocale,
   });
-  await sendOutboundSms(args.businessId, phone, customerSmsBody);
+  const sms = await sendOutboundSms(args.businessId, phone, customerSmsBody);
 
   if (owner?.phone) {
     const ownerSmsBody = ownerBookingNotificationSms({
