@@ -198,6 +198,31 @@ export type Dictionary = {
       saving: string;
       customSaved: string;
       saveError: string;
+      aiCustomTitle: string;
+      aiCustomSubtitle: string;
+      personalityLabel: string;
+      personalityFriendly: string;
+      personalityLuxury: string;
+      personalityCorporate: string;
+      bilingualLabel: string;
+      bilingualHint: string;
+      bilingualToggle: string;
+    };
+    phone: {
+      title: string;
+      subtitle: string;
+      step1Title: string;
+      step1Desc: string;
+      generate: string;
+      dedicatedTitle: string;
+      dedicatedDesc: string;
+      areaCodeLabel: string;
+      getNumber: string;
+      readyTitle: string;
+      step2Title: string;
+      step2Desc: string;
+      disableForwarding: string;
+      notConfigured: string;
     };
     bookings: {
       add: string;
@@ -558,7 +583,7 @@ const fr: Dictionary = {
     },
     langOptions: { fr: "Français", en: "English" },
     submit: "Créer mon compte",
-    success: "Compte créé! Connectez-vous pour configurer votre entreprise.",
+    success: "Compte créé! Votre essai gratuit de 14 jours est maintenant actif.",
     hasAccount: "Déjà un compte?",
   },
   login: {
@@ -566,7 +591,7 @@ const fr: Dictionary = {
     subtitle: "Accédez à votre tableau de bord JustBookMe.",
     fields: { email: "Courriel", password: "Mot de passe" },
     submit: "Se connecter",
-    registered: "Compte créé! Connectez-vous pour continuer.",
+    registered: "Compte créé! Connectez-vous pour accéder à votre tableau de bord.",
     noAccount: "Pas encore de compte?",
     configError: "Connexion indisponible — configuration serveur manquante.",
   },
@@ -752,6 +777,31 @@ const fr: Dictionary = {
       saving: "Enregistrement…",
       customSaved: "Personnalisation enregistrée — agent vocal mis à jour.",
       saveError: "Erreur — réessayez.",
+      aiCustomTitle: "Personnalisation de l'IA",
+      aiCustomSubtitle: "Configurez le ton et le comportement de votre assistant IA.",
+      personalityLabel: "Personnalité de l'IA",
+      personalityFriendly: "Amical et décontracté (par défaut)",
+      personalityLuxury: "Concierge de luxe (haut de gamme)",
+      personalityCorporate: "Professionnel corporatif (direct)",
+      bilingualLabel: "Capacités linguistiques",
+      bilingualHint: "Activez les capacités bilingues natives.",
+      bilingualToggle: "Mode bilingue natif (FR/EN)",
+    },
+    phone: {
+      title: "Configuration du transfert d'appels",
+      subtitle: "Gardez votre numéro actuel et transférez les appels manqués à votre IA.",
+      step1Title: "Étape 1 : Obtenez votre numéro IA",
+      step1Desc: "Nous vous assignerons un numéro local pour votre réceptionniste IA.",
+      generate: "Générer un numéro",
+      dedicatedTitle: "Obtenez un numéro dédié",
+      dedicatedDesc: "Choisissez votre indicatif régional préféré.",
+      areaCodeLabel: "Indicatif régional",
+      getNumber: "Obtenir le numéro",
+      readyTitle: "Votre numéro IA est prêt",
+      step2Title: "Étape 2 : Transférez les appels manqués",
+      step2Desc: "Composez le code suivant sur votre téléphone d'entreprise :",
+      disableForwarding: "Pour désactiver le transfert, composez *73.",
+      notConfigured: "Non configuré",
     },
     bookings: {
       add: "Nouveau rendez-vous",
@@ -1158,7 +1208,7 @@ const en: Dictionary = {
     },
     langOptions: { fr: "Français", en: "English" },
     submit: "Create account",
-    success: "Account created! Sign in to set up your account.",
+    success: "Account created! Your 14-day free trial is now active.",
     hasAccount: "Already have an account?",
   },
   login: {
@@ -1166,7 +1216,7 @@ const en: Dictionary = {
     subtitle: "Access your JustBookMe dashboard.",
     fields: { email: "Email", password: "Password" },
     submit: "Log in",
-    registered: "Account created! Sign in to continue.",
+    registered: "Account created! Sign in to access your dashboard.",
     noAccount: "Don't have an account?",
     configError: "Login unavailable — server not configured.",
   },
@@ -1352,6 +1402,31 @@ const en: Dictionary = {
       saving: "Saving…",
       customSaved: "Customization saved — voice agent updated.",
       saveError: "Error — please try again.",
+      aiCustomTitle: "AI Customization",
+      aiCustomSubtitle: "Configure how your AI assistant speaks and behaves.",
+      personalityLabel: "AI Personality",
+      personalityFriendly: "Friendly & Casual (Default)",
+      personalityLuxury: "Luxury Concierge (White-Glove)",
+      personalityCorporate: "Corporate Professional (Direct)",
+      bilingualLabel: "Language Capabilities",
+      bilingualHint: "Enable native bilingual capabilities.",
+      bilingualToggle: "Native Bilingual Mode (EN/FR)",
+    },
+    phone: {
+      title: "Call Forwarding Setup",
+      subtitle: "Keep your existing number and forward missed calls to your AI.",
+      step1Title: "Step 1: Get your AI Number",
+      step1Desc: "We'll assign a local phone number for your AI receptionist.",
+      generate: "Generate Phone Number",
+      dedicatedTitle: "Get a Dedicated Number",
+      dedicatedDesc: "Choose your preferred area code and we'll provision a dedicated local number.",
+      areaCodeLabel: "Area Code",
+      getNumber: "Get Number",
+      readyTitle: "Your AI Number is Ready",
+      step2Title: "Step 2: Forward Missed Calls",
+      step2Desc: "Dial the following code on your business phone to forward unanswered calls to the AI:",
+      disableForwarding: "To disable call forwarding at any time, dial *73.",
+      notConfigured: "Not configured",
     },
     bookings: {
       add: "New booking",

@@ -108,28 +108,28 @@ export function VoiceSettingsCard({
 
           <div className="mt-6 space-y-4 border-t border-[var(--border)] pt-6">
             <div>
-              <h3 className="text-sm font-semibold text-[var(--foreground)]">AI Customization</h3>
-              <p className="mt-1 text-xs text-[var(--muted-fg)]">Configure how your AI assistant speaks and behaves.</p>
+              <h3 className="text-sm font-semibold text-[var(--foreground)]">{t.aiCustomTitle}</h3>
+              <p className="mt-1 text-xs text-[var(--muted-fg)]">{t.aiCustomSubtitle}</p>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
-                <label className="text-sm font-medium text-[var(--foreground)]">AI Personality</label>
-                <p className="mb-2 text-xs text-[var(--muted-fg)]">Select the tone and pacing of your assistant.</p>
+                <label className="text-sm font-medium text-[var(--foreground)]">{t.personalityLabel}</label>
+                <p className="mb-2 text-xs text-[var(--muted-fg)]">{t.aiCustomSubtitle}</p>
                 <select
                   className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-sm text-[var(--foreground)]"
                   value={personality}
                   onChange={(e) => setPersonality(e.target.value)}
                 >
-                  <option value="friendly">Friendly & Casual (Default)</option>
-                  <option value="luxury">Luxury Concierge (White-Glove)</option>
-                  <option value="corporate">Corporate Professional (Direct)</option>
+                  <option value="friendly">{t.personalityFriendly}</option>
+                  <option value="luxury">{t.personalityLuxury}</option>
+                  <option value="corporate">{t.personalityCorporate}</option>
                 </select>
               </div>
 
               <div>
-                <label className="text-sm font-medium text-[var(--foreground)]">Language Capabilities</label>
-                <p className="mb-2 text-xs text-[var(--muted-fg)]">Enable native bilingual capabilities.</p>
+                <label className="text-sm font-medium text-[var(--foreground)]">{t.bilingualLabel}</label>
+                <p className="mb-2 text-xs text-[var(--muted-fg)]">{t.bilingualHint}</p>
                 <label className="flex items-center gap-3 rounded-lg border border-[var(--border)] bg-[var(--background)] p-3 cursor-pointer hover:bg-[var(--primary-light)] transition-colors">
                   <input
                     type="checkbox"
@@ -137,7 +137,7 @@ export function VoiceSettingsCard({
                     checked={bilingual}
                     onChange={(e) => setBilingual(e.target.checked)}
                   />
-                  <span className="text-sm text-[var(--foreground)]">Native Bilingual Mode (EN/FR)</span>
+                  <span className="text-sm text-[var(--foreground)]">{t.bilingualToggle}</span>
                 </label>
               </div>
             </div>

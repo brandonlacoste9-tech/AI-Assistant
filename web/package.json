@@ -21,7 +21,10 @@
     "cron:reminders": "node scripts/run-reminders-cron.mjs",
     "cron:reminders-2h": "node scripts/run-reminders-2h-cron.mjs",
     "cron:usage-rollup": "node scripts/run-usage-rollup-cron.mjs",
-    "stripe:setup": "node scripts/stripe-setup.mjs"
+    "stripe:setup": "node scripts/stripe-setup.mjs",
+    "twilio:pool": "node scripts/twilio-provision-pool.mjs",
+    "twilio:pool:dry": "node scripts/twilio-provision-pool.mjs --dry-run",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",
@@ -43,13 +46,19 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@jest/globals": "^29.7.0",
     "@netlify/plugin-nextjs": "^5.15.8",
+    "@sentry/nextjs": "^8.0.0",
+    "@swc/core": "^1.4.0",
+    "@swc/jest": "^0.2.36",
     "@tailwindcss/postcss": "^4",
+    "@types/jest": "^29.5.12",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "^15.5.18",
+    "jest": "^29.7.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

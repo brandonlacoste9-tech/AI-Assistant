@@ -178,7 +178,7 @@ export default async function SettingsPage() {
         initialPersonality={aiPersonality}
         initialBilingual={bilingualMode}
       />
-      <PhoneSetupFlow initialPhoneNumber={phoneNumber} />
+      <PhoneSetupFlow initialPhoneNumber={phoneNumber} hasAssistant={Boolean(assistantId)} />
       <StaffCard dict={t} initial={staffRows} />
 
       {slug && <EmbedCard dict={t} slug={slug} siteUrl={siteUrl} />}

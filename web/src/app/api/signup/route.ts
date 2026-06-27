@@ -1,4 +1,6 @@
 import { getSupabaseService } from "@/lib/supabase/server";
+import { sendEmail } from "@/lib/email/send";
+import { welcomeEmail } from "@/lib/email/templates/welcome";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -110,10 +112,22 @@ export async function POST(req: Request) {
       console.error("[signup] subscription", subError);
     }
 
+    // Send welcome email (fire-and-forget — don't block signup)
+    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://justbookme.ca").replace(/\/$/, "");
+    const emailLocale = (locale === "en" ? "en" : "fr") as "fr" | "en";
+    const { subject, html, text } = welcomeEmail({
+      businessName: business_name,
+      locale: emailLocale,
+      loginUrl: `${siteUrl}/login`,
+    });
+    sendEmail({ to: email, subject, html, text }).catch((err) =>
+      console.error("[signup] welcome email failed:", err)
+    );
+
     return NextResponse.json({
       ok: true,
       business_id: business.id,
-      message: "Account created. We will contact you within 48 hours to activate your trial.",
+      message: "Account created. Your 14-day free trial is now active.",
     });
   } catch (err) {
     console.error("[signup]", err);

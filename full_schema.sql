@@ -406,3 +406,8 @@ ALTER TABLE businesses
 
 ALTER TABLE leads
   ADD COLUMN IF NOT EXISTS metadata JSONB DEFAULT '{}'::jsonb;
+-- Google Calendar OAuth tokens per business
+ALTER TABLE businesses
+  ADD COLUMN IF NOT EXISTS google_access_token TEXT,
+  ADD COLUMN IF NOT EXISTS google_refresh_token TEXT,
+  ADD COLUMN IF NOT EXISTS google_token_expires_at TIMESTAMPTZ;

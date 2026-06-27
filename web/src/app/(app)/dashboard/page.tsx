@@ -1,6 +1,7 @@
 import { CallsList } from "@/components/dashboard/calls-list";
 import { OutboundSmsBanner } from "@/components/dashboard/outbound-sms-banner";
 import { SetupChecklistCard } from "@/components/dashboard/setup-checklist-card";
+import { TrialUpgradeBanner } from "@/components/dashboard/trial-upgrade-banner";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { requireOnboardedContext } from "@/lib/auth/get-business-context";
@@ -159,6 +160,11 @@ export default async function DashboardPage() {
         {t.dashboard.title}
       </h1>
       <p className="mt-1 text-sm text-[var(--muted-fg)]">{t.dashboard.subtitle}</p>
+
+      <TrialUpgradeBanner
+        daysLeft={ctx.trialEndsAt ? Math.ceil((new Date(ctx.trialEndsAt).getTime() - Date.now()) / 86_400_000) : 99}
+        locale={locale}
+      />
 
       <OutboundSmsBanner dict={t} status={smsStatus} />
 
