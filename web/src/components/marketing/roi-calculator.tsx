@@ -14,7 +14,7 @@ export function RoiCalculator({ fr }: Props) {
   const [missedPerWeek, setMissedPerWeek] = useState(5);
 
   const monthlyLost = avgService * missedPerWeek * 4;
-  const plan = 149;
+  const plan = 49;
   const recovered = Math.round(monthlyLost * 0.6); // AI recovers ~60%
   const roi = recovered - plan;
 

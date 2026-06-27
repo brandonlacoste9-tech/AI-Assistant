@@ -50,7 +50,7 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
             {[
               { value: "24/7", label: fr ? "Disponible" : "Available" },
               { value: "FR/EN", label: fr ? "Bilingue" : "Bilingual" },
-              { value: "$149", label: fr ? "À partir de" : "Starting at" },
+              { value: "$49", label: fr ? "À partir de" : "Starting at" },
             ].map((stat) => (
               <div key={stat.label}>
                 <p className="font-display text-3xl font-bold text-[var(--accent)] drop-shadow-md">{stat.value}</p>

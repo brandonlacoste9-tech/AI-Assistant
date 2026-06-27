@@ -430,7 +430,7 @@ const fr: Dictionary = {
     rows: [
       { label: "5 coupes manquées / semaine × 45 $", value: "900 $/mois" },
       { label: "2 balayages no-shows / semaine × 150 $ (Dépôts perdus)", value: "1 200 $/mois" },
-      { label: "JustBookMe Concierge", value: "39 $/mois" },
+      { label: "JustBookMe Concierge", value: "49 $/mois" },
     ],
     punchline: "Une seule coupe récupérée par mois paie l'abonnement.",
   },
@@ -1030,7 +1030,7 @@ const en: Dictionary = {
     rows: [
       { label: "5 missed haircuts/week × $45", value: "$900/month" },
       { label: "2 color no-shows/week × $150 (Lost deposits)", value: "$1,200/month" },
-      { label: "JustBookMe Concierge", value: "$39/month" },
+      { label: "JustBookMe Concierge", value: "$49/month" },
     ],
     punchline: "Recover a single $45 haircut per month and the service pays for itself.",
   },
@@ -1570,6 +1570,6 @@ export function getDictionary(locale: Locale): Dictionary {
 }
 
 export const PLAN_PRICES = {
-  starter: { monthly: 149, annual: 1490 },
-  white_glove: { monthly: 299, annual: 2990 },
+  starter: { monthly: 49, annual: 490 },
+  white_glove: { monthly: 149, annual: 1490 },
 } as const;
