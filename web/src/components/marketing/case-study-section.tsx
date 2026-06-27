@@ -103,15 +103,6 @@ Conversation flow:
                    </div>
                  </div>
                  
-                 <div className="flex gap-4 flex-row-reverse">
-                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--primary)]/50">
-                     <span className="text-sm font-bold text-white">You</span>
-                   </div>
-                   <div className="rounded-2xl rounded-tr-none bg-[var(--primary)] p-4 text-sm text-white">
-                     {fr ? "J'aimerais en savoir plus sur les traitements au laser." : "I'd like to learn more about your laser treatments."}
-                   </div>
-                 </div>
-
                  <div className="flex gap-4">
                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#d4af37]/20">
                      <span className="text-lg font-bold text-[#d4af37]">VP</span>
