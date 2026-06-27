@@ -75,3 +75,19 @@ export async function importTwilioPhoneNumber(payload: Record<string, unknown>) 
     body: JSON.stringify(payload),
   });
 }
+
+export type VapiCallPayload = {
+  phoneNumberId: string;
+  assistantId?: string;
+  assistant?: Record<string, unknown>;
+  customer: {
+    number: string;
+  };
+};
+
+export async function createOutboundCall(payload: VapiCallPayload) {
+  return vapiFetch<{ id: string }>("/call/phone", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
