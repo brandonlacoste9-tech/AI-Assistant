@@ -3,6 +3,7 @@ import { VerticalsSection } from "@/components/marketing/verticals-section";
 import { SectionHeading } from "@/components/marketing/section-heading";
 import { CaseStudySection } from "@/components/marketing/case-study-section";
 import { SocialProof } from "@/components/marketing/social-proof";
+import { RoiCalculator } from "@/components/marketing/roi-calculator";
 import { PricingSection } from "@/components/pricing/pricing-section";
 import { FadeIn } from "@/components/ui/fade-in";
 import { AiPhoneFrame } from "@/components/marketing/ai-phone-frame";
@@ -11,13 +12,10 @@ import { getLocale } from "@/lib/i18n/get-locale";
 import {
   BarChart3,
   Calendar,
-  Check,
   MessageSquare,
   Phone,
-  Sparkles,
   Users,
 } from "lucide-react";
-import Link from "next/link";
 import { VapiWebCallButton } from "@/components/vapi-web-call-button";
 
 const featureIcons = [Phone, Calendar, MessageSquare, Users, BarChart3];
@@ -166,56 +164,7 @@ export default async function HomePage() {
       <FadeIn>
         <section className="py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="card overflow-hidden">
-              <div className="grid lg:grid-cols-2">
-                <div className="bg-gradient-to-br from-[var(--primary)] to-[#2a5080] p-8 sm:p-10">
-                  <Sparkles className="h-6 w-6 text-[var(--accent)]" />
-                  <h2 className="font-display mt-4 text-2xl font-semibold text-white sm:text-3xl">
-                    {t.builtForQuebec.title}
-                  </h2>
-                  <ul className="mt-8 space-y-4">
-                    {t.builtForQuebec.items.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-white/90">
-                        <Check className="mt-0.5 h-5 w-5 shrink-0 text-[var(--accent)]" />
-                        <span className="text-sm leading-relaxed sm:text-base">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="bg-[var(--surface)] p-8 sm:p-10">
-                  <SectionHeading title={t.roi.title} />
-                  <div className="mt-6 space-y-3">
-                    {t.roi.rows.map((row, i) => (
-                      <div
-                        key={row.label}
-                        className={`flex items-center justify-between rounded-xl px-4 py-3 ${
-                          i === t.roi.rows.length - 1
-                            ? "bg-[var(--teal-light)] border border-[var(--teal)]/20"
-                            : "bg-[var(--muted)]"
-                        }`}
-                      >
-                        <span className="text-sm text-[var(--muted-fg)]">{row.label}</span>
-                        <span
-                          className={`font-display font-semibold ${
-                            i === t.roi.rows.length - 1 ? "text-[var(--teal)]" : "text-[var(--foreground)]"
-                          }`}
-                        >
-                          {row.value}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="mt-6 text-sm font-medium text-[var(--primary)]">{t.roi.punchline}</p>
-                  <Link
-                    href="#pricing"
-                    className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[var(--accent-hover)] hover:underline"
-                  >
-                    {fr ? "Voir les forfaits" : "See plans"}
-                    <span>→</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <RoiCalculator fr={fr} />
           </div>
         </section>
       </FadeIn>

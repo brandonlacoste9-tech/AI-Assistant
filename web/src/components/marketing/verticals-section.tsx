@@ -1,8 +1,8 @@
 import { SectionHeading } from "@/components/marketing/section-heading";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
-import { Scissors, Wrench, Building2 } from "lucide-react";
+import { Scissors, HeartPulse, Briefcase, Sparkles } from "lucide-react";
 
-const ICONS = [Scissors, Wrench, Building2];
+const ICONS = [Scissors, HeartPulse, Briefcase, Sparkles];
 
 export function VerticalsSection({ dict }: { dict: Dictionary }) {
   const v = dict.verticals;
@@ -11,7 +11,7 @@ export function VerticalsSection({ dict }: { dict: Dictionary }) {
     <section className="border-y border-[var(--border)] bg-[var(--surface-elevated)] py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading label={v.label} title={v.title} description={v.subtitle} />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {v.items.map((item, i) => {
             const Icon = ICONS[i] ?? Scissors;
             return (

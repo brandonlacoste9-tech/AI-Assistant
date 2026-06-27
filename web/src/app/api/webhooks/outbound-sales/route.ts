@@ -63,8 +63,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true, callId: res.data?.id });
   } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Unknown error";
     console.error("Outbound sales webhook error:", err);
-    const errorMessage = err instanceof Error ? err.message : "Unknown error";
-    return NextResponse.json({ error: errorMessage }, { status: 500 });
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

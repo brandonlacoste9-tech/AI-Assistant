@@ -1,5 +1,5 @@
 import { cookies, headers } from "next/headers";
-import { DEFAULT_LOCALE, LOCALE_COOKIE, type Locale } from "./types";
+import { LOCALE_COOKIE, type Locale } from "./types";
 
 export async function getLocale(): Promise<Locale> {
   const cookieStore = await cookies();
@@ -8,7 +8,9 @@ export async function getLocale(): Promise<Locale> {
 
   const headerStore = await headers();
   const accept = headerStore.get("accept-language") ?? "";
-  if (accept.toLowerCase().includes("fr")) return "fr";
+  // Prefer French only for FR-primary browsers; default to EN for worldwide visitors
+  const primaryLang = accept.split(",")[0]?.split(";")[0]?.trim().toLowerCase() ?? "";
+  if (primaryLang.startsWith("fr")) return "fr";
 
-  return DEFAULT_LOCALE;
+  return "en";
 }

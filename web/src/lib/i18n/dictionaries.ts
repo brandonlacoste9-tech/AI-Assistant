@@ -376,9 +376,9 @@ const fr: Dictionary = {
     login: "Connexion",
   },
   hero: {
-    headline: "La réceptionniste IA bilingue pour salons et barbershops.",
+    headline: "La réceptionniste IA bilingue pour toute entreprise sur rendez-vous.",
     subhead:
-      "Gardez les mains sur vos ciseaux. JustBookMe répond à vos appels manqués 24 h/24, prend les rendez-vous et remplit vos chaises avec une IA bilingue.",
+      "JustBookMe répond à vos appels manqués 24 h/24, prend les rendez-vous et les confirme — pour les salons, cliniques dentaires, cabinets juridiques, physio et plus encore.",
     ctaPrimary: "Essayer gratuitement",
     ctaSecondary: "Réserver une démo de 15 minutes",
     trust: "Conçu au Québec · Bilingue · Essai 14 jours sans carte",
@@ -510,7 +510,7 @@ const fr: Dictionary = {
       "Les prix affichés n'incluent pas les taxes applicables. TPS/TVQ calculées à la caisse.",
     plans: {
       starter: {
-        name: "Barbier Indépendant",
+        name: "Solo / Indépendant",
         features: [
           "IA vocale bilingue",
           "Réservations intégrées à l'agenda",
@@ -519,9 +519,9 @@ const fr: Dictionary = {
         ],
       },
       white_glove: {
-        name: "Salon Multi-Fauteuils",
+        name: "Multi-Emploiés / Multi-Sites",
         features: [
-          "Tout du forfait Indépendant",
+          "Tout du forfait Solo",
           "Synchronisation calendrier externe (Square, etc.)",
           "Jusqu'à 500 appels IA / mois",
           "Prise en charge multi-succursales",
@@ -937,22 +937,27 @@ const fr: Dictionary = {
     label: "Pour qui",
     title: "Conçu pour votre type d'entreprise",
     subtitle:
-      "Le même réceptionniste IA — adapté aux salons de coiffure, barbershops et instituts de beauté.",
+      "Le même réceptionniste IA — adapté à tout secteur travaillant sur rendez-vous.",
     items: [
       {
-        title: "Salons de coiffure",
-        desc: "L'IA comprend « je veux un balayage » ou « des mèches », propose des créneaux et envoie des rappels.",
-        examples: ["Coupe femme", "Balayage", "Coloration"],
+        title: "Salons & Barbershops",
+        desc: "L'IA comprend « je veux un balayage », un fade ou une taille de barbe — propose des créneaux et envoie des rappels SMS.",
+        examples: ["Coupe femme", "Balayage", "Fade", "Taille de barbe"],
       },
       {
-        title: "Barbershops",
-        desc: "Des prises de rendez-vous rapides pour les fades et les tailles de barbe, sans interrompre votre travail.",
-        examples: ["Fade", "Taille de barbe", "Coupe classique"],
+        title: "Cliniques & Santé",
+        desc: "Répondez aux appels 24h/24 pour les cliniques dentaires, physio, médecins et spécialistes — sans secrétaire supplémentaire.",
+        examples: ["Clinique dentaire", "Physiothérapie", "Médecine esthétique"],
       },
       {
-        title: "Esthétique & Ongles",
-        desc: "Une expérience de réservation impeccable pour vos clientes, avec rappels SMS automatiques.",
-        examples: ["Pose d'ongles", "Soin du visage", "Épilation"],
+        title: "Bureaux & Services",
+        desc: "Pour les cabinets juridiques, comptables, conseillers financiers et tout professionnel qui travaille sur rendez-vous.",
+        examples: ["Cabinets d'avocats", "Comptabilité", "Conseiller financier"],
+      },
+      {
+        title: "Esthétique & Bien-être",
+        desc: "Spas, instituts de beauté et ongleries — une expérience de réservation premium pour vos clients.",
+        examples: ["Spa", "Soins du visage", "Pose d'ongles"],
       },
     ],
   },
@@ -971,9 +976,9 @@ const en: Dictionary = {
     login: "Log in",
   },
   hero: {
-    headline: "The Bilingual AI Receptionist for Barbers & Salons.",
+    headline: "The AI Receptionist for Any Appointment-Based Business.",
     subhead:
-      "Keep your hands on the scissors. Let JustBookMe answer missed calls, book appointments, and fill your chairs 24/7 in flawless French and English.",
+      "JustBookMe answers missed calls 24/7, books appointments, and sends confirmations — for salons, dental clinics, law offices, physio, and more.",
     ctaPrimary: "Start free trial",
     ctaSecondary: "Book a 15-minute demo",
     trust: "Built in Quebec · Bilingual · 14-day trial, no card",
@@ -1105,7 +1110,7 @@ const en: Dictionary = {
       "Prices shown exclude applicable taxes. PST/QST calculated at checkout.",
     plans: {
       starter: {
-        name: "Independent Barber",
+        name: "Solo / Independent",
         features: [
           "Bilingual Voice AI",
           "Built-in calendar bookings",
@@ -1114,9 +1119,9 @@ const en: Dictionary = {
         ],
       },
       white_glove: {
-        name: "Multi-Chair Salon",
+        name: "Multi-Staff / Multi-Location",
         features: [
-          "Everything in Independent",
+          "Everything in Solo",
           "External calendar sync (Square, etc)",
           "Up to 500 AI calls / month",
           "Multi-location support",
@@ -1532,22 +1537,27 @@ const en: Dictionary = {
     label: "Who it's for",
     title: "Built for your kind of business",
     subtitle:
-      "Same AI receptionist — tuned for hair salons, barbershops, and beauty studios.",
+      "Same AI receptionist — tuned for any appointment-based business.",
     items: [
       {
-        title: "Hair Salons",
-        desc: "AI understands \"I want a balayage\" or \"highlights\", offers slots, and sends SMS reminders.",
-        examples: ["Cut & color", "Balayage", "Extensions"],
+        title: "Salons & Barbershops",
+        desc: "AI understands \"I want a balayage\", a fade, or a beard trim — offers slots and sends SMS reminders.",
+        examples: ["Hair cuts & color", "Balayage", "Fades", "Beard trims"],
       },
       {
-        title: "Barbershops",
-        desc: "Fast booking for fades and beard trims, so you don't have to stop cutting.",
-        examples: ["Fades", "Beard trims", "Classic cuts"],
+        title: "Clinics & Health",
+        desc: "Answer calls 24/7 for dental clinics, physiotherapy, doctors, and specialists — no extra receptionist needed.",
+        examples: ["Dental clinics", "Physiotherapy", "Medical aesthetics"],
       },
       {
-        title: "Nails & Beauty",
-        desc: "Premium booking experience for your clients, with automated SMS reminders.",
-        examples: ["Nails", "Lashes", "Facials"],
+        title: "Offices & Services",
+        desc: "Perfect for law firms, accountants, financial advisors, and any professional who works by appointment.",
+        examples: ["Law firms", "Accounting", "Financial advisors"],
+      },
+      {
+        title: "Beauty & Wellness",
+        desc: "Spas, beauty institutes, and nail studios — a premium booking experience for every client.",
+        examples: ["Spas", "Facials", "Nail studios"],
       },
     ],
   },
