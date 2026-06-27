@@ -10,10 +10,29 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Scissors, User, HeartPulse, Briefcase, Sparkles } from "lucide-react";
 
 const DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
 
-const BUSINESS_TYPES: BusinessType[] = ["salon", "trade", "office"];
+const BUSINESS_TYPES: { type: BusinessType; icon: React.ElementType }[] = [
+  { type: "salon",      icon: Scissors   },
+  { type: "barbershop", icon: User       },
+  { type: "clinic",     icon: HeartPulse },
+  { type: "office",     icon: Briefcase  },
+  { type: "beauty",     icon: Sparkles   },
+];
+
+// Labels not in the dictionary for new types — inlined here
+const EXTRA_LABELS: Record<string, { fr: { title: string; desc: string }; en: { title: string; desc: string } }> = {
+  clinic: {
+    fr: { title: "Clinique & Santé", desc: "Dentaire, physio, médecine esthétique, généraliste." },
+    en: { title: "Clinic & Health",  desc: "Dental, physio, medical aesthetics, general practice." },
+  },
+  beauty: {
+    fr: { title: "Esthétique & Bien-être", desc: "Spa, onglerie, soins du visage, cils." },
+    en: { title: "Beauty & Wellness",      desc: "Spa, nails, facials, lash extensions." },
+  },
+};
 
 export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: string }) {
   const router = useRouter();
@@ -29,18 +48,22 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
     thu: { open: "09:00", close: "17:00" },
     fri: { open: "09:00", close: "17:00" },
     sat: { open: "10:00", close: "15:00" },
-    sun: { open: "", close: "" },
+    sun: { open: "",      close: ""      },
   });
   const [services, setServices] = useState(
     defaultServicesForType("salon", fr ? "fr" : "en")
   );
 
   const ot = dict.onboarding;
-  const typeLabels: Record<BusinessType, { title: string; desc: string }> = {
-    salon: { title: ot.businessTypes.salon, desc: ot.businessTypes.salonDesc },
-    trade: { title: ot.businessTypes.trade, desc: ot.businessTypes.tradeDesc },
-    office: { title: ot.businessTypes.office, desc: ot.businessTypes.officeDesc },
-  };
+
+  function getTypeLabel(type: BusinessType): { title: string; desc: string } {
+    if (type === "salon")      return { title: ot.businessTypes.salon,  desc: ot.businessTypes.salonDesc  };
+    if (type === "barbershop") return { title: ot.businessTypes.trade,  desc: ot.businessTypes.tradeDesc  };
+    if (type === "office")     return { title: ot.businessTypes.office, desc: ot.businessTypes.officeDesc };
+    // clinic / beauty — use inlined labels
+    const extra = EXTRA_LABELS[type];
+    return fr ? extra.fr : extra.en;
+  }
 
   async function saveStep(payload: Record<string, unknown>) {
     setStatus("loading");
@@ -119,32 +142,43 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
         {dict.onboarding.step} {step}/4
       </p>
 
+      {/* Step 1 — Business type */}
       {step === 1 && (
         <div className="card mt-6 space-y-4 p-6">
           <h2 className="font-display text-xl font-semibold">{ot.businessTypes.title}</h2>
           <p className="text-sm text-[var(--muted-fg)]">{ot.businessTypes.subtitle}</p>
           <div className="space-y-2">
-            {BUSINESS_TYPES.map((type) => (
-              <button
-                key={type}
-                type="button"
-                onClick={() => selectType(type)}
-                className={cn(
-                  "w-full rounded-xl border p-4 text-left transition-colors",
-                  businessType === type
-                    ? "border-[var(--primary)] bg-[var(--primary-light)]"
-                    : "border-[var(--border)] hover:border-[var(--primary)]/40"
-                )}
-              >
-                <p className="font-semibold text-[var(--foreground)]">{typeLabels[type].title}</p>
-                <p className="mt-1 text-sm text-[var(--muted-fg)]">{typeLabels[type].desc}</p>
-              </button>
-            ))}
+            {BUSINESS_TYPES.map(({ type, icon: Icon }) => {
+              const label = getTypeLabel(type);
+              return (
+                <button
+                  key={type}
+                  type="button"
+                  onClick={() => selectType(type)}
+                  className={cn(
+                    "w-full rounded-xl border p-4 text-left transition-colors flex items-start gap-3",
+                    businessType === type
+                      ? "border-[var(--primary)] bg-[var(--primary-light)]"
+                      : "border-[var(--border)] hover:border-[var(--primary)]/40"
+                  )}
+                >
+                  <Icon className="mt-0.5 h-5 w-5 shrink-0 text-[var(--primary)]" />
+                  <div>
+                    <p className="font-semibold text-[var(--foreground)]">{label.title}</p>
+                    <p className="mt-0.5 text-sm text-[var(--muted-fg)]">{label.desc}</p>
+                  </div>
+                </button>
+              );
+            })}
           </div>
           <div className="mt-4 border-t border-[var(--border)] pt-4">
-            <label className="text-sm font-medium text-[var(--foreground)]">{dict.dashboard.settings.industry}</label>
+            <label className="text-sm font-medium text-[var(--foreground)]">
+              {dict.dashboard.settings.industry}
+            </label>
             <p className="mb-2 text-sm text-[var(--muted-fg)]">
-              {fr ? "Quel est votre domaine exact? (ex: Salon de coiffure, Barbier)" : "What is your exact field? (e.g. Barbershop, Hair Salon)"}
+              {fr
+                ? "Précisez votre spécialité (ex: Clinique dentaire, Cabinet d'avocats, Salon de coiffure)"
+                : "Specify your exact field (e.g. Dental clinic, Law firm, Hair salon)"}
             </p>
             <Input
               value={industry}
@@ -158,6 +192,7 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
         </div>
       )}
 
+      {/* Step 2 — Hours */}
       {step === 2 && (
         <div className="card mt-6 space-y-4 p-6">
           <h2 className="font-display text-xl font-semibold">{dict.onboarding.hours.title}</h2>
@@ -187,6 +222,7 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
         </div>
       )}
 
+      {/* Step 3 — Services */}
       {step === 3 && (
         <div className="card mt-6 space-y-4 p-6">
           <h2 className="font-display text-xl font-semibold">{dict.onboarding.services.title}</h2>
@@ -239,6 +275,7 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
         </div>
       )}
 
+      {/* Step 4 — Done */}
       {step === 4 && (
         <div className="card mt-6 space-y-4 p-6 text-center">
           <h2 className="font-display text-xl font-semibold">{dict.onboarding.done.title}</h2>

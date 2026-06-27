@@ -1,4 +1,4 @@
-export type BusinessType = "salon" | "trade" | "office";
+export type BusinessType = "salon" | "barbershop" | "clinic" | "office" | "beauty";
 
 export type ServicePreset = {
   name: string;
@@ -11,7 +11,8 @@ export function defaultServicesForType(
   locale: "fr" | "en"
 ): ServicePreset[] {
   const fr = locale === "fr";
-  if (type === "trade") {
+
+  if (type === "barbershop") {
     return fr
       ? [
           { name: "Coupe homme", duration_minutes: 30, price_cents: 3500 },
@@ -26,7 +27,38 @@ export function defaultServicesForType(
           { name: "Haircut & Beard", duration_minutes: 60, price_cents: 5500 },
         ];
   }
+
+  if (type === "clinic") {
+    return fr
+      ? [
+          { name: "Consultation générale", duration_minutes: 30, price_cents: 10000 },
+          { name: "Examen de suivi", duration_minutes: 20, price_cents: 7500 },
+          { name: "Nettoyage dentaire", duration_minutes: 60, price_cents: 15000 },
+          { name: "Évaluation physiothérapie", duration_minutes: 45, price_cents: 12000 },
+        ]
+      : [
+          { name: "General Consultation", duration_minutes: 30, price_cents: 10000 },
+          { name: "Follow-up Appointment", duration_minutes: 20, price_cents: 7500 },
+          { name: "Dental Cleaning", duration_minutes: 60, price_cents: 15000 },
+          { name: "Physiotherapy Assessment", duration_minutes: 45, price_cents: 12000 },
+        ];
+  }
+
   if (type === "office") {
+    return fr
+      ? [
+          { name: "Consultation initiale", duration_minutes: 60, price_cents: 25000 },
+          { name: "Réunion de suivi", duration_minutes: 30, price_cents: 15000 },
+          { name: "Révision de documents", duration_minutes: 45, price_cents: 20000 },
+        ]
+      : [
+          { name: "Initial Consultation", duration_minutes: 60, price_cents: 25000 },
+          { name: "Follow-up Meeting", duration_minutes: 30, price_cents: 15000 },
+          { name: "Document Review", duration_minutes: 45, price_cents: 20000 },
+        ];
+  }
+
+  if (type === "beauty") {
     return fr
       ? [
           { name: "Manucure", duration_minutes: 45, price_cents: 4500 },
@@ -41,16 +73,20 @@ export function defaultServicesForType(
           { name: "Facial", duration_minutes: 60, price_cents: 15000 },
         ];
   }
+
+  // salon (default)
   return fr
     ? [
-        { name: "Coupe", duration_minutes: 45, price_cents: 4500 },
-        { name: "Couleur", duration_minutes: 90, price_cents: 12000 },
-        { name: "Barbe", duration_minutes: 30, price_cents: 2500 },
+        { name: "Coupe femme", duration_minutes: 45, price_cents: 6500 },
+        { name: "Balayage", duration_minutes: 120, price_cents: 18000 },
+        { name: "Couleur complète", duration_minutes: 90, price_cents: 13000 },
+        { name: "Coupe + Brushing", duration_minutes: 60, price_cents: 8000 },
       ]
     : [
-        { name: "Haircut", duration_minutes: 45, price_cents: 4500 },
-        { name: "Color", duration_minutes: 90, price_cents: 12000 },
-        { name: "Beard trim", duration_minutes: 30, price_cents: 2500 },
+        { name: "Women's Cut & Style", duration_minutes: 45, price_cents: 6500 },
+        { name: "Balayage", duration_minutes: 120, price_cents: 18000 },
+        { name: "Full Color", duration_minutes: 90, price_cents: 13000 },
+        { name: "Cut & Blowout", duration_minutes: 60, price_cents: 8000 },
       ];
 }
 
@@ -59,17 +95,29 @@ export function defaultVoiceInstructions(
   locale: "fr" | "en"
 ): string {
   const fr = locale === "fr";
-  if (type === "trade") {
+
+  if (type === "barbershop") {
     return fr
       ? "Soyez confiant et très détendu. Agissez comme le barbier en chef. Mettez de l'avant notre expertise pour les dégradés et la taille de barbe."
       : "Be confident and laid-back. Act as the head barber. Emphasize our expertise in skin fades and precise beard trims.";
   }
+  if (type === "clinic") {
+    return fr
+      ? "Soyez professionnel, rassurant et précis. Aidez les patients à prendre rendez-vous rapidement. Ne donnez jamais de conseils médicaux."
+      : "Be professional, reassuring, and precise. Help patients book appointments quickly. Never give medical advice.";
+  }
   if (type === "office") {
     return fr
-      ? "Soyez élégant, poli et accueillant. Recommandez toujours un soin supplémentaire (ex: pédicure avec une manucure)."
-      : "Be elegant, polite, and welcoming. Soft-upsell complementary services (e.g., recommend a pedicure with a manicure).";
+      ? "Soyez formel, efficace et professionnel. Aidez les clients à planifier des consultations et à laisser leurs coordonnées."
+      : "Be formal, efficient, and professional. Help clients schedule consultations and leave their contact details.";
   }
+  if (type === "beauty") {
+    return fr
+      ? "Soyez élégant, poli et accueillant. Recommandez toujours un soin complémentaire si approprié."
+      : "Be elegant, polite, and welcoming. Soft-upsell complementary services when appropriate.";
+  }
+  // salon
   return fr
-    ? "Soyez chaleureux et détendu. Proposez coupe, couleur ou barbe selon la demande."
-    : "Be warm and relaxed. Offer haircut, color, or beard services based on what they need.";
+    ? "Soyez chaleureux et détendu. Proposez coupe, couleur ou balayage selon la demande."
+    : "Be warm and relaxed. Offer haircuts, color, or balayage based on what they need.";
 }
