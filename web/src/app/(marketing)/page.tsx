@@ -32,45 +32,71 @@ export default async function HomePage() {
       <HeroSection dict={t} locale={locale} />
 
       {/* Interactive AI Demo Section */}
-      <section className="relative overflow-hidden bg-[var(--surface-elevated)] py-20 border-b border-[var(--border)]">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
-            <FadeIn>
-              <p className="section-label">{fr ? "Démo en direct" : "Live Demo"}</p>
-              <h2 className="font-display mt-2 text-3xl font-semibold tracking-tight sm:text-4xl text-[var(--foreground)]">
-                {fr ? "Parlez à notre réceptionniste IA" : "Talk to our AI Receptionist"}
+      <section id="demo" className="relative overflow-hidden py-24">
+        {/* Dark gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--hero-from)] via-[var(--hero-to)] to-[var(--background)] opacity-95" />
+        {/* Radial glow */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-[var(--accent)] opacity-5 blur-3xl" />
+
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+          <FadeIn>
+            <div className="mx-auto max-w-2xl text-center">
+              <span className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-green-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
+                {fr ? "Démo en direct" : "Live Demo — No account needed"}
+              </span>
+              <h2 className="font-display mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                {fr ? "Parlez à l'IA" : "Talk to the AI."}
+                <br />
+                <span className="text-[var(--accent)]">
+                  {fr ? "Maintenant. Gratuitement." : "Right now. For free."}
+                </span>
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-[var(--muted-fg)]">
-                {fr 
-                  ? "Essayez-le par vous-même ! Cliquez ci-dessous pour parler avec notre concierge IA." 
-                  : "Try it for yourself! Click below to speak with our AI concierge."}
+              <p className="mx-auto mt-5 max-w-xl text-lg text-white/60">
+                {fr
+                  ? "Cliquez ci-dessous et parlez à notre réceptionniste IA. Aucun compte nécessaire."
+                  : "Click below and speak to our AI receptionist. This is exactly what your clients will hear when they call your salon after hours."}
               </p>
-            </FadeIn>
-          </div>
-          
-          <div className="mt-8 flex justify-center w-full max-w-md mx-auto">
-            <FadeIn delay={0.2} className="flex flex-col items-center justify-center w-full">
-              <AiPhoneFrame>
-                <VapiWebCallButton 
+            </div>
+          </FadeIn>
+
+          <div className="mt-12 flex justify-center">
+            <FadeIn delay={0.2} className="flex flex-col items-center justify-center w-full max-w-sm">
+              <AiPhoneFrame
+                name={fr ? "Marie — Réceptionniste IA" : "Sarah — AI Receptionist"}
+                title={fr ? "JustBookMe · Démo en direct" : "JustBookMe · Live Demo"}
+              >
+                <VapiWebCallButton
                   assistantOverrides={{
                     name: "Salon Demo AI",
-                    voiceGreeting: fr 
+                    voiceGreeting: fr
                       ? "Bonjour, merci d'appeler notre salon ! Je suis votre réceptionniste IA. Comment puis-je vous aider aujourd'hui ?"
-                      : "Hi, thanks for calling our salon! I am the demo AI receptionist. How can I help you today?",
-                    voiceInstructions: fr 
+                      : "Hi, thanks for calling! I'm the AI receptionist for this salon. I can help you book a haircut, check availability, or answer any questions. How can I help you today?",
+                    voiceInstructions: fr
                       ? "You are a highly professional demo AI receptionist for a luxury hair salon and barbershop. Speak French. When a customer asks to book, first ask: 'Cherchez-vous à réserver pour un homme ou pour une femme ?'. If male, enthusiastically recommend our expert barbers for fades, beard trims, and classic cuts. If female, enthusiastically recommend our fabulous hairstylists for cuts, balayage, and color. Show detailed knowledge. Also, explain that the JustBookMe software costs $29/month and integrates with any scheduling system."
-                      : "You are a highly professional demo AI receptionist for a luxury hair salon and barbershop. Speak English. When a customer asks to book, first ask: 'Are you booking for a men's cut or a women's service?'. If men's, enthusiastically recommend our expert barbers who specialize in fades, beard trims, and classic cuts. If women's, enthusiastically recommend our fabulous hairstylists who are experts in cuts, balayage, and color. Show detailed knowledge. Also, explain that the JustBookMe software costs $29/month and integrates with any scheduling system.",
+                      : "You are a highly professional demo AI receptionist for a luxury hair salon and barbershop. Speak English. When a customer asks to book, first ask: 'Are you booking for a men's cut or a women's service?'. If men's, enthusiastically recommend our expert barbers who specialize in fades, beard trims, and classic cuts. If women's, enthusiastically recommend our fabulous hairstylists who are experts in cuts, balayage, and color. Show detailed knowledge. If they ask about pricing, let them know services start at $45. Keep it natural and warm.",
                     services: [
-                      { id: "haircut", name: "Haircut", duration_minutes: 30, price_cents: 4500 },
-                      { id: "color", name: "Hair Color", duration_minutes: 90, price_cents: 15000 }
-                    ]
+                      { id: "haircut_m", name: "Men's Haircut", duration_minutes: 30, price_cents: 4500 },
+                      { id: "haircut_f", name: "Women's Cut & Style", duration_minutes: 60, price_cents: 7500 },
+                      { id: "color", name: "Hair Color / Balayage", duration_minutes: 90, price_cents: 15000 },
+                      { id: "beard", name: "Beard Trim", duration_minutes: 20, price_cents: 2500 },
+                    ],
                   }}
                 />
               </AiPhoneFrame>
             </FadeIn>
           </div>
+
+          <FadeIn delay={0.4}>
+            <p className="mt-10 text-center text-sm text-white/30">
+              {fr
+                ? "Cette démo est alimentée par la même IA qui répondra aux appels de votre salon."
+                : "This demo is powered by the same AI that will answer your salon's calls 24/7."}
+            </p>
+          </FadeIn>
         </div>
       </section>
+
 
       <FadeIn delay={0.1}>
         <CaseStudySection fr={fr} />
