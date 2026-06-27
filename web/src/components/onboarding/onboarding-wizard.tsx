@@ -144,7 +144,7 @@ export function OnboardingWizard({ dict, locale }: { dict: Dictionary; locale: s
           <div className="mt-4 border-t border-[var(--border)] pt-4">
             <label className="text-sm font-medium text-[var(--foreground)]">{dict.dashboard.settings.industry}</label>
             <p className="mb-2 text-sm text-[var(--muted-fg)]">
-              {fr ? "Quel est votre domaine exact? (ex: Clinique Dentaire)" : "What is your exact field? (e.g. Dental Clinic)"}
+              {fr ? "Quel est votre domaine exact? (ex: Salon de coiffure, Barbier)" : "What is your exact field? (e.g. Barbershop, Hair Salon)"}
             </p>
             <Input
               value={industry}

@@ -14,31 +14,31 @@ export function defaultServicesForType(
   if (type === "trade") {
     return fr
       ? [
-          { name: "Réparation fuite / évier", duration_minutes: 90, price_cents: 15000 },
-          { name: "Débouchage drain", duration_minutes: 60, price_cents: 12000 },
-          { name: "Service HVAC", duration_minutes: 90, price_cents: 18000 },
-          { name: "Appel d'urgence", duration_minutes: 120, price_cents: 25000 },
+          { name: "Coupe homme", duration_minutes: 30, price_cents: 3500 },
+          { name: "Dégradé (Fade)", duration_minutes: 45, price_cents: 4500 },
+          { name: "Taille de barbe", duration_minutes: 30, price_cents: 2500 },
+          { name: "Coupe + Barbe", duration_minutes: 60, price_cents: 5500 },
         ]
       : [
-          { name: "Sink / leak repair", duration_minutes: 90, price_cents: 15000 },
-          { name: "Drain unclog", duration_minutes: 60, price_cents: 12000 },
-          { name: "HVAC service", duration_minutes: 90, price_cents: 18000 },
-          { name: "Emergency call", duration_minutes: 120, price_cents: 25000 },
+          { name: "Men's Haircut", duration_minutes: 30, price_cents: 3500 },
+          { name: "Skin Fade", duration_minutes: 45, price_cents: 4500 },
+          { name: "Beard Trim", duration_minutes: 30, price_cents: 2500 },
+          { name: "Haircut & Beard", duration_minutes: 60, price_cents: 5500 },
         ];
   }
   if (type === "office") {
     return fr
       ? [
-          { name: "Consultation", duration_minutes: 30, price_cents: 0 },
-          { name: "Nettoyage dentaire", duration_minutes: 60, price_cents: 15000 },
-          { name: "Examen de routine", duration_minutes: 45, price_cents: 12000 },
-          { name: "Nouveau patient", duration_minutes: 60, price_cents: 0 },
+          { name: "Manucure", duration_minutes: 45, price_cents: 4500 },
+          { name: "Pédicure", duration_minutes: 60, price_cents: 6500 },
+          { name: "Pose de cils", duration_minutes: 90, price_cents: 12000 },
+          { name: "Soin du visage", duration_minutes: 60, price_cents: 15000 },
         ]
       : [
-          { name: "Consultation", duration_minutes: 30, price_cents: 0 },
-          { name: "Dental cleaning", duration_minutes: 60, price_cents: 15000 },
-          { name: "Routine check-up", duration_minutes: 45, price_cents: 12000 },
-          { name: "New patient visit", duration_minutes: 60, price_cents: 0 },
+          { name: "Manicure", duration_minutes: 45, price_cents: 4500 },
+          { name: "Pedicure", duration_minutes: 60, price_cents: 6500 },
+          { name: "Lash Extensions", duration_minutes: 90, price_cents: 12000 },
+          { name: "Facial", duration_minutes: 60, price_cents: 15000 },
         ];
   }
   return fr
@@ -61,13 +61,13 @@ export function defaultVoiceInstructions(
   const fr = locale === "fr";
   if (type === "trade") {
     return fr
-      ? "Demandez toujours s'il s'agit d'une urgence (fuite, pas de chauffage). Mentionnez nos estimations gratuites par téléphone. Demandez l'adresse du chantier."
-      : "Always ask if it's an emergency (leak, no heat). Mention free phone estimates. Ask for the job site address.";
+      ? "Soyez confiant et très détendu. Agissez comme le barbier en chef. Mettez de l'avant notre expertise pour les dégradés et la taille de barbe."
+      : "Be confident and laid-back. Act as the head barber. Emphasize our expertise in skin fades and precise beard trims.";
   }
   if (type === "office") {
     return fr
-      ? "Demandez s'il s'agit d'un nouveau patient. Rappelez d'apporter la carte d'assurance-maladie. Restez professionnel et rassurant."
-      : "Ask if they are a new patient. Remind them to bring their health card. Stay professional and reassuring.";
+      ? "Soyez élégant, poli et accueillant. Recommandez toujours un soin supplémentaire (ex: pédicure avec une manucure)."
+      : "Be elegant, polite, and welcoming. Soft-upsell complementary services (e.g., recommend a pedicure with a manicure).";
   }
   return fr
     ? "Soyez chaleureux et détendu. Proposez coupe, couleur ou barbe selon la demande."

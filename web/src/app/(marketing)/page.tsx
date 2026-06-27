@@ -48,8 +48,20 @@ export default async function HomePage() {
             </FadeIn>
           </div>
           
-          <div className="mt-16 flex justify-center w-full max-w-md mx-auto">
-            <FadeIn delay={0.2} className="flex justify-center w-full">
+          <div className="mt-8 flex justify-center w-full max-w-md mx-auto">
+            <FadeIn delay={0.2} className="flex flex-col items-center justify-center w-full">
+              <div className="mb-6 rounded-2xl bg-[var(--primary)]/10 px-6 py-4 text-center shadow-sm border border-[var(--primary)]/20 animate-pulse">
+                <p className="text-sm font-semibold uppercase tracking-wider text-[var(--primary)]">
+                  {fr ? "Essayez-le maintenant" : "Try it right now"}
+                </p>
+                <a href="tel:5145550199" className="mt-1 block font-display text-2xl sm:text-3xl font-bold text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
+                  Call (514) 555-0199
+                </a>
+                <p className="mt-1 text-xs text-[var(--muted-fg)]">
+                  {fr ? "Parlez directement à l'IA" : "Speak directly to the AI"}
+                </p>
+              </div>
+
               <AiPhoneFrame>
                 <VapiWebCallButton 
                   assistantOverrides={{

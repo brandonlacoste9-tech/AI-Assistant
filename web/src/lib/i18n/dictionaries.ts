@@ -494,7 +494,7 @@ const fr: Dictionary = {
   pricing: {
     title: "Tarification simple",
     subtitle:
-      "Pour les entreprises de services au Québec. Essai gratuit de 14 jours. Annulation en tout temps.",
+      "Embauchez une réceptionniste IA pour une fraction du coût d'un humain. Annulez en tout temps.",
     monthly: "Mensuel",
     annual: "Annuel",
     save: "Économisez 17 %",
@@ -510,22 +510,22 @@ const fr: Dictionary = {
       "Les prix affichés n'incluent pas les taxes applicables. TPS/TVQ calculées à la caisse.",
     plans: {
       starter: {
-        name: "Starter (DIY)",
+        name: "Barbier Indépendant",
         features: [
-          "Créez votre propre IA",
-          "500 SMS / mois",
-          "200 min voix / mois",
-          "Widget web + agenda",
+          "IA vocale bilingue",
+          "Réservations intégrées à l'agenda",
+          "Jusqu'à 150 appels IA / mois",
+          "Confirmations par SMS",
         ],
       },
       white_glove: {
-        name: "Clé en Main",
+        name: "Salon Multi-Fauteuils",
         features: [
-          "Tout du forfait Starter",
-          "Création de votre IA sur mesure",
-          "Configuration des lignes téléphoniques",
-          "100% Géré pour vous (Soutien VIP)",
-          "+$149 Frais de configuration initiaux",
+          "Tout du forfait Indépendant",
+          "Synchronisation calendrier externe (Square, etc.)",
+          "Jusqu'à 500 appels IA / mois",
+          "Prise en charge multi-succursales",
+          "Configuration VIP clé en main",
         ],
       },
     },
@@ -1089,7 +1089,7 @@ const en: Dictionary = {
   pricing: {
     title: "Simple pricing",
     subtitle:
-      "For Quebec service businesses. 14-day free trial. Cancel anytime.",
+      "Hire an AI Receptionist for a fraction of the cost of a human. Cancel anytime.",
     monthly: "Monthly",
     annual: "Annual",
     save: "Save 17%",
@@ -1105,22 +1105,22 @@ const en: Dictionary = {
       "Prices shown exclude applicable taxes. PST/QST calculated at checkout.",
     plans: {
       starter: {
-        name: "Starter (DIY)",
+        name: "Independent Barber",
         features: [
-          "Build your own AI",
-          "500 SMS / month",
-          "200 voice min / month",
-          "Web widget + calendar",
+          "Bilingual Voice AI",
+          "Built-in calendar bookings",
+          "Up to 150 AI calls / month",
+          "SMS confirmations",
         ],
       },
       white_glove: {
-        name: "White-Glove AI",
+        name: "Multi-Chair Salon",
         features: [
-          "Everything in Starter",
-          "Custom AI built by us",
-          "We handle phone porting",
-          "100% Done-for-you VIP support",
-          "+$149 one-time setup fee",
+          "Everything in Independent",
+          "External calendar sync (Square, etc)",
+          "Up to 500 AI calls / month",
+          "Multi-location support",
+          "VIP white-glove setup",
         ],
       },
     },
@@ -1560,6 +1560,6 @@ export function getDictionary(locale: Locale): Dictionary {
 }
 
 export const PLAN_PRICES = {
-  starter: { monthly: 79, annual: 790 },
-  white_glove: { monthly: 199, annual: 1990 },
+  starter: { monthly: 149, annual: 1490 },
+  white_glove: { monthly: 299, annual: 2990 },
 } as const;
