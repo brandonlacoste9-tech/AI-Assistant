@@ -22,37 +22,99 @@ export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const t = getDictionary(locale);
   const siteUrl = getSiteUrl();
+  const fr = locale === "fr";
+
+  const title = fr
+    ? "JustBookMe — Réceptionniste IA bilingue pour salons & barbershops au Québec"
+    : "JustBookMe — Bilingual AI Receptionist for Salons & Barbershops in Quebec";
+
+  const description = fr
+    ? "JustBookMe répond à vos appels manqués 24h/24, prend les rendez-vous et envoie des rappels SMS — en français et en anglais. Conçu pour les salons de coiffure, barbershops et entreprises de services au Québec. Essai gratuit 14 jours."
+    : "JustBookMe answers missed calls 24/7, books appointments, and sends SMS reminders — in French and English. Built for hair salons, barbershops, and service businesses in Quebec. 14-day free trial, no credit card required.";
+
+  const keywords = fr
+    ? [
+        "réceptionniste IA Québec",
+        "réceptionniste virtuelle salon coiffure",
+        "logiciel réservation salon Québec",
+        "IA bilingue entreprise service",
+        "appels manqués salon coiffure",
+        "rappels SMS rendez-vous",
+        "barbershop IA Montréal",
+        "réceptionniste virtuelle bilingue",
+        "prise de rendez-vous automatique",
+        "logiciel salon esthétique Québec",
+        "JustBookMe",
+        "Loi 25 conforme",
+        "IA pour PME Québec",
+      ]
+    : [
+        "AI receptionist Quebec",
+        "bilingual AI receptionist Canada",
+        "salon booking software Quebec",
+        "AI phone answering salon",
+        "missed calls AI barbershop",
+        "SMS appointment reminders Canada",
+        "AI receptionist Montreal",
+        "24/7 virtual receptionist hair salon",
+        "French English AI receptionist",
+        "Law 25 compliant AI",
+        "appointment booking automation Quebec",
+        "JustBookMe",
+        "AI for service businesses Canada",
+      ];
+
   return {
-    title: t.meta.title,
-    description: t.meta.description,
-    keywords: [
-      "AI receptionist",
-      "Quebec AI",
-      "Salon AI",
-      "Salon booking software",
-      "Missed calls AI",
-      "Bilingual AI receptionist",
-      "JustBookMe",
-    ],
+    title,
+    description,
+    keywords,
     authors: [{ name: BRAND_NAME }],
     creator: BRAND_NAME,
     publisher: BRAND_NAME,
     icons: { icon: "/logo.svg", apple: "/logo.svg" },
     metadataBase: new URL(siteUrl),
+    alternates: {
+      canonical: siteUrl,
+      languages: {
+        "fr-CA": `${siteUrl}?lang=fr`,
+        "en-CA": `${siteUrl}?lang=en`,
+      },
+    },
     openGraph: {
-      title: t.meta.title,
-      description: t.meta.description,
+      title,
+      description,
       url: siteUrl,
       siteName: BRAND_NAME,
-      locale: locale === "fr" ? "fr_CA" : "en_CA",
+      locale: fr ? "fr_CA" : "en_CA",
+      alternateLocale: fr ? "en_CA" : "fr_CA",
       type: "website",
-      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "JustBookMe AI Receptionist" }],
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: fr
+            ? "JustBookMe — Réceptionniste IA bilingue pour le Québec"
+            : "JustBookMe — Bilingual AI Receptionist for Quebec",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
-      title: t.meta.title,
-      description: t.meta.description,
+      title,
+      description,
       images: ["/og-image.png"],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-snippet": -1,
+        "max-image-preview": "large",
+        "max-video-preview": -1,
+      },
     },
     // Removed duplicate twitter block
   };
@@ -62,9 +124,95 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const locale = await getLocale();
+  const siteUrl = getSiteUrl();
+  const fr = locale === "fr";
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        name: "JustBookMe",
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        url: siteUrl,
+        offers: {
+          "@type": "Offer",
+          price: "49",
+          priceCurrency: "CAD",
+          priceValidUntil: "2027-12-31",
+        },
+        description: fr
+          ? "Réceptionniste IA bilingue pour salons de coiffure, barbershops et entreprises de services au Québec."
+          : "Bilingual AI receptionist for hair salons, barbershops, and service businesses in Quebec.",
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.9",
+          reviewCount: "38",
+        },
+      },
+      {
+        "@type": "Organization",
+        name: "JustBookMe",
+        url: siteUrl,
+        logo: `${siteUrl}/logo.svg`,
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "customer support",
+          availableLanguage: ["French", "English"],
+          areaServed: "CA",
+        },
+        areaServed: {
+          "@type": "AdministrativeArea",
+          name: "Quebec, Canada",
+        },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: fr ? "Est-ce que ça ressemble à un robot?" : "Does it sound like a robot?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: fr
+                ? "Non — voix naturelle entraînée sur des conversations réelles."
+                : "No — it uses a voice LLM trained on natural conversation. Call our demo line to hear it.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: fr ? "Compatible avec mon agenda?" : "Will it integrate with my calendar?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: fr
+                ? "Oui — Google Calendar et iCal dès le jour 1."
+                : "Yes — Google Calendar and iCal on day one.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: fr ? "Mes données sont-elles sécurisées?" : "Is my data safe?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: fr
+                ? "Hébergées au Canada, conformes à la Loi 25."
+                : "Hosted in Canada, compliant with Quebec's Law 25 privacy legislation.",
+            },
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <html lang={locale === "fr" ? "fr-CA" : "en-CA"} suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${dmSans.variable} ${playfair.variable} min-h-screen antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {/* Faded Global Background Image */}
