@@ -3,7 +3,7 @@ import { defaultVoiceInstructions, type BusinessType } from "@/lib/onboarding/pr
 import { provisionVoiceForBusiness } from "@/lib/vapi/provision-service";
 import { NextResponse } from "next/server";
 
-const BUSINESS_TYPES: BusinessType[] = ["salon", "trade", "office"];
+const BUSINESS_TYPES: BusinessType[] = ["salon", "barbershop", "clinic", "office", "beauty"];
 
 export async function POST(req: Request) {
   const auth = await getApiUser();
