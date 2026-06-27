@@ -52,8 +52,8 @@ export default async function HomePage() {
               </h2>
               <p className="mx-auto mt-5 max-w-xl text-lg text-white/60">
                 {fr
-                  ? "Cliquez ci-dessous et parlez à notre réceptionniste IA. Aucun compte nécessaire."
-                  : "Click below and speak to our AI receptionist. This is exactly what your clients will hear when they call your salon after hours."}
+                  ? "Cliquez ci-dessous et parlez à notre réceptionniste IA. Ceci est un exemple pour salon, mais votre assistante sera entièrement personnalisée pour votre entreprise."
+                  : "Click below and speak to our AI receptionist. This is a salon demo, but your assistant will be custom-tailored and fully optimized for your specific business."}
               </p>
             </div>
           </FadeIn>
