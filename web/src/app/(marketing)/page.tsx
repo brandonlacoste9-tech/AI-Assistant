@@ -54,8 +54,8 @@ export default async function HomePage() {
                 <p className="text-sm font-semibold uppercase tracking-wider text-[var(--primary)]">
                   {fr ? "Essayez-le maintenant" : "Try it right now"}
                 </p>
-                <a href="tel:5145550199" className="mt-1 block font-display text-2xl sm:text-3xl font-bold text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
-                  Call (514) 555-0199
+                <a href="tel:18195811130" className="mt-1 block font-display text-2xl sm:text-3xl font-bold text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
+                  Call (819) 581-1130
                 </a>
                 <p className="mt-1 text-xs text-[var(--muted-fg)]">
                   {fr ? "Parlez directement à l'IA" : "Speak directly to the AI"}
