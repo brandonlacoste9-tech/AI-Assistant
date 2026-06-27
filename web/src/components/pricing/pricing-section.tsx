@@ -22,24 +22,24 @@ export function PricingSection({ locale }: { locale: Locale }) {
   ];
 
   return (
-    <section className="py-20">
+    <section className="py-20 bg-[#0d1117] text-white">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center">
-          <p className="section-label">{locale === "fr" ? "Forfaits" : "Plans"}</p>
-          <h1 className="font-display mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">
+          <p className="section-label text-[var(--accent)]">{locale === "fr" ? "Forfaits" : "Plans"}</p>
+          <h1 className="font-display mt-2 text-4xl font-semibold tracking-tight sm:text-5xl text-white">
             {t.pricing.title}
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-[var(--muted-fg)]">{t.pricing.subtitle}</p>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/60">{t.pricing.subtitle}</p>
 
-          <div className="mt-10 inline-flex rounded-xl border border-[var(--border)] bg-[var(--surface)] p-1 shadow-sm">
+          <div className="mt-10 inline-flex rounded-xl border border-white/10 bg-white/5 p-1 shadow-sm backdrop-blur">
             <button
               type="button"
               onClick={() => setAnnual(false)}
               className={cn(
                 "rounded-lg px-5 py-2.5 text-sm font-medium transition-all",
                 !annual
-                  ? "bg-[var(--primary)] text-white shadow-sm"
-                  : "text-[var(--muted-fg)] hover:text-[var(--foreground)]"
+                  ? "bg-white/20 text-white shadow-sm"
+                  : "text-white/50 hover:text-white"
               )}
             >
               {t.pricing.monthly}
@@ -50,8 +50,8 @@ export function PricingSection({ locale }: { locale: Locale }) {
               className={cn(
                 "rounded-lg px-5 py-2.5 text-sm font-medium transition-all",
                 annual
-                  ? "bg-[var(--primary)] text-white shadow-sm"
-                  : "text-[var(--muted-fg)] hover:text-[var(--foreground)]"
+                  ? "bg-white/20 text-white shadow-sm"
+                  : "text-white/50 hover:text-white"
               )}
             >
               {t.pricing.annual}
@@ -79,12 +79,12 @@ export function PricingSection({ locale }: { locale: Locale }) {
                     {t.pricing.popular}
                   </span>
                 )}
-                <h2 className="font-display text-xl font-semibold">{planCopy.name}</h2>
+                <h2 className="font-display text-xl font-semibold text-white">{planCopy.name}</h2>
                 <div className="mt-5 flex items-baseline gap-1">
-                  <span className="font-display text-5xl font-bold text-[var(--primary)]">
+                  <span className="font-display text-5xl font-bold text-[var(--accent)]">
                     ${monthlyDisplay}
                   </span>
-                  <span className="text-[var(--muted-fg)]">{t.pricing.perMonth}</span>
+                  <span className="text-white/50">{t.pricing.perMonth}</span>
                 </div>
                 {annual && (
                   <p className="mt-1 text-xs text-[var(--muted-fg)]">
@@ -137,16 +137,16 @@ export function PricingSection({ locale }: { locale: Locale }) {
           })}
         </div>
 
-        <p className="mt-10 text-center text-sm text-[var(--muted-fg)]">{t.pricing.trialNote}</p>
-        <p className="mt-2 text-center text-xs text-[var(--muted-fg)]">{t.pricing.taxNote}</p>
+        <p className="mt-10 text-center text-sm text-white/50">{t.pricing.trialNote}</p>
+        <p className="mt-2 text-center text-xs text-white/30">{t.pricing.taxNote}</p>
 
         <div className="mx-auto mt-16 max-w-2xl">
           <SectionHeading title={t.pricing.faqTitle} />
           <dl className="mt-8 space-y-4">
             {t.pricing.billingFaq.map((item) => (
-              <div key={item.q} className="card p-5">
-                <dt className="font-semibold">{item.q}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-[var(--muted-fg)]">{item.a}</dd>
+              <div key={item.q} className="card p-5 border-white/10 bg-white/5">
+                <dt className="font-semibold text-white">{item.q}</dt>
+                <dd className="mt-2 text-sm leading-relaxed text-white/60">{item.a}</dd>
               </div>
             ))}
           </dl>

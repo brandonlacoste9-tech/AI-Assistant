@@ -112,7 +112,7 @@ export default async function HomePage() {
       </FadeIn>
 
       <FadeIn>
-        <section id="how-it-works" className="relative py-20">
+        <section id="how-it-works" className="relative bg-[#0a0f1e] py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionHeading
               label={fr ? "Processus" : "Process"}
@@ -136,7 +136,7 @@ export default async function HomePage() {
       </FadeIn>
 
       <FadeIn>
-        <section id="features" className="border-y border-[var(--border)] bg-[var(--surface-elevated)] py-20">
+        <section id="features" className="border-y border-white/10 bg-[#0d1117] py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionHeading
               label={fr ? "Fonctionnalités" : "Features"}
@@ -228,7 +228,7 @@ export default async function HomePage() {
 
 
       <FadeIn>
-        <section id="faq" className="py-20">
+        <section id="faq" className="bg-[#0a0f1e] py-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6">
             <SectionHeading label="FAQ" title={t.faq.title} />
             <dl className="mt-10 space-y-4">
