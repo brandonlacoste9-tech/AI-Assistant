@@ -70,7 +70,7 @@ export function PricingSection({ locale }: { locale: Locale }) {
               <div
                 key={key}
                 className={cn(
-                  "card relative flex flex-col p-7 transition-transform hover:-translate-y-1",
+                  "card-dark relative flex flex-col p-7 transition-transform hover:-translate-y-1",
                   popular && "ring-2 ring-[var(--accent)] ring-offset-2 ring-offset-[var(--background)]"
                 )}
               >
@@ -144,7 +144,7 @@ export function PricingSection({ locale }: { locale: Locale }) {
           <SectionHeading title={t.pricing.faqTitle} />
           <dl className="mt-8 space-y-4">
             {t.pricing.billingFaq.map((item) => (
-              <div key={item.q} className="card p-5 border-white/10 bg-white/5">
+              <div key={item.q} className="card-dark p-5">
                 <dt className="font-semibold text-white">{item.q}</dt>
                 <dd className="mt-2 text-sm leading-relaxed text-white/60">{item.a}</dd>
               </div>
