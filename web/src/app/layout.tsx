@@ -90,7 +90,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       images: [
         {
-          url: "/og-image.png",
+          url: fr ? "/og-image-fr.png" : "/og-image.png",
           width: 1200,
           height: 630,
           alt: fr
@@ -103,7 +103,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title,
       description,
-      images: ["/og-image.png"],
+      images: [fr ? "/og-image-fr.png" : "/og-image.png"],
     },
     robots: {
       index: true,
