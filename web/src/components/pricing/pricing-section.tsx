@@ -5,6 +5,7 @@ import { getDictionary, PLAN_PRICES } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
 import { pixelEvent } from "@/lib/pixel";
+import { gtagConversion, gtagEvent } from "@/lib/gtag";
 import { Check, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -109,12 +110,16 @@ export function PricingSection({ locale }: { locale: Locale }) {
                       const price = annual
                         ? PLAN_PRICES[key].annual / 12
                         : PLAN_PRICES[key].monthly;
+                      // Meta Pixel
                       pixelEvent("InitiateCheckout", {
                         value: price,
                         currency: "CAD",
                         content_name: key,
                         content_type: annual ? "annual" : "monthly",
                       });
+                      // Google Ads + GA4
+                      gtagConversion("initiate_checkout", { value: price, currency: "CAD" });
+                      gtagEvent("begin_checkout", { plan: key, billing: annual ? "annual" : "monthly", value: price, currency: "CAD" });
                     }
                   }}
                 >

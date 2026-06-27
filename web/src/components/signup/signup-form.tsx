@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createClient } from "@/lib/supabase/client";
 import { pixelEvent } from "@/lib/pixel";
+import { gtagConversion, gtagEvent } from "@/lib/gtag";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -54,13 +55,15 @@ export function SignupForm({ dict, locale }: { dict: Dictionary; locale: string 
           } catch {
             /* ignore */
           }
-          // Fire Meta Pixel conversion event
+          // Fire Meta Pixel + Google Ads conversions
           pixelEvent("CompleteRegistration", {
             value: 0,
             currency: "CAD",
             content_name: plan,
             status: "trial_started",
           });
+          gtagConversion("signup", { value: 0, currency: "CAD" });
+          gtagEvent("trial_started", { plan, method: "email" });
           router.push("/onboarding");
           router.refresh();
           return;

@@ -4,6 +4,7 @@ import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { pixelEvent } from "@/lib/pixel";
+import { gtagConversion, gtagEvent } from "@/lib/gtag";
 import { CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 
@@ -27,12 +28,10 @@ export function WaitlistForm({ dict, locale }: { dict: Dictionary; locale: strin
       if (!res.ok) throw new Error(data.error ?? data.warning ?? "failed");
       setFounderCode(data.founder_code ?? null);
       setStatus("success");
-      // Fire Meta Pixel Lead event
-      pixelEvent("Lead", {
-        content_name: "waitlist",
-        currency: "CAD",
-        value: 0,
-      });
+      // Fire Meta Pixel + Google Ads Lead events
+      pixelEvent("Lead", { content_name: "waitlist", currency: "CAD", value: 0 });
+      gtagConversion("lead", { value: 0, currency: "CAD" });
+      gtagEvent("generate_lead", { source: "waitlist" });
       e.currentTarget.reset();
     } catch {
       setStatus("error");

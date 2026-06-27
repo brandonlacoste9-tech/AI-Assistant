@@ -8,6 +8,10 @@ import Script from "next/script";
 import "./globals.css";
 
 const FB_PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID ?? "";
+const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID ?? "";
+const GADS_ID = process.env.NEXT_PUBLIC_GADS_ID ?? "";
+// Use whichever ID is set — gtag works with either or both
+const GTAG_ID = GA4_ID || GADS_ID;
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -232,6 +236,26 @@ fbq('track','PageView');
               `,
             }}
           />
+        )}
+        {/* Google tag (gtag.js) — GA4 + Google Ads */}
+        {GTAG_ID && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+${GA4_ID ? `gtag('config', '${GA4_ID}', { page_path: window.location.pathname });` : ""}
+${GADS_ID ? `gtag('config', '${GADS_ID}');` : ""}
+                `,
+              }}
+            />
+          </>
         )}
         {/* Pixel noscript fallback */}
         {FB_PIXEL_ID && (
