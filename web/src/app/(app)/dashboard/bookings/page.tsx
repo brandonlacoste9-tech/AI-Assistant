@@ -41,7 +41,7 @@ export default async function BookingsPage({
 
     const { data: appts } = await supabase
       .from("appointments")
-      .select("id, customer_name, starts_at, status, service_id, notes, services(name), customers(phone)")
+      .select("id, customer_name, starts_at, status, service_id, notes, source, services(name), customers(phone)")
       .eq("business_id", ctx.businessId)
       .order("starts_at", { ascending: true })
       .limit(50);
@@ -73,6 +73,7 @@ export default async function BookingsPage({
         status: a.status as string,
         service_id: (a.service_id as string | null) ?? null,
         notes: (a.notes as string | null) ?? null,
+        source: a.source as string | null,
         services: service,
       };
     });

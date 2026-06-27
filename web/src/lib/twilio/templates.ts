@@ -52,3 +52,32 @@ export function bookingReminder2hSms(p: BookingSmsParams): string {
 
   return `${p.businessName}: Reminder — your appointment is in 2 hours (${time}). Reply YES to confirm or CANCEL to cancel.`;
 }
+
+type OwnerNotificationParams = {
+  businessName: string;
+  customerName: string;
+  customerPhone: string;
+  startsAt: Date;
+  serviceName?: string | null;
+  locale: string;
+};
+
+export function ownerBookingNotificationSms(p: OwnerNotificationParams): string {
+  const when = p.startsAt.toLocaleString(p.locale === "fr" ? "fr-CA" : "en-CA", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "America/Montreal",
+  });
+
+  const svc = p.serviceName ? ` pour ${p.serviceName}` : "";
+  const svcEn = p.serviceName ? ` for ${p.serviceName}` : "";
+
+  if (p.locale === "fr") {
+    return `🚨 NOUVELLE RÉSERVATION ! L'IA a booké ${p.customerName}${svc} le ${when}. Tél: ${p.customerPhone}`;
+  }
+
+  return `🚨 NEW BOOKING! The AI booked ${p.customerName}${svcEn} on ${when}. Tel: ${p.customerPhone}`;
+}

@@ -1,6 +1,6 @@
 import { BRAND_NAME } from "@/lib/site-config";
 import { sendOutboundSms } from "@/lib/twilio/send-outbound-sms";
-import { bookingConfirmationSms } from "@/lib/twilio/templates";
+import { bookingConfirmationSms, ownerBookingNotificationSms } from "@/lib/twilio/templates";
 import { getSupabaseService } from "@/lib/supabase/server";
 import { incrementUsage } from "@/lib/usage/increment-usage";
 import {
@@ -327,6 +327,14 @@ export async function createAppointment(args: {
     .eq("id", args.businessId)
     .single();
 
+  const { data: owner } = await supabase
+    .from("users")
+    .select("phone")
+    .eq("business_id", args.businessId)
+    .eq("role", "owner")
+    .limit(1)
+    .maybeSingle();
+
   let customerId: string | null = null;
   const { data: existing } = await supabase
     .from("customers")
@@ -385,14 +393,26 @@ export async function createAppointment(args: {
   });
 
   const smsLocale = locale;
-  const smsBody = bookingConfirmationSms({
+  const customerSmsBody = bookingConfirmationSms({
     businessName: business?.name ?? BRAND_NAME,
     customerName: args.customer_name,
     startsAt: start,
     serviceName: service?.name ?? null,
     locale: smsLocale,
   });
-  const sms = await sendOutboundSms(args.businessId, phone, smsBody);
+  await sendOutboundSms(args.businessId, phone, customerSmsBody);
+
+  if (owner?.phone) {
+    const ownerSmsBody = ownerBookingNotificationSms({
+      businessName: business?.name ?? BRAND_NAME,
+      customerName: args.customer_name,
+      customerPhone: phone,
+      startsAt: start,
+      serviceName: service?.name ?? null,
+      locale: business?.default_language ?? "en",
+    });
+    await sendOutboundSms(args.businessId, owner.phone, ownerSmsBody);
+  }
 
   await incrementUsage(args.businessId, { bookings: 1 });
 

@@ -16,6 +16,7 @@ type Booking = {
   status: string;
   service_id: string | null;
   notes: string | null;
+  source?: string | null;
   services: { name: string } | null;
 };
 
@@ -204,7 +205,14 @@ export function BookingsList({
                 ) : (
                   <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
                     <div className="min-w-0">
-                      <p className="break-words font-medium text-[var(--foreground)]">{b.customer_name}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="break-words font-medium text-[var(--foreground)]">{b.customer_name}</p>
+                        {b.source === "phone_ai" && (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-[var(--primary)]/10 px-2 py-0.5 text-xs font-semibold text-[var(--primary)]">
+                            ✨ AI Booking
+                          </span>
+                        )}
+                      </div>
                       <p className="text-sm text-[var(--muted-fg)]">{when}</p>
                       {b.services?.name && (
                         <p className="break-words text-sm text-[var(--muted-fg)]">{b.services.name}</p>
