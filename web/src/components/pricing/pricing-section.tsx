@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/marketing/section-heading";
 import { getDictionary, PLAN_PRICES } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
+import { pixelEvent } from "@/lib/pixel";
 import { Check, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -103,6 +104,19 @@ export function PricingSection({ locale }: { locale: Locale }) {
                     "mt-8 block rounded-xl py-3.5 text-center text-sm font-semibold transition-all",
                     popular ? "btn-primary" : "btn-secondary"
                   )}
+                  onClick={() => {
+                    if (key !== "white_glove") {
+                      const price = annual
+                        ? PLAN_PRICES[key].annual / 12
+                        : PLAN_PRICES[key].monthly;
+                      pixelEvent("InitiateCheckout", {
+                        value: price,
+                        currency: "CAD",
+                        content_name: key,
+                        content_type: annual ? "annual" : "monthly",
+                      });
+                    }
+                  }}
                 >
                   {key === "white_glove" ? t.pricing.contact : t.pricing.cta}
                 </Link>

@@ -4,6 +4,7 @@ import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createClient } from "@/lib/supabase/client";
+import { pixelEvent } from "@/lib/pixel";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -53,6 +54,13 @@ export function SignupForm({ dict, locale }: { dict: Dictionary; locale: string 
           } catch {
             /* ignore */
           }
+          // Fire Meta Pixel conversion event
+          pixelEvent("CompleteRegistration", {
+            value: 0,
+            currency: "CAD",
+            content_name: plan,
+            status: "trial_started",
+          });
           router.push("/onboarding");
           router.refresh();
           return;
