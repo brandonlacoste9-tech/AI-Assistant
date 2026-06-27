@@ -46,13 +46,15 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: BRAND_NAME,
       locale: locale === "fr" ? "fr_CA" : "en_CA",
       type: "website",
-      images: [{ url: "/logo.svg", width: 512, height: 512, alt: BRAND_NAME }],
+      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "JustBookMe AI Receptionist" }],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: t.meta.title,
       description: t.meta.description,
+      images: ["/og-image.png"],
     },
+    // Removed duplicate twitter block
   };
 }
 
