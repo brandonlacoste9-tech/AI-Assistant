@@ -21,24 +21,28 @@ export function AiPhoneFrame({
       {/* Animated glowing orb behind the phone */}
       <motion.div
         animate={{
-          scale: [1, 1.05, 1],
-          opacity: [0.4, 0.6, 0.4],
+          scale: [1, 1.1, 1],
+          opacity: [0.3, 0.7, 0.3],
+          rotate: [0, 90, 0],
         }}
         transition={{
-          duration: 4,
+          duration: 8,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute -inset-4 z-0 rounded-full bg-[var(--primary)] blur-3xl"
+        className="absolute -inset-8 z-0 rounded-full bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--teal)] blur-3xl"
       />
 
       {/* The actual phone glass container */}
-      <div className="relative z-10 overflow-hidden rounded-[40px] border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-xl">
+      <div className="relative z-10 overflow-hidden rounded-[40px] border border-white/30 bg-white/5 p-6 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
+        {/* Subtle inner shadow for the glass edge */}
+        <div className="absolute inset-0 rounded-[40px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] pointer-events-none" />
+
         {/* Phone Speaker Notch */}
-        <div className="absolute left-1/2 top-3 h-1.5 w-16 -translate-x-1/2 rounded-full bg-white/20" />
+        <div className="absolute left-1/2 top-3 h-1.5 w-20 -translate-x-1/2 rounded-full bg-black/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]" />
         
-        <div className="mt-6 flex flex-col items-center justify-center">
-          <div className="mb-6 h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-white/20 shadow-[0_0_30px_rgba(var(--primary-rgb),0.5)]">
+        <div className="mt-8 flex flex-col items-center justify-center">
+          <div className="mb-6 h-24 w-24 shrink-0 overflow-hidden rounded-full border border-white/20 shadow-[0_0_40px_rgba(var(--accent-rgb),0.4)]">
             <img 
               src={avatarSrc} 
               alt="AI Receptionist"

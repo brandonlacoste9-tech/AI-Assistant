@@ -34,9 +34,15 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link href="/signup" className="btn-primary px-8 py-4 text-base shadow-xl shadow-[var(--primary)]/20">
-              {dict.hero.ctaPrimary}
-              <ArrowRight className="h-4 w-4" />
+            <Link 
+              href="/signup" 
+              className="btn-primary relative overflow-hidden px-8 py-4 text-base shadow-[0_0_40px_-10px_rgba(212,175,55,0.4)] transition-all hover:scale-105 hover:shadow-[0_0_60px_-15px_rgba(212,175,55,0.6)]"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                {dict.hero.ctaPrimary}
+                <ArrowRight className="h-4 w-4" />
+              </span>
+              <div className="absolute inset-0 z-0 animate-pulse bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             </Link>
           </div>
 
