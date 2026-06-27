@@ -10,12 +10,21 @@ export function Header({ locale }: { locale: Locale }) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)]/80 bg-[var(--background)]/90 backdrop-blur-lg">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-8">
         <Logo />
 
-        <nav className="hidden items-center gap-8 text-sm font-medium text-[var(--muted-fg)] md:flex">
+        <nav className="hidden flex-1 items-center justify-center gap-10 text-sm font-medium text-[var(--muted-fg)] md:flex">
+          <Link href="/#features" className="transition-colors hover:text-[var(--primary)]">
+            {t.features.title}
+          </Link>
+          <Link href="/#how-it-works" className="transition-colors hover:text-[var(--primary)]">
+            {t.howItWorks.title}
+          </Link>
           <Link href="/pricing" className="transition-colors hover:text-[var(--primary)]">
             {t.nav.pricing}
+          </Link>
+          <Link href="/#faq" className="transition-colors hover:text-[var(--primary)]">
+            {t.faq.title}
           </Link>
         </nav>
 
