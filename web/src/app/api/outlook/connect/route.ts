@@ -17,7 +17,7 @@ export async function GET() {
     return NextResponse.json({ error: "Service unavailable" }, { status: 503 });
   }
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const sessionToken = cookieStore.get("session_token")?.value;
   if (!sessionToken) {
     return NextResponse.redirect(new URL("/login", process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"));

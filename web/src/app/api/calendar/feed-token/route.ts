@@ -13,7 +13,7 @@ async function getBusinessIdFromSession(): Promise<string | null> {
   const supabase = getSupabaseService();
   if (!supabase) return null;
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const sessionToken = cookieStore.get("session_token")?.value;
   if (!sessionToken) return null;
 

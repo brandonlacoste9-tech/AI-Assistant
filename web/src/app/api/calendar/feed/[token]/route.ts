@@ -15,9 +15,9 @@ import { generateIcsFeed, type IcsEventInput } from "@/lib/calendar/ics";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { token: string } }
+  { params }: { params: Promise<{ token: string }> }
 ) {
-  const { token } = params;
+  const { token } = await params;
 
   if (!token || token.length < 20) {
     return new NextResponse("Invalid feed token", { status: 401 });

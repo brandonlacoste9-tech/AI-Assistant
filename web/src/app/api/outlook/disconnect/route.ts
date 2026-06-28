@@ -12,7 +12,7 @@ export async function POST() {
     return NextResponse.json({ error: "Service unavailable" }, { status: 503 });
   }
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const sessionToken = cookieStore.get("session_token")?.value;
   if (!sessionToken) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
