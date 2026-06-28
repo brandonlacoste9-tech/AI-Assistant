@@ -5,6 +5,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { getSupabaseService } from "@/lib/supabase/server";
 import { CalendarSyncCard } from "@/components/dashboard/calendar-sync-card";
+import { DEMO_VIDEO_URL } from "@/lib/site-config";
 
 export default async function IntegrationsPage() {
   const ctx = await requireOnboardedContext();
@@ -45,6 +46,29 @@ export default async function IntegrationsPage() {
         googleConnected={googleConnected}
         outlookConnected={outlookConnected}
       />
+
+      {/* Walkthrough Video Explainer */}
+      <div className="card p-6">
+        <h2 className="text-lg font-semibold text-[var(--foreground)]">
+          {locale === "fr" ? "Guide de configuration vidéo" : "Walkthrough Tutorial Video"}
+        </h2>
+        <p className="mt-1 text-sm text-[var(--muted-fg)] mb-6">
+          {locale === "fr" 
+            ? "Découvrez comment connecter vos agendas Google, Outlook ou iCal en moins de 2 minutes." 
+            : "Learn how to connect and sync your Google, Outlook, or iCal calendars in less than 2 minutes."}
+        </p>
+        <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-white/10 bg-slate-950 shadow-lg">
+          <div className="aspect-video w-full">
+            <iframe
+              src={DEMO_VIDEO_URL}
+              title={locale === "fr" ? "Tutoriel de configuration" : "Walkthrough Video"}
+              className="h-full w-full border-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
