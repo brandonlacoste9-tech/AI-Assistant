@@ -32,41 +32,39 @@ export async function generateMetadata(): Promise<Metadata> {
   const fr = locale === "fr";
 
   const title = fr
-    ? "JustBookMe — Réceptionniste IA bilingue pour salons & barbershops au Québec"
-    : "JustBookMe — Bilingual AI Receptionist for Salons & Barbershops in Quebec";
+    ? "JustBookMe — Réceptionniste IA bilingue pour salons, cliniques & entreprises au Canada"
+    : "JustBookMe — Bilingual AI Receptionist for Salons, Clinics & Offices in Canada";
 
   const description = fr
-    ? "JustBookMe répond à vos appels manqués 24h/24, prend les rendez-vous et envoie des rappels SMS — en français et en anglais. Conçu pour les salons de coiffure, barbershops et entreprises de services au Québec. Essai gratuit 14 jours."
-    : "JustBookMe answers missed calls 24/7, books appointments, and sends SMS reminders — in French and English. Built for hair salons, barbershops, and service businesses in Quebec. 14-day free trial, no credit card required.";
+    ? "JustBookMe répond à vos appels manqués 24h/24, prend les rendez-vous et envoie des rappels SMS — en français et en anglais. Conçu pour les salons, cliniques et entreprises de services au Canada. Essai gratuit 14 jours."
+    : "JustBookMe answers missed calls 24/7, books appointments, and sends SMS reminders — in French and English. Built for salons, clinics, and service businesses in Canada. 14-day free trial, no credit card required.";
 
   const keywords = fr
     ? [
-        "réceptionniste IA Québec",
-        "réceptionniste virtuelle salon coiffure",
-        "logiciel réservation salon Québec",
+        "réceptionniste IA Canada",
+        "réceptionniste virtuelle Canada",
+        "logiciel réservation Canada",
         "IA bilingue entreprise service",
-        "appels manqués salon coiffure",
+        "appels manqués entreprise",
         "rappels SMS rendez-vous",
-        "barbershop IA Montréal",
         "réceptionniste virtuelle bilingue",
         "prise de rendez-vous automatique",
-        "logiciel salon esthétique Québec",
         "JustBookMe",
         "Loi 25 conforme",
-        "IA pour PME Québec",
+        "PIPEDA conforme",
+        "IA pour PME Canada",
       ]
     : [
-        "AI receptionist Quebec",
+        "AI receptionist Canada",
         "bilingual AI receptionist Canada",
-        "salon booking software Quebec",
-        "AI phone answering salon",
-        "missed calls AI barbershop",
+        "appointment booking software Canada",
+        "AI phone answering service",
+        "missed calls AI receptionist",
         "SMS appointment reminders Canada",
-        "AI receptionist Montreal",
-        "24/7 virtual receptionist hair salon",
+        "24/7 virtual receptionist",
         "French English AI receptionist",
-        "Law 25 compliant AI",
-        "appointment booking automation Quebec",
+        "PIPEDA compliant AI",
+        "appointment booking automation",
         "JustBookMe",
         "AI for service businesses Canada",
       ];
@@ -101,8 +99,8 @@ export async function generateMetadata(): Promise<Metadata> {
           width: 1200,
           height: 630,
           alt: fr
-            ? "JustBookMe — Réceptionniste IA bilingue pour le Québec"
-            : "JustBookMe — Bilingual AI Receptionist for Quebec",
+            ? "JustBookMe — Réceptionniste IA bilingue pour le Canada"
+            : "JustBookMe — Bilingual AI Receptionist for Canada",
         },
       ],
     },
@@ -150,8 +148,8 @@ export default async function RootLayout({
           priceValidUntil: "2027-12-31",
         },
         description: fr
-          ? "Réceptionniste IA bilingue pour salons de coiffure, barbershops et entreprises de services au Québec."
-          : "Bilingual AI receptionist for hair salons, barbershops, and service businesses in Quebec.",
+          ? "Réceptionniste IA bilingue pour salons, cliniques et entreprises de services au Canada."
+          : "Bilingual AI receptionist for salons, clinics, and service businesses in Canada.",
         aggregateRating: {
           "@type": "AggregateRating",
           ratingValue: "4.9",
@@ -170,8 +168,8 @@ export default async function RootLayout({
           areaServed: "CA",
         },
         areaServed: {
-          "@type": "AdministrativeArea",
-          name: "Quebec, Canada",
+          "@type": "Country",
+          name: "Canada",
         },
       },
       {
@@ -203,8 +201,8 @@ export default async function RootLayout({
             acceptedAnswer: {
               "@type": "Answer",
               text: fr
-                ? "Hébergées au Canada, conformes à la Loi 25."
-                : "Hosted in Canada, compliant with Quebec's Law 25 privacy legislation.",
+                ? "Hébergées au Canada, conformes à la Loi 25 et la LPRPDE."
+                : "Hosted in Canada, compliant with PIPEDA & Quebec's Law 25 privacy legislation.",
             },
           },
         ],

@@ -74,7 +74,7 @@ export function buildReceptionistSystemPrompt(ctx: BusinessVoiceContext): string
   const toneInstruction = personalityRules[selectedPersonality as keyof typeof personalityRules] || personalityRules.friendly;
 
   const bilingualInstruction = ctx.bilingualMode
-    ? `BILINGUAL RULE: You are fully BILINGUAL in English and French (Quebecois). You MUST instantly match the caller's language. If they speak French, reply in flawless French. If they speak English, reply in English. Never mix languages in one reply.`
+    ? `BILINGUAL RULE: You are fully BILINGUAL in English and French. You MUST instantly match the caller's language. If they speak French, reply in flawless French. If they speak English, reply in English. Never mix languages in one reply.`
     : `Languages: Canadian French and English. Detect the caller's language from their first sentence and stay in that language for the whole call.`;
 
   const verticalRules = getVerticalRules(ctx.businessType ?? "salon");
@@ -112,7 +112,7 @@ ${verticalRules ? `${verticalRules}\n` : ""}- Location Rule: We are located only
 
 French style (when caller speaks French):
 - Always use « vous » (vouvoiement). Never use « tu ».
-- Use polished Quebec French.
+- Use polished Canadian French.
 
 English style (when caller speaks English):
 - Sound like a highly polished concierge in ${city}.

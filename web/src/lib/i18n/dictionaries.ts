@@ -417,12 +417,12 @@ const fr: Dictionary = {
     ],
   },
   builtForQuebec: {
-    title: "Conçu pour le Québec",
+    title: "Conçu pour le Canada",
     items: [
       "Bilingue FR/EN avec une voix naturelle",
-      "Prix en CAD, facturation TPS/TVQ",
-      "Conforme à la Loi 25",
-      "Soutien local, heures d'affaires EST/EDT",
+      "Prix en CAD, conformité fiscale locale (TPS/TVQ/TVH)",
+      "Respect de la vie privée (LPRPDE & Loi 25)",
+      "Soutien local à travers le pays",
     ],
   },
   features: {
@@ -462,7 +462,7 @@ const fr: Dictionary = {
   waitlist: {
     title: "Rejoignez la liste d'attente",
     subtitle:
-      "Soyez parmi les 10 premiers salons et barbershops au Québec à tester JustBookMe. Tarif fondateur garanti à vie.",
+      "Soyez parmi les 10 premiers salons et barbershops à tester JustBookMe. Tarif fondateur garanti à vie.",
     fields: {
       businessName: "Nom du salon",
       contactName: "Votre nom",
@@ -605,7 +605,7 @@ const fr: Dictionary = {
         {
           heading: "Responsable",
           paragraphs: [
-            "JustBookMe (« nous ») exploite justbookme.ca et les services associés pour les salons et entreprises de services au Québec.",
+            "JustBookMe (« nous ») exploite justbookme.ca et les services associés pour les salons et entreprises de services.",
           ],
         },
         {
@@ -622,7 +622,7 @@ const fr: Dictionary = {
           ],
         },
         {
-          heading: "Vos droits (Loi 25)",
+          heading: "Vos droits (Vie privée)",
           paragraphs: [
             "Vous pouvez demander l'accès, la rectification ou la suppression de vos renseignements personnels en écrivant à info@justbookme.ca.",
           ],
@@ -1031,7 +1031,7 @@ const en: Dictionary = {
       "JustBookMe answers missed calls 24/7, books appointments, and sends confirmations — for salons, dental clinics, law offices, physio, and more.",
     ctaPrimary: "Start free trial",
     ctaSecondary: "Book a 15-minute demo",
-    trust: "Built in Quebec · Bilingual · 14-day trial, no card",
+    trust: "Built in Canada · Bilingual · 14-day trial, no card",
   },
   howItWorks: {
     title: "How it works",
@@ -1042,12 +1042,12 @@ const en: Dictionary = {
     ],
   },
   builtForQuebec: {
-    title: "Built for Quebec",
+    title: "Built for Canada",
     items: [
       "Bilingual FR/EN with native-quality voice",
-      "CAD pricing, PST/QST invoicing",
-      "Compliant with Quebec privacy law (Law 25)",
-      "Local support, business hours in EST/EDT",
+      "CAD pricing, local tax compliance (GST/HST/PST/QST)",
+      "Compliant with Canadian privacy laws (PIPEDA & Law 25)",
+      "Local support in your time zone",
     ],
   },
   features: {
@@ -1087,7 +1087,7 @@ const en: Dictionary = {
   waitlist: {
     title: "Join the waitlist",
     subtitle:
-      "Be among the first 10 Quebec salons & barbershops to try JustBookMe. Founder pricing locked for life.",
+      "Be among the first 10 salons & barbershops to try JustBookMe. Founder pricing locked for life.",
     fields: {
       businessName: "Business name",
       contactName: "Your name",
@@ -1230,7 +1230,7 @@ const en: Dictionary = {
         {
           heading: "Data controller",
           paragraphs: [
-            "JustBookMe (« we ») operates justbookme.ca and related services for Quebec service businesses.",
+            "JustBookMe (« we ») operates justbookme.ca and related services for service businesses.",
           ],
         },
         {

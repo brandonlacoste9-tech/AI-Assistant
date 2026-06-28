@@ -28,25 +28,25 @@ export function RoiCalculator({ fr }: Props) {
   return (
     <div className="card overflow-hidden">
       <div className="grid lg:grid-cols-2">
-        {/* Left: Quebec card */}
+        {/* Left: Canada/Bilingual card */}
         <div className="bg-gradient-to-br from-[#0f172a] to-[#2a5080] p-8 sm:p-10">
           <Sparkles className="h-6 w-6 text-[var(--accent)]" />
           <h2 className="font-display mt-4 text-2xl font-semibold text-white sm:text-3xl">
-            {fr ? "Conçu pour le Québec" : "Built for Quebec"}
+            {fr ? "Conçu pour le Canada" : "Built for Canada"}
           </h2>
           <ul className="mt-8 space-y-4">
             {(fr
               ? [
                   "Bilingue FR/EN avec une voix naturelle",
-                  "Prix en CAD, facturation TPS/TVQ",
-                  "Conforme à la Loi 25",
-                  "Soutien local, heures d'affaires EST/EDT",
+                  "Prix en CAD, conformité fiscale locale",
+                  "Respect de la vie privée (LPRPDE & Loi 25)",
+                  "Soutien local à travers le pays",
                 ]
               : [
                   "Bilingual FR/EN with native-quality voice",
-                  "CAD pricing, PST/QST invoicing",
-                  "Compliant with Quebec privacy law (Law 25)",
-                  "Local support, business hours in EST/EDT",
+                  "CAD pricing, local tax compliance (GST/HST/PST/QST)",
+                  "Compliant with Canadian privacy laws (PIPEDA & Law 25)",
+                  "Local support in your time zone",
                 ]
             ).map((item) => (
               <li key={item} className="flex items-start gap-3 text-white/90">

@@ -12,12 +12,12 @@ export function FounderBanner({ locale }: { locale: Locale }) {
           {fr ? (
             <>
               <span className="text-[var(--accent-hover)]">10 places fondateur</span> — configuration
-              gratuite + 30 % de rabais à vie pour les premiers salons et barbershops du Québec
+              gratuite + 30 % de rabais à vie pour les premiers salons et barbershops au Canada
             </>
           ) : (
             <>
               <span className="text-[var(--accent-hover)]">10 founder spots</span> — free setup + 30%
-              off for life for the first Quebec salons & barbershops
+              off for life for the first Canadian salons & barbershops
             </>
           )}
         </p>
