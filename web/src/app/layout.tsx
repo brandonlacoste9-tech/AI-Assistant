@@ -1,10 +1,8 @@
 import { getLocale } from "@/lib/i18n/get-locale";
-import { getDictionary } from "@/lib/i18n/dictionaries";
 import { BRAND_NAME, getSiteUrl } from "@/lib/site-config";
 import type { Metadata } from "next";
 import { DM_Sans, Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import Script from "next/script";
 import "./globals.css";
 
 const FB_PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID ?? "";
@@ -27,7 +25,6 @@ const playfair = Playfair_Display({
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  const t = getDictionary(locale);
   const siteUrl = getSiteUrl();
   const fr = locale === "fr";
 

@@ -19,21 +19,13 @@ export default async function IntegrationsPage() {
   // Check Outlook connection
   const supabase = getSupabaseService();
   let outlookConnected = false;
-  let currentProvider: "google" | "outlook" | "ics_only" | "none" = "none";
   if (supabase) {
     const { data } = await supabase
       .from("businesses")
-      .select("outlook_refresh_token, calendar_provider")
+      .select("outlook_refresh_token")
       .eq("id", ctx.businessId)
       .single();
     outlookConnected = Boolean(data?.outlook_refresh_token);
-    if (data?.calendar_provider) {
-      currentProvider = data.calendar_provider as typeof currentProvider;
-    } else if (googleConnected) {
-      currentProvider = "google";
-    } else if (outlookConnected) {
-      currentProvider = "outlook";
-    }
   }
 
   return (
@@ -52,7 +44,6 @@ export default async function IntegrationsPage() {
       <CalendarSyncCard
         googleConnected={googleConnected}
         outlookConnected={outlookConnected}
-        currentProvider={currentProvider}
       />
     </div>
   );

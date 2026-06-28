@@ -2,15 +2,12 @@
 
 import { useState, useEffect } from "react";
 
-type CalendarProvider = "google" | "outlook" | "ics_only" | "none";
-
 type Props = {
   googleConnected: boolean;
   outlookConnected: boolean;
-  currentProvider: CalendarProvider;
 };
 
-export function CalendarSyncCard({ googleConnected, outlookConnected, currentProvider }: Props) {
+export function CalendarSyncCard({ googleConnected, outlookConnected }: Props) {
   const [feedUrl, setFeedUrl] = useState<string | null>(null);
   const [feedLoading, setFeedLoading] = useState(false);
   const [copied, setCopied] = useState(false);

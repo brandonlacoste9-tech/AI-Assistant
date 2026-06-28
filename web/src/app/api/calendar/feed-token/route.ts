@@ -4,7 +4,7 @@
  * GET: Get the current feed URL
  */
 
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getSupabaseService } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 import crypto from "crypto";

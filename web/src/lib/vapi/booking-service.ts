@@ -5,7 +5,6 @@ import { getSupabaseService } from "@/lib/supabase/server";
 import { incrementUsage } from "@/lib/usage/increment-usage";
 import {
   generateSlotTimes,
-  hasSchedulingConflict,
   type HoursRow,
 } from "@/lib/vapi/hours";
 import { MONTREAL_TZ, montrealDayBoundsIso, montrealLocalToIso } from "@/lib/vapi/timezone";
@@ -171,7 +170,6 @@ export async function checkAvailability(args: {
   const service = await resolveService(args.businessId, args.service_id, args.service_name);
   const duration = service?.duration_minutes ?? 30;
 
-  const supabase = getSupabaseService();
   const bounds = montrealDayBoundsIso(preferredDate);
   const dayStart = bounds?.start ?? montrealLocalToIso(parts.y, parts.m, parts.d, 0, 0);
   const dayEnd = bounds?.end ?? montrealLocalToIso(parts.y, parts.m, parts.d, 23, 59);
