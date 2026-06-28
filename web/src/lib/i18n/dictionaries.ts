@@ -88,6 +88,7 @@ export type Dictionary = {
   dashboard: {
     title: string;
     subtitle: string;
+    watchWalkthrough: string;
     nav: {
       today: string;
       bookings: string;
@@ -405,7 +406,7 @@ const fr: Dictionary = {
     subhead:
       "JustBookMe répond à vos appels manqués 24 h/24, prend les rendez-vous et les confirme — pour les salons, cliniques dentaires, cabinets juridiques, physio et plus encore.",
     ctaPrimary: "Essayer gratuitement",
-    ctaSecondary: "Réserver une démo de 15 minutes",
+    ctaSecondary: "Voir la démo vidéo",
     trust: "Conçu au Québec · Bilingue · Essai 7 jours sans carte",
   },
   howItWorks: {
@@ -660,8 +661,9 @@ const fr: Dictionary = {
     },
   },
   dashboard: {
-    title: "Aujourd'hui",
-    subtitle: "Vue d'ensemble de votre activité.",
+    title: "Tableau de bord",
+    subtitle: "Suivez vos performances de réception et d'appels.",
+    watchWalkthrough: "Regarder le tutoriel vidéo",
     nav: {
       today: "Aujourd'hui",
       bookings: "Rendez-vous",
@@ -1030,7 +1032,7 @@ const en: Dictionary = {
     subhead:
       "JustBookMe answers missed calls 24/7, books appointments, and sends confirmations — for salons, dental clinics, law offices, physio, and more.",
     ctaPrimary: "Start free trial",
-    ctaSecondary: "Book a 15-minute demo",
+    ctaSecondary: "Watch demo video",
     trust: "Built in Canada · Bilingual · 7-day trial, no card",
   },
   howItWorks: {
@@ -1285,8 +1287,9 @@ const en: Dictionary = {
     },
   },
   dashboard: {
-    title: "Today",
-    subtitle: "Overview of your business activity.",
+    title: "Dashboard",
+    subtitle: "Monitor your receptionist and call performance.",
+    watchWalkthrough: "Watch walkthrough video",
     nav: {
       today: "Today",
       bookings: "Appointments",

@@ -2,6 +2,7 @@ import { CallsList } from "@/components/dashboard/calls-list";
 import { OutboundSmsBanner } from "@/components/dashboard/outbound-sms-banner";
 import { SetupChecklistCard } from "@/components/dashboard/setup-checklist-card";
 import { TrialUpgradeBanner } from "@/components/dashboard/trial-upgrade-banner";
+import { DashboardWelcomeVideo } from "@/components/dashboard/dashboard-welcome-video";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { requireOnboardedContext } from "@/lib/auth/get-business-context";
@@ -156,10 +157,17 @@ export default async function DashboardPage() {
 
   return (
     <div className="mx-auto w-full max-w-4xl">
-      <h1 className="font-display text-2xl font-semibold text-[var(--foreground)]">
-        {t.dashboard.title}
-      </h1>
-      <p className="mt-1 text-sm text-[var(--muted-fg)]">{t.dashboard.subtitle}</p>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="font-display text-2xl font-semibold text-[var(--foreground)]">
+            {t.dashboard.title}
+          </h1>
+          <p className="mt-1 text-sm text-[var(--muted-fg)]">{t.dashboard.subtitle}</p>
+        </div>
+        <div className="flex shrink-0 items-center">
+          <DashboardWelcomeVideo dict={t} />
+        </div>
+      </div>
 
       <TrialUpgradeBanner
         daysLeft={ctx.trialEndsAt ? Math.ceil((new Date(ctx.trialEndsAt).getTime() - Date.now()) / 86_400_000) : 99}

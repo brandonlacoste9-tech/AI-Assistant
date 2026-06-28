@@ -1,10 +1,16 @@
+"use client";
+
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/types";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Play } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import { VideoModal } from "@/components/ui/video-modal";
+import { DEMO_VIDEO_URL } from "@/lib/site-config";
 
 export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const fr = locale === "fr";
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   return (
     <section className="relative overflow-hidden bg-slate-950">
@@ -44,6 +50,15 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
               </span>
               <div className="absolute inset-0 z-0 animate-pulse bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             </Link>
+
+            <button
+              type="button"
+              onClick={() => setIsVideoOpen(true)}
+              className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-8 py-4 text-base font-medium text-white backdrop-blur-sm transition-all hover:bg-white/15 hover:scale-105 shadow-lg"
+            >
+              <Play className="h-4 w-4 text-[var(--accent)] fill-[var(--accent)]" />
+              {dict.hero.ctaSecondary}
+            </button>
           </div>
 
           <div className="mt-16 flex flex-wrap justify-center gap-8 sm:gap-16 border-t border-white/10 pt-10">
@@ -60,6 +75,13 @@ export function HeroSection({ dict, locale }: { dict: Dictionary; locale: Locale
           </div>
         </div>
       </div>
+
+      <VideoModal
+        isOpen={isVideoOpen}
+        onClose={() => setIsVideoOpen(false)}
+        videoUrl={DEMO_VIDEO_URL}
+        title={dict.hero.ctaSecondary}
+      />
     </section>
   );
 }

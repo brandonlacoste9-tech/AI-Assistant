@@ -25,3 +25,6 @@ export function isCalendlyExternal(): boolean {
   const url = process.env.NEXT_PUBLIC_CALENDLY_URL?.trim();
   return Boolean(url && url.startsWith("http"));
 }
+
+// Configurable explainer/demo video URL (YouTube embed format)
+export const DEMO_VIDEO_URL = "https://www.youtube.com/embed/dQw4w9WgXcQ";
