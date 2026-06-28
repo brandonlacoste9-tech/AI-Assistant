@@ -64,7 +64,7 @@ export async function POST(req: Request) {
       .slice(0, 40);
 
     const trialEnds = new Date();
-    trialEnds.setDate(trialEnds.getDate() + 14);
+    trialEnds.setDate(trialEnds.getDate() + 7);
 
     const { data: business, error: bizError } = await service
       .from("businesses")
@@ -127,7 +127,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       ok: true,
       business_id: business.id,
-      message: "Account created. Your 14-day free trial is now active.",
+      message: "Account created. Your 7-day free trial is now active.",
     });
   } catch (err) {
     console.error("[signup]", err);

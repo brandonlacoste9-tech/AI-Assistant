@@ -75,14 +75,14 @@ describe("POST /api/signup", () => {
   });
 
   describe("Trial period", () => {
-    it("should set trial to 14 days from now", () => {
+    it("should set trial to 7 days from now", () => {
       const trialEnds = new Date();
-      trialEnds.setDate(trialEnds.getDate() + 14);
+      trialEnds.setDate(trialEnds.getDate() + 7);
       const now = new Date();
       const diffDays = Math.round(
         (trialEnds.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
       );
-      expect(diffDays).toBe(14);
+      expect(diffDays).toBe(7);
     });
   });
 });

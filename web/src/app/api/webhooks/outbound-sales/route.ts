@@ -49,7 +49,7 @@ export async function POST(req: Request) {
           provider: "11labs",
           voiceId: "cgSgspJ2msm6clMCkdW9", // Sarah voice
         },
-        firstMessage: `Hi ${name}! This is Sarah, the AI receptionist from ${BRAND_NAME}. I'm calling because you just clicked on our Facebook ad for a 14-day free trial!`,
+        firstMessage: `Hi ${name}! This is Sarah, the AI receptionist from ${BRAND_NAME}. I'm calling because you just clicked on our Facebook ad for a 7-day free trial!`,
       },
       customer: {
         number: phone,

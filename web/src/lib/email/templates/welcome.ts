@@ -73,8 +73,8 @@ export function welcomeEmail({
       <p style="font-size:13px;color:#6b7280;text-align:center;margin:0 0 16px;">
         ${
           fr
-            ? "Vous avez 14 jours d'essai gratuit — aucune carte de crédit requise."
-            : "You have a 14-day free trial — no credit card required."
+            ? "Vous avez 7 jours d'essai gratuit — aucune carte de crédit requise."
+            : "You have a 7-day free trial — no credit card required."
         }
       </p>
 
@@ -99,8 +99,8 @@ export function welcomeEmail({
 </html>`.trim();
 
   const text = fr
-    ? `Bienvenue sur JustBookMe, ${businessName}!\n\nVotre réceptionniste IA est presque prête.\n\nProchaines étapes:\n1. Ajoutez vos services et heures d'ouverture\n2. Personnalisez le message d'accueil\n3. Transférez vos appels manqués\n\nAccédez à votre tableau de bord: ${loginUrl}\n\nVous avez 14 jours d'essai gratuit.\n\nQuestions? info@justbookme.ca`
-    : `Welcome to JustBookMe, ${businessName}!\n\nYour AI receptionist is almost ready.\n\nNext steps:\n1. Add your services and working hours\n2. Customize your AI greeting\n3. Forward missed calls to your AI number\n\nGo to your dashboard: ${loginUrl}\n\nYou have a 14-day free trial — no credit card required.\n\nQuestions? info@justbookme.ca`;
+    ? `Bienvenue sur JustBookMe, ${businessName}!\n\nVotre réceptionniste IA est presque prête.\n\nProchaines étapes:\n1. Ajoutez vos services et heures d'ouverture\n2. Personnalisez le message d'accueil\n3. Transférez vos appels manqués\n\nAccédez à votre tableau de bord: ${loginUrl}\n\nVous avez 7 jours d'essai gratuit.\n\nQuestions? info@justbookme.ca`
+    : `Welcome to JustBookMe, ${businessName}!\n\nYour AI receptionist is almost ready.\n\nNext steps:\n1. Add your services and working hours\n2. Customize your AI greeting\n3. Forward missed calls to your AI number\n\nGo to your dashboard: ${loginUrl}\n\nYou have a 7-day free trial — no credit card required.\n\nQuestions? info@justbookme.ca`;
 
   return { subject, html, text };
 }

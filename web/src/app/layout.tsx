@@ -36,8 +36,8 @@ export async function generateMetadata(): Promise<Metadata> {
     : "JustBookMe — Bilingual AI Receptionist for Salons, Clinics & Offices in Canada";
 
   const description = fr
-    ? "JustBookMe répond à vos appels manqués 24h/24, prend les rendez-vous et envoie des rappels SMS — en français et en anglais. Conçu pour les salons, cliniques et entreprises de services au Canada. Essai gratuit 14 jours."
-    : "JustBookMe answers missed calls 24/7, books appointments, and sends SMS reminders — in French and English. Built for salons, clinics, and service businesses in Canada. 14-day free trial, no credit card required.";
+    ? "JustBookMe répond à vos appels manqués 24h/24, prend les rendez-vous et envoie des rappels SMS — en français et en anglais. Conçu pour les salons, cliniques et entreprises de services au Canada. Essai gratuit 7 jours."
+    : "JustBookMe answers missed calls 24/7, books appointments, and sends SMS reminders — in French and English. Built for salons, clinics, and service businesses in Canada. 7-day free trial, no credit card required.";
 
   const keywords = fr
     ? [

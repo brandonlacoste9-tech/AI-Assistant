@@ -406,7 +406,7 @@ const fr: Dictionary = {
       "JustBookMe répond à vos appels manqués 24 h/24, prend les rendez-vous et les confirme — pour les salons, cliniques dentaires, cabinets juridiques, physio et plus encore.",
     ctaPrimary: "Essayer gratuitement",
     ctaSecondary: "Réserver une démo de 15 minutes",
-    trust: "Conçu au Québec · Bilingue · Essai 14 jours sans carte",
+    trust: "Conçu au Québec · Bilingue · Essai 7 jours sans carte",
   },
   howItWorks: {
     title: "Comment ça fonctionne",
@@ -557,7 +557,7 @@ const fr: Dictionary = {
     billingFaq: [
       {
         q: "Faut-il une carte pour l'essai?",
-        a: "Non. Inscrivez-vous par courriel, utilisez le forfait Pro pendant 14 jours.",
+        a: "Non. Inscrivez-vous par courriel, utilisez le forfait Pro pendant 7 jours.",
       },
       {
         q: "Puis-je changer de forfait?",
@@ -571,7 +571,7 @@ const fr: Dictionary = {
   },
   signup: {
     title: "Commencez votre essai gratuit",
-    subtitle: "14 jours du forfait Pro. Aucune carte requise.",
+    subtitle: "7 jours du forfait Pro. Aucune carte requise.",
     step1: "Créez votre compte",
     fields: {
       email: "Courriel",
@@ -583,7 +583,7 @@ const fr: Dictionary = {
     },
     langOptions: { fr: "Français", en: "English" },
     submit: "Créer mon compte",
-    success: "Compte créé! Votre essai gratuit de 14 jours est maintenant actif.",
+    success: "Compte créé! Votre essai gratuit de 7 jours est maintenant actif.",
     hasAccount: "Déjà un compte?",
   },
   login: {
@@ -641,7 +641,7 @@ const fr: Dictionary = {
         {
           heading: "Essai gratuit",
           paragraphs: [
-            "L'essai de 14 jours est offert sans carte de crédit. À la fin de l'essai, l'accès peut être suspendu sans paiement.",
+            "L'essai de 7 jours est offert sans carte de crédit. À la fin de l'essai, l'accès peut être suspendu sans paiement.",
           ],
         },
         {
@@ -1031,7 +1031,7 @@ const en: Dictionary = {
       "JustBookMe answers missed calls 24/7, books appointments, and sends confirmations — for salons, dental clinics, law offices, physio, and more.",
     ctaPrimary: "Start free trial",
     ctaSecondary: "Book a 15-minute demo",
-    trust: "Built in Canada · Bilingual · 14-day trial, no card",
+    trust: "Built in Canada · Bilingual · 7-day trial, no card",
   },
   howItWorks: {
     title: "How it works",
@@ -1182,7 +1182,7 @@ const en: Dictionary = {
     billingFaq: [
       {
         q: "Do I need a card for the trial?",
-        a: "No. Sign up with email, use Pro features for 14 days.",
+        a: "No. Sign up with email, use Pro features for 7 days.",
       },
       {
         q: "Can I switch plans?",
@@ -1196,7 +1196,7 @@ const en: Dictionary = {
   },
   signup: {
     title: "Start your free trial",
-    subtitle: "14 days of Pro. No card required.",
+    subtitle: "7 days of Pro. No card required.",
     step1: "Create your account",
     fields: {
       email: "Email",
@@ -1208,7 +1208,7 @@ const en: Dictionary = {
     },
     langOptions: { fr: "Français", en: "English" },
     submit: "Create account",
-    success: "Account created! Your 14-day free trial is now active.",
+    success: "Account created! Your 7-day free trial is now active.",
     hasAccount: "Already have an account?",
   },
   login: {
@@ -1266,7 +1266,7 @@ const en: Dictionary = {
         {
           heading: "Free trial",
           paragraphs: [
-            "A 14-day trial is offered without a credit card. After the trial, access may be suspended without payment.",
+            "A 7-day trial is offered without a credit card. After the trial, access may be suspended without payment.",
           ],
         },
         {

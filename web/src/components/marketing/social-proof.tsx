@@ -11,13 +11,13 @@ export function SocialProof({ locale }: { locale: Locale }) {
         { icon: ShieldCheck, label: "Conforme à la Loi 25" },
         { icon: Clock, label: "Disponible 24h/24, 7j/7" },
         { icon: Globe, label: "Bilingue FR/EN" },
-        { icon: Star, label: "Essai 14 jours sans carte" },
+        { icon: Star, label: "Essai 7 jours sans carte" },
       ]
     : [
         { icon: ShieldCheck, label: "Law 25 Compliant" },
         { icon: Clock, label: "Available 24/7" },
         { icon: Globe, label: "FR/EN Bilingual" },
-        { icon: Star, label: "14-day free trial, no card" },
+        { icon: Star, label: "7-day free trial, no card" },
       ];
 
   return (
@@ -48,7 +48,7 @@ export function SocialProof({ locale }: { locale: Locale }) {
               label: fr ? "Perdus par mois (5 appels/semaine)" : "Lost per month (5 calls/week)",
             },
             {
-              stat: "14 j",
+              stat: "7 j",
               label: fr ? "Essai gratuit, sans carte" : "Free trial, no card",
             },
           ].map((item) => (
