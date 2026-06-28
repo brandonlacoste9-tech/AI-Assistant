@@ -27,4 +27,4 @@ export function isCalendlyExternal(): boolean {
 }
 
 // Configurable explainer/demo video URL (YouTube embed format)
-export const DEMO_VIDEO_URL = "https://www.youtube.com/embed/yJ23oYgBjxk";
+export const DEMO_VIDEO_URL = "https://www.youtube.com/embed/wTPrk4djAz8";
