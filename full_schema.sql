@@ -411,3 +411,32 @@ ALTER TABLE businesses
   ADD COLUMN IF NOT EXISTS google_access_token TEXT,
   ADD COLUMN IF NOT EXISTS google_refresh_token TEXT,
   ADD COLUMN IF NOT EXISTS google_token_expires_at TIMESTAMPTZ;
+
+-- Calendar Sync: Outlook tokens, iCal feed, external event tracking
+
+ALTER TABLE businesses
+  ADD COLUMN IF NOT EXISTS outlook_access_token TEXT,
+  ADD COLUMN IF NOT EXISTS outlook_refresh_token TEXT,
+  ADD COLUMN IF NOT EXISTS outlook_token_expires_at TIMESTAMPTZ,
+  ADD COLUMN IF NOT EXISTS outlook_email TEXT,
+  ADD COLUMN IF NOT EXISTS calendar_provider TEXT CHECK (calendar_provider IN ('google', 'outlook', 'ics_only')),
+  ADD COLUMN IF NOT EXISTS calendar_feed_token TEXT UNIQUE;
+
+CREATE INDEX IF NOT EXISTS idx_businesses_calendar_feed_token
+  ON businesses (calendar_feed_token)
+  WHERE calendar_feed_token IS NOT NULL;
+
+ALTER TABLE appointments
+  ADD COLUMN IF NOT EXISTS external_calendar_id TEXT,
+  ADD COLUMN IF NOT EXISTS calendar_provider TEXT CHECK (calendar_provider IN ('google', 'outlook'));
+
+CREATE INDEX IF NOT EXISTS idx_appointments_external_calendar_id
+  ON appointments (external_calendar_id)
+  WHERE external_calendar_id IS NOT NULL;
+
+ALTER TABLE appointments
+  DROP CONSTRAINT IF EXISTS appointments_source_check;
+
+ALTER TABLE appointments
+  ADD CONSTRAINT appointments_source_check
+  CHECK (source IN ('phone_ai', 'web_form', 'manual', 'reschedule', 'calendar_sync'));

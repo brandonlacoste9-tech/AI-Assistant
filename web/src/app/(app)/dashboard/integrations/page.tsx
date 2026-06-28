@@ -3,8 +3,9 @@ import { isGoogleCalendarConnected } from "@/lib/google/calendar";
 import { isGoogleConfigured } from "@/lib/google/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
-import { Calendar, Code, CalendarDays, Webhook, CheckCircle2 } from "lucide-react";
-import { GoogleCalendarButton } from "@/components/dashboard/google-calendar-button";
+import { Code, CalendarDays, Webhook } from "lucide-react";
+import { CalendarSyncCard } from "@/components/dashboard/calendar-sync-card";
+import { getSupabaseService } from "@/lib/supabase/server";
 
 export default async function IntegrationsPage() {
   const ctx = await requireOnboardedContext();
@@ -15,6 +16,26 @@ export default async function IntegrationsPage() {
   const googleConnected = googleConfigured
     ? await isGoogleCalendarConnected(ctx.businessId)
     : false;
+
+  // Check Outlook connection
+  const supabase = getSupabaseService();
+  let outlookConnected = false;
+  let currentProvider: "google" | "outlook" | "ics_only" | "none" = "none";
+  if (supabase) {
+    const { data } = await supabase
+      .from("businesses")
+      .select("outlook_refresh_token, calendar_provider")
+      .eq("id", ctx.businessId)
+      .single();
+    outlookConnected = Boolean(data?.outlook_refresh_token);
+    if (data?.calendar_provider) {
+      currentProvider = data.calendar_provider as typeof currentProvider;
+    } else if (googleConnected) {
+      currentProvider = "google";
+    } else if (outlookConnected) {
+      currentProvider = "outlook";
+    }
+  }
 
   const integrations = [
     {
@@ -71,65 +92,50 @@ export default async function IntegrationsPage() {
           {t.dashboard.nav.integrations}
         </h1>
         <p className="mt-1 text-sm text-[var(--muted-fg)]">
-          Connect your existing scheduling software so the AI receptionist never
+          Connect your calendar and scheduling tools so the AI receptionist never
           double-books you.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {/* Google Calendar — special card with real OAuth */}
-        <div className="card flex flex-col p-5">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--primary-light)] text-[var(--primary)]">
-              <Calendar className="h-5 w-5" />
-            </div>
-            <h3 className="font-semibold text-[var(--foreground)]">
-              Google Calendar
-            </h3>
-            {googleConnected && (
-              <CheckCircle2 className="ml-auto h-5 w-5 text-green-600" />
-            )}
-          </div>
+      {/* Calendar Sync — the critical integration */}
+      <CalendarSyncCard
+        googleConnected={googleConnected}
+        outlookConnected={outlookConnected}
+        currentProvider={currentProvider}
+      />
 
-          <p className="mt-3 flex-1 text-sm text-[var(--muted-fg)]">
-            Sync your Google Calendar to prevent double booking. The AI will
-            check your availability before confirming appointments.
-          </p>
-
-          <div className="mt-5">
-            <GoogleCalendarButton
-              connected={googleConnected}
-              configured={googleConfigured}
-            />
-          </div>
-        </div>
-
-        {/* Other integrations */}
-        {integrations.map((integration) => (
-          <div key={integration.id} className="card flex flex-col p-5">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--primary-light)] text-[var(--primary)]">
-                <integration.icon className="h-5 w-5" />
+      {/* Other integrations */}
+      <div>
+        <h2 className="text-lg font-semibold text-[var(--foreground)] mb-4">
+          Industry Scheduling Tools
+        </h2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {integrations.map((integration) => (
+            <div key={integration.id} className="card flex flex-col p-5">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--primary-light)] text-[var(--primary)]">
+                  <integration.icon className="h-5 w-5" />
+                </div>
+                <h3 className="font-semibold text-[var(--foreground)]">
+                  {integration.name}
+                </h3>
               </div>
-              <h3 className="font-semibold text-[var(--foreground)]">
-                {integration.name}
-              </h3>
-            </div>
 
-            <p className="mt-3 flex-1 text-sm text-[var(--muted-fg)]">
-              {integration.description}
-            </p>
+              <p className="mt-3 flex-1 text-sm text-[var(--muted-fg)]">
+                {integration.description}
+              </p>
 
-            <div className="mt-5">
-              <button
-                type="button"
-                className="w-full rounded-md bg-[var(--muted)] px-3 py-2 text-sm font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--border)]"
-              >
-                {integration.actionText}
-              </button>
+              <div className="mt-5">
+                <button
+                  type="button"
+                  className="w-full rounded-md bg-[var(--muted)] px-3 py-2 text-sm font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--border)]"
+                >
+                  {integration.actionText}
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

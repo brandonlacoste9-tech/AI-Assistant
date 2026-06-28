@@ -1,6 +1,7 @@
 import { updateBookingDetails } from "@/lib/appointments/update-booking";
 import { getApiUser } from "@/lib/auth/api-auth";
 import { deleteBusinessRow } from "@/lib/auth/business-mutation";
+import { pushBookingToCalendar, removeBookingFromCalendar } from "@/lib/calendar/sync";
 import { sendBookingSms } from "@/lib/twilio/send-booking-sms";
 import { NextResponse } from "next/server";
 
@@ -105,6 +106,16 @@ export async function POST(req: Request) {
     sms_sent = sms.ok;
   }
 
+  // Push to connected calendar (fire-and-forget)
+  pushBookingToCalendar(businessId, {
+    id: data.id,
+    customerName: customer_name,
+    serviceName: "Appointment",
+    startsAt: start,
+    endsAt: end,
+    customerPhone: customer_phone,
+  }).catch((err) => console.error("[bookings/POST] Calendar sync failed:", err));
+
   return NextResponse.json({ ok: true, id: data.id, sms_sent });
 }
 
@@ -144,6 +155,13 @@ export async function PATCH(req: Request) {
       .eq("id", id)
       .eq("business_id", businessId);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+    // Remove from calendar if cancelled
+    if (status === "cancelled") {
+      removeBookingFromCalendar(businessId, id).catch((err) =>
+        console.error("[bookings/PATCH] Calendar remove failed:", err)
+      );
+    }
   }
 
   return NextResponse.json({ ok: true });
@@ -158,6 +176,11 @@ export async function DELETE(req: Request) {
   if (!id) {
     return NextResponse.json({ error: "Missing id" }, { status: 400 });
   }
+
+  // Remove from calendar before deleting
+  removeBookingFromCalendar(businessId, id).catch((err) =>
+    console.error("[bookings/DELETE] Calendar remove failed:", err)
+  );
 
   const result = await deleteBusinessRow("appointments", id, businessId);
   if (!result.ok) return NextResponse.json({ error: result.error }, { status: 500 });

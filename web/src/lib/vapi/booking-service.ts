@@ -9,6 +9,7 @@ import {
   type HoursRow,
 } from "@/lib/vapi/hours";
 import { MONTREAL_TZ, montrealDayBoundsIso, montrealLocalToIso } from "@/lib/vapi/timezone";
+import { getAllBusySlots, hasConflictWithBusySlots, pushBookingToCalendar } from "@/lib/calendar/sync";
 
 const TZ = MONTREAL_TZ;
 
@@ -175,17 +176,8 @@ export async function checkAvailability(args: {
   const dayStart = bounds?.start ?? montrealLocalToIso(parts.y, parts.m, parts.d, 0, 0);
   const dayEnd = bounds?.end ?? montrealLocalToIso(parts.y, parts.m, parts.d, 23, 59);
 
-  let booked: { starts_at: string; ends_at: string }[] = [];
-  if (supabase) {
-    const { data } = await supabase
-      .from("appointments")
-      .select("starts_at, ends_at")
-      .eq("business_id", args.businessId)
-      .gte("starts_at", dayStart)
-      .lt("starts_at", dayEnd)
-      .neq("status", "cancelled");
-    booked = (data ?? []) as typeof booked;
-  }
+  // Merge ALL calendar sources (internal + Google + Outlook) to prevent double-booking
+  const busySlots = await getAllBusySlots(args.businessId, dayStart, dayEnd);
 
   const slotTimes = generateSlotTimes(workingHours, preferredDate, duration);
   const slots: { starts_at: string; label: string; service_id: string | null; service_name: string }[] = [];
@@ -195,7 +187,7 @@ export async function checkAvailability(args: {
     const startMs = new Date(iso).getTime();
     const endMs = startMs + duration * 60_000;
 
-    if (!hasSchedulingConflict(booked, startMs, endMs)) {
+    if (!hasConflictWithBusySlots(busySlots, startMs, endMs)) {
       slots.push({
         starts_at: iso,
         label: slotLabel(iso, locale),
@@ -294,23 +286,12 @@ export async function createAppointment(args: {
     };
   }
 
+  // Check ALL calendar sources for conflicts (internal + Google + Outlook)
   const dayBounds = montrealDayBoundsIso(preferredDate);
   if (dayBounds) {
-    const { data: conflicts } = await supabase
-      .from("appointments")
-      .select("starts_at, ends_at")
-      .eq("business_id", args.businessId)
-      .gte("starts_at", dayBounds.start)
-      .lt("starts_at", dayBounds.end)
-      .neq("status", "cancelled");
+    const busySlots = await getAllBusySlots(args.businessId, dayBounds.start, dayBounds.end);
 
-    if (
-      hasSchedulingConflict(
-        (conflicts ?? []) as { starts_at: string; ends_at: string }[],
-        start.getTime(),
-        end.getTime()
-      )
-    ) {
+    if (hasConflictWithBusySlots(busySlots, start.getTime(), end.getTime())) {
       return {
         ok: false as const,
         error:
@@ -415,6 +396,19 @@ export async function createAppointment(args: {
   }
 
   await incrementUsage(args.businessId, { bookings: 1 });
+
+  // Push booking to connected calendar (Google, Outlook, or generate .ics)
+  // Fire-and-forget: don't block the response on calendar sync
+  pushBookingToCalendar(args.businessId, {
+    id: appt.id,
+    customerName: args.customer_name,
+    serviceName: service?.name ?? "Appointment",
+    startsAt: start,
+    endsAt: end,
+    customerPhone: phone,
+  }).catch((err) => {
+    console.error("[booking-service] Calendar sync failed:", err);
+  });
 
   return {
     ok: true as const,
