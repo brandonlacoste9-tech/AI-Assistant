@@ -42,6 +42,7 @@ export async function GET() {
     redirect_uri: REDIRECT_URI,
     scope: scopes,
     response_mode: "query",
+    prompt: "consent",
     state: sessionToken, // Use session token as state for CSRF protection
   });
 
