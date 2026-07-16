@@ -182,4 +182,15 @@ Do **not** promise 14 days if the product trial is 7.
 4. Post one Reel cut from the demo YouTube video.  
 5. Book yourself 3 walk-in slots this week.  
 
+### Outbound pack (start here)
+
+| File | Purpose |
+|------|---------|
+| [outreach/OUTBOUND_WEEK1.md](./outreach/OUTBOUND_WEEK1.md) | Day-by-day week 1 plan |
+| [outreach/send-queue-week1.csv](./outreach/send-queue-week1.csv) | Ordered who to contact |
+| [outreach/copy-paste-emporium.txt](./outreach/copy-paste-emporium.txt) | First email ready to send |
+| [outreach/ig-dms-and-scripts.md](./outreach/ig-dms-and-scripts.md) | IG + walk-in + phone |
+| [outreach/tracker.csv](./outreach/tracker.csv) | Log every touch |
+| [outreach/cold-emails-ready.md](./outreach/cold-emails-ready.md) | Full email bodies |
+
 Marketing is a system: **outbound + content every week**, paid only when the funnel converts.

@@ -1,0 +1,25 @@
+priority,day,business_name,vertical,neighbourhood,email,phone,channel,template,subject,status,personalization_note
+1,Mon,Emporium Barbershop (Mile-Ex),barbershop,Mile End,info@emporiumbarbershop.com,514-439-0898,email,barbershop_B1,Qui répond quand t'es sur un fade?,ready,notes say few phone bookings — strong fit
+2,Mon,Emporium Barbershop (Plateau),barbershop,Plateau,info@emporiumbarbershop.com,514-439-0898,email,barbershop_B1,Qui répond quand t'es sur un fade?,skip_or_mention_both,same email as #1 — one email covering both locations
+3,Mon,O Salon,salon,Plateau,, ,email,salon_A1,Tes appels manqués le samedi?,need_email,osalonmtl.ca
+4,Mon,Salon Freyja,salon,Plateau,, ,email,salon_A1,Tes appels manqués le samedi?,need_email,salonfreyja.com
+5,Mon,Salon Le Blend,salon,Rosemont,, ,email,salon_A1,Tes appels manqués le samedi?,need_email,salonleblend.com
+6,Mon,Coiffure Célia,salon,Rosemont,, ,email,salon_A1,Tes appels manqués le samedi?,need_email,coiffurecelia.ca
+7,Mon,Mesh Coiffure,salon,Plateau,, ,ig_dm,ig_dm1,IG actif,ready_dm,prefer IG first
+8,Mon,Salon Goldn,salon,Laval,, ,email,salon_A1,Tes appels manqués le samedi?,need_email,Fresha 1670 Boul des Laurentides
+9,Mon,Blue Dog Barbershop,barbershop,Mile End,, ,email,barbershop_B1,Qui répond quand t'es sur un fade?,need_email,3958 Boul Saint-Laurent
+10,Mon,Salon Helmet,barbershop,Plateau,, ,email,barbershop_B1,Qui répond quand t'es sur un fade?,need_email,163 Mont-Royal E
+11,Tue,Maverick Barbier,barbershop,Little Italy,, ,email,barbershop_B1,Qui répond quand t'es sur un fade?,need_email,6464 Boul Saint-Laurent
+12,Tue,Queen of the World Barbers,barbershop,Little Italy,, ,email,barbershop_B1,Qui répond quand t'es sur un fade?,need_email,6754 Boul Saint-Laurent
+13,Tue,La Chapelle Barbershop (Plateau),barbershop,Plateau,, ,walkin,walkin_script,,ready,4424 rue Saint-Denis
+14,Tue,La Baraque du Barbier (Plateau),barbershop,Plateau,, ,walkin,walkin_script,,ready,Rue Saint-Denis
+15,Tue,Les Coiffeurs,barbershop,Village,, ,email,barbershop_B1,Qui répond quand t'es sur un fade?,need_email,1285 rue Atateken
+16,Wed,Maison Privée,barbershop,Vieux-Montréal,, ,email,barbershop_B1,Qui répond quand t'es sur un fade?,need_email,Vieux-Port area
+17,Wed,Barbier Cloakroom,barbershop,Downtown,, ,email,barbershop_B1,Qui répond quand t'es sur un fade?,need_email,2175 rue de la Montagne
+18,Wed,Coiffure Lyly Co,salon,Laval,, ,email,salon_A1,Tes appels manqués le samedi?,need_email,owner-operator
+19,Thu,Emporium Barbershop (Mile-Ex),barbershop,Mile End,info@emporiumbarbershop.com,514-439-0898,email,barbershop_B2,Ton agenda est-tu plein toute la semaine?,followup_day4,only if no reply Mon
+20,Thu,La Chapelle Barbershop (Hochelaga),barbershop,Hochelaga,, ,walkin,walkin_script,,ready,3585 rue Ontario E
+21,Fri,Salon Rosemont,salon,Rosemont,, ,email,salon_A1,Tes appels manqués le samedi?,need_email,Fresha listings
+22,Fri,Salon Verdun,salon,Verdun,, ,email,salon_A1,Tes appels manqués le samedi?,need_email,
+23,Fri,Barbershop Verdun,barbershop,Verdun,, ,walkin,walkin_script,,optional,
+24,Sat,any busy salon Plateau,,Plateau,, ,walkin,walkin_script,,optional,pain visible Saturday
