@@ -1,12 +1,15 @@
-# Cold emails — ready to send (Phase 0)
+# Cold emails — ready to send
 
-**Live site:** https://resilient-khapse-ecd31c.netlify.app  
-**Waitlist:** https://resilient-khapse-ecd31c.netlify.app/#waitlist  
-**Demo booking:** mailto:contact@rendezvousai.ca?subject=Demo%2015%20min%20%E2%80%94%20RendezVous%20AI
+**Live site:** https://justbookme.ca  
+**Signup / trial:** https://justbookme.ca/signup  
+**Pricing:** https://justbookme.ca/pricing  
+**Demo:** use Calendly env or `mailto:info@justbookme.ca?subject=Demo%2015%20min%20%E2%80%94%20JustBookMe`
 
 Replace `{first_name}`, `{business_name}`, `{neighbourhood}` before sending.
 
-**Prospect list:** `prospect-list-montreal.csv` — 37 leads (20 barbershops · 17 salons). Fill phones/emails from Google Maps before sending.
+**Prospect list:** `prospect-list-montreal.csv` — fill phones/emails from Google Maps first.
+
+**Brand:** JustBookMe only (not RendezVous AI).
 
 ---
 
@@ -20,17 +23,16 @@ Bonjour {first_name},
 Je parle avec beaucoup de propriétaires de salons à {neighbourhood}, et la même chose revient toujours :
 quand c'est plein le samedi, le téléphone sonne dans le vide.
 
-RendezVous AI répond en français et en anglais, prend le rendez-vous,
+JustBookMe répond en français et en anglais, prend le rendez-vous,
 et envoie les rappels SMS — pendant que vous êtes avec une cliente.
 
-On cherche 10 salons au Québec pour un essai gratuit de 14 jours
-(configuration gratuite + 30 % de rabais à vie pour les fondateurs).
+Essai gratuit sur justbookme.ca (configuration simple, sans carte pour commencer).
 
 15 minutes pour voir si ça vous convient?
-→ https://resilient-khapse-ecd31c.netlify.app/#waitlist
+→ https://justbookme.ca/signup
 
 Brandon
-RendezVous AI
+JustBookMe · justbookme.ca
 ```
 
 ---
@@ -44,32 +46,34 @@ RendezVous AI
 
 Calcul rapide : 5 appels manqués/semaine × 80 $ = 1 600 $/mois.
 
-RendezVous AI : 149 $/mois. Un seul rendez-vous récupéré par semaine paie l'abonnement.
+JustBookMe se paie souvent avec un seul rendez-vous récupéré par semaine.
 
-Voir le site : https://resilient-khapse-ecd31c.netlify.app/pricing
+Voir les tarifs : https://justbookme.ca/pricing
 
 Si ce n'est pas pour vous, aucun problème — je ne vous relancerai plus.
 
 Brandon
+JustBookMe · justbookme.ca
 ```
 
 ---
 
 ## Email 3 — Breakup (Day 10)
 
-**Subject:** `Dernière place fondateur — {business_name}`
+**Subject:** `Dernier message — {business_name}`
 
 ```
 {first_name},
 
-On ferme les 10 places fondateur cette semaine (configuration gratuite + 30 % à vie).
+Dernier message de ma part, promis.
 
-Si les appels manqués deviennent un problème plus tard :
-https://resilient-khapse-ecd31c.netlify.app/#waitlist
+Si les appels manqués deviennent un problème :
+https://justbookme.ca
 
 Bonne continuation avec {business_name}!
 
 Brandon
+JustBookMe · justbookme.ca
 ```
 
 ---
@@ -84,19 +88,17 @@ Bonjour {first_name},
 Les barbershops que je visite à {neighbourhood} ont le même problème :
 quand vous êtes en coupe, le téléphone sonne et personne ne répond.
 
-RendezVous AI prend les rendez-vous (fade, line-up, barbe) en français et en anglais,
+JustBookMe prend les rendez-vous (fade, line-up, barbe) en français et en anglais,
 et envoie les rappels SMS — pendant que vous êtes avec un client.
 
-10 places fondateur au Québec : essai 14 jours gratuit + configuration gratuite + 30 % à vie.
+Essai gratuit : https://justbookme.ca/signup
 
 15 minutes pour une démo?
-→ https://resilient-khapse-ecd31c.netlify.app/#waitlist
+→ https://justbookme.ca
 
 Brandon
-RendezVous AI
+JustBookMe · justbookme.ca
 ```
-
-**Hot lead example:** Emporium Barbershop note « peu de rdv par téléphone » — parfait pour ce pitch.
 
 ---
 
@@ -110,7 +112,7 @@ RendezVous AI
 | 4 | Laval | `salon coiffure Laval` |
 | 5 | Québec | `salon coiffure Québec` |
 
-**Week 1 goal:** 30 Email 1 sends · 10 walk-ins · 5 interviews · 1 LOI
+**Week 1 goal:** 30 Email 1 sends · 10 walk-ins · 5 demos · 1 trial
 
 ---
 
@@ -124,15 +126,14 @@ Hi {first_name},
 I talk to a lot of salon owners in {neighbourhood}, and the same thing keeps coming up:
 when you're fully booked on Saturday, the phone rings into the void.
 
-RendezVous AI answers in French and English, books the appointment,
+JustBookMe answers in French and English, books the appointment,
 and sends SMS reminders — while you're with a client.
 
-We're looking for 10 Quebec salons for a free 14-day trial
-(free setup + 30% off for life for founders).
+Free trial: https://justbookme.ca/signup
 
 Worth 15 minutes?
-→ https://resilient-khapse-ecd31c.netlify.app/#waitlist
+→ https://justbookme.ca
 
 Brandon
-RendezVous AI
+JustBookMe · justbookme.ca
 ```
