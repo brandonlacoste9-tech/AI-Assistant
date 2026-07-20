@@ -99,7 +99,14 @@ export async function POST(req: Request) {
       console.error("[signup] user", userError);
       await service.from("businesses").delete().eq("id", business.id);
       await service.auth.admin.deleteUser(userId);
-      return NextResponse.json({ error: userError.message }, { status: 500 });
+      const schemaHint =
+        /business_id|schema cache|column/i.test(userError.message)
+          ? " Database schema is missing JustBookMe columns (often a shared Supabase project). See docs/PILOT_BLOCKERS.md — use a dedicated project and run supabase/JUSTBOOKME_FRESH_PROJECT.sql."
+          : "";
+      return NextResponse.json(
+        { error: `${userError.message}${schemaHint}` },
+        { status: 500 }
+      );
     }
 
     const { error: subError } = await service.from("subscriptions").insert({
