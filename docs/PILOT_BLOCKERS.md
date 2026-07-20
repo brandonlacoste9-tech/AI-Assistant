@@ -126,6 +126,43 @@ Production domain is **justbookme.ca** — update Supabase Auth Site URL + redir
 
 ---
 
+## If you already set A + B but smoke still fails
+
+Production was re-checked **after** “already done” claims — still:
+
+- `cron_secret: false` on `GET /api/health`
+- Signup still: missing `users.business_id`
+
+That means **the runtime Netlify deploy does not see what you set**, or the **wrong project keys** are live.
+
+### Netlify checklist (most common)
+
+1. Open the site that serves **justbookme.ca** (custom domain binding) — not an old Netlify site name only.  
+2. **Environment variables** → scope **Production** (and “Same for all” if used).  
+3. Names exact: `CRON_SECRET`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`  
+4. Values not empty / not still `ulbfaxhsbbckotcbmslk` if you created a new JustBookMe project.  
+5. **Trigger deploy** after env change (required for Next; `NEXT_PUBLIC_*` are build-time).  
+6. After deploy, open: https://justbookme.ca/api/health  
+
+Expected when fixed:
+
+```json
+"cron_secret": true,
+"schema_users_business_id": true,
+"schema_businesses": true,
+"supabase_project_ref": "<your-new-ref-not-shared>"
+```
+
+If `supabase_project_ref` is still `ulbfaxhsbbckotcbmslk`, Netlify is still on the **shared** DB.
+
+### Supabase checklist
+
+1. SQL Editor on the project matching that **ref**.  
+2. Run: `select column_name from information_schema.columns where table_name = 'users' and table_schema = 'public';`  
+3. Must list `business_id`. If not, run `supabase/JUSTBOOKME_FRESH_PROJECT.sql` on a **new** project only.
+
+---
+
 ## Smoke results snapshot (2026-07-20)
 
 | Check | Result |
