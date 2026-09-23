@@ -1,6 +1,6 @@
 # JustBookMe — 7-Email Trial Onboarding Drip Sequence
 **Product:** JustBookMe (justbookme.ca) — Bilingual AI Receptionist for Quebec Service Businesses  
-**Trial length:** 14 days, no credit card required  
+**Trial length:** 7 days, no credit card required  
 **From name:** JustBookMe  
 **Reply-to:** hello@justbookme.ca  
 **Total emails:** 14 (FR + EN for each of 7 emails)

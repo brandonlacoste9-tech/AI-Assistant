@@ -1,4 +1,4 @@
-# Supabase Setup — RendezVous AI
+# Supabase Setup — JustBookMe
 
 ## 1. Create project
 
@@ -40,7 +40,7 @@ Dashboard → **Authentication** → **URL Configuration**
 |---------|-------|
 | Site URL | `http://localhost:3000` (dev) |
 | Redirect URLs | `http://localhost:3000/**` |
-| | `https://resilient-khapse-ecd31c.netlify.app/**` |
+| | `https://justbookme.ca/**` |
 
 Dashboard → **Authentication** → **Providers** → **Email**
 

@@ -7,7 +7,7 @@ One-page guide for onboarding the first Montreal salon pilot on https://justbook
 1. **Netlify env** — confirm these are set:
    - `CRON_SECRET` (random 32+ chars) — enables reminder + usage crons
    - `TWILIO_*`, `VAPI_*`, `SUPABASE_*`, `STRIPE_*` as needed
-   - Leave `USAGE_ENFORCE` unset (or `false`) during pilot
+   - `USAGE_ENFORCE` defaults on. Leave it on so the trial cap can fire. Set `false` only while debugging.
 
 2. **Run smoke test**
    ```bash
@@ -68,7 +68,7 @@ One-page guide for onboarding the first Montreal salon pilot on https://justbook
 ## After pilot (week 3+)
 
 - Gather 3 quotes from owner (what worked, what confused them)
-- Enable `USAGE_ENFORCE=true` only when moving to paid starter plans
+- `USAGE_ENFORCE` is already on. Paid Starter and Pro use their own caps in `plan-limits.ts`.
 - Offer Pro upgrade if >100 voice min/month
 
 ## Contacts

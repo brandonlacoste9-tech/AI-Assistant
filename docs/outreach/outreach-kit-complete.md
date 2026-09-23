@@ -44,7 +44,7 @@ Ces appels-là, ils partent chez le salon d'en face.
 
 JustBookMe répond à ta place 24h/7, en français et en anglais, et prend les rendez-vous directement dans ton agenda.
 
-Essai gratuit 14 jours, sans carte de crédit.
+Essai gratuit 7 jours, sans carte de crédit.
 
 Ça te tente de voir comment ça marche? justbookme.ca
 
@@ -67,7 +67,7 @@ JustBookMe coûte 149 $/mois. Un seul rendez-vous récupéré, et c'est payé.
 
 La messagerie vocale, elle, ne prend jamais de rendez-vous.
 
-14 jours gratuits, aucune carte requise : justbookme.ca
+7 jours gratuits, aucune carte requise : justbookme.ca
 
 Brandon
 JustBookMe · justbookme.ca
@@ -113,7 +113,7 @@ Mais ce client-là, il rappelle pas. Il prend rendez-vous chez quelqu'un d'autre
 
 JustBookMe répond à ta place, en français et en anglais, et bloque le créneau dans ton horaire. 24h/7.
 
-Essai 14 jours, zéro carte de crédit : justbookme.ca
+Essai 7 jours, zéro carte de crédit : justbookme.ca
 
 Brandon
 JustBookMe · justbookme.ca
@@ -180,7 +180,7 @@ JustBookMe répond à vos appels 24h/7, en français et en anglais, et prend les
 
 Conforme à la Loi 25, hébergé au Canada.
 
-Essai 14 jours gratuit : justbookme.ca
+Essai 7 jours gratuit : justbookme.ca
 
 Brandon
 JustBookMe · justbookme.ca
@@ -247,7 +247,7 @@ Une série de soins interrompue avant de commencer, c'est des centaines de dolla
 
 JustBookMe répond à votre place, 24h/7, en français et en anglais.
 
-14 jours gratuits : justbookme.ca
+7 jours gratuits : justbookme.ca
 
 Brandon
 JustBookMe · justbookme.ca
@@ -320,7 +320,7 @@ Message 1:
 Ton feed est tellement cohérent — les tons chauds que tu utilises sont vraiment reconnaissables. Tu fais ta mise en page toi-même ou t'as quelqu'un?
 
 Message 2 (après réponse):
-Respect! Bon, j'aurais une question: est-ce que tu manques des appels quand t'es en train de travailler? On a un outil qui répond à ta place 24h/7 — essai 14 jours gratuit. justbookme.ca
+Respect! Bon, j'aurais une question: est-ce que tu manques des appels quand t'es en train de travailler? On a un outil qui répond à ta place 24h/7 — essai 7 jours gratuit. justbookme.ca
 
 ---
 
@@ -342,7 +342,7 @@ Message 1:
 Tes fades sont vraiment nets, man — la ligne de dégradé sur le dernier reels est impeccable. T'as combien d'années de métier?
 
 Message 2 (après réponse):
-Respect! Dis-moi — quand t'es en plein travail, qui répond au téléphone? On aide les barbershops à ne plus perdre d'appels avec un réceptionniste IA bilingue. 149 $/mois, 14 jours gratuits. justbookme.ca
+Respect! Dis-moi — quand t'es en plein travail, qui répond au téléphone? On aide les barbershops à ne plus perdre d'appels avec un réceptionniste IA bilingue. 149 $/mois, 7 jours gratuits. justbookme.ca
 
 ---
 
@@ -362,7 +362,7 @@ Message 1:
 Wow, le skin fade sur ton dernier post — vraiment propre. Tu fais des cours ou c'est juste des années de pratique?
 
 Message 2 (après réponse):
-Chapeau. Curieux — est-ce que tu perds des bookings parce que tu peux pas répondre pendant tes coupes? On a une solution simple pour ça. justbookme.ca — essai 14 jours gratuit.
+Chapeau. Curieux — est-ce que tu perds des bookings parce que tu peux pas répondre pendant tes coupes? On a une solution simple pour ça. justbookme.ca — essai 7 jours gratuit.
 
 ---
 
@@ -396,7 +396,7 @@ Message 1:
 Your feed aesthetic is so consistent — the warm tones you use are really distinctive. Do you plan your shoots yourself?
 
 Message 2 (after reply):
-That's impressive! So — how do you handle bookings when you're hands-deep in a colour? We help salons recover missed calls automatically. 14-day free trial at justbookme.ca
+That's impressive! So — how do you handle bookings when you're hands-deep in a colour? We help salons recover missed calls automatically. 7-day free trial at justbookme.ca
 
 ---
 
@@ -418,7 +418,7 @@ Message 1:
 Bro, your fades are clean — that taper line on your last reel is sharp as it gets. How long have you been cutting?
 
 Message 2 (after reply):
-Respect! So who answers the phone when you're mid-cut? We built a bilingual AI receptionist for shops like yours — $149/mo, 14-day free trial. justbookme.ca
+Respect! So who answers the phone when you're mid-cut? We built a bilingual AI receptionist for shops like yours — $149/mo, 7-day free trial. justbookme.ca
 
 ---
 
@@ -462,7 +462,7 @@ Salut! C'est Brandon de JustBookMe. T'as visité notre site tantôt — des ques
 
 **SMS FR-2 (Day 2)**
 
-Juste un p'tit suivi — l'essai 14 jours est toujours gratuit, aucune carte requise. Si t'as 10 min, je peux te montrer comment ça marche: {link}
+Juste un p'tit suivi — l'essai 7 jours est toujours gratuit, aucune carte requise. Si t'as 10 min, je peux te montrer comment ça marche: {link}
 
 *(143 characters)*
 
@@ -488,7 +488,7 @@ Hey! It's Brandon from JustBookMe. You checked out our site earlier — any ques
 
 **SMS EN-2 (Day 2)**
 
-Just following up — the 14-day free trial is still open, no credit card needed. Worth a quick look: {link}
+Just following up — the 7-day free trial is still open, no credit card needed. Worth a quick look: {link}
 
 *(104 characters)*
 
@@ -544,11 +544,11 @@ Last one from me! If missed calls become an issue down the road, we're here. Fre
 
 **French:**
 
-"Aucun problème, je comprends tout à fait — vous avez un commerce à gérer. Je te laisse une carte. Si ça t'intéresse, t'as un essai gratuit 14 jours sur justbookme.ca — aucune carte de crédit, tu peux annuler quand tu veux. Je peux aussi revenir à un meilleur moment si tu préfères. C'est quoi le meilleur moment pour toi en général?"
+"Aucun problème, je comprends tout à fait — vous avez un commerce à gérer. Je te laisse une carte. Si ça t'intéresse, t'as un essai gratuit 7 jours sur justbookme.ca — aucune carte de crédit, tu peux annuler quand tu veux. Je peux aussi revenir à un meilleur moment si tu préfères. C'est quoi le meilleur moment pour toi en général?"
 
 **English:**
 
-"No problem at all, I totally get it — you've got a business to run. I'll leave you a card. If you're curious, there's a 14-day free trial at justbookme.ca — no credit card, cancel anytime. I'm also happy to come back at a better time if that works. When's usually quieter for you?"
+"No problem at all, I totally get it — you've got a business to run. I'll leave you a card. If you're curious, there's a 7-day free trial at justbookme.ca — no credit card, cancel anytime. I'm also happy to come back at a better time if that works. When's usually quieter for you?"
 
 ---
 
@@ -624,7 +624,7 @@ Merci pour la connexion! Je développe une solution pour les cliniques de physio
 
 **Salon Owner:**
 
-Merci pour la connexion, [Prénom]! Je travaille avec des salons à Montréal pour récupérer les appels manqués automatiquement — un réceptionniste IA bilingue, disponible 24h/7, à 149 $/mois. Essai gratuit 14 jours, sans carte de crédit. Si tu veux qu'on en parle 15 minutes, je serais content de t'expliquer comment ça marche. — Brandon, justbookme.ca
+Merci pour la connexion, [Prénom]! Je travaille avec des salons à Montréal pour récupérer les appels manqués automatiquement — un réceptionniste IA bilingue, disponible 24h/7, à 149 $/mois. Essai gratuit 7 jours, sans carte de crédit. Si tu veux qu'on en parle 15 minutes, je serais content de t'expliquer comment ça marche. — Brandon, justbookme.ca
 
 *(350 characters)*
 
@@ -862,7 +862,7 @@ PhysioQuébec Saint-Jean-Baptiste,,,, Quebec City,Saint-Jean-Baptiste,physiother
 |------|-------|---------|
 | Starter | $49/month CAD | Solo operators, 1–2 staff |
 | Pro | $149/month CAD | 3–8 staff, multi-location |
-| Free Trial | 14 days, no credit card | Everyone |
+| Free Trial | 7 days, no credit card | Everyone |
 
 **Key ROI hook:**
 > "A missed haircut = $80–150. Miss 5 calls/week = $1,600/month gone. JustBookMe costs $149/month — one recovered booking pays for it."

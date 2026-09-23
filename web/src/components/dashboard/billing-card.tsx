@@ -4,7 +4,8 @@ import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { usagePercent } from "@/lib/usage/plan-limits";
 import { softLimitLevel, worstSoftLimitLevel } from "@/lib/usage/soft-limit";
 import type { UsageSnapshot } from "@/lib/usage/get-usage";
-import { isValidPlan } from "@/lib/stripe/plans";
+import { coercePlan, type PlanId } from "@/lib/stripe/plans";
+import { PLAN_PRICES } from "@/lib/i18n/dictionaries";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -103,7 +104,7 @@ export function BillingCard({
     : null;
 
   const hasActiveSubscription =
-    billing.subscriptionStatus === "active" || billing.subscriptionStatus === "trialing";
+    billing.subscriptionStatus === "active" || billing.subscriptionStatus === "past_due";
 
   const canSubscribe = billing.stripeConfigured && !hasActiveSubscription;
 
@@ -140,11 +141,7 @@ export function BillingCard({
   useEffect(() => {
     if (autoStarted.current || !canSubscribe) return;
     const plan =
-      subscribeParam && isValidPlan(subscribeParam)
-        ? subscribeParam
-        : billing.pendingSubscribePlan && isValidPlan(billing.pendingSubscribePlan)
-          ? billing.pendingSubscribePlan
-          : null;
+      coercePlan(subscribeParam) ?? coercePlan(billing.pendingSubscribePlan);
     if (!plan) return;
     autoStarted.current = true;
     startCheckout(plan).finally(() => {
@@ -282,15 +279,15 @@ export function BillingCard({
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2">
-                {(["starter", "white_glove"] as const).map((plan) => (
+                {(["starter", "pro"] as const satisfies readonly PlanId[]).map((plan) => (
                   <Button
                     key={plan}
                     type="button"
-                    variant={plan === "white_glove" ? "primary" : "secondary"}
+                    variant={plan === "pro" ? "primary" : "secondary"}
                     disabled={status === "loading"}
                     onClick={() => startCheckout(plan)}
                   >
-                    {t.subscribe} {plan}
+                    {t.subscribe} {plan === "pro" ? "Pro" : "Starter"} · ${PLAN_PRICES[plan].monthly}
                   </Button>
                 ))}
               </div>

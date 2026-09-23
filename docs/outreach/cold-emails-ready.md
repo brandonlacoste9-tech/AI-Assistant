@@ -9,7 +9,7 @@ Replace `{first_name}`, `{business_name}`, `{neighbourhood}` before sending.
 
 **Prospect list:** `prospect-list-montreal.csv` — fill phones/emails from Google Maps first.
 
-**Brand:** JustBookMe only (not RendezVous AI).
+**Brand:** JustBookMe only (not JustBookMe).
 
 ---
 

@@ -66,19 +66,26 @@ console.log(`${vapiPublic ? "✓" : "○"} NEXT_PUBLIC_VAPI_PUBLIC_KEY`);
 console.log("\n── Stripe (billing) ──");
 const stripeKey = set("STRIPE_SECRET_KEY");
 const stripeWebhook = set("STRIPE_WEBHOOK_SECRET");
-const stripePrices = [
+const stripePriceKeys = [
   "STRIPE_PRICE_STARTER_MONTHLY",
   "STRIPE_PRICE_STARTER_ANNUAL",
-  "STRIPE_PRICE_PRO_MONTHLY",
-  "STRIPE_PRICE_PRO_ANNUAL",
-  "STRIPE_PRICE_PREMIUM_MONTHLY",
-  "STRIPE_PRICE_PREMIUM_ANNUAL",
-].filter(set);
-console.log(`${stripeKey ? "✓" : "○"} STRIPE_SECRET_KEY`);
+  "STRIPE_PRICE_WHITE_GLOVE_MONTHLY",
+  "STRIPE_PRICE_WHITE_GLOVE_ANNUAL",
+];
+const stripePrices = stripePriceKeys.filter(set);
+const strict = process.argv.includes("--strict");
+console.log(`${stripeKey ? "✓" : strict ? "✗" : "○"} STRIPE_SECRET_KEY`);
 console.log(`${stripeWebhook ? "✓" : "○"} STRIPE_WEBHOOK_SECRET`);
-console.log(`${stripePrices.length === 6 ? "✓" : "○"} price IDs (${stripePrices.length}/6)`);
-if (stripeKey && stripePrices.length < 6) {
+console.log(
+  `${stripePrices.length === stripePriceKeys.length ? "✓" : strict ? "✗" : "○"} price IDs (${stripePrices.length}/${stripePriceKeys.length}) — Starter $49 + Pro $149 (WHITE_GLOVE env names)`
+);
+if (stripePrices.length < stripePriceKeys.length) {
   console.log("  → run: npm run stripe:setup");
+  console.log("  → Pro $149 uses STRIPE_PRICE_WHITE_GLOVE_MONTHLY / _ANNUAL");
+}
+if (strict) {
+  if (!stripeKey) missing++;
+  missing += stripePriceKeys.length - stripePrices.length;
 }
 
 console.log("\n── Optional ──");

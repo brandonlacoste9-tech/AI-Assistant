@@ -1,6 +1,6 @@
-# RendezVous AI
+# JustBookMe
 
-Bilingual AI receptionist + follow-up agent for Quebec service businesses.
+Bilingual AI receptionist + follow-up agent for Quebec service businesses. Live at [justbookme.ca](https://justbookme.ca).
 
 **Tagline:** Never miss a booking, lead, or follow-up again — in French or English.
 

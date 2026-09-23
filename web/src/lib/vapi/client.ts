@@ -85,6 +85,10 @@ export type VapiCallPayload = {
   };
 };
 
+export async function endVapiCall(callId: string) {
+  return vapiFetch<{ id?: string }>(`/call/${callId}`, { method: "DELETE" });
+}
+
 export async function createOutboundCall(payload: VapiCallPayload) {
   return vapiFetch<{ id: string }>("/call/phone", {
     method: "POST",

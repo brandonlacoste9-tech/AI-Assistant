@@ -13,7 +13,11 @@ import { useState } from "react";
 export function SignupForm({ dict, locale }: { dict: Dictionary; locale: string }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const plan = searchParams.get("plan") ?? "pro";
+  const requested = searchParams.get("plan");
+  const plan =
+    requested === "pro" || requested === "white_glove" || requested === "premium"
+      ? "pro"
+      : "starter";
   const interval = searchParams.get("interval") === "year" ? "year" : "month";
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");

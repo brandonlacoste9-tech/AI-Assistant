@@ -1,4 +1,4 @@
-# RendezVous AI — ICP One-Pager + Cold Outreach Scripts
+# JustBookMe — ICP One-Pager + Cold Outreach Scripts
 
 **Goal:** 15 interviews + 5 LOIs in Phase 0; 50 emails + 30 visits in Phase 4  
 **Primary vertical:** Salons & esthetics (Montréal + Québec City)  
@@ -42,7 +42,7 @@
 
 ### ROI pitch (30 seconds)
 
-> A missed haircut is $80–150. If you miss 5 calls a week, that's $1,600/month gone. RendezVous AI answers in French and English, books the appointment, and sends SMS reminders. At $149/month, one recovered booking per week pays for it.
+> A missed haircut is $80–150. If you miss 5 calls a week, that's $1,600/month gone. JustBookMe answers in French and English, books the appointment, and sends SMS reminders. At $149/month, one recovered booking per week pays for it.
 
 ### Competitor displacement
 
@@ -91,15 +91,15 @@ Bonjour {first_name},
 Je passe devant beaucoup de salons à {neighbourhood} et une chose revient toujours:
 quand c'est plein le samedi, le téléphone sonne dans le vide.
 
-RendezVous AI répond en français et en anglais, prend le rendez-vous,
+JustBookMe répond en français et en anglais, prend le rendez-vous,
 et envoie les rappels SMS — pendant que vous êtes avec une cliente.
 
-On cherche 10 salons au Québec pour un essai gratuit de 14 jours (tarif fondateur à vie).
+On cherche 10 salons au Québec pour un essai gratuit de 7 jours (tarif fondateur à vie).
 
 15 minutes pour voir si ça fit?
 
 {your_name}
-RendezVous AI · rendezvousai.ca
+JustBookMe · justbookme.ca
 ```
 
 **EN version:**
@@ -110,15 +110,15 @@ Hi {first_name},
 I talk to a lot of salon owners in {neighbourhood}, and the same thing keeps coming up:
 when you're fully booked on Saturday, the phone rings into the void.
 
-RendezVous AI answers in French and English, books the appointment,
+JustBookMe answers in French and English, books the appointment,
 and sends SMS reminders — while you're with a client.
 
-We're looking for 10 Quebec salons for a free 14-day trial (founder pricing locked for life).
+We're looking for 10 Quebec salons for a free 7-day trial (founder pricing locked for life).
 
 Worth 15 minutes to see if it fits?
 
 {your_name}
-RendezVous AI · rendezvousai.ca
+JustBookMe · justbookme.ca
 ```
 
 ---
@@ -133,7 +133,7 @@ RendezVous AI · rendezvousai.ca
 
 Quick math: 5 appels manqués/semaine × 80 $ = 1 600 $/mois.
 
-RendezVous AI coûte 149 $/mois. Un seul rendez-vous récupéré par semaine paie l'abonnement.
+JustBookMe coûte 149 $/mois. Un seul rendez-vous récupéré par semaine paie l'abonnement.
 
 Voici une démo de 2 minutes: {demo_link}
 
@@ -190,12 +190,12 @@ Bonne continuation avec {business_name}!
 **LOI = verbal + email confirmation:**
 
 ```
-Objet: Accord pilote RendezVous AI — {business_name}
+Objet: Accord pilote JustBookMe — {business_name}
 
 Merci pour la conversation aujourd'hui!
 
 Comme convenu:
-- Essai gratuit de 14 jours (forfait Pro)
+- Essai gratuit de 7 jours (forfait Pro)
 - Configuration gratuite par notre équipe
 - Tarif fondateur -30 % à vie si vous continuez après l'essai
 - En échange: 30 min de rétroaction à la fin de la 2e semaine
@@ -212,12 +212,12 @@ Pour confirmer, répondez "CONFIRMÉ" à ce courriel.
 ### Gatekeeper / owner
 
 **FR:**
-> "Bonjour, c'est {name} de RendezVous AI. Je cherche {owner_name} — c'est pour un projet local qui aide les salons à ne plus manquer d'appels. Elle/il est disponible 2 minutes?"
+> "Bonjour, c'est {name} de JustBookMe. Je cherche {owner_name} — c'est pour un projet local qui aide les salons à ne plus manquer d'appels. Elle/il est disponible 2 minutes?"
 
 ### Voicemail
 
 **FR (30 sec):**
-> "Bonjour, c'est {name}, RendezVous AI. On aide les salons au Québec à répondre aux appels manqués avec un réceptionniste IA bilingue. Essai gratuit 14 jours. Mon numéro: {phone}. rendezvousai.ca. Merci!"
+> "Bonjour, c'est {name}, JustBookMe. On aide les salons au Québec à répondre aux appels manqués avec un réceptionniste IA bilingue. Essai gratuit 7 jours. Mon numéro: {phone}. justbookme.ca. Merci!"
 
 ---
 
@@ -267,17 +267,17 @@ Contact: ___________
 Adresse: ___________
 
 {Business_name} exprime son intérêt à participer au programme pilote
-RendezVous AI pour une période de 14 jours à compter de la date d'activation.
+JustBookMe pour une période de 7 jours à compter de la date d'activation.
 
 Conditions:
 1. Essai gratuit — forfait Pro, sans carte de crédit requise
-2. Configuration initiale assurée par RendezVous AI (≈30 min)
+2. Configuration initiale assurée par JustBookMe (≈30 min)
 3. Tarif fondateur: 30 % de rabais à vie sur tout forfait payant
 4. En contrepartie: participation à un appel de rétroaction (30 min)
    et autorisation d'utiliser le nom de l'entreprise comme référence
    (sous réserve d'approbation)
 
-RendezVous AI s'engage à:
+JustBookMe s'engage à:
 - Protéger les renseignements personnels conformément à la Loi 25
 - Fournir un support par courriel pendant les heures d'affaires (EST)
 - Ne pas facturer sans consentement explicite à la fin de l'essai
@@ -339,7 +339,7 @@ Titre: _________________________
 **Target:** Distributors, esthetics product reps, salon furniture sellers
 
 **FR email:**
-> "Bonjour, je développe RendezVous AI — un réceptionniste IA bilingue pour salons au Québec. Est-ce que vous auriez 3 clients qui se plaignent souvent des appels manqués? Je leur offre un essai fondateur et une commission de parrainage si ça vous intéresse."
+> "Bonjour, je développe JustBookMe — un réceptionniste IA bilingue pour salons au Québec. Est-ce que vous auriez 3 clients qui se plaignent souvent des appels manqués? Je leur offre un essai fondateur et une commission de parrainage si ça vous intéresse."
 
 **Referral offer (post-V1):** $50 CAD credit per converted salon.
 

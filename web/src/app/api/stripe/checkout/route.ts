@@ -2,8 +2,8 @@ import { getApiUser } from "@/lib/auth/api-auth";
 import { getSiteUrl } from "@/lib/site-config";
 import { getStripe, isStripeConfigured } from "@/lib/stripe/client";
 import {
+  coercePlan,
   getPriceId,
-  isValidPlan,
   remainingTrialDays,
   type BillingInterval,
 } from "@/lib/stripe/plans";
@@ -19,10 +19,10 @@ export async function POST(req: Request) {
   const { supabase, businessId, user } = auth;
 
   const body = await req.json();
-  const plan = body.plan as string;
+  const plan = coercePlan(typeof body.plan === "string" ? body.plan : null);
   const interval = (body.interval === "year" ? "year" : "month") as BillingInterval;
 
-  if (!isValidPlan(plan)) {
+  if (!plan) {
     return NextResponse.json({ error: "Invalid plan" }, { status: 400 });
   }
 

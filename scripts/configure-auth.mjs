@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 
 const projectRef = process.argv[2] ?? "ulbfaxhsbbckotcbmslk";
-const siteUrl = process.argv[3] ?? "https://resilient-khapse-ecd31c.netlify.app";
+const siteUrl = process.argv[3] ?? "https://justbookme.ca";
 const token = process.env.SUPABASE_ACCESS_TOKEN;
 
 if (!token) {

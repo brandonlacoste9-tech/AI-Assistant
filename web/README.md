@@ -8,7 +8,7 @@ Next.js 15 marketing site + signup for [JustBookMe](https://justbookme.ca).
 |-------|---------|
 | `/` | Landing (FR default, EN toggle) |
 | `/pricing` | Plans with monthly/annual toggle |
-| `/signup` | 14-day trial signup |
+| `/signup` | 7-day trial signup |
 
 ## Quick start
 

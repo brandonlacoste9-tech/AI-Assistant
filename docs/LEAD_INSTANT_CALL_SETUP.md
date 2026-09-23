@@ -15,14 +15,14 @@ When a prospect fills out your Facebook Lead Ad form, this automation:
 ## Architecture
 
 ```
-Meta Lead Ad form submit
-  → Meta Webhooks (POST to your Netlify function URL)
-  → lead-instant-call.mjs
-      → Log to Supabase outreach_prospects
-      → Sleep 10s
-      → Vapi outbound call API  ──► Prospect's phone rings
-          └─ Fallback: Twilio Calls API + TwiML
+Zapier / Meta lead
+  → POST https://justbookme.ca/api/webhooks/outbound-sales
+      Authorization: Bearer $OUTBOUND_WEBHOOK_SECRET
+      → Insert outreach_prospects
+      → Vapi outbound call (assistant Sarah) via VAPI_PHONE_NUMBER_ID
 ```
+
+There is one sales-call path. The old Netlify function `lead-instant-call.mjs` (assistant Sophie) is removed.
 
 ---
 
@@ -33,8 +33,8 @@ Add these to your Netlify environment (Site settings → Environment variables):
 | Variable | Where to get it |
 |---|---|
 | `FB_VERIFY_TOKEN` | Make up a random string (e.g. `jbm_verify_2026`) |
-| `VAPI_API_KEY` | [vapi.ai](https://vapi.ai) → Dashboard → API Keys |
-| `VAPI_ASSISTANT_ID` | Vapi dashboard → your outbound sales assistant |
+| `OUTBOUND_WEBHOOK_SECRET` | Random string. Required. Requests without `Authorization: Bearer <secret>` get 401. |
+| `VAPI_PRIVATE_KEY` | [vapi.ai](https://vapi.ai) → Dashboard → API Keys |
 | `VAPI_PHONE_NUMBER_ID` | Vapi dashboard → Phone Numbers (your Quebec number) |
 | `TWILIO_ACCOUNT_SID` | [twilio.com/console](https://console.twilio.com) |
 | `TWILIO_AUTH_TOKEN` | Twilio console |
@@ -63,7 +63,7 @@ Add these to your Netlify environment (Site settings → Environment variables):
 
 1. Go to [Meta for Developers](https://developers.facebook.com) → your app → **Webhooks**
 2. Click **Add Subscription** → select **leadgen**
-3. **Callback URL:** `https://your-site.netlify.app/.netlify/functions/lead-instant-call`
+3. **Callback URL:** `https://justbookme.ca/api/webhooks/outbound-sales`
 4. **Verify Token:** paste your `FB_VERIFY_TOKEN` value
 5. Click **Verify and Save** — Meta will send a GET request to confirm
 6. Subscribe to your **Page** under the leadgen subscription
@@ -121,36 +121,22 @@ Keep the form to **4 fields max** for conversion rate. Recommended minimal set:
 ## Step 6 — Test the Full Flow
 
 ```bash
-# Simulate a Meta webhook POST locally (requires Netlify CLI)
-netlify dev
-
-curl -X POST http://localhost:8888/.netlify/functions/lead-instant-call \
+# Local app: cd web && npm run dev
+curl -X POST http://localhost:3000/api/webhooks/outbound-sales \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OUTBOUND_WEBHOOK_SECRET" \
   -d '{
-    "object": "page",
-    "entry": [{
-      "changes": [{
-        "field": "leadgen",
-        "value": {
-          "leadgen_id": "test_001",
-          "page_id": "your_page_id",
-          "form_id": "your_form_id",
-          "field_data": [
-            {"name": "first_name", "values": ["Marie"]},
-            {"name": "phone_number", "values": ["5141234567"]},
-            {"name": "business_name", "values": ["Salon Freyja"]},
-            {"name": "city", "values": ["Montréal"]},
-            {"name": "preferred_language", "values": ["fr"]}
-          ]
-        }
-      }]
-    }]
+    "name": "Marie",
+    "phone": "+15145550100",
+    "businessName": "Salon Marie"
   }'
+
+# Missing or wrong bearer → 401. There is no default secret.
 ```
 
 Expected response:
 ```json
-{ "ok": true, "results": [{ "lead": "+15141234567", "status": "fulfilled", "value": { "provider": "vapi", "callId": "..." } }] }
+{ "success": true, "callId": "..." }
 ```
 
 ---

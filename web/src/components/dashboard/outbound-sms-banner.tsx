@@ -28,7 +28,7 @@ export function OutboundSmsBanner({
             </p>
           )}
           <Link
-            href="/dashboard/settings"
+            href="/dashboard/settings?subscribe=pro&interval=month#billing"
             className="mt-2 inline-block font-medium text-red-800 underline-offset-2 hover:underline"
           >
             {t.billingLink}

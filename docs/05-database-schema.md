@@ -35,7 +35,7 @@ businesses (
   default_language text check in ('fr','en'),
   phone_number text,
   stripe_customer_id text,
-  plan text check in ('starter','pro','premium'),
+  plan text check in ('trial','starter','pro'),
   trial_ends_at timestamptz,
   created_at timestamptz default now()
 )

@@ -55,9 +55,9 @@ EN examples: "Yeah, that's exactly what we hear from most salon owners." / "Righ
 
 **Step 4 — One-sentence value prop**
 
-FR: "C'est pour ça que Brandon a construit JustBookMe — l'IA répond à ta place 24h/24, en français et en anglais, et prend les rendez-vous directement dans ton agenda. L'essai est gratuit 14 jours, sans carte de crédit."
+FR: "C'est pour ça que Brandon a construit JustBookMe — l'IA répond à ta place 24h/24, en français et en anglais, et prend les rendez-vous directement dans ton agenda. L'essai est gratuit 7 jours, sans carte de crédit."
 
-EN: "That's exactly what JustBookMe solves — the AI answers for you 24/7 in French and English, and books straight into your calendar. The trial is free for 14 days, no credit card."
+EN: "That's exactly what JustBookMe solves — the AI answers for you 24/7 in French and English, and books straight into your calendar. The trial is free for 7 days, no credit card."
 
 **Step 5 — Soft close for the demo**
 
@@ -89,9 +89,9 @@ End the call gracefully.
 
 **"C'est combien?" / "How much is it?"**
 
-FR: "Ça commence à 49 $/mois pour un solo, ou 149 $/mois pour les équipes jusqu'à 5. Mais l'essai de 14 jours est gratuit — t'as le temps de voir si ça récupère assez de rendez-vous pour se payer tout seul avant de mettre ta carte."
+FR: "Ça commence à 49 $/mois pour un solo, ou 149 $/mois pour les équipes jusqu'à 5. Mais l'essai de 7 jours est gratuit — t'as le temps de voir si ça récupère assez de rendez-vous pour se payer tout seul avant de mettre ta carte."
 
-EN: "It starts at $49/month for solo operators, or $149/month for teams up to 5. But the 14-day trial is free — you'll see whether it recovers enough bookings to pay for itself before you put in a card."
+EN: "It starts at $49/month for solo operators, or $149/month for teams up to 5. But the 7-day trial is free — you'll see whether it recovers enough bookings to pay for itself before you put in a card."
 
 **"Est-ce que ça sonne comme un robot?" / "Does it sound like a robot?"**
 
@@ -175,7 +175,7 @@ Add these to **End Call Phrases** in the Vapi dashboard so the assistant knows w
 
 ## Variable Reference
 
-These variables are injected by the `lead-instant-call.mjs` webhook automatically:
+These variables are injected by `POST /api/webhooks/outbound-sales` when a lead is called:
 
 | Variable | Source | Example |
 |---|---|---|

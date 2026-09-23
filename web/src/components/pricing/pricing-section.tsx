@@ -18,7 +18,7 @@ export function PricingSection({ locale }: { locale: Locale }) {
 
   const plans: { key: PlanKey; popular?: boolean }[] = [
     { key: "starter" },
-    { key: "white_glove", popular: true },
+    { key: "pro", popular: true },
   ];
 
   return (
@@ -100,32 +100,33 @@ export function PricingSection({ locale }: { locale: Locale }) {
                   ))}
                 </ul>
                 <Link
-                  href={key === "white_glove" ? "mailto:info@tryjustbookme.com" : `/signup?plan=${key}&interval=${annual ? "year" : "month"}`}
+                  href={`/signup?plan=${key}&interval=${annual ? "year" : "month"}`}
                   className={cn(
                     "mt-8 block rounded-xl py-3.5 text-center text-sm font-semibold transition-all",
                     popular ? "btn-primary" : "btn-secondary"
                   )}
                   onClick={() => {
-                    if (key !== "white_glove") {
-                      const price = annual
-                        ? PLAN_PRICES[key].annual / 12
-                        : PLAN_PRICES[key].monthly;
-                      // Meta Pixel
-                      pixelEvent("InitiateCheckout", {
-                        value: price,
-                        currency: "CAD",
-                        content_name: key,
-                        content_type: annual ? "annual" : "monthly",
-                      });
-                      // Google Ads + GA4
-                      gtagConversion("initiate_checkout", { value: price, currency: "CAD" });
-                      gtagEvent("begin_checkout", { plan: key, billing: annual ? "annual" : "monthly", value: price, currency: "CAD" });
-                    }
+                    const price = annual
+                      ? PLAN_PRICES[key].annual / 12
+                      : PLAN_PRICES[key].monthly;
+                    pixelEvent("InitiateCheckout", {
+                      value: price,
+                      currency: "CAD",
+                      content_name: key,
+                      content_type: annual ? "annual" : "monthly",
+                    });
+                    gtagConversion("initiate_checkout", { value: price, currency: "CAD" });
+                    gtagEvent("begin_checkout", {
+                      plan: key,
+                      billing: annual ? "annual" : "monthly",
+                      value: price,
+                      currency: "CAD",
+                    });
                   }}
                 >
-                  {key === "white_glove" ? t.pricing.contact : t.pricing.cta}
+                  {t.pricing.cta}
                 </Link>
-                {key === "white_glove" && (
+                {key === "pro" && (
                   <Link href="/vicpark" className="mt-4 flex items-center justify-center gap-1.5 text-xs font-semibold text-[var(--accent)] hover:underline group">
                     <Sparkles className="h-3.5 w-3.5 transition-transform group-hover:scale-110" />
                     {locale === "fr" ? "Voir un exemple sur mesure" : "View a custom live build"}

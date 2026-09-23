@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS businesses (
   default_language TEXT NOT NULL DEFAULT 'fr' CHECK (default_language IN ('fr', 'en')),
   phone_number TEXT,
   stripe_customer_id TEXT UNIQUE,
-  plan TEXT NOT NULL DEFAULT 'trial' CHECK (plan IN ('trial', 'starter', 'pro', 'premium')),
+  plan TEXT NOT NULL DEFAULT 'starter' CHECK (plan IN ('trial', 'starter', 'pro')),
   trial_ends_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS subscriptions (
   business_id UUID NOT NULL UNIQUE REFERENCES businesses(id) ON DELETE CASCADE,
   stripe_subscription_id TEXT UNIQUE,
   status TEXT NOT NULL DEFAULT 'trialing',
-  plan TEXT NOT NULL DEFAULT 'pro',
+  plan TEXT NOT NULL DEFAULT 'starter',
   current_period_end TIMESTAMPTZ,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()

@@ -52,9 +52,9 @@ try {
   if (health.checks?.cron_secret === true) pass("CRON_SECRET configured on production");
   else fail("CRON_SECRET on production", "Set in Netlify env — reminders won't run");
   if (health.checks?.usage_enforce === true) {
-    console.log("  ⚠ USAGE_ENFORCE=true on production — outbound SMS may pause at 2× limit");
+    pass("USAGE_ENFORCE on (trial and plan caps apply)");
   } else {
-    pass("USAGE_ENFORCE off (pilot-safe)");
+    console.log("  ⚠ USAGE_ENFORCE off on this deploy — current code defaults it on after redeploy");
   }
 } catch (e) {
   fail("GET /api/health flags", e.message);
