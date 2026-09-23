@@ -12,6 +12,8 @@ import {
 import type { VapiToolName } from "@/lib/vapi/tool-schemas";
 import { getVapiDefaultBusinessId, getVapiWebhookSecret } from "@/lib/vapi/config";
 import { incrementUsage } from "@/lib/usage/increment-usage";
+import { checkVoiceMinutesAllowed } from "@/lib/usage/outbound-sms-guard";
+import { endVapiCall } from "@/lib/vapi/client";
 
 type RawToolCall = {
   id: string;
@@ -174,6 +176,15 @@ export async function handleVapiStatusUpdate(body: VapiWebhookBody) {
   const businessId = await resolveBusinessFromMessage(msg);
   const { externalCallId, fromNumber, startedAt } = getCallMeta(msg);
   if (!businessId || !externalCallId) return;
+
+  const voice = await checkVoiceMinutesAllowed(businessId);
+  if (!voice.allowed) {
+    console.warn(
+      `[usage] Ending call ${externalCallId}: voice cap ${voice.used}/${voice.limit}. Upgrade to Pro to continue.`
+    );
+    await endVapiCall(externalCallId);
+    return;
+  }
 
   await upsertCallStarted({
     businessId,

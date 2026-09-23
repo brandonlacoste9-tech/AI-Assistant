@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { limitPlan } from "@/lib/usage/plan-limits";
 
 export async function resolveBusinessPlan(
   supabase: SupabaseClient,
@@ -10,8 +11,11 @@ export async function resolveBusinessPlan(
     .eq("business_id", businessId)
     .maybeSingle();
 
-  if (sub?.plan && (sub.status === "active" || sub.status === "trialing")) {
-    return sub.plan;
+  // Trial window uses the trial caps, even if they clicked Pro before paying.
+  if (sub?.status === "trialing") return "trial";
+
+  if (sub?.plan && sub.status === "active") {
+    return limitPlan(sub.plan);
   }
 
   const { data: biz } = await supabase
@@ -20,5 +24,5 @@ export async function resolveBusinessPlan(
     .eq("id", businessId)
     .single();
 
-  return biz?.plan ?? "trial";
+  return limitPlan(biz?.plan ?? "trial");
 }

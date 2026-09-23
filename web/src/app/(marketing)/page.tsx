@@ -97,7 +97,7 @@ export default async function HomePage() {
                 href="/signup"
                 className="btn-primary px-8 py-4 text-base shadow-xl shadow-[var(--primary)]/20"
               >
-                {fr ? "Essayer gratuitement — 14 jours sans carte" : "Start free — 14 days, no card"}
+                {fr ? "Essayer gratuitement — 7 jours sans carte" : "Start free — 7 days, no card"}
               </a>
             </div>
           </FadeIn>

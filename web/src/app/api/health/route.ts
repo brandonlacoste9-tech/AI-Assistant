@@ -1,3 +1,4 @@
+import { isUsageEnforcementEnabled } from "@/lib/usage/plan-limits";
 import { getSupabaseAnonKey, getSupabaseUrl } from "@/lib/supabase/config";
 import { getSiteUrl } from "@/lib/site-config";
 import { getSupabaseService } from "@/lib/supabase/server";
@@ -22,7 +23,7 @@ export async function GET() {
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim()
     ),
     cron_secret: Boolean(process.env.CRON_SECRET?.trim()),
-    usage_enforce: process.env.USAGE_ENFORCE?.trim() === "true",
+    usage_enforce: isUsageEnforcementEnabled(),
     schema_users_business_id: null,
     schema_businesses: null,
   };

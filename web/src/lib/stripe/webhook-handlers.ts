@@ -1,4 +1,4 @@
-import { planFromPriceId } from "@/lib/stripe/plans";
+import { coercePlan, persistablePlan, planFromPriceId } from "@/lib/stripe/plans";
 import { getSupabaseService } from "@/lib/supabase/server";
 import type Stripe from "stripe";
 
@@ -30,7 +30,7 @@ export async function handleCheckoutCompleted(session: Stripe.Checkout.Session) 
       .from("businesses")
       .update({
         stripe_customer_id: customerId,
-        ...(plan ? { plan } : {}),
+        ...(plan ? { plan: persistablePlan(plan) } : {}),
       })
       .eq("id", businessId);
   }
@@ -41,7 +41,7 @@ export async function handleCheckoutCompleted(session: Stripe.Checkout.Session) 
         business_id: businessId,
         stripe_subscription_id: subscriptionId,
         status: "trialing",
-        plan: plan ?? "starter",
+        plan: persistablePlan(plan),
       },
       { onConflict: "business_id" }
     );
@@ -54,11 +54,14 @@ export async function handleSubscriptionChange(sub: Stripe.Subscription) {
 
   const businessId = sub.metadata?.business_id;
   const priceId = sub.items.data[0]?.price?.id;
-  const plan = priceId ? planFromPriceId(priceId) : null;
+  const fromPrice = priceId ? planFromPriceId(priceId) : null;
+  const metaPlan = typeof sub.metadata?.plan === "string" ? sub.metadata.plan : null;
+  // Only write a plan we can identify. Do not guess "starter" over an existing Pro row.
+  const plan = fromPrice ?? coercePlan(metaPlan);
 
   const row = {
     status: sub.status,
-    plan: plan ?? sub.metadata?.plan ?? "pro",
+    ...(plan ? { plan } : {}),
     current_period_end: periodEndIso(sub),
     stripe_subscription_id: sub.id,
   };

@@ -1,4 +1,4 @@
-# RendezVous AI — Landing Page Copy
+# JustBookMe — Landing Page Copy
 
 **Implementation note:** Build once in English; layer FR via `lang` toggle keyed off `Accept-Language` or a user-selected cookie. Do not ship two separate builds.
 
@@ -9,11 +9,11 @@
 ### Hero
 
 > **Stop losing bookings to missed calls.**  
-> RendezVous AI answers your phone 24/7, books appointments, and follows up by SMS — in French or English. Built for Quebec service businesses.
+> JustBookMe answers your phone 24/7, books appointments, and follows up by SMS — in French or English. Built for Quebec service businesses.
 
 **Subhead:** Salon full? On a job site? With a client? Your AI receptionist handles it. You just show up.
 
-- **Primary CTA:** Start free 14-day trial
+- **Primary CTA:** Start free 7-day trial
 - **Secondary CTA:** Book a 15-minute demo
 
 ### How it works
@@ -58,11 +58,11 @@ Ready to stop missing calls? **Start your trial →**
 ### Hero
 
 > **Arrêtez de perdre des rendez-vous à cause des appels manqués.**  
-> RendezVous AI répond au téléphone 24 h/24, prend les rendez-vous et envoie les rappels par SMS — en français ou en anglais. Conçu pour les entreprises de services au Québec.
+> JustBookMe répond au téléphone 24 h/24, prend les rendez-vous et envoie les rappels par SMS — en français ou en anglais. Conçu pour les entreprises de services au Québec.
 
 **Subhead:** Salon plein? Sur un chantier? Avec un client? Votre réceptionniste IA gère. Vous n'avez qu'à vous présenter.
 
-- **Primary CTA:** Essai gratuit de 14 jours
+- **Primary CTA:** Essai gratuit de 7 jours
 - **Secondary CTA:** Réserver une démo de 15 minutes
 
 ### Conçu pour le Québec

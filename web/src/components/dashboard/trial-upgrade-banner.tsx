@@ -46,7 +46,7 @@ export function TrialUpgradeBanner({
         {message}
       </p>
       <a
-        href="/dashboard/settings?subscribe=starter&interval=month#billing"
+        href="/dashboard/settings?subscribe=pro&interval=month#billing"
         className={`shrink-0 rounded-lg px-3 py-1.5 text-sm font-medium text-white transition-colors ${
           urgent
             ? "bg-red-600 hover:bg-red-700"

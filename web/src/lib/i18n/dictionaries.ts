@@ -48,7 +48,7 @@ export type Dictionary = {
     taxNote: string;
     plans: {
       starter: { name: string; features: string[] };
-      white_glove: { name: string; features: string[] };
+      pro: { name: string; features: string[] };
     };
     billingFaq: { q: string; a: string }[];
   };
@@ -536,29 +536,29 @@ const fr: Dictionary = {
       "Les prix affichés n'incluent pas les taxes applicables. TPS/TVQ calculées à la caisse.",
     plans: {
       starter: {
-        name: "Solo / Indépendant",
+        name: "Starter",
         features: [
           "IA vocale bilingue",
           "Réservations intégrées à l'agenda",
-          "Jusqu'à 150 appels IA / mois",
+          "49 $/mois · jusqu'à 2 employés",
           "Confirmations par SMS",
         ],
       },
-      white_glove: {
-        name: "Multi-Emploiés / Multi-Sites",
+      pro: {
+        name: "Pro",
         features: [
-          "Tout du forfait Solo",
+          "Tout du forfait Starter",
           "Synchronisation calendrier externe (Square, etc.)",
-          "Jusqu'à 500 appels IA / mois",
+          "149 $/mois · plus de minutes et de SMS",
           "Prise en charge multi-succursales",
-          "Configuration VIP clé en main",
+          "Paiement en ligne — actif le jour même",
         ],
       },
     },
     billingFaq: [
       {
         q: "Faut-il une carte pour l'essai?",
-        a: "Non. Inscrivez-vous par courriel, utilisez le forfait Pro pendant 7 jours.",
+        a: "Non. Inscrivez-vous par courriel. L'essai dure 7 jours, puis choisissez Starter (49 $) ou Pro (149 $).",
       },
       {
         q: "Puis-je changer de forfait?",
@@ -572,7 +572,7 @@ const fr: Dictionary = {
   },
   signup: {
     title: "Commencez votre essai gratuit",
-    subtitle: "7 jours du forfait Pro. Aucune carte requise.",
+    subtitle: "Essai gratuit de 7 jours. Aucune carte requise.",
     step1: "Créez votre compte",
     fields: {
       email: "Courriel",
@@ -716,7 +716,7 @@ const fr: Dictionary = {
     smsStatus: {
       pausedTitle: "SMS automatiques en pause",
       pausedBody:
-        "Les confirmations et rappels SMS sont temporairement suspendus — votre ligne téléphonique et les SMS entrants fonctionnent toujours.",
+        "Les confirmations et rappels SMS sont en pause : le plafond de l'essai ou du forfait est atteint. Passez au Pro (149 $) pour continuer. La ligne et les SMS entrants fonctionnent toujours.",
       warnTitle: "Limite SMS presque atteinte",
       warnBody:
         "Vous approchez de la limite d'envoi SMS de votre forfait. Passez au forfait Pro si vous avez besoin de plus de capacité.",
@@ -1162,29 +1162,29 @@ const en: Dictionary = {
       "Prices shown exclude applicable taxes. PST/QST calculated at checkout.",
     plans: {
       starter: {
-        name: "Solo / Independent",
+        name: "Starter",
         features: [
           "Bilingual Voice AI",
           "Built-in calendar bookings",
-          "Up to 150 AI calls / month",
+          "$49/mo · up to 2 staff",
           "SMS confirmations",
         ],
       },
-      white_glove: {
-        name: "Multi-Staff / Multi-Location",
+      pro: {
+        name: "Pro",
         features: [
-          "Everything in Solo",
+          "Everything in Starter",
           "External calendar sync (Square, etc)",
-          "Up to 500 AI calls / month",
+          "$149/mo · more minutes and SMS",
           "Multi-location support",
-          "VIP white-glove setup",
+          "Self-serve checkout — live the same day",
         ],
       },
     },
     billingFaq: [
       {
         q: "Do I need a card for the trial?",
-        a: "No. Sign up with email, use Pro features for 7 days.",
+        a: "No. Sign up with email. The trial is 7 days, then choose Starter ($49) or Pro ($149).",
       },
       {
         q: "Can I switch plans?",
@@ -1198,7 +1198,7 @@ const en: Dictionary = {
   },
   signup: {
     title: "Start your free trial",
-    subtitle: "7 days of Pro. No card required.",
+    subtitle: "7-day free trial. No card required.",
     step1: "Create your account",
     fields: {
       email: "Email",
@@ -1342,7 +1342,7 @@ const en: Dictionary = {
     smsStatus: {
       pausedTitle: "Automated SMS paused",
       pausedBody:
-        "Confirmation and reminder texts are temporarily paused — your phone line and inbound texts still work.",
+        "Confirmation and reminder texts are paused — the trial or plan cap is reached. Upgrade to Pro ($149) to continue. Your phone line and inbound texts still work.",
       warnTitle: "SMS limit almost reached",
       warnBody:
         "You're approaching your plan's outbound SMS limit. Upgrade to Pro if you need more capacity.",
@@ -1649,5 +1649,5 @@ export function getDictionary(locale: Locale): Dictionary {
 
 export const PLAN_PRICES = {
   starter: { monthly: 49, annual: 490 },
-  white_glove: { monthly: 149, annual: 1490 },
+  pro: { monthly: 149, annual: 1490 },
 } as const;

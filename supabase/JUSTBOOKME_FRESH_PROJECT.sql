@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS businesses (
   default_language TEXT NOT NULL DEFAULT 'fr' CHECK (default_language IN ('fr', 'en')),
   phone_number TEXT,
   stripe_customer_id TEXT UNIQUE,
-  plan TEXT NOT NULL DEFAULT 'trial' CHECK (plan IN ('trial', 'starter', 'pro', 'premium')),
+  plan TEXT NOT NULL DEFAULT 'starter' CHECK (plan IN ('trial', 'starter', 'pro')),
   trial_ends_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS subscriptions (
   business_id UUID NOT NULL UNIQUE REFERENCES businesses(id) ON DELETE CASCADE,
   stripe_subscription_id TEXT UNIQUE,
   status TEXT NOT NULL DEFAULT 'trialing',
-  plan TEXT NOT NULL DEFAULT 'pro',
+  plan TEXT NOT NULL DEFAULT 'starter',
   current_period_end TIMESTAMPTZ,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
@@ -532,4 +532,31 @@ ALTER TABLE businesses
 -- Upgrade business_type check constraint to include all onboarding types
 ALTER TABLE public.businesses DROP CONSTRAINT IF EXISTS businesses_business_type_check;
 ALTER TABLE public.businesses ADD CONSTRAINT businesses_business_type_check CHECK (business_type IN ('salon', 'barbershop', 'clinic', 'office', 'beauty'));
+
+-- ========== 017_plan_taxonomy_and_outreach.sql ==========
+-- Included so a fresh paste matches the migration. Constraint is already starter/pro above.
+
+CREATE TABLE IF NOT EXISTS public.outreach_prospects (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  business_name TEXT,
+  contact_name TEXT,
+  phone TEXT,
+  email TEXT,
+  city TEXT,
+  source TEXT,
+  status TEXT NOT NULL DEFAULT 'new',
+  last_contact TIMESTAMPTZ,
+  notes TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS outreach_prospects_phone_unique
+  ON public.outreach_prospects (phone)
+  WHERE phone IS NOT NULL AND phone <> '';
+
+ALTER TABLE public.outreach_prospects ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS deny_public_outreach_prospects ON public.outreach_prospects;
+CREATE POLICY deny_public_outreach_prospects ON public.outreach_prospects
+  FOR ALL USING (false);
 

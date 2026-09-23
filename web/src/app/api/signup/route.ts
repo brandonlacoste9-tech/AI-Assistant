@@ -1,3 +1,4 @@
+import { SIGNUP_PLAN } from "@/lib/stripe/plans";
 import { getSupabaseService } from "@/lib/supabase/server";
 import { sendEmail } from "@/lib/email/send";
 import { welcomeEmail } from "@/lib/email/templates/welcome";
@@ -13,7 +14,6 @@ export async function POST(req: Request) {
       city,
       phone,
       default_language = "fr",
-      plan = "pro",
       locale = "fr",
     } = body;
 
@@ -73,7 +73,7 @@ export async function POST(req: Request) {
         slug: `${slug}-${userId.slice(0, 8)}`,
         city: city ?? null,
         default_language,
-        plan: "trial",
+        plan: SIGNUP_PLAN,
         trial_ends_at: trialEnds.toISOString(),
       })
       .select("id")
@@ -112,7 +112,7 @@ export async function POST(req: Request) {
     const { error: subError } = await service.from("subscriptions").insert({
       business_id: business.id,
       status: "trialing",
-      plan,
+      plan: SIGNUP_PLAN,
     });
 
     if (subError) {

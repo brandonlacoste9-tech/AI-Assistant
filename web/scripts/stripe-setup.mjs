@@ -40,10 +40,9 @@ const stripe = new Stripe(key);
 const PRICES = [
   { env: "STRIPE_PRICE_STARTER_MONTHLY", amount: 4900, interval: "month", tier: "starter" },
   { env: "STRIPE_PRICE_STARTER_ANNUAL", amount: 49000, interval: "year", tier: "starter" },
-  { env: "STRIPE_PRICE_PRO_MONTHLY", amount: 14900, interval: "month", tier: "pro" },
-  { env: "STRIPE_PRICE_PRO_ANNUAL", amount: 149000, interval: "year", tier: "pro" },
-  { env: "STRIPE_PRICE_PREMIUM_MONTHLY", amount: 34900, interval: "month", tier: "premium" },
-  { env: "STRIPE_PRICE_PREMIUM_ANNUAL", amount: 349000, interval: "year", tier: "premium" },
+  // Pro $149. Env names stay WHITE_GLOVE — that is what checkout reads.
+  { env: "STRIPE_PRICE_WHITE_GLOVE_MONTHLY", amount: 14900, interval: "month", tier: "pro" },
+  { env: "STRIPE_PRICE_WHITE_GLOVE_ANNUAL", amount: 149000, interval: "year", tier: "pro" },
 ];
 
 const PRODUCT_NAME = "JustBookMe Subscription";

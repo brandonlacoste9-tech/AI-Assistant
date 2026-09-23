@@ -1,4 +1,4 @@
-# RendezVous AI — Connected Infrastructure
+# JustBookMe — Connected Infrastructure
 
 ## Supabase project
 
@@ -19,12 +19,12 @@
 
 ### Auth URLs configured
 
-- Site URL: `https://resilient-khapse-ecd31c.netlify.app`
-- Redirects: `https://resilient-khapse-ecd31c.netlify.app/**`, `http://localhost:3000/**`
+- Site URL: `https://justbookme.ca`
+- Redirects: `https://justbookme.ca/**`, `http://localhost:3000/**`
 
 ## Netlify — add these env vars NOW
 
-**Site:** https://resilient-khapse-ecd31c.netlify.app
+**Site:** https://justbookme.ca
 
 Netlify → Site configuration → Environment variables → add all four, then **Trigger deploy**.
 
@@ -33,7 +33,7 @@ Netlify → Site configuration → Environment variables → add all four, then 
 | `NEXT_PUBLIC_SUPABASE_URL` | `https://ulbfaxhsbbckotcbmslk.supabase.co` |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase Dashboard → Settings → API → `anon` `public` |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase Dashboard → Settings → API → `service_role` **secret** |
-| `NEXT_PUBLIC_SITE_URL` | `https://resilient-khapse-ecd31c.netlify.app` |
+| `NEXT_PUBLIC_SITE_URL` | `https://justbookme.ca` |
 
 Keys are **not** stored in this repo. Copy from [Supabase API settings](https://supabase.com/dashboard/project/ulbfaxhsbbckotcbmslk/settings/api).
 
@@ -44,7 +44,7 @@ Keys are **not** stored in this repo. Copy from [Supabase API settings](https://
 node scripts/run-migration.mjs ulbfaxhsbbckotcbmslk supabase/migrations/001_initial.sql
 
 # Update auth redirect URLs
-node scripts/configure-auth.mjs ulbfaxhsbbckotcbmslk https://resilient-khapse-ecd31c.netlify.app
+node scripts/configure-auth.mjs ulbfaxhsbbckotcbmslk https://justbookme.ca
 ```
 
 ## Env var reference

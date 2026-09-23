@@ -34,13 +34,14 @@ JustBookMe expects RendezVous `users` with **`business_id` → businesses**.
 008_reminder_columns.sql
 009_customers_staff_usage.sql
 010_google_calendar.sql
-010_voice_customization.sql
 011_business_type.sql
-011_calendar_sync.sql
 012_business_industry.sql
 013_lead_structure.sql
 014_rls_hardening.sql
-(+ later numbered files if needed)
+015_voice_customization.sql
+016_calendar_sync.sql
+017_plan_taxonomy_and_outreach.sql
+(+ later timestamped files if needed)
 ```
 
 Or paste `full_schema.sql` if complete, then remaining migrations.
@@ -121,8 +122,7 @@ CRON_SECRET=<paste>
 
 ## 3. Auth URL hygiene
 
-`PROJECT_CONNECTED.md` still lists Netlify site `resilient-khapse-ecd31c.netlify.app`.  
-Production domain is **justbookme.ca** — update Supabase Auth Site URL + redirects to match.
+Production domain is **justbookme.ca**. Supabase Auth Site URL and redirects must be `https://justbookme.ca` and `https://justbookme.ca/**` (see `docs/PROJECT_CONNECTED.md`). The old Netlify preview hostname is not the auth URL.
 
 ---
 
@@ -172,7 +172,7 @@ If `supabase_project_ref` is still `ulbfaxhsbbckotcbmslk`, Netlify is still on t
 | Health / DB connected | PASS |
 | Vapi / Twilio status | PASS (configured) |
 | Cron reject unauth | PASS |
-| USAGE_ENFORCE off | PASS (pilot-safe) |
+| USAGE_ENFORCE | code defaults **on** (set `USAGE_ENFORCE=false` only to disable) |
 | **Signup full** | **FAIL — business_id** |
 | **CRON_SECRET** | **FAIL** |
 
